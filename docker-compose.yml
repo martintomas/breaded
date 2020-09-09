@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  web:
+    image: 'web'
+    build:
+      context: .
+      args:
+        - INSTALL_CHROMIUM=true
+    ports:
+      - 3000:3000
+    env_file:
+      - ".env"
+    volumes:
+      - .:/usr/src/app:cached
+      - node-modules:/usr/src/app/node_modules
+      - web_cache:/usr/src/app/tmp/cache
+    command: start-server
+    stdin_open: true
+    tty: true
+
+volumes:
+  web_cache:
+  node-modules:
