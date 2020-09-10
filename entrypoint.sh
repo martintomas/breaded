@@ -8,12 +8,12 @@ esac
 
 start_server() {
     if [[ "${RAILS_ENV}" = "development" ]]; then
-        echo "Starting server in ${RAILS_ENV} mode. Skipping db:migrate and assets:precompile"
+        echo "Starting server in ${RAILS_ENV} mode. Skipping db:migrate and webpacker:compile"
         rm -rf tmp/pids/server.pid
         bundle exec rails server --port 3000 --binding 0.0.0.0 -e ${RAILS_ENV}
     else
-        echo "Starting server ${RAILS_ENV} mode. Running db:migrate and assets:precompile"
-        rails webpacker:install && rails db:migrate && rake assets:precompile && bundle exec rails server --port 3000 --binding 0.0.0.0 -e ${RAILS_ENV}
+        echo "Starting server ${RAILS_ENV} mode. Running db:migrate and webpacker:compile"
+        rails db:migrate && rails webpacker:compile && bundle exec rails server --port 3000 --binding 0.0.0.0 -e ${RAILS_ENV}
     fi
 }
 
