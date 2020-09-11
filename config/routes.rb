@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  root 'page#home'
+  root 'pages#home'
+
+  resources :pages do
+    collection do
+      get :commit
+    end
+  end
 end

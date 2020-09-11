@@ -8,8 +8,8 @@ html[lang="#{I18n.locale}"]
 
     meta name="description" content="Breaded"
 
-    == stylesheet_pack_tag 'application'
-    == javascript_pack_tag 'application'
+    == stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    == javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
     == csrf_meta_tags
     == csp_meta_tag

@@ -21,13 +21,16 @@ RUN npm install --global yarn
 ARG INSTALL_CHROMIUM
 RUN sh -c 'if [ "$INSTALL_CHROMIUM" = true ]; then apt install -y chromium; else echo "Skipping chrome installation"; fi'
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile ./
 RUN bundle install
 
 COPY package.json ./
 RUN yarn install --check-files
 
 COPY . .
+
+ARG COMMIT_HASH
+RUN echo $COMMIT_HASH > public/commit.txt
 
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["start-server"]
