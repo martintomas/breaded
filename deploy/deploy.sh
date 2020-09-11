@@ -2,11 +2,14 @@
 
 cd $(dirname "${BASH_SOURCE[0]}")
 
-ssh-add ~/.ssh/personal
+if [[ -n $(git status -s) ]]; then
+  echo "Merge unfinished work before you deploy current version of master to production!"
+  exit
+fi
 
-#git stash
-#git checkout master
-#git pull
+ssh-add ~/.ssh/personal
+git checkout master
+git pull
 
 COMMIT_HASH=$(git log -n 1 --pretty=format:"%h")
 
@@ -18,4 +21,3 @@ kubectl config use-context do-lon1-breaded-cluster
 kubectl set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 
 docker image rmi breaded-production:$COMMIT_HASH
-docker image rmi registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
