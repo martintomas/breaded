@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+unset BUNDLE_PATH
+unset BUNDLE_BIN
+
 case ${RAILS_ENV} in
     *)
         echo "Environment: ${RAILS_ENV}"

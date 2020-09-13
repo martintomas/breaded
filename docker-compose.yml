@@ -5,8 +5,6 @@ services:
     image: 'web'
     build:
       context: .
-      args:
-        - INSTALL_CHROMIUM=true
     ports:
       - 3000:3000
     env_file:
