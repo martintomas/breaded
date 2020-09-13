@@ -32,7 +32,7 @@ FROM ruby:2.6.3-alpine
 LABEL maintainer="Martin Tomas <martintomas.it@gmail.com>"
 
 ARG RAILS_ROOT=/usr/src/app
-ARG PACKAGES="tzdata postgresql-client nodejs bash"
+ARG PACKAGES="tzdata postgresql-client nodejs bash yarn"
 
 ENV BUNDLE_APP_CONFIG="$RAILS_ROOT/.bundle"
 ENV GEM_HOME="$RAILS_ROOT/vendor/bundle/ruby/2.6.0"

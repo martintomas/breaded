@@ -12,6 +12,7 @@ services:
     volumes:
       - .:/usr/src/app:cached
       - node-modules:/usr/src/app/node_modules
+      - vendor:/usr/src/app/vendor
       - web_cache:/usr/src/app/tmp/cache
     command: start-server
     stdin_open: true
@@ -19,4 +20,5 @@ services:
 
 volumes:
   web_cache:
+  vendor:
   node-modules:
