@@ -19,5 +19,6 @@ docker push registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 
 kubectl config use-context do-lon1-breaded-cluster
 kubectl set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
+kubectl set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 
 #docker image rmi breaded-production:$COMMIT_HASH

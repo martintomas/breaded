@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: background_job
+  name: background-job
 spec:
   selector:
     matchLabels:
-      app: background_job
+      app: background-job
   replicas: 1
   strategy:
     type: RollingUpdate
@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        app: background_job
+        app: background-job
     spec:
       containers:
         - args:
@@ -25,8 +25,8 @@ spec:
                 name: breaded-config
             - secretRef:
                 name: breaded-secrets
-          image: registry.digitalocean.com/breaded/breaded-production:d67e437
-          name: background_job
+          image: registry.digitalocean.com/breaded/breaded-production:1d0c615
+          name: background-job
           imagePullPolicy: Always
           ports:
             - containerPort: 7433

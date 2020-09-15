@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:3.2-alpine
+          image: redis:6.0-alpine
           imagePullPolicy: Always
           args: ["--requirepass", "$(REDIS_PASS)", "--appendonly", "yes"]
           ports:
@@ -26,11 +26,11 @@ spec:
                 name: breaded-config
             - secretRef:
                 name: breaded-secrets
-          volumeDevices:
-            - devicePath: /data
+          volumeMounts:
+            - mountPath: /data
               name: redis-data
       volumes:
         - name: redis-data
           persistentVolumeClaim:
-            claimName: redis-data
+            claimName: redis-persistent-data
 
