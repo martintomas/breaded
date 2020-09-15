@@ -9,13 +9,11 @@ Bundler.require(*Rails.groups)
 module Breaded
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.active_job.queue_adapter = :sidekiq
+    config.i18n.default_locale = :en
     config.load_defaults 6.0
 
     config.filter_parameters << :password
-
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration can go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded after loading
-    # the framework and any gems in your application.
+    config.time_zone = 'London'
   end
 end
