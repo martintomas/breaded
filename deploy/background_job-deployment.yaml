@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: background_job
+spec:
+  selector:
+    matchLabels:
+      app: background_job
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: background_job
+    spec:
+      containers:
+        - args:
+            - start-background-job
+          envFrom:
+            - configMapRef:
+                name: breaded-config
+            - secretRef:
+                name: breaded-secrets
+          image: registry.digitalocean.com/breaded/breaded-production:d67e437
+          name: background_job
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 7433
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 7433
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 60
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 7433
+            failureThreshold: 3
+            periodSeconds: 10
+            initialDelaySeconds: 60
+            timeoutSeconds: 3
+          lifecycle:
+            preStop:
+              exec:
+                # SIGTERM triggers a quick exit; gracefully terminate instead
+                command: [ 'deploy/sidekiq_quiet' ]
+      terminationGracePeriodSeconds: 60 # put your longest Job time here plus security time.
+      restartPolicy: Always

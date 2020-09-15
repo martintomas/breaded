@@ -13,7 +13,7 @@ git pull
 
 COMMIT_HASH=$(git log -n 1 --pretty=format:"%h")
 
-docker build ../ -t breaded-production:$COMMIT_HASH --build-arg COMMIT_HASH=$COMMIT_HASH
+docker build -f ../Dockerfile.production ../ -t breaded-production:$COMMIT_HASH --build-arg COMMIT_HASH=$COMMIT_HASH
 docker tag breaded-production:$COMMIT_HASH registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 docker push registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 

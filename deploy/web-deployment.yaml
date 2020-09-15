@@ -20,13 +20,12 @@ spec:
       containers:
       - args:
         - start-server
-        env:
-        - name: RAILS_ENV
-          valueFrom:
-            configMapKeyRef:
-              key: RAILS_ENV
-              name: web-env
-        image: registry.digitalocean.com/breaded/breaded-production
+        envFrom:
+          - configMapRef:
+              name: breaded-config
+          - secretRef:
+              name: breaded-secrets
+        image: registry.digitalocean.com/breaded/breaded-production:d67e437
         name: web
         ports:
         - containerPort: 3000
