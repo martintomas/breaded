@@ -2,10 +2,10 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: host.docker.internal
-  port: 5432
-  username: breaded
-  password: password
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
+  username: <%= ENV["DB_USERNAME"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
 
 development:
   <<: *default
@@ -19,7 +19,3 @@ production:
   <<: *default
   database: breaded_production
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= Rails.application.credentials.db.try(:[], :db_host) %>
-  port: <%= Rails.application.credentials.db.try(:[], :db_port) %>
-  username: <%= Rails.application.credentials.db.try(:[], :db_username) %>
-  password: <%= Rails.application.credentials.db.try(:[], :db_password) %>

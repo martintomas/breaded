@@ -1,8 +1,6 @@
 Sidekiq.configure_server do |config|
-  config.redis = { url: Rails.application.credentials.redis.try(:[], :url),
-                   password: Rails.application.credentials.redis.try(:[], :password)}
+  config.redis = { url: ENV["REDIS_URL"], password: ENV["REDIS_PASSWORD"] }
 end
 Sidekiq.configure_client do |config|
-  config.redis = { url: Rails.application.credentials.redis.try(:[], :url),
-                   password: Rails.application.credentials.redis.try(:[], :password)}
+  config.redis = { url: ENV["REDIS_URL"], password: ENV["REDIS_PASSWORD"] }
 end

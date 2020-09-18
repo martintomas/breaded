@@ -5,4 +5,10 @@ metadata:
 data:
   RAILS_ENV: production
   NODE_ENV: production
+  DB_HOST: private-breaded-postgresql-do-user-7994465-0.b.db.ondigitalocean.com
+  DB_PORT: 25060
+  DB_USERNAME: breaded
+  SMTP_USERNAME: martintomas.it@gmail.com
+  REDIS_URL: redis://10.245.100.137:6379/0
+  SENTRY_DSN: https://131f4e22e31c4ea684e0cd3030843d01@o446163.ingest.sentry.io/5424104
   HOST_URL: https://breaded.cz
