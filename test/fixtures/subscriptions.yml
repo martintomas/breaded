@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+customer_subscription_1:
+  user: customer
+  subscription_plan: once_every_month
+  surprise_me_count: 0
+  active: true
+
+customer_subscription_2:
+  user: customer_2
+  subscription_plan: twice_every_month
+  surprise_me_count: 2
+  active: true
+
+not_active_subscription:
+  user: customer
+  subscription_plan: twice_every_month
+  surprise_me_count: 2
+  active: false

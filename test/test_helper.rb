@@ -2,14 +2,35 @@
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
+require 'webmock/minitest'
 require 'rails/test_help'
+require 'minitest/reporters'
+
+Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+  # parallelize(workers: :number_of_processors)
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  # @param [Symbol] attribute
+  # @param [Class] klass of ApplicationRecord
+  def invalid_with_missing(klass, attribute)
+    @full_content.delete attribute
+    model = klass.new @full_content
+    refute model.valid?
+    assert model.errors.include?(attribute)
+  end
+
+  # @param [Symbol] attribute
+  # @param [Class] klass of ApplicationRecord
+  def already_taken_unique(klass, attribute)
+    klass.create! @full_content
+    new_type = klass.new @full_content
+    refute new_type.valid?
+    assert new_type.errors.include?(attribute), new_type.errors.keys.inspect
+    assert_equal :taken, new_type.errors.details[attribute][0][:error]
+  end
 end

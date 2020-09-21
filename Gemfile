@@ -32,6 +32,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
 gem 'cancancan'
+gem 'rolify'
 
 gem 'sidekiq'
 gem 'sidekiq_alive'
@@ -50,16 +51,26 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  #gem 'spring'
-  #gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'bullet'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'ruby-debug-ide'
+  gem 'debase'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', require: !ENV['SELENIUM_URL']
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'minitest-stub_any_instance'
+  gem 'webmock'
 end
 
 group :production do

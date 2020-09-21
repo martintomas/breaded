@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+admin:
+  first_name: Super
+  last_name: Admin
+  email: admin@breaded.net
+  roles: admin
+
+customer:
+  first_name: John
+  last_name: Black
+  email: john.black@breaded.net
+  roles: customer
+
+customer_2:
+  first_name: Martin
+  last_name: Tomas
+  email: martin.tomas@breaded.net
+  roles: customer

@@ -1,0 +1,22 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+customer_order_food_1:
+  food: rye_bread
+  order: customer_order_1
+  amount: 1
+
+customer_order_food_2:
+  food: seeded_bread
+  order: customer_order_1
+  amount: 3
+
+customer_order_food_3:
+  food: rye_bread
+  order: customer_order_2
+  amount: 2
+
+customer_order_food_4:
+  food: rye_bread
+  order: customer_order_3
+  amount: 10
+

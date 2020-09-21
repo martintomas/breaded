@@ -1,0 +1,51 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+translation_1:
+  text: This is translated text
+  language: en
+  localised_text: translated_text_1
+
+vegetarian_translation:
+  text: Vegetarian
+  language: en
+  localised_text: vegetarian_localized_text
+
+butter_translation:
+  text: Butter
+  language: en
+  localised_text: butter_localized_text
+
+rye_translation:
+  text: Rye
+  language: en
+  localised_text: rye_localized_text
+
+rye_bread_name_translation:
+  text: Rye bread
+  language: en
+  localised_text: rye_bread_name
+
+seeded_bread_name_translation:
+  text: Seeded bread
+  language: en
+  localised_text: seeded_bread_name
+
+rye_bread_description_translation:
+  text: Rye bread super long description
+  language: en
+  localised_text: rye_bread_description
+
+seeded_bread_description_translation:
+  text: Seeded bread super long description
+  language: en
+  localised_text: seeded_bread_description
+
+bread_and_butter_name_translation:
+  text: Bread & Butter
+  language: en
+  localised_text: bread_and_butter_name
+
+bread_and_butter_description_translation:
+  text: Description of Bread and Butter company
+  language: en
+  localised_text: bread_and_butter_description

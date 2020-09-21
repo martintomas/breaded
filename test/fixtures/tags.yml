@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+vegetarian_tag:
+  name: vegetarian_localized_text
+  tag_type: attribute
+
+butter_tag:
+  name: butter_localized_text
+  tag_type: goes_well
+
+rye_tag:
+  name: rye_localized_text
+  tag_type: category

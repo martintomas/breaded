@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+rye_bread:
+  name: rye_bread_name
+  description: rye_bread_description
+  producer: bread_and_butter
+
+seeded_bread:
+  name: seeded_bread_name
+  description: seeded_bread_description
+  producer: bread_and_butter

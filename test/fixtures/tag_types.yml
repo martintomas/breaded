@@ -1,0 +1,10 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+category:
+  code: $LABEL
+
+goes_well:
+  code: $LABEL
+
+attribute:
+  code: $LABEL

@@ -1,9 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  devise_for :users
   root 'pages#home'
 
-  mount Sidekiq::Web => '/sidekiq'
+  authenticate :user, lambda { |u| u.has_role? :admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resources :pages do
     collection do

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+rye_bread_rye_tag:
+  food: rye_bread
+  tag: rye_tag
+
+rye_bread_vegetarian_tag:
+  food: rye_bread
+  tag: vegetarian_tag
+
+rye_bread_butter_tag:
+  food: rye_bread
+  tag: butter_tag
+
+seeded_bread_butter_tag:
+  food: seeded_bread
+  tag: butter_tag

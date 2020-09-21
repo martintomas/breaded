@@ -1,0 +1,5 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bread_and_butter:
+  name: bread_and_butter_name
+  description: bread_and_butter_description
