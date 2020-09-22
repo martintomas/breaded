@@ -11,4 +11,5 @@ digitalocean:
   endpoint: https://ams3.digitaloceanspaces.com
   access_key_id: <%= ENV["STORAGE_KEY"] %>
   secret_access_key: <%= ENV["STORAGE_ACCESS_KEY"] %>
+  region: ams3
   bucket: 46990d58-2b34-44e1-9875-c1b54eb75faa
