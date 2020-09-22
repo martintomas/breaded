@@ -1,0 +1,13 @@
+= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
+  = f.semantic_errors
+  = f.inputs do
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :password
+    = f.input :role_ids, label: I18n.t('active_admin.roles.label'), multiple: true, include_hidden: false,
+        collection: Role.all.map { |role| [role.name, role.id] }
+  = f.actions do
+    = f.action(:submit)
+    = f.cancel_link
+
