@@ -13,13 +13,14 @@ WORKDIR $RAILS_ROOT
 
 RUN apk update && apk upgrade && apk add --update --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 
-COPY Gemfile package.json ./
-
+COPY Gemfile ./
 RUN bundle install
 # Remove unneeded files (cached *.gem, *.o, *.c)
 RUN rm -rf /usr/local/bundle/cache/*.gem \
     && find /usr/local/bundle/gems/ -name "*.c" -delete \
     && find /usr/local/bundle/gems/ -name "*.o" -delete
+
+COPY package.json ./
 RUN yarn install --check-files
 
 ############### Finalize build ###############
@@ -39,7 +40,9 @@ USER rails_user
 
 COPY --chown=rails_user . .
 COPY --chown=rails_user --from=build-env /usr/local/bundle/ /usr/local/bundle/
-COPY --chown=rails_user --from=build-env $RAILS_ROOT/node_modules/ $RAILS_ROOT/node_modules/
+COPY --chown=rails_user --from=build-env $RAILS_ROOT/Gemfile.lock $RAILS_ROOT/../
+COPY --chown=rails_user --from=build-env $RAILS_ROOT/yarn.lock $RAILS_ROOT/../
+COPY --chown=rails_user --from=build-env $RAILS_ROOT/node_modules/ $RAILS_ROOT/../node_modules/
 
 RUN echo $COMMIT_HASH > public/commit.txt
 

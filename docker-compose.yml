@@ -11,7 +11,6 @@ services:
       - ".env"
     volumes:
       - .:/usr/src/app
-      - node-modules:/usr/src/app/node_modules
     command: start-server
     stdin_open: true
     tty: true
@@ -23,7 +22,6 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/tmp
-      - node-modules:/usr/src/app/node_modules
     env_file:
       - ".env"
     command: start-background-job
@@ -47,6 +45,3 @@ services:
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
-
-volumes:
-  node-modules:
