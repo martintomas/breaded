@@ -12,3 +12,4 @@ data:
   REDIS_URL: "redis://10.245.100.137:6379/0"
   SENTRY_DSN: "https://131f4e22e31c4ea684e0cd3030843d01@o446163.ingest.sentry.io/5424104"
   HOST_URL: "https://breaded.cz"
+  CDN_HOST: "assets.breaded.cz"
