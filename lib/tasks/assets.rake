@@ -9,9 +9,12 @@ namespace :assets do
                                secret_access_key: ENV["STORAGE_ACCESS_KEY"],
                                endpoint: ENV["STORAGE_ENDPOINT"])
 
-    Dir.glob('**/*', base: 'public').reject { |f| File.directory? f }.each do |public_asset|
+    Dir.glob('**/*', base: 'public').each do |public_asset|
+      path = Rails.root.join 'public', public_asset
+      next unless File.file? path
+
       obj = s3.bucket(ENV["STORAGE_BUCKET"]).object(public_asset)
-      obj.put(acl: 'public-read', body: File.open(Rails.root.join('public', public_asset)))
+      obj.put(acl: 'public-read', body: File.open(path))
     end
   end
 end
