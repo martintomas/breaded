@@ -17,12 +17,6 @@ docker build -f ../Dockerfile.production ../ -t breaded-production:$COMMIT_HASH 
 docker tag breaded-production:$COMMIT_HASH registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 docker push registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 
-docker create --name=breaded_production -it breaded-production:$COMMIT_HASH
-docker start breaded_production
-
-docker stop breaded_production
-docker rm breaded_production
-
 kubectl config use-context do-lon1-breaded-cluster
 kubectl set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH
 kubectl set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$COMMIT_HASH

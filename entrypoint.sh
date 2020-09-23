@@ -22,7 +22,7 @@ copy_assets_to_cdn() {
     echo "Copying assets to CDN"
     rake assets:to_cdn
     echo "Finished copying assets to CDN"
-  end
+  fi
 }
 
 start_server() {
