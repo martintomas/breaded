@@ -34,7 +34,7 @@ spec:
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
-            path: /pages/commit
+            path: /commit.txt
             port: web
           failureThreshold: 3
           periodSeconds: 10
@@ -42,7 +42,7 @@ spec:
           timeoutSeconds: 3
         readinessProbe:
           httpGet:
-            path: /pages/commit
+            path: /commit.txt
             port: web
           failureThreshold: 3
           periodSeconds: 10

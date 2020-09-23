@@ -7,10 +7,4 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     get root_url
     assert_response :success
   end
-
-  test '#commit' do
-    get commit_pages_url
-    assert_response :success
-    assert_match /test/, response.body
-  end
 end
