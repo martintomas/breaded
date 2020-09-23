@@ -17,6 +17,14 @@ synchronize_with_project_directory() {
   fi
 }
 
+copy_assets_to_cdn() {
+  if [[ "${RAILS_ENV}" = "production" ]]; then
+    echo "Copying assets to CDN"
+    rake assets:to_cdn
+    echo "Finished copying assets to CDN"
+  end
+}
+
 start_server() {
     if [[ "${RAILS_ENV}" = "development" ]]; then
         rm -rf tmp/pids/server.pid
@@ -30,6 +38,7 @@ start_background_job() {
 }
 
 synchronize_with_project_directory
+copy_assets_to_cdn
 
 if [[ "$1" = "start-server" ]]; then
     start_server
