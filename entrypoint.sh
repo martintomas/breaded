@@ -26,10 +26,14 @@ copy_assets_to_cdn() {
 }
 
 start_server() {
-    if [[ "${RAILS_ENV}" = "development" ]]; then
-        rm -rf tmp/pids/server.pid
+    if [[ "${RAILS_ENV}" = "production" ]]; then
+      rails db:migrate && rails server --port 3000 --binding 0.0.0.0 -e ${RAILS_ENV}
+    else
+      rm -rf tmp/pids/server.pid
+      rails db:migrate
+      bin/webpack-dev-server --port 3035 --host 0.0.0.0 &
+      rails server --port 3000 --binding 0.0.0.0 -e ${RAILS_ENV}
     fi
-    rails db:migrate && rails server --port 3000 --binding 0.0.0.0 -e ${RAILS_ENV}
 }
 
 start_background_job() {

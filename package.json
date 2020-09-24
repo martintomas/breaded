@@ -8,7 +8,8 @@
     "@rails/webpacker": "4.3.0",
     "@activeadmin/activeadmin": "^2.8.0",
     "turbolinks": "^5.2.0",
-    "stimulus": "^1.1.1"
+    "stimulus": "^1.1.1",
+    "imagesloaded": "^4.1.4"
   },
   "version": "0.1.0",
   "devDependencies": {

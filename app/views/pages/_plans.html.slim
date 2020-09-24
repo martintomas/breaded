@@ -1,0 +1,26 @@
+.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.fade.slide-zoom-in
+  .breadedPlan
+    .breadedPlanBrd
+    .breadedPlanBrd-bottom
+    span.breadedPlanTitle = t 'app.homepage.plans.title'
+    .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+      section.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+        .breads-lg-4.breads-md-4.breads-sm-4.breads-xs-12
+          section.breads-lg-11.breads-md-12.breads-sm-12.breads-xs-12
+            = image_pack_tag('media/images/plans-1.png')
+            h3 = t 'app.homepage.plans.first.header_html'
+            p = t 'app.homepage.plans.first.description'
+            span = t 'app.homepage.plans.first.specification'
+        .breads-lg-4.breads-md-4.breads-sm-4.breads-xs-12
+          section.breads-lg-11.breads-md-12.breads-sm-12.breads-xs-12
+            = image_pack_tag('media/images/plans-2.png')
+            h3 = t 'app.homepage.plans.second.header_html'
+            p = t 'app.homepage.plans.second.description'
+            span = t 'app.homepage.plans.second.specification'
+        .breads-lg-4.breads-md-4.breads-sm-4.breads-xs-12
+          section.breads-lg-11.breads-md-12.breads-sm-12.breads-xs-12
+            = image_pack_tag('media/images/plans-3.png')
+            h3 = t 'app.homepage.plans.third.header_html'
+            p = t 'app.homepage.plans.third.description'
+            span = t 'app.homepage.plans.third.specification'
+    button = link_to t('app.homepage.breaded_button_simple'), '#'

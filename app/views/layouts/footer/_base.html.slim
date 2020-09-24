@@ -1,0 +1,19 @@
+footer.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+  section.fade.slide-zoom-in
+    div
+      ul
+        li.footerLogo = image_pack_tag('media/images/logo-footer.svg')
+        li
+          ul.footer-links
+            li
+              ul
+                li = link_to I18n.t('app.menu.browse_breads'), '#'
+                li = link_to I18n.t('app.menu.about'), '#'
+                li = link_to I18n.t('app.menu.apply_to_be_baker'), '#'
+            li
+              ul
+                li = link_to I18n.t('app.footer.faq'), '#'
+                li = link_to I18n.t('app.footer.contact_us'), '#'
+                li = link_to I18n.t('app.footer.privacy_and_terms'), '#'
+    div
+      p = t 'app.footer.all_rights_reserved', current_year: Time.current.year

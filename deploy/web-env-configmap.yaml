@@ -14,4 +14,4 @@ data:
   STORAGE_ENDPOINT: "https://ams3.digitaloceanspaces.com"
   STORAGE_BUCKET: "assets-breaded"
   HOST_URL: "https://breaded.cz"
-  CDN_HOST: "assets-breaded.ams3.cdn.digitaloceanspaces.com"
+  CDN_HOST: "assets.breaded.cz"

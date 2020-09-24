@@ -1,0 +1,7 @@
+.breads-lg-6.breads-md-6.breads-sm-6.breads-xs-12
+  = image_pack_tag('media/images/home-img-01.jpg', class: 'img-responsive fade slide-top')
+  span.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.imageText-2.fade.slide-top
+    span
+      h4 = t 'app.homepage.featured.second.title'
+      p = t 'app.homepage.featured.second.description'
+      = link_to I18n.t('app.homepage.featured.read_more_link'), '#'

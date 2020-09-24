@@ -1,0 +1,11 @@
+header.header data-controller='header' data-target='header.menu' data-action='scroll@window->header#hideHeader' data-header-last-scroll='0' data-header-delta='5'
+  div
+    = link_to image_pack_tag('media/images/logo.svg'), root_path, class: 'logo'
+    input.menu-btn#menu-btn type='checkbox' data-action='click->header#toggleMobMenu'
+    label.menu-icon for='menu-btn'
+      span.navicon
+    ul.menu
+      li = link_to I18n.t('app.menu.browse_breads'), '#'
+      li = link_to I18n.t('app.menu.about'), '#'
+      li = link_to I18n.t('app.menu.gift'), '#'
+      li = link_to I18n.t('app.menu.login'), new_user_session_path

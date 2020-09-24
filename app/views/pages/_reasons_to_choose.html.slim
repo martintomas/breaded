@@ -1,0 +1,25 @@
+.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.division
+  == render partial: 'pages/featured/first'
+  .breads-lg-6.breads-md-6.breads-sm-6.breads-xs-12.seasonSection
+    section
+      h3.bigview = t 'app.homepage.reasons_to_choose.title_big_html'
+      h3.mobview = t 'app.homepage.reasons_to_choose.title_mob'
+      .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+        h4
+          span = image_pack_tag('media/images/seasoned-1.png')
+          = t 'app.homepage.reasons_to_choose.first.subtitle'
+        p.breads-lg-10.breads-md-10.PD0PX
+          = t 'app.homepage.reasons_to_choose.first.description'
+      .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+        h4
+          span = image_pack_tag('media/images/seasoned-2.png')
+          = t 'app.homepage.reasons_to_choose.second.subtitle'
+        p.breads-lg-10.breads-md-10.PD0PX
+          = t 'app.homepage.reasons_to_choose.second.description'
+      .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+        h4
+          span = image_pack_tag('media/images/seasoned-3.png')
+          = t 'app.homepage.reasons_to_choose.third.subtitle'
+        p.breads-lg-10.breads-md-10.PD0PX
+          = t 'app.homepage.reasons_to_choose.third.description'
+      == render partial: 'get_breaded_link'

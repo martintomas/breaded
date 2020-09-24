@@ -1,7 +1,7 @@
 doctype html
 html[lang="#{I18n.locale}"]
   head
-    meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     meta charset="utf-8"
 
     title = Breaded
@@ -14,5 +14,9 @@ html[lang="#{I18n.locale}"]
     == csrf_meta_tags
     == csp_meta_tag
 
-  body
-    == yield
+  body.demo-1.loading data-controller='body' data-action='scroll@window->body#checkIfInView resize@window->body#checkIfInView'
+    section.container
+      == render partial: 'layouts/menu/base'
+      == yield
+    == render partial: 'layouts/footer/gift'
+    == render partial: 'layouts/footer/base'

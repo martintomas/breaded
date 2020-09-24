@@ -1,4 +1,84 @@
 en:
+  app:
+    menu:
+      about: About
+      apply_to_be_baker: Apply to be a Baker
+      browse_breads: Browse Breads
+      gift: Gift
+      login: Login
+    gift:
+      label: Gift Breaded
+      button_html: "<i class='insider'></i>Get Breaded"
+      description: Gift Breaded to show someone how much they mean to you.
+    footer:
+      faq: FQAs
+      contact_us: Contact Us
+      privacy_and_terms: Privacy & Terms
+      all_rights_reserved: '© %{current_year} Breaded All rights reserved.'
+    homepage:
+      introduction_html: "Freshly Baked Breads,</br>Boxed & Delivered"
+      description_html: "Get up to <span>10 different</span> types of bread and</br>carefully delivered to your doorstep"
+      breaded_button_html: "<i class='insider'></i>Get Breaded"
+      breaded_button_simple: Get Breaded
+      steps:
+        first:
+          title_big_html: "Pick Your </br>Breads"
+          title_mob: Pick Your Breads
+          description: Sign Up in a few seconds & pick ten breads from a varied list. Or let us surprise you.
+        second:
+          title_big_html: "Choose </br>Plan"
+          title_mob: Choose Plan
+          description: Choose a Breaded subscription plan that suits your family needs. You can cancel anytime.
+        third:
+          title_big_html: "Delivered To </br>You"
+          title_mob: Delivered To You
+          description: All your breads are freshly boxed & carefully delivered to your doorstep as per your plan.
+      reasons_to_choose:
+        title_big_html: "Reasons to choose </br>Breaded"
+        title_mob: Reasons to choose Breaded
+        first:
+          subtitle: Seasoned Bakers
+          description: We source brilliant and passionate bakers around the UK, who have mastered different styles of bread-making.
+        second:
+          subtitle: Freshly Baked
+          description: All our breads are freshly prepared and baked before they’re boxed and delivered to your door.
+        third:
+          subtitle: Amazing Selections
+          description: A diverse, handpicked list that brings together breads that have evolved with different cultures, traditions & necessities.
+      breaded_geniuses:
+        title: The Breaded Geniuses
+        description: Every baker on Breaded is an artisanal earnest genius at their core. As each bread is the result of intricacy, creativity, discipline, patience & love Our bakers are constantly expanding the frontiers of bread-making. In other words, they love making bread. Period.
+        subsections:
+          first:
+            header: Featured Breads
+            description: Every week, we put together a list that features the most popular and top-rated breads by customers, bakers & the Breaded team.
+            link: This Week’s Featured Breads
+          second:
+            header: Are You a Seasoned Baker?
+            description: Are you a seasoned baker who’s interested in baking for Breaded. Just apply by filling out a simple form & invite us to taste your breads.
+            link: Apply To Be a Baker
+      plans:
+        title: Breaded Plans
+        first:
+          header_html: "Once Every </br>Month"
+          description: Perfect for the first timers who haven’t tried Breaded. Cancel anytime.
+          specification: 10 Breads x 1
+        second:
+          header_html: "Twice Every </br>Month"
+          description: For the soft spoken bread lovers or small cozy families. Cancel anytime.
+          specification: 10 Breads x 2
+        third:
+          header_html: "Four Times </br>Every Month"
+          description: For the bread connoisseurs or big families that share. Cancel anytime.
+          specification: 10 Breads x 4
+      featured:
+        read_more_link: Read More
+        first:
+          title: "Featured: Galician Rye Bread"
+          description: Galician rye bread is essentially a rustic rye sourdough bread made from a starter that’s subtler and lovelier and more approachable in flavor than most deli rye breads.
+        second:
+          title: "Featured: Multigrain Seeded Bread"
+          description: A light and fluffy multigrain sandwich bread, filled and topped with lots of grains. A crispy toasted seed crust with a fluffy texture combined with whole grain goodness.
   active_admin:
     menu:
       parents:

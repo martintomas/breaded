@@ -1,0 +1,10 @@
+.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.division.mainBanner
+  .breads-md-7.breads-lg-7.breads-sm-7.breads-xs-12.mainBannerText
+    span.content_Text
+      section
+        span = t 'app.homepage.introduction_html'
+        p = t 'app.homepage.description_html'
+        == render partial: 'get_breaded_link'
+  .breads-md-5.breads-lg-5.breads-sm-5.breads-xs-12.mainBannerImg
+    span.imgSection = image_pack_tag('media/images/mainBannerImg.jpg', class: 'img-responsive')
+  .dividerCol.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12

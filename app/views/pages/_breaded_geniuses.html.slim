@@ -1,0 +1,14 @@
+.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.division
+  .breads-lg-6.breads-md-6.breads-sm-6.breads-xs-12.bakers
+    h3 = t 'app.homepage.breaded_geniuses.title'
+    .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+      p.breads-lg-9.breads-md-9.PD0PX = t 'app.homepage.breaded_geniuses.description'
+    .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+      h4 = t 'app.homepage.breaded_geniuses.subsections.first.header'
+      p.breads-lg-9.breads-md-9.PD0PX = t 'app.homepage.breaded_geniuses.subsections.first.description'
+      = link_to I18n.t('app.homepage.breaded_geniuses.subsections.first.link'), '#'
+    .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+      h4 = t 'app.homepage.breaded_geniuses.subsections.second.header'
+      p.breads-lg-9.breads-md-9.PD0PX = t 'app.homepage.breaded_geniuses.subsections.second.description'
+      = link_to I18n.t('app.homepage.breaded_geniuses.subsections.second.link'), '#'
+  == render partial: 'pages/featured/second'
