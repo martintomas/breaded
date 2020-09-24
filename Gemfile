@@ -31,6 +31,7 @@ gem 'activeadmin'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
+gem 'inline_svg'
 gem 'cancancan'
 gem 'rolify'
 

@@ -11,7 +11,6 @@ require("channels")
 require.context('../images', true);
 require.context('../fonts', true);
 
-//import '../src/javascripts/imagesloaded.pkgd.min'
 import '../src/javascripts/TweenMax.min' // TODO: deprecated, fix at future
 import '../src/javascripts/animatedImage'
 
