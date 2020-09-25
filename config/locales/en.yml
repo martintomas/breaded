@@ -8,7 +8,7 @@ en:
       login: Login
     gift:
       label: Gift Breaded
-      button_html: "<i class='insider'></i>Get Breaded"
+      button_html: '<i class="insider"></i>Get Breaded'
       description: Gift Breaded to show someone how much they mean to you.
     footer:
       faq: FQAs
@@ -16,25 +16,25 @@ en:
       privacy_and_terms: Privacy & Terms
       all_rights_reserved: '© %{current_year} Breaded All rights reserved.'
     homepage:
-      introduction_html: "Freshly Baked Breads,</br>Boxed & Delivered"
-      description_html: "Get up to <span>10 different</span> types of bread and</br>carefully delivered to your doorstep"
-      breaded_button_html: "<i class='insider'></i>Get Breaded"
+      introduction_html: 'Freshly Baked Breads,</br>Boxed & Delivered'
+      description_html: 'Get up to <span>%{number_breads} different</span> types of bread and</br>carefully delivered to your doorstep'
+      breaded_button_html: '<i class="insider"></i>Get Breaded'
       breaded_button_simple: Get Breaded
       steps:
         first:
-          title_big_html: "Pick Your </br>Breads"
+          title_big_html: 'Pick Your </br>Breads'
           title_mob: Pick Your Breads
           description: Sign Up in a few seconds & pick ten breads from a varied list. Or let us surprise you.
         second:
-          title_big_html: "Choose </br>Plan"
+          title_big_html: 'Choose </br>Plan'
           title_mob: Choose Plan
           description: Choose a Breaded subscription plan that suits your family needs. You can cancel anytime.
         third:
-          title_big_html: "Delivered To </br>You"
+          title_big_html: 'Delivered To </br>You'
           title_mob: Delivered To You
           description: All your breads are freshly boxed & carefully delivered to your doorstep as per your plan.
       reasons_to_choose:
-        title_big_html: "Reasons to choose </br>Breaded"
+        title_big_html: 'Reasons to choose </br>Breaded'
         title_mob: Reasons to choose Breaded
         first:
           subtitle: Seasoned Bakers
@@ -60,24 +60,24 @@ en:
       plans:
         title: Breaded Plans
         first:
-          header_html: "Once Every </br>Month"
+          header_html: 'Once Every </br>Month'
           description: Perfect for the first timers who haven’t tried Breaded. Cancel anytime.
           specification: 10 Breads x 1
         second:
-          header_html: "Twice Every </br>Month"
+          header_html: 'Twice Every </br>Month'
           description: For the soft spoken bread lovers or small cozy families. Cancel anytime.
           specification: 10 Breads x 2
         third:
-          header_html: "Four Times </br>Every Month"
+          header_html: 'Four Times </br>Every Month'
           description: For the bread connoisseurs or big families that share. Cancel anytime.
           specification: 10 Breads x 4
       featured:
         read_more_link: Read More
         first:
-          title: "Featured: Galician Rye Bread"
+          title: 'Featured: Galician Rye Bread'
           description: Galician rye bread is essentially a rustic rye sourdough bread made from a starter that’s subtler and lovelier and more approachable in flavor than most deli rye breads.
         second:
-          title: "Featured: Multigrain Seeded Bread"
+          title: 'Featured: Multigrain Seeded Bread'
           description: A light and fluffy multigrain sandwich bread, filled and topped with lots of grains. A crispy toasted seed crust with a fluffy texture combined with whole grain goodness.
   active_admin:
     menu:

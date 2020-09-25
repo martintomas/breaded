@@ -2,3 +2,4 @@ deploy/breaded-secrets.yaml
 node_modules
 Gemfile.lock
 yarn.lock
+.env

@@ -1,0 +1,8 @@
+development: &default
+  default_number_of_breads: 10
+
+test:
+  <<: *default
+
+production:
+  default_number_of_breads: 10

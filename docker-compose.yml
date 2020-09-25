@@ -6,8 +6,9 @@ services:
     build:
       context: .
     ports:
-      - 3000:3000
-      - 3035:3035
+      - 3000:3000 # rails
+      - 3035:3035 # webpacker dev server
+      - 4000:4000 # capybara
     env_file:
       - ".env"
     volumes:
@@ -32,17 +33,7 @@ services:
     ports:
       - 6379:6379
 
-  selenium-hub:
-    image: selenium/hub:3.141.59-mercury
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug:3.141.59
     ports:
-      - "4444:4444"
-
-  chrome:
-    image: selenium/node-chrome:3.141.59-mercury
-    volumes:
-      - /dev/shm:/dev/shm
-    depends_on:
-      - selenium-hub
-    environment:
-      - HUB_HOST=selenium-hub
-      - HUB_PORT=4444
+      - 5900:5900

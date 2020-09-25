@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class Admin::RoleControllerTest < ActionDispatch::IntegrationTest
+class Admin::RolesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
@@ -26,7 +26,9 @@ class Admin::RoleControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Role.count', 1 do
       post admin_roles_url, params: { role: { name: 'NEW ROLE' } }
 
-      assert_redirected_to admin_role_url(Role.last)
+      role = Role.last
+      assert_equal role.name, 'NEW ROLE'
+      assert_redirected_to admin_role_url()
     end
   end
 

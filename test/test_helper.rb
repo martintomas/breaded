@@ -8,6 +8,10 @@ require 'minitest/reporters'
 
 Minitest::Reporters.use!
 
+allowed_sites = []
+allowed_sites += [Regexp.new(ENV['SELENIUM_URL'])] if ENV['SELENIUM_URL'].present?
+WebMock.disable_net_connect!(allow_localhost: true, allow: allowed_sites)
+
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   # parallelize(workers: :number_of_processors)

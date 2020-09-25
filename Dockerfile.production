@@ -28,7 +28,7 @@ RUN rm -rf public/packs
 
 RUN bin/rails webpacker:compile
 
-RUN rm -rf node_modules tmp/cache tmp/storage log/development.log log/test.log
+RUN rm -rf node_modules tmp/cache tmp/storage tmp/screenshots log/development.log log/test.log
 
 ############### Finalize build ###############
 FROM ruby:2.6.3-alpine

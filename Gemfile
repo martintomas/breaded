@@ -65,9 +65,9 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver', require: !ENV['SELENIUM_URL']
+  gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', require: !ENV['SELENIUM_URL']
   gem 'minitest'
   gem 'minitest-reporters'
   gem 'minitest-stub_any_instance'

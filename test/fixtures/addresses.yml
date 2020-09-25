@@ -1,7 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+admin_address:
+  addressable: admin (User)
+  address_line: Address Line
+  street: Street 1
+  postal_code: 54546
+  city: London
+  state: UK
+
 customer_address:
-  addressable: customer
+  addressable: customer (User)
   address_line: Address Line
   street: Street 1
   postal_code: 54546
@@ -9,7 +17,7 @@ customer_address:
   state: UK
 
 customer_order_1_address:
-  addressable: customer_order_1
+  addressable: customer_order_1 (Order)
   address_line: Address Line
   street: Street 1
   postal_code: 54546
