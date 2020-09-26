@@ -8,7 +8,6 @@ services:
     ports:
       - 3000:3000 # rails
       - 3035:3035 # webpacker dev server
-      - 4000:4000 # capybara
     env_file:
       - ".env"
     volumes:
@@ -34,6 +33,6 @@ services:
       - 6379:6379
 
   selenium_chrome:
-    image: selenium/standalone-chrome-debug:3.141.59
+    image: selenium/standalone-chrome:3.141.59
     ports:
-      - 5900:5900
+      - 4444:4444

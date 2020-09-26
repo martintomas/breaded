@@ -21,16 +21,17 @@ Capybara.register_driver :selenium_chrome_in_container do |app|
 end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  Capybara.server_host = '0.0.0.0'
-  Capybara.server_port = 4000
-  Capybara.app_host = "http://web:4000"
-
   driven_by :headless_selenium_chrome_in_container
 
+  setup do
+    Capybara.server_host = '0.0.0.0'
+    Capybara.app_host = "http://#{Socket.ip_address_list.detect(&:ipv4_private?).ip_address}:#{Capybara.server_port}"
+  end
+
   def login_as_admin
-    visit new_session_path
-    fill_in 'session[email]', with: users(:admin).email
-    fill_in 'session[password]', with: user(:admin).password
+    visit new_user_session_path
+    fill_in 'user[email]', with: 'admin@breaded.net'
+    fill_in 'user[password]', with: 'password'
 
     click_on 'Log in'
   end

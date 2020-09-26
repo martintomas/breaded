@@ -5,12 +5,14 @@ admin:
   last_name: Admin
   email: admin@breaded.net
   roles: admin
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 
 customer:
   first_name: John
   last_name: Black
   email: john.black@breaded.net
   roles: customer
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'customer') %>
 
 customer_2:
   first_name: Martin
