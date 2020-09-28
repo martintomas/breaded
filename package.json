@@ -9,7 +9,8 @@
     "@activeadmin/activeadmin": "^2.8.0",
     "turbolinks": "^5.2.0",
     "stimulus": "^1.1.1",
-    "imagesloaded": "^4.1.4"
+    "imagesloaded": "^4.1.4",
+    "@sentry/browser": "^5.24.2"
   },
   "version": "0.1.0",
   "devDependencies": {
