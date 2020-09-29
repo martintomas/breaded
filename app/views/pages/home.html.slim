@@ -1,8 +1,11 @@
-== render partial: 'images_presentation'
-== render partial: 'title'
+section.container
+  == render partial: 'images_presentation'
+  == render partial: 'title'
 
-.bodyContainers.row
-  == render partial: 'steps'
-  == render partial: 'reasons_to_choose'
-  == render partial: 'breaded_geniuses'
-  == render partial: 'plans'
+  .bodyContainers.row
+    == render partial: 'steps'
+    == render partial: 'reasons_to_choose'
+    == render partial: 'breaded_geniuses'
+    == render partial: 'plans'
+
+== render partial: 'shared/gift'

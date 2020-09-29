@@ -79,6 +79,18 @@ en:
         second:
           title: 'Featured: Multigrain Seeded Bread'
           description: A light and fluffy multigrain sandwich bread, filled and topped with lots of grains. A crispy toasted seed crust with a fluffy texture combined with whole grain goodness.
+    login:
+      label: Hi, Bread Lover!
+      login_button: Log in
+      signup_button: Sign Up
+      login_submit: Login
+      forgot_password_link: Forgot your password?
+    registration:
+      registration_submit: Signup
+    forgotten_password:
+      form_submit: Send me reset password instructions
+    errors:
+      form_error: '%{errors_count} prevented the form from being saved:'
   active_admin:
     menu:
       parents:

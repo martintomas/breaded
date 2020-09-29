@@ -1,0 +1,19 @@
+div
+  .panel.shadow1
+    = form_for(resource, as: resource_name, url: user_registration_path, html: { class: 'login-form' }) do |f|
+      == render 'users/sessions/login_switch', login_action: false
+      == render "users/shared/error_messages", resource: resource
+
+      fieldset id='signup-fieldset'
+        = f.label :first_name, class: 'animated fadeInUp animate3'
+        = f.text_field :first_name, class: 'login animated fadeInUp animate2', required: true
+        br
+        = f.label :last_name, class: 'login animated fadeInUp animate3'
+        = f.text_field :last_name, class: 'login animated fadeInUp animate3', required: true
+        br
+        = f.label :email, class: 'animated fadeInUp animate5'
+        = f.email_field :email, class: 'login animated fadeInUp animate5', required: true
+        br
+        = f.label :password, class: 'animated fadeInUp animate5'
+        = f.password_field :password, class: 'login animated fadeInUp animate5', required: true
+      input.login_form.button.animated.fadeInUp.animate6 type="submit" id="signup-form-submit" value="#{I18n.t('app.registration.registration_submit')}"

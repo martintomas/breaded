@@ -1,0 +1,6 @@
+- if resource.errors.any?
+  div#error_explanation
+    p = t 'app.errors.form_error', errors_count: pluralize(resource.errors.count, "error")
+    ul
+      - resource.errors.full_messages.each do |message|
+        li = message

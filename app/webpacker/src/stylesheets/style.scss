@@ -1,0 +1,1156 @@
+/* Default Settings */
+body.pages {
+  & {
+    background-color: #fff;
+    color: #333333;
+    font-size: 28px;
+    font-family: Montserrat-Regular;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important;
+    position: relative;
+    display: block;
+    font-weight: normal;
+    -webkit-animation: bugfix infinite 1s;
+  }
+
+  @-webkit-keyframes bugfix {
+    from {
+      padding: 0;
+    }
+    to {
+      padding: 0;
+    }
+  }
+
+  & > section > main {
+    position: absolute;
+    width: 1100px;
+    margin: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .bodyContainers {
+    width: 1170px;
+    margin: auto;
+    position: relative;
+    z-index: 9;
+    background: #fff;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+    position: relative;
+    vertical-align: middle;
+    font-family: "Montserrat-Medium";
+    cursor: pointer;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  button a {
+    color: #010101;
+    padding: 15px 25px;
+    text-decoration: none;
+    display: block;
+  }
+
+  button:focus {
+    outline: 0;
+  }
+
+  .insider {
+    background-color: #fff;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    left: -95px;
+    transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -o-transform: rotateZ(45deg);
+    -ms-transform: rotateZ(45deg);
+  }
+
+  button:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: #fff;
+  }
+
+  button:hover a {
+    color: #fff;
+  }
+
+  button:hover .insider {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    left: 185px;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333333;
+  }
+
+  h1 {
+    font-size: 45px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 60px;
+    margin: 0 0 25px;
+  }
+
+  h3 {
+    font-family: Merriweather-Regular;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-family: 'Merriweather-Light', sans-serif;
+    font-size: 18px;
+    margin: 15px 0;
+    font-weight: 300;
+    color: #333333;
+  }
+
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    transition: all 2s ease-in-out 1s;
+  }
+
+  .PD0PX {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .division {
+    margin-bottom: 30vh;
+  }
+
+  .imageText-1 {
+    font-size: 16px;
+    margin: -10px 0 0 15%;
+    z-index: 1;
+  }
+
+  .imageText-2 {
+    font-size: 16px;
+    margin: -10px 0 0 -15%;
+    z-index: 1;
+  }
+
+  .imageText-1 h4,
+  .imageText-2 h4 {
+    font-family: "Merriweather-Regular";
+  }
+
+  .imageText-1 span,
+  .imageText-2 span {
+    float: right;
+    padding: 3rem;
+    border-radius: 5px;
+    background-color: #FDF6EF;
+  }
+
+  .imageText-2 span {
+    float: left;
+  }
+
+  .imageText-1 p,
+  .imageText-2 p {
+    line-height: 2;
+    font-family: "Merriweather-LightItalic";
+  }
+
+  .imageText-1 a,
+  .imageText-2 a {
+    color: #000000;
+    font-family: "Montserrat-Regular";
+    font-size: 14px;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .imageText-1 a:hover::before,
+  .imageText-2 a::before {
+    content: "";
+    border-bottom: 2px solid;
+    margin: auto;
+    width: 100%;
+    position: absolute;
+    bottom: -5px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  .imageText-1 a:hover::before,
+  .imageText-2 a:hover::before {
+    width: 40%;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  .bakers p {
+    font-family: "Montserrat-Light";
+  }
+
+  .imageText-1 a,
+  .imageText-2 a,
+  .bakers a {
+    display: inline-block;
+    color: #000000;
+    font-size: 14px;
+    margin: 1rem 0;
+    text-decoration: none;
+    font-family: "Montserrat-SemiBold";
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    position: relative;
+    padding: 7px 0;
+  }
+
+  .imageText-1 a::before,
+  .imageText-2 a::before,
+  .bakers a::before {
+    content: "";
+    border-bottom: 2px solid;
+    margin: auto;
+    width: 100%;
+    position: absolute;
+    bottom: -5px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  .imageText-1 a:hover::before,
+  .imageText-2 a:hover::before,
+  .bakers a:hover::before {
+    width: 40%;
+    margin: auto;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  .pickupPlan {
+    background-color: #F9F1E8;
+  }
+
+  /* small screens */
+  @media screen and (max-width: 44em) {
+    & {
+      margin: 0;
+    }
+
+    nav[role="custom-dropdown"] ul {
+      display: none;
+      height: 100%;
+    }
+    nav[role="custom-dropdown"] label {
+      position: relative;
+      display: block;
+      width: 100%;
+      min-height: 2.25em;
+      padding: 0.45em;
+      font-size: 1.1em;
+      margin: 0;
+      border: 0.15em solid rgba(60, 60, 60, 0.2);
+      background-image: url(https://raw.github.com/TimPietrusky/mantisbt-is-a-rockstar/master/rockstar/img/bg_dark_grey.png);
+    }
+    nav[role="custom-dropdown"] label:after {
+      position: absolute;
+      right: 0.25em;
+      top: 0;
+      content: "\2261";
+      font-size: 1.8em;
+    }
+    nav[role="custom-dropdown"] input[type="checkbox"]:checked ~ label:after {
+      color: #222;
+    }
+    nav[role="custom-dropdown"] input[type="checkbox"]:checked ~ ul {
+      display: block;
+    }
+    nav[role="custom-dropdown"] input[type="checkbox"]:checked ~ ul > li {
+      width: 100%;
+      opacity: 0.8;
+      text-align: left;
+    }
+    nav[role="custom-dropdown"] input[type="checkbox"]:checked ~ ul > li:after {
+      position: absolute;
+      right: 0.25em;
+      content: "\203A";
+      font: bold 1.4em sans-serif;
+    }
+  }
+
+
+  /*Header section Ends*/
+  .mainBanner {
+    background-color: transparent;
+    margin-bottom: 0;
+    height: 100vh;
+  }
+
+  .mainBanner p {
+    margin: 30px 0;
+    font-size: 20px;
+    font-weight: 100;
+  }
+
+  .mainBanner p b {
+    font-weight: 500;
+  }
+
+  .mainBannerText {
+    background-color: #ffffff;
+    position: absolute;
+    height: 100%;
+    z-index: 10;
+  }
+
+  .mainBannerImg {
+    float: right;
+    padding-right: 0;
+    z-index: 8;
+    margin-top: 120px;
+  }
+
+  .dividerCol {
+    padding-bottom: 100%;
+    background-color: #ffffff;
+    z-index: 9;
+  }
+
+  .imgSection {
+    width: 75%;
+  }
+
+  .imaSection img {
+    opacity: 1;
+    transition: all 2s ease-in-out;
+  }
+
+  .imgSection img:hover {
+    opacity: 0;
+    transition: all 2s ease-in-out;
+  }
+
+  .imgDescribsion {
+    margin: 6rem 0;
+    background-color: #ffffff;
+  }
+
+  /* Gift Section */
+
+  .giftBreaded {
+    background-color: #F9F1E8;
+  }
+
+  .giftBreaded > div > section {
+    padding: 5rem 0;
+    display: table;
+    margin: auto;
+    float: none;
+  }
+
+  .giftBreaded > div {
+    width: 1170px;
+    font-size: 20px;
+    font-weight: 100;
+    margin: auto;
+  }
+
+  .giftBreaded h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: "Merriweather-Regular";
+    font-weight: 500;
+    font-size: 40px;
+  }
+
+  .giftBreaded p {
+    font-family: "Montserrat-Regular";
+    font-size: 18px;
+  }
+
+  .giftBreaded .insider {
+    background-color: #F9F1E8;
+  }
+
+  /* pickup and Delivery Plan */
+
+  .pickupDeliveryStep {
+    background-color: #F9F1E8;
+  }
+
+  .pickupDeliveryStep > section {
+    padding: 5rem 0 5rem 3rem;
+    float: left;
+  }
+
+  .pickupDeliveryStep > section > div > section {
+    padding-right: 5rem;
+  }
+
+  .pickupDeliveryStep section span {
+    font-size: 18px;
+    width: 35px;
+    height: 35px;
+    position: relative;
+    display: block;
+    border: 1.2px solid #707070;
+    border-radius: 50%;
+  }
+
+  .pickupDeliveryStep section span i {
+    font-style: normal;
+    position: absolute;
+    margin-left: 11px;
+    margin-top: 4px;
+    font-family: Merriweather-Regular;
+  }
+
+  .pickupDeliveryStep section h2 {
+    font-family: 'Merriweather-Regular', sans-serif;
+    font-size: 30px;
+    margin: 30px 0;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .pickupDeliveryStep section p {
+    font-size: 20px;
+    line-height: 2;
+    padding-right: 20px;
+    margin: 0;
+    font-family: Montserrat-Light;
+  }
+
+  /* Sectional Section */
+  .seasonSection section {
+    padding: 0 3rem;
+  }
+
+  .seasonSection h3 {
+    margin: 0;
+  }
+
+  .seasonSection section > div {
+    margin-top: 1rem;
+  }
+
+  .seasonSection section > div > p {
+    margin: 0;
+    font-family: "Montserrat-Light";
+  }
+
+  .seasonSection button {
+    margin-top: 2rem;
+  }
+
+  .seasonSection img {
+    width: 25px;
+    margin-right: 7px;
+    margin-bottom: -6px;
+  }
+
+  .seasonSection h3,
+  .bakers h3 {
+    padding: 0 15px;
+  }
+
+  /* Bakers Section */
+
+  .bakers h3 {
+    margin: 0;
+  }
+
+  .bakers > div {
+    margin-top: 1rem;
+  }
+
+  .bakers > div > p {
+    margin: 0;
+  }
+
+  .fade {
+    opacity: 0;
+    position: relative;
+  }
+
+  .bigview {
+    display: block;
+  }
+
+  .mobview {
+    display: none;
+  }
+
+  /*animation element sliding left*/
+
+  .fade.slide-top {
+    opacity: 0;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+    -moz-transform: translate3d(0px, 100px, 0px);
+    -webkit-transform: translate3d(0px, 100px, 0px);
+    -o-transform: translate(0px, 100px);
+    -ms-transform: translate(0px, 100px);
+    transform: translate3d(0px, 100px, 0px);
+  }
+
+  .fade.slide-top.in-view {
+    opacity: 1;
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  .fade.slide-right {
+    opacity: 0;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+    -moz-transform: translate3d(100px, 0px, 0px);
+    -webkit-transform: translate3d(100px, 0px, 0px);
+    -o-transform: translate(100px, 0px);
+    -ms-transform: translate(100px, 0px);
+    transform: translate3d(100px, 0px, 0px);
+  }
+
+  .fade.slide-right.in-view {
+    opacity: 1;
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  .fade.slide-left {
+    opacity: 0;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+    -moz-transform: translate3d(-100px, 0px, 0px);
+    -webkit-transform: translate3d(-100px, 0px, 0px);
+    -o-transform: translate(-100px, 0px);
+    -ms-transform: translate(-100px, 0px);
+    transform: translate3d(-100px, 0px, 0px);
+  }
+
+  .fade.slide-left.in-view {
+    opacity: 1;
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  .fade.slide-zoom-in {
+    opacity: 0;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+  }
+
+  .fade.slide-zoom-in.in-view {
+    opacity: 1;
+    -moz-transition: all 1s linear;
+    -webkit-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    transition: all 1s linear;
+  }
+
+  /*Breaded Plan */
+  .breadedPlan {
+    float: left;
+    padding: 5rem 0;
+    position: relative;
+    margin-bottom: 7rem;
+    border-radius: 5px;
+  }
+
+  .breadedPlan section {
+    float: none;
+    margin: auto;
+  }
+
+  .breadedPlanTitle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: -18px;
+    background: #ffffff;
+    width: 250px;
+    text-align: center;
+    font-family: "Merriweather-Regular";
+  }
+
+  .breadedPlan h3 {
+    font-family: "Merriweather-Regular";
+  }
+
+  .breadedPlan div span {
+    font-size: 22px;
+    margin: 2rem 0;
+    display: block;
+    font-family: "Merriweather-Light";
+  }
+
+  .breadedPlan p {
+    font-family: "Montserrat-Light";
+  }
+
+  .breadedPlan > button {
+    position: absolute;
+    bottom: 0;
+    background: #303030;
+    color: #fff;
+    border-radius: 5px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: -27px;
+    z-index: 1;
+    outline: none;
+  }
+
+  .breadedPlan > button a {
+    color: #ffffff;
+  }
+
+  .breadedPlan > button:hover {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    transform: scale(1.2);
+  }
+
+  .in-view .breadedPlan .breadedPlanBrd:before, .in-view .breadedPlan .breadedPlanBrd:after {
+    opacity: 1;
+    -webkit-animation: open 1s;
+    /* Chrome, Safari, Opera */
+    animation: open 3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    animation-direction: normal;
+  }
+
+  .in-view .breadedPlan .breadedPlanBrd-bottom:before, .in-view .breadedPlan .breadedPlanBrd-bottom:after {
+    opacity: 1;
+    -webkit-animation: openB 1s;
+    /* Chrome, Safari, Opera */
+    animation: openB 1s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    animation-direction: normal;
+    top: 0%;
+  }
+
+  .breadedPlanBrd {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -1px;
+  }
+
+  .breadedPlanBrd:before {
+    position: absolute;
+    content: '';
+    height: 0;
+    width: 0;
+    display: block;
+    opacity: 0;
+    border-top: solid 2px #707070;
+    border-left: solid 2px #707070;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .breadedPlanBrd:after {
+    position: absolute;
+    content: '';
+    height: 0;
+    width: 0;
+    display: block;
+    opacity: 0;
+    border-top: solid 2px #707070;
+    border-right: solid 2px #707070;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+
+  .breadedPlanBrd-bottom:before {
+    position: absolute;
+    content: '';
+    height: 0;
+    width: 0;
+    display: block;
+    opacity: 0;
+    height: 100%;
+    border-bottom: solid 2px #707070;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    right: 0;
+  }
+
+  .breadedPlanBrd-bottom:after {
+    position: absolute;
+    content: '';
+    height: 0;
+    width: 0;
+    display: block;
+    opacity: 0;
+    height: 100%;
+    border-bottom: solid 2px #707070;
+    -webkit-border-top-left-radius: 5px;
+    -moz-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    left: 0;
+  }
+
+
+  @keyframes open {
+    0% {
+      width: 0;
+      height: 0;
+    }
+    50% {
+      width: 100%;
+      height: 0;
+    }
+    100% {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  @keyframes openB {
+    0% {
+      width: 0px;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+
+  @media (max-width: 1250px) {
+    & > section > main {
+      width: 920px;
+    }
+    .giftBreaded > div,
+    .bodyContainers {
+      width: auto;
+    }
+    .bakers h3 {
+      padding-left: 15px;
+    }
+    .pickupDeliveryStep > section {
+      padding: 5rem 0 5rem 1rem;
+    }
+    .pickupDeliveryStep > section > div > section {
+      padding-right: 0;
+    }
+    .mainBanner {
+      padding-right: 0;
+    }
+    .mainBannerImg {
+      padding: 0;
+    }
+  }
+  @media (max-width: 992px) {
+    & > section > main {
+      width: 720px;
+    }
+    button {
+      font-size: 18px;
+    }
+    .content_Text section {
+      margin: 1rem 0;
+    }
+    .content_Text span {
+      font-size: 30px;
+      line-height: 50px;
+    }
+    .mainBanner p {
+      margin: 1rem 0;
+      font-size: 16px;
+      font-weight: 100;
+    }
+    .breadedPlan h3 {
+      font-size: 23px;
+    }
+    .pickupDeliveryStep > section {
+      padding: 5rem 0 5rem 0rem;
+    }
+    .pickupDeliveryStep > section > div > section {
+      padding-right: 0;
+    }
+    .pickupDeliveryStep section h2 {
+      font-size: 25px;
+    }
+    .pickupDeliveryStep section p {
+      font-size: 17px;
+      line-height: 1.5;
+      padding-right: 0px;
+    }
+    .seasonSection section {
+      padding: 0;
+    }
+    .seasonSection section > div > p,
+    .bakers > div > p {
+      font-size: 10px;
+    }
+    .seasonSection h3,
+    .bakers h3 {
+      font-size: 22px;
+      padding-left: 15px;
+    }
+    .seasonSection h4,
+    .bakers h4 {
+      font-size: 14px;
+    }
+    .seasonSection button {
+      margin-top: 1rem;
+      margin-left: 15px;
+    }
+    .bakers a {
+      font-size: 10px;
+      margin: 7px 0 0;
+    }
+    .imageText-1,
+    .imageText-2 {
+      margin: auto;
+    }
+    .imageText-1 span {
+      margin: 10px -102% 0 0;
+    }
+    .imageText-2 span {
+      font-size: 16px;
+      margin: 10px 0 0 -102%;
+      width: 200%;
+    }
+    .mainBannerImg {
+      margin-top: auto;
+    }
+  }
+
+  @media (max-width: 850px) {
+    & > section > main {
+      display: none;
+    }
+    .imgSection img:hover {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & > section > main {
+      width: 750px;
+    }
+    button {
+      font-size: 18px;
+    }
+
+    button:hover .insider {
+      display: none;
+      transition: all 0.3s ease;
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      -ms-transition: all 0.3s ease;
+      left: 185px;
+    }
+    main {
+      display: none;
+    }
+    .bigview {
+      display: none;
+    }
+    .mobview {
+      display: block;
+    }
+    .dividerCol {
+      display: none;
+    }
+    body > section > main,
+    .bodyContainers {
+      width: auto;
+    }
+    .mainBannerText {
+      position: relative;
+      text-align: center;
+      height: auto;
+    }
+    .content_Text {
+      position: relative;
+    }
+    .content_Text span {
+      font-size: 26px;
+      line-height: 45px;
+    }
+    .content_Text section {
+      margin: 0em 0 2em;
+    }
+    .mainBanner {
+      height: auto;
+      margin-top: 121px;
+    }
+    .mainBanner p,
+    .content_Text p span {
+      font-size: 16px;
+      line-height: 28px;
+    }
+    .pickupDeliveryStep > section {
+      padding: 2em 0 2em 2em;
+    }
+    .pickupDeliveryStep > section > div {
+      margin-bottom: 2em;
+    }
+    .imageText-1 span,
+    .imageText-2 span {
+      width: auto;
+      margin: auto;
+    }
+    .division .img-responsive {
+      width: calc(100% - 32px);
+      margin: auto;
+    }
+    .seasonSection section {
+      padding: 0;
+    }
+    .seasonSection section > div {
+      text-align: left;
+    }
+    .imageText-1,
+    .imageText-2 {
+      width: auto;
+      margin: -7px auto 2rem;
+    }
+    .seasonSection h3,
+    .bakers h3 {
+      padding: 15px;
+      text-align: left;
+      font-size: 27px;
+      padding-left: 30px;
+    }
+    .division {
+      margin-bottom: 4rem;
+    }
+    .bakers {
+      float: left;
+      margin-bottom: 2rem;
+    }
+    .breadedPlan {
+      padding: 3rem 0;
+    }
+    .breadedPlan > button {
+      bottom: -20px;
+    }
+    .seasonSection h4,
+    .bakers h4 {
+      font-size: 15px;
+    }
+    .seasonSection section > div > p,
+    .bakers > div > p {
+      font-size: 14px;
+    }
+    .bakers a {
+      font-size: 16px;
+    }
+    .mainBannerImg img {
+      width: 75% !important;
+    }
+    .fade.slide-right {
+      opacity: 1;
+      -moz-transform: translate3d(0px, 0px, 0px);
+      -webkit-transform: translate3d(0px, 0px, 0px);
+      -o-transform: translate(0px, 0px);
+      -ms-transform: translate(0px, 0px);
+      transform: translate3d(0px, 0px, 0px);
+    }
+    .fade.slide-left {
+      opacity: 1;
+      -moz-transform: translate3d(0px, 0px, 0px);
+      -webkit-transform: translate3d(0px, 0px, 0px);
+      -o-transform: translate(0px, 0px);
+      -ms-transform: translate(0px, 0px);
+      transform: translate3d(0px, 0px, 0px);
+    }
+    .fade.slide-top {
+      opacity: 1;
+      -moz-transform: translate3d(0px, 0px, 0px);
+      -webkit-transform: translate3d(0px, 0px, 0px);
+      -o-transform: translate(0px, 0px);
+      -ms-transform: translate(0px, 0px);
+      transform: translate3d(0px, 0px, 0px);
+    }
+    .fade.slide-zoom-in {
+      opacity: 1;
+      -moz-transition: all 1s linear;
+      -webkit-transition: all 1s linear;
+      -o-transition: all 1s linear;
+      transition: all 1s linear;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .division,
+    .division div {
+      padding: 0;
+    }
+    .seasonSection section > div,
+    .bakers > div {
+      padding: 0 30px;
+    }
+    .division .img-responsive {
+      width: 100%;
+    }
+    .pickupDeliveryStep > section {
+      padding: 2em 1em 2em;
+    }
+    .pickupDeliveryStep > section > div > section {
+      padding-right: 0rem;
+    }
+    .pickupDeliveryStep section h2 {
+      font-size: 25px;
+      margin: 12px 0;
+      line-height: 1.5;
+    }
+    .pickupDeliveryStep section p {
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .pickupDeliveryStep > section > div {
+      margin-bottom: 2.1em;
+    }
+    .breadedPlanTitle {
+      top: -15px;
+      font-size: 20px;
+      width: 200px;
+    }
+    .breadedPlan img {
+      width: 50px;
+    }
+    .breadedPlan h3 {
+      font-size: 25px;
+      margin: 5px 0;
+    }
+    .breadedPlan div {
+      padding: 0;
+    }
+    .breadedPlan div span {
+      font-size: 18px;
+      margin: 1rem 0;
+    }
+    .breadedPlan section {
+      margin: 25px auto;
+    }
+    .imageText-1, .imageText-2 {
+      padding: 0;
+    }
+    .imageText-1 span, .imageText-2 span {
+      padding: 20px 30px 40px;
+    }
+    .seasonSection button {
+      margin-top: 3rem;
+      margin-left: 30px;
+      font-size: 16px;
+    }
+    .seasonSection h3,
+    .bakers h3 {
+      font-size: 20px;
+    }
+    .seasonSection h4,
+    .bakers h4 {
+      font-size: 15px;
+    }
+    .seasonSection section > div > p,
+    .bakers > div > p {
+      font-size: 12px;
+    }
+    .bakers a {
+      font-size: 12px;
+    }
+    .giftBreaded h1 {
+      font-size: 35px;
+    }
+  }
+}
+

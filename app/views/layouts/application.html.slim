@@ -8,15 +8,14 @@ html[lang="#{I18n.locale}"]
 
     meta name="description" content="Breaded"
 
+    link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
     == stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     == javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
 
     == csrf_meta_tags
     == csp_meta_tag
 
-  body.demo-1.loading data-controller='body' data-action='scroll@window->body#checkIfInView resize@window->body#checkIfInView'
-    section.container
-      == render partial: 'layouts/menu/base'
-      == yield
-    == render partial: 'layouts/footer/gift'
-    == render partial: 'layouts/footer/base'
+  body.demo-1.loading data-controller='body' class="#{ controller.controller_name }" data-action='scroll@window->body#checkIfInView resize@window->body#checkIfInView'
+    == render partial: 'shared/menu'
+    == yield
+    == render partial: 'shared/footer'

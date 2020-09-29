@@ -1,0 +1,10 @@
+div
+  .panel.shadow1
+    = form_for(resource, as: resource_name, url: user_password_path, html: { class: 'login-form' }) do |f|
+      == render "users/shared/error_messages", resource: resource
+      == render 'shared/flash_messages'
+
+      fieldset id='login-fieldset'
+        = f.label :email, class: 'login animated fadeInUp animate3'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'login animated fadeInUp animate2', required: true
+      input.login_form.button.animated.fadeInUp.animate4 type="submit" id="login-form-submit" value="#{I18n.t('app.forgotten_password.form_submit')}"

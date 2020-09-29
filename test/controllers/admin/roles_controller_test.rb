@@ -28,7 +28,7 @@ class Admin::RolesControllerTest < ActionDispatch::IntegrationTest
 
       role = Role.last
       assert_equal role.name, 'NEW ROLE'
-      assert_redirected_to admin_role_url()
+      assert_redirected_to admin_role_url(role)
     end
   end
 

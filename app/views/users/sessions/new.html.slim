@@ -1,0 +1,14 @@
+div
+  .panel.shadow1
+    = form_for(resource, as: resource_name, url: user_session_path, html: { class: 'login-form' }) do |f|
+      == render 'users/sessions/login_switch', login_action: true
+
+      fieldset id='login-fieldset'
+        = f.label :email, class: 'login animated fadeInUp animate3'
+        = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'login animated fadeInUp animate2', required: true
+        br
+        = f.label :password, class: 'login animated fadeInUp animate4'
+        = f.password_field :password, autocomplete: 'current-password', class: 'login animated fadeInUp animate3', required: true
+      p
+        = link_to I18n.t('app.login.forgot_password_link'), new_user_password_path, id: "lost-password-link", class: "animated fadeIn animate6"
+      input.login_form.button.animated.fadeInUp.animate4 type="submit" id="login-form-submit" value="#{I18n.t('app.login.login_submit')}"
