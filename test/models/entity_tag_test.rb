@@ -2,32 +2,32 @@
 
 require 'test_helper'
 
-class FoodTagTest < ActiveSupport::TestCase
+class EntityTagTest < ActiveSupport::TestCase
   setup do
-    @full_content = { food: foods(:seeded_bread),
+    @full_content = { entity: foods(:seeded_bread),
                       tag: tags(:vegetarian_tag) }
   end
 
   test 'the validity - empty is not valid' do
-    model = FoodTag.new
+    model = EntityTag.new
     refute model.valid?
   end
 
   test 'the validity - with all is valid' do
-    model = FoodTag.new @full_content
+    model = EntityTag.new @full_content
     assert model.valid?, model.errors.full_messages
   end
 
   test 'the validity - without food is not valid' do
-    invalid_with_missing FoodTag, :food
+    invalid_with_missing EntityTag, :entity
   end
 
   test 'the validity - without tag is not valid' do
-    invalid_with_missing FoodTag, :tag
+    invalid_with_missing EntityTag, :tag
   end
 
   test 'the validity - combination of food and tag has to be unique' do
-    FoodTag.create! @full_content
-    refute FoodTag.new(@full_content).valid?
+    EntityTag.create! @full_content
+    refute EntityTag.new(@full_content).valid?
   end
 end

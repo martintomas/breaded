@@ -8,12 +8,13 @@
 	font-size: 16px;
 }
 
-html, body {
+html {
 	height: 100%;
 }
 
 body.pages {
 	& {
+		height: 100%;
 		--color-text: #262523;
 		--color-bg: #ffffff;
 		--color-link: #eca324;

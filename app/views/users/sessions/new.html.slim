@@ -1,7 +1,7 @@
 div
   .panel.shadow1
     = form_for(resource, as: resource_name, url: user_session_path, html: { class: 'login-form' }) do |f|
-      == render 'users/sessions/login_switch', login_action: true
+      == render 'users/shared/login_switch', page: 'login'
 
       fieldset id='login-fieldset'
         = f.label :email, class: 'login animated fadeInUp animate3'

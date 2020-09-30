@@ -3,3 +3,4 @@
 bread_and_butter:
   name: bread_and_butter_name
   description: bread_and_butter_description
+  producer_application: producer_application_bread_and_butter

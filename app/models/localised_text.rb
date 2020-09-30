@@ -7,4 +7,6 @@ class LocalisedText < ApplicationRecord
   has_many :food_descriptions, class_name: 'Food', foreign_key: 'description_id', dependent: :nullify
   has_many :producer_names, class_name: 'Producer', foreign_key: 'name_id', dependent: :nullify
   has_many :producer_descriptions, class_name: 'Producer', foreign_key: 'description_id', dependent: :nullify
+
+  accepts_nested_attributes_for :text_translations
 end

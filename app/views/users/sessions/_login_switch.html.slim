@@ -1,8 +1,0 @@
-h1.animated.fadeInUp.animate1 id='title-login' = t 'app.login.label'
-.panel-switch.animated.fadeIn
-  button.disabled type='button' id='log_in' onclick="location.href='#{new_user_session_path}'" class=('active-button' unless login_action)
-    = t 'app.login.login_button'
-  button.disabled type='button' id='sign_up' onclick="location.href='#{new_user_registration_path}'" class=('active-button' if login_action)
-    = t 'app.login.signup_button'
-
-== render 'shared/flash_messages'

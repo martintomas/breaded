@@ -1,0 +1,26 @@
+div
+  div.panel.shadow1
+    = form_with model: @producer_application , html: { class: 'bakersignup-form' } do |f|
+      h1.animated.fadeInUp.animate1 id="title-bakersignup" = t 'app.baker_signup.apply_to_be_baker'
+      p.animated.animate2.fadeIn = t 'app.baker_signup.description'
+      == render 'shared/flash_messages'
+      section
+        fieldset id="bakersignup-fieldset"
+          = f.label :first_name, class: 'animated fadeIn animate6'
+          = f.text_field :first_name, class: 'bakersignup animated fadeInUp animate2', required: true
+          br
+          = f.label :last_name, class: 'animated fadeIn animate6'
+          = f.text_field :last_name, class: 'bakersignup animated fadeInUp animate3', required: true
+          br
+          = f.label :email, class: 'animated fadeIn animate6'
+          = f.email_field :email, class: 'bakersignup animated fadeInUp animate4', required: true
+          br
+          = f.label :phone_number, class: 'animated fadeIn animate6'
+          = f.phone_field :phone_number, class: 'bakersignup animated fadeInUp animate5', required: true
+        .checkBoxSection.animated.fadeIn.animate6
+          = collection_check_boxes(:producer_application, :entity_tag_ids, Tag.with_translations.categories, :id, :localized_name) do |b|
+            = b.label(class: 'baker_container') do
+              = b.text
+              = b.check_box
+              span.checkmark
+        input type="submit" id="bakersignup-form-submit" class="bakersignup_form button animated fadeInUp animate7" value="Submit"

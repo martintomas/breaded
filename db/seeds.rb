@@ -12,6 +12,10 @@ Seeds::FillBaseType.perform_for Language, codes: %w[en]
 puts 'Tag types'
 Seeds::FillBaseType.perform_for TagType, codes: %w[category goes_well attribute]
 
+puts 'Tag categories'
+Seeds::FillTags.perform_for ['Sourdough', 'Whole Wheat', 'Brioche', 'Multigrain', 'Rye', 'Vegan', 'Baguette', 'Gluten Free', 'Ciabatta', 'Keto'],
+                            tag_type: TagType.the_category
+
 puts 'Subscription Plans'
 Seeds::FillSubscriptionPlans.perform_for [{ price: 29.99, currency: 'GBP' , number_of_items: 10 , number_of_deliveries: 1 },
                                           { price: 61.99, currency: 'GBP' , number_of_items: 10 , number_of_deliveries: 2 },

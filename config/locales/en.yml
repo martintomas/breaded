@@ -89,12 +89,17 @@ en:
       registration_submit: Signup
     forgotten_password:
       form_submit: Send me reset password instructions
+    baker_signup:
+      apply_to_be_baker: Apply To Be a Baker
+      description: "Apply by filling out the simple form below & invite us to taste your breads. You'll be evaluated on three aspects: Baking Artistry, Knowledge & Experience. Think you'll meet the mark?"
+      notice: We have recived your applications and will look at it as soon as possible.
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
   active_admin:
     menu:
       parents:
         user: User
+        producer: Producer
     addresses:
       label: Addresses
     users:
@@ -104,3 +109,7 @@ en:
       address: Address
     roles:
       label: Roles
+    producer_applications:
+      label: Producer Applications
+    tags:
+      categories: Categories

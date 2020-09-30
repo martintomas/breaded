@@ -48,11 +48,11 @@ footer {
       font-family: "Montserrat-Regular";
   }
   footer p {
-      font-size: 16px;
-      color: #fff;
-      margin: 50px 0 0;
-      font-family: "Montserrat-Regular";
-      text-align: left;
+      font-size: 16px !important;
+      color: #fff !important;
+      margin: 50px 0 0 !important;
+      font-family: "Montserrat-Regular" !important;
+      text-align: left !important;
   }
 
   @media (max-width:1250px) {
