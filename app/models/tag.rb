@@ -12,6 +12,6 @@ class Tag < ApplicationRecord
   scope :with_translations, -> { includes(name: { text_translations: :language })}
 
   def localized_name
-    name.text_translations.detect { |t| t.language.code.to_sym == I18n.locale }.text
+    name.text_translations.detect { |t| t.language.code.to_sym == I18n.locale }&.text
   end
 end

@@ -29,10 +29,21 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def login_as_admin
-    visit new_user_session_path
-    fill_in 'user[email]', with: 'admin@breaded.net'
-    fill_in 'user[password]', with: 'password'
+    login_as users(:admin).email, 'password'
+  end
 
-    click_on 'Log in'
+  def login_as_customer
+    login_as users(:customer).email, 'customer'
+  end
+
+  def login_as(email, password)
+    visit new_user_session_path
+
+    within 'form.login-form' do
+      fill_in 'user[email]', with: email
+      fill_in 'user[password]', with: password
+
+      click_on I18n.t('app.login.login_submit')
+    end
   end
 end

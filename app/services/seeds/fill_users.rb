@@ -5,7 +5,7 @@ class Seeds::FillUsers
 
       puts "user: #{user[:email]}"
       user[:role_ids] = Role.where(name: user.delete(:roles)).pluck(:id)
-      User.create! user
+      User.create! user.merge(confirmed_at: Time.current)
     end
   end
 end

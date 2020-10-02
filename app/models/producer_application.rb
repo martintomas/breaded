@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProducerApplication < ApplicationRecord
-  has_one :producer
+  has_one :producer, dependent: :nullify
   has_many :entity_tags, as: :entity, dependent: :destroy
   has_many :tags, through: :entity_tags
 

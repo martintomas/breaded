@@ -18,7 +18,7 @@ div
           = f.label :phone_number, class: 'animated fadeIn animate6'
           = f.phone_field :phone_number, class: 'bakersignup animated fadeInUp animate5', required: true
         .checkBoxSection.animated.fadeIn.animate6
-          = collection_check_boxes(:producer_application, :entity_tag_ids, Tag.with_translations.categories, :id, :localized_name) do |b|
+          = collection_check_boxes(:producer_application, :tag_ids, Tag.with_translations.categories, :id, :localized_name) do |b|
             = b.label(class: 'baker_container') do
               = b.text
               = b.check_box

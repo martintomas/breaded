@@ -6,6 +6,7 @@ admin:
   email: admin@breaded.net
   roles: admin
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  confirmed_at: <%= Time.current %>
 
 customer:
   first_name: John
@@ -13,9 +14,11 @@ customer:
   email: john.black@breaded.net
   roles: customer
   encrypted_password: <%= Devise::Encryptor.digest(User, 'customer') %>
+  confirmed_at: <%= Time.current %>
 
 customer_2:
   first_name: Martin
   last_name: Tomas
   email: martin.tomas@breaded.net
   roles: customer
+  confirmed_at: <%= Time.current %>

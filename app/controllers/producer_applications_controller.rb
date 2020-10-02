@@ -7,7 +7,7 @@ class ProducerApplicationsController < ApplicationController
 
   def create
     params = producer_application_params.to_h
-    params[:entity_tags_attributes] = params.delete(:entity_tag_ids).reject(&:blank?).map { |tag_id| { tag_id: tag_id  } }
+    params[:entity_tags_attributes] = params.delete(:tag_ids).reject(&:blank?).map { |tag_id| { tag_id: tag_id  } }
     @producer_application = ProducerApplication.new params
 
     if @producer_application.save
@@ -20,6 +20,6 @@ class ProducerApplicationsController < ApplicationController
   private
 
   def producer_application_params
-    params.require(:producer_application).permit(:first_name, :last_name, :email, :phone_number, entity_tag_ids: [])
+    params.require(:producer_application).permit(:first_name, :last_name, :email, :phone_number, tag_ids: [])
   end
 end
