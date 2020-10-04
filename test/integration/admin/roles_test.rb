@@ -83,7 +83,7 @@ class Admin::RolesTest < ActionDispatch::IntegrationTest
     end
     assert_select 'div#active_admin_content' do
       assert_select 'div#main_content' do
-        assert_select 'form#edit_role' do
+        assert_select "form#edit_role_#{@role.id}" do
           assert_select 'input[name="role[name]"][value=?]', @role.name
         end
       end

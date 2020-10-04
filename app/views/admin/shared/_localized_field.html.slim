@@ -1,0 +1,5 @@
+= f.fields_for(field_name, resource.send(field_name) || LocalisedText.new) do |localized_text|
+  = localized_text.fields_for(:text_translations, localized_text.object.text_translations.presence || \
+      TextTranslation.new(language: Language.find_by(code: I18n.locale))) do |translation|
+    = translation.hidden_field :language_id, value: translation.object.language_id
+    = translation.input :text, label: field_name.to_s.titleize

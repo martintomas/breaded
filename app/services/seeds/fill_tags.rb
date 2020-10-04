@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seeds::FillTags
   def self.perform_for(tags, tag_type:)
     tags.each do |tag|

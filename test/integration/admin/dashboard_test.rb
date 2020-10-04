@@ -28,8 +28,20 @@ class Admin::DashboardTest < ActionDispatch::IntegrationTest
   test 'shows proper content' do
     assert_select 'div#active_admin_content' do
       assert_select 'div#main_content' do
-        assert_select 'span', I18n.t("active_admin.dashboard_welcome.welcome")
-        assert_select 'small', I18n.t("active_admin.dashboard_welcome.call_to_action")
+        assert_select 'div.panel:nth-of-type(1)' do
+          assert_select 'h3', I18n.t('active_admin.dashboards.panels.recent_applications')
+          assert_select 'table' do
+            assert_select 'tr' do
+              ProducerApplication.order(:created_at).first(5).each do |producer_application|
+                assert_select 'td', producer_application.first_name
+                assert_select 'td', producer_application.last_name
+                assert_select 'td', producer_application.email
+                assert_select 'td', producer_application.phone_number
+                assert_select 'td', I18n.t('active_admin.dashboards.see_detail')
+              end
+            end
+          end
+        end
       end
     end
   end

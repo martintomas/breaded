@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seeds::FillUsers
   def self.perform_for(users)
     users.each do |user|

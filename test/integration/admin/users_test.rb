@@ -60,6 +60,12 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
             assert_select 'td', @user.first_name
             assert_select 'td', @user.last_name
             assert_select 'td', @user.email
+            assert_select 'td', @user.reset_password_token
+            assert_select 'td', @user.reset_password_sent_at&.strftime('%B %d, %Y %H:%M')
+            assert_select 'td', @user.confirmed_at&.strftime('%B %d, %Y %H:%M')
+            assert_select 'td', @user.confirmation_token
+            assert_select 'td', @user.confirmation_sent_at&.strftime('%B %d, %Y %H:%M')
+            assert_select 'td', @user.unconfirmed_email
           end
         end
         assert_select 'div.panel#roles' do
@@ -96,6 +102,8 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
           assert_select 'input[name="user[last_name]"]'
           assert_select 'input[name="user[email]"]'
           assert_select 'input[name="user[password]"]'
+          assert_select 'li#user_reset_password_sent_at_input'
+          assert_select 'li#user_confirmed_at_input'
           assert_select 'select[name="user[role_ids][]"]' do
             Role.all.each do |role|
               assert_select 'option', role.name

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seeds::FillSubscriptionPlans
   def self.perform_for(subscription_plans)
     subscription_plans.each do |subscription_plan|

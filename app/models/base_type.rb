@@ -14,4 +14,8 @@ class BaseType < ActiveRecord::Base
       super
     end
   end
+
+  def to_s
+    code
+  end
 end

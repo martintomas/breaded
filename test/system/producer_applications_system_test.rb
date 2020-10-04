@@ -12,7 +12,7 @@ class ProducerApplicationsSystemTest < ApplicationSystemTestCase
       fill_in 'producer_application[email]', with: 'test@test.test'
       fill_in 'producer_application[phone_number]', with: '12345678'
       click_on 'Submit'
-      assert_selector 'div.flash', text: I18n.t('app.baker_signup.notice')
     end
+    assert_selector 'div.flash', text: I18n.t('app.baker_signup.notice')
   end
 end

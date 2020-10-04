@@ -23,6 +23,12 @@ class Admin::RolesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#new' do
+    get new_admin_role_url
+
+    assert_response :success
+  end
+
+  test '#create' do
     assert_difference 'Role.count', 1 do
       post admin_roles_url, params: { role: { name: 'NEW ROLE' } }
 

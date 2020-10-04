@@ -7,6 +7,7 @@ class Food < ApplicationRecord
 
   has_many :order_foods, dependent: :restrict_with_exception
   has_many :entity_tags, as: :entity, dependent: :destroy
+  has_many :tags, through: :entity_tags
 
   has_one_attached :image
 end

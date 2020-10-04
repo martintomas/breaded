@@ -100,6 +100,10 @@ en:
       parents:
         user: User
         producer: Producer
+    dashboards:
+      see_detail: see detail
+      panels:
+        recent_applications: Recent Baker Applications
     addresses:
       label: Addresses
     users:
@@ -111,5 +115,7 @@ en:
       label: Roles
     producer_applications:
       label: Producer Applications
+    producers:
+      label: Producers
     tags:
       categories: Categories

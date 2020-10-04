@@ -23,6 +23,12 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#new' do
+    get new_admin_user_url
+
+    assert_response :success
+  end
+
+  test '#create' do
     assert_difference 'User.count', 1 do
       post admin_users_url, params: { user: { first_name: 'First Name',
                                               last_name: 'Last Name',

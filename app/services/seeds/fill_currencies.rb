@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seeds::FillCurrencies
   def self.perform_for(currencies)
     currencies.each do |currency|

@@ -5,7 +5,7 @@ ActiveAdmin.register ProducerApplication do
 
   actions :index, :show, :destroy
 
-  menu parent: I18n.t('active_admin.menu.parents.producer'), priority: 1, label: I18n.t('active_admin.producer_applications.label')
+  menu parent: I18n.t('active_admin.menu.parents.producer'), priority: 2, label: I18n.t('active_admin.producer_applications.label')
 
   show do
     default_main_content
