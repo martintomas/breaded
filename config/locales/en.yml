@@ -117,5 +117,10 @@ en:
       label: Producer Applications
     producers:
       label: Producers
+    foods:
+      label: Foods
     tags:
       categories: Categories
+      goes_well: Goes Well
+      ingredients: Ingredients
+      attributes: Attributes

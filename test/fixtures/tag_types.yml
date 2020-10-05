@@ -8,3 +8,6 @@ goes_well:
 
 attribute:
   code: $LABEL
+
+ingredient:
+  code: $LABEL

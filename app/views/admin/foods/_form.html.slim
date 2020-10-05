@@ -1,0 +1,24 @@
+= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
+  = f.semantic_errors
+  = f.inputs do
+    == render partial: 'admin/shared/localized_field', locals: { f: f, field_name: :name }
+    == render partial: 'admin/shared/localized_field', locals: { f: f, field_name: :description }
+    = f.input :producer, include_blank: false, collection: Producer.accessible_by(current_user.current_ability, :read) \
+      .with_translations.map { |producer| [producer.localized_name, producer.id] }
+    = f.input :image, as: :file
+    = f.inputs I18n.t('active_admin.tags.categories')
+      = f.collection_check_boxes(:tag_ids, Tag.categories.with_translations, :id, :localized_name) do |b|
+        = b.label { b.check_box + ' ' + b.text }
+    = f.inputs I18n.t('active_admin.tags.attributes')
+      = f.collection_check_boxes(:tag_ids, Tag.attributes.with_translations, :id, :localized_name) do |b|
+        = b.label { b.check_box + ' ' + b.text }
+    = f.inputs I18n.t('active_admin.tags.ingredients')
+      = f.collection_check_boxes(:tag_ids, Tag.ingredients.with_translations, :id, :localized_name) do |b|
+        = b.label { b.check_box + ' ' + b.text }
+    = f.inputs I18n.t('active_admin.tags.goes_well')
+      = f.collection_check_boxes(:tag_ids, Tag.goes_well.with_translations, :id, :localized_name) do |b|
+        = b.label { b.check_box + ' ' + b.text }
+  = f.actions do
+    = f.action(:submit)
+    = f.cancel_link
+

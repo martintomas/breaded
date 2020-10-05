@@ -8,4 +8,8 @@ class Producer < ApplicationRecord
   belongs_to :producer_application, optional: true
 
   has_many :foods, dependent: :destroy
+
+  def to_s
+    localized_name
+  end
 end

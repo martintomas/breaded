@@ -7,6 +7,7 @@ class FoodTest < ActiveSupport::TestCase
     @full_content = { name: localised_texts(:rye_bread_name),
                       description: localised_texts(:rye_bread_description),
                       producer: producers(:bread_and_butter) }
+    @food = foods :rye_bread
   end
 
   test 'the validity - empty is not valid' do
@@ -29,5 +30,9 @@ class FoodTest < ActiveSupport::TestCase
 
   test 'the validity - without producer is not valid' do
     invalid_with_missing Food, :producer
+  end
+
+  test '#to_s' do
+    assert_equal @food.localized_name, @food.to_s
   end
 end

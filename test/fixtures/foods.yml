@@ -9,3 +9,8 @@ seeded_bread:
   name: seeded_bread_name
   description: seeded_bread_description
   producer: bread_and_butter
+
+deletable_food:
+  name: seeded_bread_name
+  description: seeded_bread_description
+  producer: bread_and_butter

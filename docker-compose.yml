@@ -12,6 +12,8 @@ services:
       - ".env"
     volumes:
       - .:/usr/src/app
+    depends_on:
+      - redis
     command: start-server
     stdin_open: true
     tty: true

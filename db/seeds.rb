@@ -10,7 +10,7 @@ puts 'Languages'
 Seeds::FillBaseType.perform_for Language, codes: %w[en]
 
 puts 'Tag types'
-Seeds::FillBaseType.perform_for TagType, codes: %w[category goes_well attribute]
+Seeds::FillBaseType.perform_for TagType, codes: %w[category goes_well attribute ingredient]
 
 puts 'Tag categories'
 Seeds::FillTags.perform_for ['Sourdough', 'Whole Wheat', 'Brioche', 'Multigrain', 'Rye', 'Vegan', 'Baguette', 'Gluten Free', 'Ciabatta', 'Keto'],
