@@ -6,18 +6,10 @@
     = f.input :producer, include_blank: false, collection: Producer.accessible_by(current_user.current_ability, :read) \
       .with_translations.map { |producer| [producer.localized_name, producer.id] }
     = f.input :image, as: :file
-    = f.inputs I18n.t('active_admin.tags.categories')
-      = f.collection_check_boxes(:tag_ids, Tag.categories.with_translations, :id, :localized_name) do |b|
-        = b.label { b.check_box + ' ' + b.text }
-    = f.inputs I18n.t('active_admin.tags.attributes')
-      = f.collection_check_boxes(:tag_ids, Tag.attributes.with_translations, :id, :localized_name) do |b|
-        = b.label { b.check_box + ' ' + b.text }
-    = f.inputs I18n.t('active_admin.tags.ingredients')
-      = f.collection_check_boxes(:tag_ids, Tag.ingredients.with_translations, :id, :localized_name) do |b|
-        = b.label { b.check_box + ' ' + b.text }
-    = f.inputs I18n.t('active_admin.tags.goes_well')
-      = f.collection_check_boxes(:tag_ids, Tag.goes_well.with_translations, :id, :localized_name) do |b|
-        = b.label { b.check_box + ' ' + b.text }
+    == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_category }
+    == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_attribute }
+    == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_ingredient }
+    == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_goes_well }
   = f.actions do
     = f.action(:submit)
     = f.cancel_link

@@ -6,5 +6,5 @@ bread_and_butter:
   producer_application: producer_application_bread_and_butter
 
 deletable_producer:
-  name: bread_and_butter_name
-  description: bread_and_butter_description
+  name: deletable_producer_name
+  description: deletable_producer_description

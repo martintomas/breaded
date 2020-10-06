@@ -49,3 +49,28 @@ bread_and_butter_description_translation:
   text: Description of Bread and Butter company
   language: en
   localised_text: bread_and_butter_description
+
+honey_translation:
+  text: Honey
+  language: en
+  localised_text: honey_localized_text
+
+deletable_food_name_translation:
+  text: Deletable Food
+  language: en
+  localised_text: deletable_food_name
+
+deletable_food_description_translation:
+  text: Deletable Food
+  language: en
+  localised_text: deletable_food_description
+
+deletable_producer_name_translation:
+  text: Deletable Producer
+  language: en
+  localised_text: deletable_producer_name
+
+deletable_producer_description_translation:
+  text: Deletable Producer
+  language: en
+  localised_text: deletable_producer_description

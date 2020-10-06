@@ -8,3 +8,8 @@ rye_bread_description: {}
 seeded_bread_description: {}
 bread_and_butter_name: {}
 bread_and_butter_description: {}
+honey_localized_text: {}
+deletable_food_name: {}
+deletable_food_description: {}
+deletable_producer_name: {}
+deletable_producer_description: {}

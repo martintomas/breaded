@@ -11,6 +11,6 @@ seeded_bread:
   producer: bread_and_butter
 
 deletable_food:
-  name: seeded_bread_name
-  description: seeded_bread_description
+  name: deletable_food_name
+  description: deletable_food_description
   producer: bread_and_butter

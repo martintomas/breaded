@@ -48,7 +48,7 @@ ActiveAdmin.register Food do
         column :localized_name
       end
     end
-    panel I18n.t('active_admin.tags.goes_well'), id: 'goes_well' do
+    panel I18n.t('active_admin.tags.goes_well'), id: 'goes_wells' do
       table_for resource.tags.goes_well.with_translations do
         column :localized_name
       end
