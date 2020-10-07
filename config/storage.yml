@@ -13,4 +13,3 @@ digitalocean:
   secret_access_key: <%= ENV["STORAGE_ACCESS_KEY"] %>
   region: ams3
   bucket: <%= ENV["STORAGE_BUCKET"] %>
-  public: true
