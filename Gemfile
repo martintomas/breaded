@@ -40,7 +40,8 @@ gem 'sidekiq_alive'
 gem 'sidekiq-scheduler'
 
 gem 'slim-rails'
-gem "sentry-raven"
+gem 'sentry-raven'
+gem 'pagy'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

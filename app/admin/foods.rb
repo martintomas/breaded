@@ -29,7 +29,7 @@ ActiveAdmin.register Food do
       row(:name) { |row_record| row_record.localized_name }
       row(:description) { |row_record| row_record.localized_description }
       row(:producer)
-      row(:image) { |row_record| image_tag rails_blob_path(row_record.image) if row_record.image.attached? }
+      row(:image) { |row_record| image_tag Blobs::UrlBuilder.new(row_record.image).url if row_record.image.attached? }
       row :created_at
       row :updated_at
     end

@@ -25,11 +25,11 @@ spec:
               name: breaded-config
           - secretRef:
               name: breaded-secrets
-        image: registry.digitalocean.com/breaded/breaded-production:4859bb5
+        image: registry.digitalocean.com/breaded/breaded-production:42a1783
         resources:
           limits:
-            memory: 500Mi
-            cpu: 500m
+            memory: 250Mi
+            cpu: 250m
           requests:
             cpu: 250m
             memory: 250Mi
@@ -44,15 +44,15 @@ spec:
             path: /commit.txt
             port: web
           failureThreshold: 3
-          periodSeconds: 10
-          initialDelaySeconds: 60
+          periodSeconds: 20
+          initialDelaySeconds: 120
           timeoutSeconds: 3
         readinessProbe:
           httpGet:
             path: /commit.txt
             port: web
           failureThreshold: 3
-          periodSeconds: 10
-          initialDelaySeconds: 30
+          periodSeconds: 20
+          initialDelaySeconds: 60
       terminationGracePeriodSeconds: 30
       restartPolicy: Always
