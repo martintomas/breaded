@@ -25,13 +25,13 @@ spec:
                 name: breaded-config
             - secretRef:
                 name: breaded-secrets
-          image: registry.digitalocean.com/breaded/breaded-production:1d0c615
+          image: registry.digitalocean.com/breaded/breaded-production:4859bb5
           resources:
             limits:
               memory: 750Mi
-              cpu: 750m
-            requests:
               cpu: 500m
+            requests:
+              cpu: 250m
               memory: 500Mi
           name: background-job
           imagePullPolicy: Always

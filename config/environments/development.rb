@@ -62,3 +62,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::FileUpdateChecker
   config.web_console.whitelisted_ips = ['172.19.0.1', '172.20.0.1']
 end
+
+Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
