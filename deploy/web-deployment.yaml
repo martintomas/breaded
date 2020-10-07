@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: web
-  replicas: 3
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -26,6 +26,13 @@ spec:
           - secretRef:
               name: breaded-secrets
         image: registry.digitalocean.com/breaded/breaded-production:d67e437
+        resources:
+          limits:
+            memory: 500Mi
+            cpu: 750m
+          requests:
+            cpu: 500m
+            memory: 250Mi
         name: web
         ports:
         - containerPort: 3000
@@ -47,4 +54,5 @@ spec:
           failureThreshold: 3
           periodSeconds: 10
           initialDelaySeconds: 30
+      terminationGracePeriodSeconds: 30
       restartPolicy: Always

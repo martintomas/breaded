@@ -26,6 +26,13 @@ spec:
             - secretRef:
                 name: breaded-secrets
           image: registry.digitalocean.com/breaded/breaded-production:1d0c615
+          resources:
+            limits:
+              memory: 750Mi
+              cpu: 750m
+            requests:
+              cpu: 500m
+              memory: 500Mi
           name: background-job
           imagePullPolicy: Always
           ports:
