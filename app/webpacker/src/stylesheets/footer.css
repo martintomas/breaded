@@ -37,6 +37,7 @@ footer {
   .footer-links li ul li{
       display: block;
       margin-bottom: 5px;
+      line-height: 40px;
   }
   .footer-links li ul li:last-child {
       margin-bottom: 0;;
@@ -45,13 +46,15 @@ footer {
       font-size: 14px;
       color: #fff;
       text-decoration: none;
-      font-family: "Montserrat-Regular";
+      font-family: "Montserrat";
+      font-weight: 400;
   }
   footer p {
       font-size: 16px !important;
       color: #fff !important;
       margin: 50px 0 0 !important;
-      font-family: "Montserrat-Regular" !important;
+      font-family: "Montserrat" !important;
+      font-weight: 400;
       text-align: left !important;
   }
 

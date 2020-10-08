@@ -74,3 +74,8 @@ deletable_producer_description_translation:
   text: Deletable Producer
   language: en
   localised_text: deletable_producer_description
+
+featured_tag_translation:
+  text: Featured
+  language: en
+  localised_text: featured_localized_text

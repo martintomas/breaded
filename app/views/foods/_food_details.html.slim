@@ -1,0 +1,15 @@
+- foods.sort_by(&:localized_name).each do |food|
+  ul.itemsection
+    li
+      = image_tag Blobs::UrlBuilder.new(food.image).url if food.image.attached?
+      .iteamcount
+        = link_to content_tag(:span, I18n.t('app.browse_bread.about_bread')), '#'
+        .numbers-row
+          .dec.button = '-'
+          input type="text" value="0"
+          .inc.button = '+'
+    li
+      span.lastWord = last_word_split(food.localized_name)
+      p = food.tags.select { |tag| tag.tag_type_id == TagType.the_ingredient.id }.map(&:localized_name).join(', ')
+      div
+        = print_attributes_of(food.tags.select { |tag| tag.tag_type_id == TagType.the_attribute.id } )

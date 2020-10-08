@@ -9,6 +9,8 @@ class Tag < ApplicationRecord
 
   has_one_attached :image
 
+  validates_uniqueness_of :code, scope: :tag_type_id, if: -> (tag) { tag.code.present? }
+
   scope :categories, -> { where(tag_type: TagType.the_category) }
   scope :ingredients, -> { where(tag_type: TagType.the_ingredient) }
   scope :attributes, -> { where(tag_type: TagType.the_attribute) }

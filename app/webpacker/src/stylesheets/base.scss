@@ -74,7 +74,8 @@ body.pages {
 
 	.content_Text span {
 		text-transform: capitalize;
-		font-family: 'Merriweather-Regular', sans-serif;
+		font-family: 'Merriweather', sans-serif;
+		font-weight: 400;
 		color: #333333;
 		font-size: 45px;
 		line-height: 65px;
@@ -84,12 +85,14 @@ body.pages {
 		color: #666666;
 		font-size: 27px;
 		line-height: 36px;
-		font-family: Montserrat-Light;
+		font-family: "Montserrat";
+		font-weight: 300;
 	}
 
 	.content_Text p span {
 		color: #333333;
-		font-family: Montserrat-Medium;
+		font-family: "Montserrat";
+		font-weight: 500;
 		font-size: 20px;
 		line-height: 40px;
 		text-transform: lowercase;
@@ -97,7 +100,8 @@ body.pages {
 
 	.content_Text button {
 		margin-top: 12px;
-		font-family: Montserrat-Medium;
+		font-family: "Montserrat";
+		font-weight: 500;
 	}
 
 	.hidder {
@@ -264,7 +268,7 @@ body.pages {
 	}
 
 	.content__title {
-		font-family: forma-djr-display, sans-serif;
+		font-family: "Montserrat", sans-serif;
 		font-weight: 700;
 		position: relative;
 		z-index: 10000;

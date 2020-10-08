@@ -1,0 +1,7 @@
+- producers.each do |producer|
+  h5 = producer.localized_name
+  span = t 'app.browse_bread.number_items', number: producer.foods.size
+  p
+    = truncate_long(producer.localized_description) + ' '
+    = link_to I18n.t('app.browse_bread.read_more'), '#'
+  == render partial: 'foods/food_details', locals: { foods: producer.foods }

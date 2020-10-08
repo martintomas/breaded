@@ -11,3 +11,6 @@ attribute:
 
 ingredient:
   code: $LABEL
+
+other:
+  code: $LABEL

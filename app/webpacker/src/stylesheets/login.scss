@@ -7,7 +7,8 @@ body.sessions, body.registrations, body.passwords {
         background: #ffffff;
         width: 100%;
         text-align: center;
-        font-family: 'Montserrat-Regular', sans-serif;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
     }
 
     .panel {
@@ -40,7 +41,8 @@ body.sessions, body.registrations, body.passwords {
         margin: 0px;
         border: none;
         color: #fff;
-        font-family: 'Montserrat-Medium', sans-serif;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
         font-size: 0.8em;
         transition: background-color 0.2s, color 0.2s, opacity 0.2s;
     }
@@ -48,13 +50,15 @@ body.sessions, body.registrations, body.passwords {
     .panel-switch button:active {
         background: #000000;
         color: #c9c9c9;
-        font-family: 'Montserrat-Medium', sans-serif;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
     }
 
     .active-button {
         background: transparent !important;
         color: #333 !important;
-        font-family: 'Montserrat-Light' !important;
+        font-family: 'Montserrat' !important;
+        font-weight: 300;
     }
 
     button, .button, a {
@@ -63,7 +67,7 @@ body.sessions, body.registrations, body.passwords {
 
     form h1 {
         color: #000;
-        font-family: 'Merriweather-Regular', sans-serif;
+        font-family: 'Merriweather', sans-serif;
         font-weight: 600;
         margin: 0 0 50px;
         font-size: 1.7em;
@@ -82,7 +86,8 @@ body.sessions, body.registrations, body.passwords {
         padding: 5px;
         margin-left: 12px;
         margin-top: -3px;
-        font-family: Montserrat-Light;
+        font-family: "Montserrat";
+        font-weight: 300;
     }
 
     .animate1, .animate2, .animate3, .animate4 {
@@ -158,7 +163,8 @@ body.sessions, body.registrations, body.passwords {
         padding: 20px 5px;
         border: 1px solid #707070;
         color: #333;
-        font-family: "Montserrat-Light";
+        font-family: "Montserrat";
+        font-weight: 300;
     }
 
     fieldset input::placeholder {
@@ -176,7 +182,7 @@ body.sessions, body.registrations, body.passwords {
         border-radius: 5px;
         background: #333333;
         color: #fff;
-        font-family: 'Montserrat-Medium', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         text-transform: uppercase;
         font-weight: 600;
         z-index: 1;
@@ -189,7 +195,8 @@ body.sessions, body.registrations, body.passwords {
     }
 
     #lost-password-link {
-        font-family: "Montserrat-Light";
+        font-family: "Montserrat";
+        font-weight: 300;
         font-size: 10px;
     }
 

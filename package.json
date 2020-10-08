@@ -10,7 +10,8 @@
     "turbolinks": "^5.2.0",
     "stimulus": "^1.1.1",
     "imagesloaded": "^4.1.4",
-    "@sentry/browser": "^5.24.2"
+    "@sentry/browser": "^5.24.2",
+    "intersection-observer": "^0.11.0"
   },
   "version": "0.1.0",
   "devDependencies": {

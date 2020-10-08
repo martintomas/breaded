@@ -8,7 +8,7 @@ en:
       login: Login
     gift:
       label: Gift Breaded
-      button_html: '<i class="insider"></i>Get Breaded'
+      button_html: '<i class="insider"></i>Gift Breaded'
       description: Gift Breaded to show someone how much they mean to you.
     footer:
       faq: FQAs
@@ -93,6 +93,20 @@ en:
       apply_to_be_baker: Apply To Be a Baker
       description: "Apply by filling out the simple form below & invite us to taste your breads. You'll be evaluated on three aspects: Baking Artistry, Knowledge & Experience. Think you'll meet the mark?"
       notice: We have recived your applications and will look at it as soon as possible.
+    browse_bread:
+      title: Pick Your Ten Breads
+      subtitle: Or we can surprise you based on your preferences.
+      menu_let_me: Let Me Pick
+      menu_suprise_me: Surprise Me
+      all_breads: All Breads
+      number_items: '%{number} items'
+      about_bread: About the Bread
+      read_more: Read More
+      filter:
+        label: Filter by
+        bread_section: Breads
+        bakers_section: Bakers
+        all: All
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
   active_admin:
@@ -121,6 +135,6 @@ en:
       label: Foods
     tags:
       categories: Categories
-      goes_well: Goes Well
+      goes_wells: Goes Well
       ingredients: Ingredients
       attributes: Attributes

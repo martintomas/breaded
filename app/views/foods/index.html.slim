@@ -1,0 +1,153 @@
+section.container
+  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.pickup
+    h1 = t 'app.browse_bread.title'
+    p = t 'app.browse_bread.subtitle'
+    #stick-here
+    #container
+      #tab-container
+        == render partial: 'foods/menu', locals: { page: 'browse_bread' }
+        #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12
+          .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.tab-section.active.browse_bread data-controller='browse-bread-filter' data-browse-bread-filter-base-url="#{foods_url}"
+            .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.browse_bread
+              .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12 style="z-index: 1;"
+                == render partial: 'foods/filter'
+              .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.itemsBlock.active data-target="browse-bread-filter.entries"
+              div data-target="browse-bread-filter.pagination" style="display: inline-block; visibility: hidden;"
+
+
+
+== render partial: 'shared/gift'
+
+/         <div class="breads-lg-3 breads-md-3 breads-sm-3 breads-xs-12 selectedItems sticker">
+/           <span> <i class="counter">0</i>/10 </span>
+/           <span class="selectedBreadsActive active"> No Breads picked </span>
+/           <div class="selectedBreads selectedBreadsActive">
+/             <span>3 &nbsp;Breads &nbsp;Selected &nbsp;<i>Close</i></span>
+/             <div>
+/               <span>Whole Wheat Bread</span>
+/               <div class="numbers-row">
+/                 <div class="dec button">-</div>
+/                 <input type="text" value="0">
+/                 <div class="inc button">+</div>
+/               </div>
+/             </div>
+/             <div>
+/               <span>Flake Honey Brioche</span>
+/               <div class="numbers-row">
+/                 <div class="dec button">-</div>
+/                 <input type="text" value="0">
+/                 <div class="inc button">+</div>
+/               </div>
+/             </div>
+/             <div>
+/               <span>Date & Rye Bread</span>
+/               <div class="numbers-row">
+/                 <div class="dec button">-</div>
+/                 <input type="text" value="0">
+/                 <div class="inc button">+</div>
+/               </div>
+/             </div>
+/           </div>
+/         </div>
+/       </div>
+
+
+
+
+/       <div class="breads-lg-12 breads-md-12 breads-sm-12 breads-xs-12 surpriseSection">
+/         <div class="breads-lg-8 breads-md-8 breads-sm-8 breads-xs-12">
+/           <div>
+/             <h4>Ingredient </br>Preferences</h4>
+/             <p class="breads-lg-8 breads-md-8 breads-sm-8 breads-xs-12 PDLR0PX">Get up to 10 different types of bread and carefully delivered to your doorstep</p>
+/             <span>
+/               <ul class="vegan">
+/                 <li>V</li>
+/                 <li>Vegan</li>
+/                 <li>
+/                   <div class="numbers-row">
+/                     <div class="inc button">+</div>
+/                     <input type="text" value="2">
+/                     <div class="dec button">-</div>
+/                   </div>
+/                 </li>
+/               </ul>
+/               <ul class="gluten">
+/                 <li>G</li>
+/                 <li>Gluten Free</li>
+/                 <li>
+/                   <div class="numbers-row">
+/                     <div class="inc button">+</div>
+/                     <input type="text" value="0">
+/                     <div class="dec button">-</div>
+/                   </div>
+/                 </li>
+/               </ul>
+/             </span>
+/           </div>
+/           <div>
+/             <h4>Favorite</br>Bread Types</h4>
+/             <div class="checkBoxSection animated fadeIn animate6">
+/               <label class="baker_container">Sourdough
+/                 <input type="checkbox" checked="checked">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Whole Wheat
+/                 <input type="checkbox">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Brioche
+/                 <input type="checkbox">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Multigrain
+/                 <input type="checkbox">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Rye
+/                 <input type="checkbox" checked="checked">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Vegan
+/                 <input type="checkbox" checked="checked">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Baguette
+/                 <input type="checkbox">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Gluten Free
+/                 <input type="checkbox">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Ciabatta
+/                 <input type="checkbox" checked="checked">
+/                 <span class="checkmark"></span>
+/               </label>
+/               <label class="baker_container">Keto
+/                 <input type="checkbox">
+/                 <span class="checkmark"></span>
+/               </label>
+/             </div>
+/           </div>
+/         </div>
+/         <div class="breads-lg-4 breads-md-4 breads-sm-4 breads-xs-12 surpriseList">
+/           <h4>Lets Us</br>Surprise You</h4>
+/           <div>
+/             <span>Ingredient Preference</span>
+/             <p>Vegan</p>
+/           </div>
+/           <div>
+/             <span>Favourite Bread Type</span>
+/             <p>Vegan<!-- <i>&minus;</i> --></p>
+/             <p>Rye</p>
+/             <p>French</p>
+/             <p>Italian</p>
+/           </div>
+/           <button>Confirm List</button>
+/         </div>
+/       </div>
+/     </div>
+/     </div>
+/   </div>
+/   </div>
+/   </section>

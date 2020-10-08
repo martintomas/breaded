@@ -15,3 +15,7 @@ rye_tag:
 honey_tag:
   name: honey_localized_text
   tag_type: ingredient
+
+featured:
+  name: featured_localized_text
+  tag_type: other

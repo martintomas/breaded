@@ -5,7 +5,7 @@ header.header data-controller='header' data-target='header.menu' data-action='sc
     label.menu-icon for='menu-btn'
       span.navicon
     ul.menu
-      li = link_to I18n.t('app.menu.browse_breads'), '#'
+      li = link_to I18n.t('app.menu.browse_breads'), foods_path
       li = link_to I18n.t('app.menu.about'), '#'
       li = link_to I18n.t('app.menu.gift'), '#'
       - if current_user.present?

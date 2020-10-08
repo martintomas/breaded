@@ -1,0 +1,130 @@
+body.foods {
+    .selectedItems {
+        font-size: 14px;
+        margin-top: 38px;
+    }
+
+    .selectedItems.stick {
+        left: 71%;
+    }
+
+    .selectedItems span:first-child {
+        font-family: 'Montserrat';
+        font-weight: 300;
+    }
+
+    .selectedItems span {
+        display: block;
+        padding-left: 15px;
+        font-family: 'Montserrat';
+        font-weight: 400;
+        margin-bottom: 7px;
+    }
+
+    .selectedItems span i {
+        font-family: 'Montserrat';
+        font-weight: 300;
+        font-style: normal;
+        font-size: 14px;
+    }
+
+    .selectedBreads .numbers-row {
+        width: auto;
+        border: 1px solid #666666;
+        border-radius: 3px;
+        background-color: transparent;
+        color: #333333;
+        line-height: 15px;
+    }
+
+    .selectedBreads .numbers-row input {
+        background-color: transparent;
+        color: #333333;
+        font-size: 10px;
+    }
+
+    .selectedBreads .numbers-row > div {
+        color: #333333;
+        padding: 0 5px 1px;
+    }
+
+    .selectedBreads > div {
+        width: 100%;
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .stick .selectedBreads > span {
+        width: 80%;
+    }
+
+    .stick .selectedBreads > div {
+        width: 80%;
+    }
+
+    .selectedBreads > span {
+        margin-bottom: 15px !important;
+        font-family: 'Montserrat' !important;
+        font-weight: 400 !important;
+    }
+
+    .selectedBreads span {
+        font-size: 12px;
+        display: inline-block;
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    .selectedBreads span i {
+        font-size: 12px;
+        font-style: normal;
+        text-decoration: underline;
+        float: right;
+    }
+
+    .selectedBreadsActive {
+        display: none !important;
+    }
+
+    .selectedBreadsActive.active {
+        display: block !important;
+    }
+
+    .numbers-row {
+        background: #000000;
+        color: #ffffff;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 85px;
+        text-align: center;
+        line-height: 34px;
+    }
+
+    .numbers-row > div {
+        color: #fff;
+        padding: 0;
+        border: 0;
+        display: inline-block;
+        padding: 0 5px 4px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .numbers-row input {
+        display: inline-block;
+        width: 10px;
+        padding: 0;
+        position: relative;
+        font-size: 17px;
+        border: none;
+        background: #000000;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .counter {
+        display: inline-block;
+        font-size: 10px;
+    }
+}

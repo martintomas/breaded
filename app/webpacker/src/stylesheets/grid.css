@@ -665,3 +665,47 @@
     margin-left: 0;
   }
 }
+
+/* Gift Section */
+
+.giftBreaded {
+  background-color: #F9F1E8;
+}
+.giftBreaded .insider {
+  background-color: #F9F1E8 !important;
+}
+.giftBreaded > div > section{
+  padding: 5rem 0;
+  display: table;
+  margin: auto;
+  float: none;
+}
+.giftBreaded > div {
+  width: 1170px;
+  font-size: 20px;
+  font-weight: 300;
+  margin: auto;
+}
+.giftBreaded h1 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: "Merriweather";
+  font-weight: 500;
+}
+.giftBreaded p {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-size: 18px !important;
+}
+
+@media (max-width: 1250px) {
+  .giftBreaded > div{
+    width: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .giftBreaded h1 {
+    font-size: 35px;
+  }
+}
