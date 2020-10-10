@@ -1,0 +1,13 @@
+.breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12.selectedItems.sticker
+  span
+    i.counter.size-of-basket = 0
+    = "/#{Rails.application.config.options[:default_number_of_breads]}"
+  span.selectedBreadsActive.no-breads-title.active = t 'app.browse_bread.shopping_basket.empty'
+  #shopping-basket.selectedBreads.selectedBreadsActive
+    span
+      = t 'app.browse_bread.shopping_basket.breads_selected_html'
+      i.open-basket-button data-action='click->shop-basket#openBasket'
+        = t 'app.browse_bread.shopping_basket.open_button'
+      i.close-basket-button.active data-action='click->shop-basket#closeBasket'
+        = t 'app.browse_bread.shopping_basket.close_button'
+    .shopping-basket-items.active

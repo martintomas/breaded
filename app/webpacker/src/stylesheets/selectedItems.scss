@@ -48,7 +48,7 @@ body.foods {
         padding: 0 5px 1px;
     }
 
-    .selectedBreads > div {
+    .selectedBreads > .shopping-basket-items > .shopping-basket-item {
         width: 100%;
         position: relative;
         margin-bottom: 10px;
@@ -58,7 +58,7 @@ body.foods {
         width: 80%;
     }
 
-    .stick .selectedBreads > div {
+    .stick .selectedBreads > .shopping-basket-items > .shopping-basket-item {
         width: 80%;
     }
 
@@ -80,6 +80,27 @@ body.foods {
         font-style: normal;
         text-decoration: underline;
         float: right;
+        display: none;
+
+        &.active {
+            cursor: pointer;
+            display: inline-block;
+        }
+    }
+
+    .selectedBreads {
+        .number-selected-breads {
+            display: inline;
+            padding: 0;
+        }
+
+        .shopping-basket-items {
+            display: none;
+
+            &.active {
+                display: block;
+            }
+        }
     }
 
     .selectedBreadsActive {

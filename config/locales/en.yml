@@ -102,6 +102,11 @@ en:
       number_items: '%{number} items'
       about_bread: About the Bread
       read_more: Read More
+      shopping_basket:
+        empty: No Breads picked
+        breads_selected_html: "<span class='number-selected-breads'>3</span>\u00a0Breads\u00a0Selected"
+        close_button: Close
+        open_button: Open
       filter:
         label: Filter by
         bread_section: Breads

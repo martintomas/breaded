@@ -1,6 +1,6 @@
 import { Controller } from "stimulus"
 
-import { ImageTrail } from '../helpers/imageTrail'
+import { ImageTrail } from '../services/imageTrail'
 
 export default class extends Controller {
     connect() {

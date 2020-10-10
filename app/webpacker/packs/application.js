@@ -14,6 +14,5 @@ require.context('../fonts', true);
 import '../src/javascripts/sentry'
 
 import '../src/javascripts/controllers'
-import '../src/javascripts/script'
 
 import './stylesheets.scss'

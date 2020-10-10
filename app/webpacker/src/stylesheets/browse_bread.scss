@@ -487,6 +487,12 @@ body.foods {
         text-align: left;
     }
 
+    .browse_bread > .pagination {
+        font-size: 15px;
+        display: inline-block;
+        visibility: hidden;
+    }
+
     .listItems {
         display: none !important;
         margin-top: 20px !important;
