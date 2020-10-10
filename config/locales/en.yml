@@ -112,6 +112,10 @@ en:
         bread_section: Breads
         bakers_section: Bakers
         all: All
+    bread_detail:
+      goes_well_with: Goes Well With
+      baked_by: Baked By
+      add: Add
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
   active_admin:

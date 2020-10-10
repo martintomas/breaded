@@ -23,7 +23,7 @@ class ProducerApplicationsControllerTest < ActionDispatch::IntegrationTest
         assert_equal 'Last Name', producer_application.last_name
         assert_equal 'test@test.test', producer_application.email
         assert_equal '1234567', producer_application.phone_number
-        assert_equal tags(:vegetarian_tag, :butter_tag), producer_application.tags
+        assert tags(:vegetarian_tag, :butter_tag).all? { |tag| tag.in? producer_application.tags }
         assert_redirected_to new_producer_application_path
       end
     end

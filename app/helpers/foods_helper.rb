@@ -30,4 +30,8 @@ module FoodsHelper
       return res if text[i] == '.' || i >= hard_length
     end
   end
+
+  def print_tags_from(tags, tag_type:)
+    tags.select { |tag| tag.tag_type_id == tag_type.id }.map(&:localized_name).join(', ')
+  end
 end

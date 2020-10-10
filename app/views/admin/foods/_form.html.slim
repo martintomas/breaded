@@ -5,7 +5,8 @@
     == render partial: 'admin/shared/localized_field', locals: { f: f, field_name: :description }
     = f.input :producer, include_blank: false, collection: Producer.accessible_by(current_user.current_ability, :read) \
       .with_translations.map { |producer| [producer.localized_name, producer.id] }
-    = f.input :image, as: :file
+    = f.input :image_detail, as: :file
+    = f.input :image_description, as: :file
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_category }
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_attribute }
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_ingredient }

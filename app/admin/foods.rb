@@ -29,7 +29,8 @@ ActiveAdmin.register Food do
       row(:name) { |row_record| row_record.localized_name }
       row(:description) { |row_record| row_record.localized_description }
       row(:producer)
-      row(:image) { |row_record| image_tag Blobs::UrlBuilder.new(row_record.image).url if row_record.image.attached? }
+      row(:image_detail) { |row_record| image_tag Blobs::UrlBuilder.new(row_record.image_detail).url }
+      row(:image_description) { |row_record| image_tag Blobs::UrlBuilder.new(row_record.image_description).url }
       row :created_at
       row :updated_at
     end

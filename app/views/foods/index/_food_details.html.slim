@@ -1,12 +1,12 @@
 - foods.sort_by(&:localized_name).each do |food|
   ul.itemsection
     li
-      = image_tag Blobs::UrlBuilder.new(food.image).url if food.image.attached?
+      = image_tag Blobs::UrlBuilder.new(food.image_detail).url
       .iteamcount
-        = link_to content_tag(:span, I18n.t('app.browse_bread.about_bread')), '#'
+        = link_to content_tag(:span, I18n.t('app.browse_bread.about_bread')), food_path(food)
         == render partial: 'amount_button', locals: { food_id: food.id, food_name: food.localized_name }
     li
       span.lastWord = last_word_split(food.localized_name)
-      p = food.tags.select { |tag| tag.tag_type_id == TagType.the_ingredient.id }.map(&:localized_name).join(', ')
+      p = print_tags_from(food.tags, tag_type: TagType.the_ingredient)
       div
         = print_attributes_of(food.tags.select { |tag| tag.tag_type_id == TagType.the_attribute.id } )

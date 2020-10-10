@@ -38,14 +38,16 @@ class Admin::FoodsControllerTest < ActionDispatch::IntegrationTest
                                                                               { "0"=>{ language_id: Language.the_en.id,
                                                                                        text: "test2" }}},
                                                 producer_id: producers(:bread_and_butter).id,
-                                                image: fixture_file_upload('/files/product-1.png', 'image/png'),
+                                                image_detail: fixture_file_upload('/files/product-1.png', 'image/png'),
+                                                image_description: fixture_file_upload('/files/product-1.png', 'image/png'),
                                                 tag_ids: tags(:vegetarian_tag, :honey_tag).map(&:id) }}
         food = Food.last
         assert_equal 'test', food.localized_name
         assert_equal 'test2', food.localized_description
         assert_equal producers(:bread_and_butter), food.producer
-        refute_nil food.image
-        assert_equal tags(:vegetarian_tag, :honey_tag), food.tags
+        refute_nil food.image_detail
+        refute_nil food.image_description
+        assert tags(:vegetarian_tag, :honey_tag).all? { |tag| tag.in? food.tags }
         assert_redirected_to admin_food_url(food)
       end
     end
@@ -68,14 +70,14 @@ class Admin::FoodsControllerTest < ActionDispatch::IntegrationTest
                                                id: text_translations(:rye_bread_description_translation).id }},
                                   id: localised_texts(:rye_bread_description).id },
                             producer_id: producers(:deletable_producer).id,
-                            image: fixture_file_upload('/files/product-1.png', 'image/png'),
+                            image_detail: fixture_file_upload('/files/product-1.png', 'image/png'),
                             tag_ids: tags(:vegetarian_tag, :honey_tag).map(&:id) }}
       @food.reload
       assert_equal 'test', @food.localized_name
       assert_equal 'test2', @food.localized_description
       assert_equal producers(:deletable_producer), @food.producer
-      refute_nil @food.image
-      assert_equal tags(:vegetarian_tag, :honey_tag), food.tags
+      refute_nil @food.image_detail
+      assert tags(:vegetarian_tag, :honey_tag).all? { |tag| tag.in? @food.tags }
       assert_redirected_to admin_food_url(@food)
     end
   end

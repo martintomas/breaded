@@ -5,30 +5,35 @@ class FoodsController < ApplicationController
     respond_to do |format|
       format.html
       format.json {
-        return render_breads if params[:section] == 'breads'
-        render_bakers
+        return list_of_breads_for(params[:category]) if params[:section] == 'breads'
+        list_of_bakers_for(params[:category])
       }
     end
   end
 
+  def show
+    @food = Food.with_translations.preload(tags: { name: { text_translations: :language } },
+                                           producer: { name: { text_translations: :language } }).find params[:id]
+  end
+
   private
 
-  def render_breads
+  def list_of_breads_for(category)
     query = Food.with_translations.preload(tags: { name: { text_translations: :language } })
-    query = query.joins(:tags).where(tags: { id: params[:category]}) if params[:category].present? && params[:category] != 'all'
+    query = query.joins(:tags).where(tags: { id: category }) if category.present? && category != 'all'
 
     pagy, foods = pagy query, items: 10
-    render json: { header: render_to_string(partial: 'food_details_header', locals: { query: query }, formats: [:html]),
-                   entries: render_to_string(partial: 'food_details', locals: { foods: foods }, formats: [:html]),
+    render json: { header: render_to_string(partial: 'foods/index/food_details_header', locals: { query: query }, formats: [:html]),
+                   entries: render_to_string(partial: 'foods/index/food_details', locals: { foods: foods }, formats: [:html]),
                    pagination: view_context.pagy_nav(pagy) }
   end
 
-  def render_bakers
+  def list_of_bakers_for(category)
     query = Producer.with_translations.preload(foods: { tags: { name: { text_translations: :language } } }).order(:id)
-    query = query.where(id: params[:category]) if params[:category].present? && params[:category] != 'all'
+    query = query.where(id: category) if category.present? && category != 'all'
 
     pagy, producers = pagy query, items: 5
-    render json: { entries: render_to_string(partial: 'producer_details', locals: { producers: producers }, formats: [:html]),
+    render json: { entries: render_to_string(partial: 'foods/index/producer_details', locals: { producers: producers }, formats: [:html]),
                    pagination: view_context.pagy_nav(pagy) }
   end
 end

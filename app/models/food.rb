@@ -11,9 +11,13 @@ class Food < ApplicationRecord
   has_many :entity_tags, as: :entity, dependent: :destroy
   has_many :tags, through: :entity_tags
 
-  has_one_attached :image
+  has_one_attached :image_detail
+  has_one_attached :image_description
 
   accepts_nested_attributes_for :entity_tags
+
+  validates :image_detail, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+  validates :image_description, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
 
   def to_s
     localized_name

@@ -10,11 +10,11 @@ section.container
           .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.tab-section.active.browse_bread data-controller='browse-bread-filter' data-browse-bread-filter-base-url="#{foods_url}"
             .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.browse_bread
               .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12 style="z-index: 1;"
-                == render partial: 'foods/filter'
+                == render partial: 'foods/index/filter'
               .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.itemsBlock.active data-target="browse-bread-filter.entries"
               .pagination data-target="browse-bread-filter.pagination"
-            == render partial: 'foods/shopping_basket'
-            == render partial: 'foods/shopping_basket_item'
+            == render partial: 'foods/index/shopping_basket'
+            == render partial: 'foods/index/shopping_basket_item'
 
 == render partial: 'shared/gift'
 

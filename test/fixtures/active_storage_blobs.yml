@@ -1,0 +1,9 @@
+png_file_2000:
+  id: 1
+  key: '12345678'
+  filename: 'file.png'
+  content_type: 'image/png'
+  metadata: nil
+  byte_size: 2000
+  checksum: "123456789012345678901234"
+  created_at: <%= Time.current %>
