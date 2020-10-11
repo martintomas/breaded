@@ -1,6 +1,6 @@
 import { BaseStorage} from "./BaseStorage";
 
-const DEFAULT_STRUCTURE = { breads: {} };
+const DEFAULT_STRUCTURE = { breads: [], surpriseMe: [] };
 
 export class ShopBasketStorage extends BaseStorage {
     constructor() {

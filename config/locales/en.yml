@@ -116,6 +116,14 @@ en:
       goes_well_with: Goes Well With
       baked_by: Baked By
       add: Add
+    surprise_me:
+      ingredients_preferences_html: 'Ingredient </br>Preferences'
+      favourite_bread_types_html: 'Favorite</br>Bread Types'
+      ingredients_preferences: 'Ingredient Preferences'
+      favourite_bread_types: 'Favorite Bread Types'
+      let_us_surprise_you_html: 'Lets Us</br>Surprise You'
+      description: Get up to 10 different types of bread and carefully delivered to your doorstep
+      confirm: 'Confirm List'
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
   active_admin:
@@ -147,3 +155,4 @@ en:
       goes_wells: Goes Well
       ingredients: Ingredients
       attributes: Attributes
+      others: Others

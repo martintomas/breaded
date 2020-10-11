@@ -15,4 +15,5 @@ class Tag < ApplicationRecord
   scope :ingredients, -> { where(tag_type: TagType.the_ingredient) }
   scope :attributes, -> { where(tag_type: TagType.the_attribute) }
   scope :goes_well, -> { where(tag_type: TagType.the_goes_well) }
+  scope :others, -> { where(tag_type: TagType.the_other) }
 end

@@ -1,0 +1,7 @@
+h4 = t 'app.surprise_me.favourite_bread_types_html'
+.checkBoxSection.animated.fadeIn.animate6
+  - Tag.with_translations.categories.each do |tag|
+    label.baker_container
+      = tag.localized_name
+      input type="checkbox" data-tag-id="#{tag.id}" data-tag-name="#{tag.localized_name}" data-action='surprise-me#updateCategoryPreferences'
+      span.checkmark

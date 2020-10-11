@@ -1,5 +1,7 @@
 import { Controller } from "stimulus"
-import { ShopBasketViewHelper } from "../services/ShopBasketViewHelper";
+import { ShopBasketMutation } from "../mutations/ShopBasketMutation";
+import { QuerySelectorBuilder } from "../services/QuerySelectorBuilder";
+import { ShoppingButtonUpdater } from "../services/ShoppingButtonUpdater";
 
 require('intersection-observer');
 
@@ -11,7 +13,7 @@ export default class extends Controller {
             document.selectedSection = 'breads';
             document.selectedCategory = { breads: 'breads-all' }
         }
-        this.shopBasketViewHelper = new ShopBasketViewHelper();
+        this.shoppingButtonUpdater = new ShoppingButtonUpdater(new ShopBasketMutation(), new QuerySelectorBuilder('data-food-id'));
         this.updateStatusOfFilter();
         this.intersectionObserver = new IntersectionObserver(entries => this.processIntersectionEntries(entries))
     }
@@ -62,7 +64,7 @@ export default class extends Controller {
                 if(hardReset) { this.entriesTarget.innerHTML = '' }
                 this.processFoodData(data);
                 this.updateStatusOfCategory();
-                this.shopBasketViewHelper.updateShoppingButtons();
+                this.shoppingButtonUpdater.update();
                 if(hardReset) { window.scrollTo(0, document.getElementById('tab-container')); }
             }
         })

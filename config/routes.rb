@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
 
-  resources :foods, only: %i[index show]
+  resources :foods, only: %i[index show]  do
+    collection do
+      get :surprise_me
+    end
+  end
   resources :producer_applications, only: %i[new create]
 end

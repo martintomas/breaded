@@ -11,6 +11,7 @@
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_attribute }
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_ingredient }
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_goes_well }
+    == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_other }
   = f.actions do
     = f.action(:submit)
     = f.cancel_link

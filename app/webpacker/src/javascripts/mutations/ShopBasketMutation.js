@@ -1,48 +1,34 @@
 import { ShopBasketStorage } from "../storages/ShopBasketStorage";
+import { ShopBasketBaseMutations } from "./ShopBasketBaseMutations";
 
-export class ShopBasketMutation {
+export class ShopBasketMutation extends ShopBasketBaseMutations {
     constructor() {
+        super();
         this.basketStorage = ShopBasketStorage.getStorage();
-        this.breads = this.basketStorage.storage.breads;
+        this.data = this.basketStorage.storage.breads;
     }
 
-    addFoodItem(foodId, food_name) {
-        if(this.breads[foodId]) {
-            this.breads[foodId].amount += 1;
+    addFoodItem(foodId, foodName) {
+        let foodItem = this.findBy(foodId);
+
+        if(foodItem) {
+            foodItem.amount += 1;
         } else {
-            this.breads[foodId] = { food_name: food_name, amount: 1 }
+            this.data.push({ id: foodId, foodName: foodName, amount: 1 })
         }
         this.basketStorage.save();
     }
 
     removeFoodItem(foodId) {
-        if(this.breads[foodId]) {
-            if(this.breads[foodId].amount === 1) {
-                delete this.breads[foodId]
+        let foodItem = this.findBy(foodId);
+
+        if(foodItem) {
+            if(foodItem.amount === 1) {
+                this.data.splice(this.data.indexOf(foodItem), 1);
             } else {
-                this.breads[foodId].amount -= 1;
+                foodItem.amount -= 1;
             }
         }
         this.basketStorage.save();
-    }
-
-    foodItems() {
-        return this.breads;
-    }
-
-    sumOfFoodItems() {
-        let sum = 0
-        $.each(this.foodItems(), (foodId, foodValues) => {
-            sum += foodValues.amount
-        });
-        return sum;
-    }
-
-    getAmountOf(foodId) {
-        if(this.breads[foodId]) {
-            return this.breads[foodId].amount
-        } else {
-            return 0;
-        }
     }
 }

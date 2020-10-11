@@ -54,6 +54,11 @@ ActiveAdmin.register Food do
         column :localized_name
       end
     end
+    panel I18n.t('active_admin.tags.others'), id: 'others' do
+      table_for resource.tags.others.with_translations do
+        column :localized_name
+      end
+    end
   end
 
   form partial: 'form'

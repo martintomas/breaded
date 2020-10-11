@@ -13,18 +13,18 @@ export default class extends Controller {
     }
 
     addItem(event) {
-        if(this.shopBasketMutation.sumOfFoodItems() >= this.data.get('max-items')) { return; }
+        if(this.shopBasketMutation.numOfItems() >= this.data.get('maxItems')) { return; }
 
         event = $(event.target);
-        this.shopBasketMutation.addFoodItem(event.data('food-id'), event.data('food-name'));
+        this.shopBasketMutation.addFoodItem(event.data('foodId'), event.data('foodName'));
         this.shopBasketViewHelper.updateShoppingBasket();
     }
 
     removeItem(event) {
-        if(this.shopBasketMutation.sumOfFoodItems() <= 0) { return; }
+        if(this.shopBasketMutation.numOfItems() <= 0) { return; }
 
         event = $(event.target);
-        this.shopBasketMutation.removeFoodItem(event.data('food-id'));
+        this.shopBasketMutation.removeFoodItem(event.data('foodId'));
         this.shopBasketViewHelper.updateShoppingBasket();
     }
 

@@ -1,4 +1,4 @@
-body.foods.index {
+body.foods.index, body.foods.surprise_me {
     & {
         background-color: #fff;
         color: #333333;
@@ -824,7 +824,7 @@ body.foods.index {
     }
 
     .vegan li,
-    .gluten li {
+    .gluten_free li {
         width: 100px;
     }
 
@@ -845,7 +845,7 @@ body.foods.index {
     }
 
     .vegan .numbers-row,
-    .gluten .numbers-row {
+    .gluten_free .numbers-row {
         position: relative;
         color: #333333;
         border: 1px solid #2A6C07;
@@ -855,23 +855,23 @@ body.foods.index {
 
     .vegan .numbers-row > div,
     .vegan .numbers-row input,
-    .gluten .numbers-row > div,
-    .gluten .numbers-row input {
+    .gluten_free .numbers-row > div,
+    .gluten_free .numbers-row input {
         color: #2A6C07;
         background: #ffffff;
         border-radius: 5px;
     }
 
-    .gluten {
+    .gluten_free {
         color: #C4C41C;
     }
 
-    .gluten li:first-child,
-    .gluten li:last-child {
+    .gluten_free li:first-child,
+    .gluten_free li:last-child {
         width: auto;
     }
 
-    .gluten li:first-child::after {
+    .gluten_free li:first-child::after {
         content: "";
         width: 20px;
         height: 20px;
@@ -882,12 +882,12 @@ body.foods.index {
         top: -1.5px;
     }
 
-    .gluten .numbers-row > div,
-    .gluten .numbers-row input {
+    .gluten_free .numbers-row > div,
+    .gluten_free .numbers-row input {
         color: #C4C41C;
     }
 
-    .gluten .numbers-row {
+    .gluten_free .numbers-row {
         border: 1px solid #C4C41C;
     }
 

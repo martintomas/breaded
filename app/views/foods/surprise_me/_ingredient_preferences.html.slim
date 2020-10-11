@@ -1,0 +1,13 @@
+h4 = t 'app.surprise_me.ingredients_preferences_html'
+p.breads-lg-8.breads-md-8.breads-sm-8.breads-xs-12.PDLR0PX
+  = t 'app.surprise_me.description'
+span
+  - Tag.with_translations.attributes.each do |tag|
+    ul class="#{tag.code}"
+      li = tag.code[0].upcase
+      li = tag.localized_name
+      li
+        .numbers-row
+          .inc.button data-tag-id="#{tag.id}" data-tag-name="#{tag.localized_name}" data-action='click->surprise-me#addItem' = '+'
+          input type="text" value="0"
+          .dec.button data-tag-id="#{tag.id}" data-action='click->surprise-me#removeItem' = '-'

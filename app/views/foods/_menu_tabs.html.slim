@@ -1,0 +1,5 @@
+.panel-switch
+  button type="button" id="letMe" onclick="location.href='#{foods_path}'" class=('active-button' unless page == 'browse_bread')
+    = t 'app.browse_bread.menu_let_me'
+  button type="button" id="suprise" onclick="location.href='#{surprise_me_foods_path}'" class=('active-button' unless page == 'surprise_me')
+    = t 'app.browse_bread.menu_suprise_me'

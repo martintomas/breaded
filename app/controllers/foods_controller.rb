@@ -11,6 +11,8 @@ class FoodsController < ApplicationController
     end
   end
 
+  def surprise_me; end
+
   def show
     @food = Food.with_translations.preload(tags: { name: { text_translations: :language } },
                                            producer: { name: { text_translations: :language } }).find params[:id]
