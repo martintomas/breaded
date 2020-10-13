@@ -6,7 +6,9 @@ class FoodTest < ActiveSupport::TestCase
   setup do
     @full_content = { name: localised_texts(:rye_bread_name),
                       description: localised_texts(:rye_bread_description),
-                      producer: producers(:bread_and_butter) }
+                      producer: producers(:bread_and_butter),
+                      image_detail: ActiveStorage::Blob.find(1),
+                      image_description: ActiveStorage::Blob.find(1) }
     @food = foods :rye_bread
   end
 
@@ -30,6 +32,14 @@ class FoodTest < ActiveSupport::TestCase
 
   test 'the validity - without producer is not valid' do
     invalid_with_missing Food, :producer
+  end
+
+  test 'the validity - without image_detail is not valid' do
+    invalid_with_missing Food, :image_detail
+  end
+
+  test 'the validity - without image_description is not valid' do
+    invalid_with_missing Food, :image_description
   end
 
   test '#to_s' do

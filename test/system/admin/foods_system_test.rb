@@ -15,6 +15,8 @@ class Admin::FoodsSystemTest < ApplicationSystemTestCase
       fill_in 'food[name_attributes][text_translations_attributes][0][text]', with: 'Test Name'
       fill_in 'food[description_attributes][text_translations_attributes][0][text]', with: 'Test Description'
       select Producer.first.localized_name, from: 'food[producer_id]'
+      attach_file 'food[image_detail]', file_fixture('product-1.png')
+      attach_file 'food[image_description]', file_fixture('product-1.png')
       check "food_tag_ids_#{Tag.first.id}"
       check "food_tag_ids_#{Tag.last.id}"
       click_on 'Create Food'

@@ -8,5 +8,4 @@
     li
       span.lastWord = last_word_split(food.localized_name)
       p = print_tags_from(food.tags, tag_type: TagType.the_ingredient)
-      div
-        = print_attributes_of(food.tags.select { |tag| tag.tag_type_id == TagType.the_attribute.id } )
+      div = print_attributes_of(food.tags.select { |tag| tag.tag_type_id == TagType.the_attribute.id } )

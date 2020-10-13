@@ -25,3 +25,17 @@ seeded_bread_description_image:
   record_id: <%= ActiveRecord::FixtureSet.identify(:seeded_bread) %>
   blob_id: 1
   created_at: <%= Time.current %>
+
+deletable_food_detail_image:
+  name: 'image_detail'
+  record_type: 'Food'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:deletable_food) %>
+  blob_id: 1
+  created_at: <%= Time.current %>
+
+deletable_food_description_image:
+  name: 'image_description'
+  record_type: 'Food'
+  record_id: <%= ActiveRecord::FixtureSet.identify(:deletable_food) %>
+  blob_id: 1
+  created_at: <%= Time.current %>

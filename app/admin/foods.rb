@@ -5,7 +5,7 @@ ActiveAdmin.register Food do
 
   menu parent: I18n.t('active_admin.menu.parents.producer'), priority: 2, label: I18n.t('active_admin.foods.label')
 
-  permit_params :image, :producer_id, name_attributes: {}, description_attributes: {}, tag_ids: []
+  permit_params :image_detail, :image_description, :producer_id, name_attributes: {}, description_attributes: {}, tag_ids: []
 
   controller do
     def scoped_collection

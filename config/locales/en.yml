@@ -97,14 +97,13 @@ en:
       title: Pick Your Ten Breads
       subtitle: Or we can surprise you based on your preferences.
       menu_let_me: Let Me Pick
-      menu_suprise_me: Surprise Me
-      all_breads: All Breads
+      menu_surprise_me: Surprise Me
       number_items: '%{number} items'
       about_bread: About the Bread
       read_more: Read More
       shopping_basket:
         empty: No Breads picked
-        breads_selected_html: "<span class='number-selected-breads'>3</span>\u00a0Breads\u00a0Selected"
+        breads_selected_html: "<span class='number-selected-breads'>0</span>\u00a0Breads\u00a0Selected"
         close_button: Close
         open_button: Open
       filter:

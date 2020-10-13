@@ -3,6 +3,7 @@
 vegetarian_tag:
   name: vegetarian_localized_text
   tag_type: attribute
+  code: vegan
 
 butter_tag:
   name: butter_localized_text
@@ -19,3 +20,4 @@ honey_tag:
 featured:
   name: featured_localized_text
   tag_type: other
+  code: $LABEL

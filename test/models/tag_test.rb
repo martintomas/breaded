@@ -39,7 +39,7 @@ class TagTest < ActiveSupport::TestCase
   end
 
   test 'the validity - code has to be uniq within tag type' do
-    model = Tag.new
+    model = Tag.new @full_content
     model.save!
     model = Tag.new @full_content.except(:code)
     assert model.valid?, model.errors.full_messages

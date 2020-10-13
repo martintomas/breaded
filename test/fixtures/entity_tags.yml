@@ -12,6 +12,10 @@ rye_bread_butter_tag:
   entity: rye_bread (Food)
   tag: butter_tag
 
+rye_bread_honey_tag:
+  entity: rye_bread (Food)
+  tag: honey_tag
+
 seeded_bread_butter_tag:
   entity: seeded_bread (Food)
   tag: butter_tag
