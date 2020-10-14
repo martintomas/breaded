@@ -26,6 +26,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   setup do
     Capybara.server_host = '0.0.0.0'
     Capybara.app_host = "http://#{Socket.ip_address_list.detect(&:ipv4_private?).ip_address}:#{Capybara.server_port}"
+    Capybara.ignore_hidden_elements = false
   end
 
   def login_as_admin

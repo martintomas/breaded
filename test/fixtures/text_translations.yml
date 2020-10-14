@@ -79,3 +79,8 @@ featured_tag_translation:
   text: Featured
   language: en
   localised_text: featured_localized_text
+
+sourdough_translation:
+  text: Sourdough
+  language: en
+  localised_text: sourdough_localized_text

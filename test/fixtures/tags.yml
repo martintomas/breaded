@@ -13,6 +13,10 @@ rye_tag:
   name: rye_localized_text
   tag_type: category
 
+sourdough_tag:
+  name: sourdough_localized_text
+  tag_type: category
+
 honey_tag:
   name: honey_localized_text
   tag_type: ingredient
