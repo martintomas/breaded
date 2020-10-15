@@ -5,7 +5,8 @@ ActiveAdmin.register Food do
 
   menu parent: I18n.t('active_admin.menu.parents.producer'), priority: 2, label: I18n.t('active_admin.foods.label')
 
-  permit_params :image_detail, :image_description, :producer_id, name_attributes: {}, description_attributes: {}, tag_ids: []
+  permit_params :enabled, :image_detail, :image_description, :producer_id, name_attributes: {},
+                description_attributes: {}, tag_ids: []
 
   controller do
     def scoped_collection
@@ -19,6 +20,7 @@ ActiveAdmin.register Food do
     column :name, -> (row_record) { row_record.localized_name }
     column :description, -> (row_record) { row_record.localized_description }
     column :producer
+    column :enabled
     column :created_at
     column :updated_at
     actions
@@ -31,6 +33,7 @@ ActiveAdmin.register Food do
       row(:producer)
       row(:image_detail) { |row_record| image_tag Blobs::UrlBuilder.new(row_record.image_detail).url }
       row(:image_description) { |row_record| image_tag Blobs::UrlBuilder.new(row_record.image_description).url }
+      row :enabled
       row :created_at
       row :updated_at
     end

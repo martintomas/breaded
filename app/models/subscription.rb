@@ -5,10 +5,11 @@ class Subscription < ApplicationRecord
   belongs_to :user
 
   has_many :orders, dependent: :destroy
+  has_many :subscription_surprises, dependent: :destroy
   has_one :payment, dependent: :restrict_with_exception
 
-  validates :surprise_me_count, presence: true
   validates :active, inclusion: { in: [true, false] }
+  validates :number_of_orders_left, :number_of_items, numericality: { greater_than_or_equal_to: 0 }
 
   scope :active, -> { where(active: true) }
 end

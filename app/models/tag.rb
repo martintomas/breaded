@@ -7,7 +7,7 @@ class Tag < ApplicationRecord
 
   belongs_to :tag_type
 
-  has_one_attached :image
+  has_many :entity_tags, dependent: :destroy
 
   validates_uniqueness_of :code, scope: :tag_type_id, if: -> (tag) { tag.code.present? }
 

@@ -40,13 +40,15 @@ class Admin::FoodsControllerTest < ActionDispatch::IntegrationTest
                                                 producer_id: producers(:bread_and_butter).id,
                                                 image_detail: fixture_file_upload('/files/product-1.png', 'image/png'),
                                                 image_description: fixture_file_upload('/files/product-1.png', 'image/png'),
-                                                tag_ids: tags(:vegetarian_tag, :honey_tag).map(&:id) }}
+                                                tag_ids: tags(:vegetarian_tag, :honey_tag).map(&:id),
+                                                enabled: '0' }}
         food = Food.last
         assert_equal 'test', food.localized_name
         assert_equal 'test2', food.localized_description
         assert_equal producers(:bread_and_butter), food.producer
         refute_nil food.image_detail
         refute_nil food.image_description
+        refute food.enabled
         assert tags(:vegetarian_tag, :honey_tag).all? { |tag| tag.in? food.tags }
         assert_redirected_to admin_food_url(food)
       end
@@ -71,12 +73,14 @@ class Admin::FoodsControllerTest < ActionDispatch::IntegrationTest
                                   id: localised_texts(:rye_bread_description).id },
                             producer_id: producers(:deletable_producer).id,
                             image_detail: fixture_file_upload('/files/product-1.png', 'image/png'),
-                            tag_ids: tags(:vegetarian_tag, :honey_tag).map(&:id) }}
+                            tag_ids: tags(:vegetarian_tag, :honey_tag).map(&:id),
+                            enabled: '1' } }
       @food.reload
       assert_equal 'test', @food.localized_name
       assert_equal 'test2', @food.localized_description
       assert_equal producers(:deletable_producer), @food.producer
       refute_nil @food.image_detail
+      assert @food.enabled
       assert tags(:vegetarian_tag, :honey_tag).all? { |tag| tag.in? @food.tags }
       assert_redirected_to admin_food_url(@food)
     end

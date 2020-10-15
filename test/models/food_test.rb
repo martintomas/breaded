@@ -8,7 +8,8 @@ class FoodTest < ActiveSupport::TestCase
                       description: localised_texts(:rye_bread_description),
                       producer: producers(:bread_and_butter),
                       image_detail: ActiveStorage::Blob.find(1),
-                      image_description: ActiveStorage::Blob.find(1) }
+                      image_description: ActiveStorage::Blob.find(1),
+                      enabled: true }
     @food = foods :rye_bread
   end
 
@@ -40,6 +41,12 @@ class FoodTest < ActiveSupport::TestCase
 
   test 'the validity - without image_description is not valid' do
     invalid_with_missing Food, :image_description
+  end
+
+  test 'the validity - without enabled is valid' do
+    model = Food.new @full_content.except(:enabled)
+    assert model.valid?, model.errors.full_messages
+    assert model.enabled
   end
 
   test '#to_s' do

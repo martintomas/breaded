@@ -16,8 +16,11 @@ class Food < ApplicationRecord
 
   accepts_nested_attributes_for :entity_tags
 
+  validates :enabled, inclusion: { in: [true, false] }
   validates :image_detail, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
   validates :image_description, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
+
+  scope :enabled, -> { where(enabled: true) }
 
   def to_s
     localized_name

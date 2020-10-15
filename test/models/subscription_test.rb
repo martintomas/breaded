@@ -6,7 +6,8 @@ class SubscriptionTest < ActiveSupport::TestCase
   setup do
     @full_content = { user: users(:customer),
                       subscription_plan: subscription_plans(:once_every_month),
-                      surprise_me_count: 0,
+                      number_of_orders_left: 0,
+                      number_of_items: 10,
                       active: true }
   end
 
@@ -28,10 +29,12 @@ class SubscriptionTest < ActiveSupport::TestCase
     invalid_with_missing Subscription, :subscription_plan
   end
 
-  test 'the validity - without surprise_me_count is valid' do
-    model = Subscription.new @full_content.except(:surprise_me_count)
-    assert model.valid?, model.errors.full_messages
-    assert_equal model.surprise_me_count, 0
+  test 'the validity - without number_of_orders_left is not valid' do
+    invalid_with_missing Subscription, :number_of_orders_left
+  end
+
+  test 'the validity - without number_of_items is not valid' do
+    invalid_with_missing Subscription, :number_of_items
   end
 
   test 'the validity - without active is valid' do

@@ -36,10 +36,12 @@ class Admin::ProducersControllerTest < ActionDispatch::IntegrationTest
                                                                                       text: "test" }}},
                                                         description_attributes: { text_translations_attributes:
                                                                                     { "0"=>{ language_id: Language.the_en.id,
-                                                                                             text: "test2" }}}}}
+                                                                                             text: "test2" }}},
+                                                        enabled: '1' }}
         producer = Producer.last
         assert_equal 'test', producer.localized_name
         assert_equal 'test2', producer.localized_description
+        assert producer.enabled
         assert_redirected_to admin_producer_url(producer)
       end
     end
@@ -60,10 +62,13 @@ class Admin::ProducersControllerTest < ActionDispatch::IntegrationTest
                                 { "0"=>{ language_id: Language.the_en.id,
                                          text: "test2",
                                          id: text_translations(:bread_and_butter_description_translation).id }},
-                              id: localised_texts(:bread_and_butter_description).id }}}
+                              id: localised_texts(:bread_and_butter_description).id },
+                          enabled: '0' } }
 
+      @producer.reload
       assert_equal 'test', @producer.localized_name
       assert_equal 'test2', @producer.localized_description
+      refute @producer.enabled
       assert_redirected_to admin_producer_url(@producer)
     end
   end

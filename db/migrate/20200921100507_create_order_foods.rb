@@ -4,6 +4,7 @@ class CreateOrderFoods < ActiveRecord::Migration[6.0]
       t.references :food, null: false, foreign_key: true
       t.references :order, null: false, foreign_key: true
       t.integer :amount
+      t.boolean :automatic, default: false
 
       t.timestamps
     end

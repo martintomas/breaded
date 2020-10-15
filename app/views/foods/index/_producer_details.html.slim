@@ -2,4 +2,4 @@
   h5 = producer.localized_name
   span = t 'app.browse_bread.number_items', number: producer.foods.size
   p = truncate_long_description_of(producer)
-  == render partial: 'foods/index/food_details', locals: { foods: producer.foods }
+  == render partial: 'foods/index/food_details', locals: { foods: producer.foods.enabled }

@@ -3,7 +3,8 @@ class CreateSubscriptions < ActiveRecord::Migration[6.0]
     create_table :subscriptions do |t|
       t.references :subscription_plan, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
-      t.integer :surprise_me_count, default: 0
+      t.integer :number_of_orders_left
+      t.integer :number_of_items
       t.boolean :active, default: true
 
       t.timestamps

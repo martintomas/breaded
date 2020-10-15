@@ -6,7 +6,8 @@ class OrderFoodTest < ActiveSupport::TestCase
   setup do
     @full_content = { food: foods(:seeded_bread),
                       order: orders(:customer_order_2),
-                      amount: 2 }
+                      amount: 2,
+                      automatic: false }
   end
 
   test 'the validity - empty is not valid' do
@@ -29,6 +30,12 @@ class OrderFoodTest < ActiveSupport::TestCase
 
   test 'the validity - without amount is not valid' do
     invalid_with_missing OrderFood, :amount
+  end
+
+  test 'the validity - without automatic is valid' do
+    model = OrderFood.new @full_content.except(:automatic)
+    assert model.valid?, model.errors.full_messages
+    refute model.automatic
   end
 
   test 'the validity - combination of food and order has to be unique' do

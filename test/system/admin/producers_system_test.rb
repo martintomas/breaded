@@ -14,6 +14,7 @@ class Admin::ProducersSystemTest < ApplicationSystemTestCase
     within 'form#new_producer' do
       fill_in 'producer[name_attributes][text_translations_attributes][0][text]', with: 'Test Name'
       fill_in 'producer[description_attributes][text_translations_attributes][0][text]', with: 'Test Description'
+      check 'producer[enabled]'
       click_on 'Create Producer'
     end
     within 'div#active_admin_content' do
@@ -34,6 +35,7 @@ class Admin::ProducersSystemTest < ApplicationSystemTestCase
     within "form#edit_producer_#{@producer.id}" do
       fill_in 'producer[name_attributes][text_translations_attributes][0][text]', with: 'Test Name'
       fill_in 'producer[description_attributes][text_translations_attributes][0][text]', with: 'Test Description'
+      check 'producer[enabled]'
       click_on 'Update Producer'
     end
     within 'div#active_admin_content' do

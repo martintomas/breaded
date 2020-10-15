@@ -9,6 +9,10 @@ class Producer < ApplicationRecord
 
   has_many :foods, dependent: :destroy
 
+  validates :enabled, inclusion: { in: [true, false] }
+
+  scope :enabled, -> { where(enabled: true) }
+
   def to_s
     localized_name
   end

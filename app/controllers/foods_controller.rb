@@ -14,14 +14,14 @@ class FoodsController < ApplicationController
   def surprise_me; end
 
   def show
-    @food = Food.with_translations.preload(tags: { name: { text_translations: :language } },
-                                           producer: { name: { text_translations: :language } }).find params[:id]
+    @food = Food.with_translations.enabled.preload(tags: { name: { text_translations: :language } },
+                                                   producer: { name: { text_translations: :language } }).find params[:id]
   end
 
   private
 
   def list_of_breads_for(category)
-    query = Food.with_translations.preload(tags: { name: { text_translations: :language } })
+    query = Food.with_translations.enabled.preload(tags: { name: { text_translations: :language } })
     query = query.joins(:tags).where(tags: { id: category }) if category.present? && category != 'all'
 
     pagy, foods = pagy query, items: 10
@@ -31,7 +31,7 @@ class FoodsController < ApplicationController
   end
 
   def list_of_bakers_for(category)
-    query = Producer.with_translations.preload(foods: { tags: { name: { text_translations: :language } } }).order(:id)
+    query = Producer.with_translations.enabled.preload(foods: { tags: { name: { text_translations: :language } } }).order(:id)
     query = query.where(id: category) if category.present? && category != 'all'
 
     pagy, producers = pagy query, items: 5

@@ -22,3 +22,10 @@ customer_2:
   email: martin.tomas@breaded.net
   roles: customer
   confirmed_at: <%= Time.current %>
+
+surprise_me_customer:
+  first_name: Surprise
+  last_name: Me
+  email: surprise.me@breaded.net
+  roles: customer
+  confirmed_at: <%= Time.current %>

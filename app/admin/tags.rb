@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Producer do
-  config.filters = false
+ActiveAdmin.register Tag do
+  menu parent: I18n.t('active_admin.menu.parents.tag'), priority: 1, label: I18n.t('active_admin.tags.label')
 
-  menu parent: I18n.t('active_admin.menu.parents.producer'), priority: 1, label: I18n.t('active_admin.producers.label')
+  filter :tag_type
 
-  permit_params :enabled, name_attributes: {}, description_attributes: {}
+  permit_params :tag_type_id, name_attributes: {}
 
   controller do
     def scoped_collection
@@ -17,8 +17,7 @@ ActiveAdmin.register Producer do
     selectable_column
     id_column
     column :name, -> (row_record) { row_record.localized_name }
-    column :description, -> (row_record) { row_record.localized_description }
-    column :enabled
+    column :tag_type
     column :created_at
     column :updated_at
     actions
@@ -27,8 +26,7 @@ ActiveAdmin.register Producer do
   show title: proc { |row_record| row_record.localized_name } do
     attributes_table do
       row(:name) { |row_record| row_record.localized_name }
-      row(:description) { |row_record| row_record.localized_description }
-      row :enabled
+      row :tag_type
       row :created_at
       row :updated_at
     end

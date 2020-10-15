@@ -7,6 +7,7 @@
       .with_translations.map { |producer| [producer.localized_name, producer.id] }
     = f.input :image_detail, as: :file
     = f.input :image_description, as: :file
+    = f.input :enabled
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_category }
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_attribute }
     == render partial: 'admin/foods/tag_check_boxes', locals: { f: f, tag_type: TagType.the_ingredient }

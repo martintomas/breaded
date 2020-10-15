@@ -11,8 +11,9 @@ class ProducerApplicationsSystemTest < ApplicationSystemTestCase
       fill_in 'producer_application[last_name]', with: 'Last Name'
       fill_in 'producer_application[email]', with: 'test@test.test'
       fill_in 'producer_application[phone_number]', with: '12345678'
-      click_on 'Submit'
+      click_button 'Submit'
+
+      assert_selector 'div.flash', text: I18n.t('app.baker_signup.notice'), visible: false
     end
-    assert_selector 'div.flash', text: I18n.t('app.baker_signup.notice')
   end
 end

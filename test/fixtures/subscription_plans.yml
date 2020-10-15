@@ -3,17 +3,14 @@
 once_every_month:
   price: 29.99
   currency: GBP
-  number_of_items: 10
   number_of_deliveries: 1
 
 twice_every_month:
   price: 61.99
   currency: GBP
-  number_of_items: 10
   number_of_deliveries: 2
 
 four_times_every_month:
   price: 114.99
   currency: GBP
-  number_of_items: 10
   number_of_deliveries: 4

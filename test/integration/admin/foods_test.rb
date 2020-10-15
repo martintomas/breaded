@@ -97,6 +97,7 @@ class Admin::FoodsTest < ActionDispatch::IntegrationTest
           assert_select 'textarea[name="food[name_attributes][text_translations_attributes][0][text]"]'
           assert_select 'textarea[name="food[description_attributes][text_translations_attributes][0][text]"]'
           assert_select 'select[name="food[producer_id]"]'
+          assert_select 'input[name="food[enabled]"][value="1"]'
           tag_types(:category, :goes_well, :attribute, :ingredient).each do |tag_type|
             Tag.where(tag_type: tag_type).each do |tag|
               assert_select "label[for=food_tag_ids_#{tag.id}]", tag.localized_name
@@ -123,6 +124,7 @@ class Admin::FoodsTest < ActionDispatch::IntegrationTest
           assert_select 'select[name="food[producer_id]"]' do
             assert_select 'option[selected=selected]', @food.producer.localized_name
           end
+          assert_select 'input[name="food[enabled]"][value=?]', (@food.enabled && 1 || 0).to_s
           tag_types(:category, :goes_well, :attribute, :ingredient).each do |tag_type|
             @food.tags.where(tag_type: tag_type).each do |tag|
               assert_select "label[for=food_tag_ids_#{tag.id}]", tag.localized_name

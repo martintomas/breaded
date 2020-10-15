@@ -23,3 +23,11 @@ seeded_bread_butter_tag:
 producer_application_rye_tag:
   entity: producer_application_bread_and_butter (ProducerApplication)
   tag: rye_tag
+
+surprise_me_tag_category:
+  entity: surprise_with_amount (SubscriptionSurprise)
+  tag: rye_tag
+
+surprise_me_tag_ingredient:
+  entity: surprise_without_amount (SubscriptionSurprise)
+  tag: vegetarian_tag

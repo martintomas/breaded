@@ -6,7 +6,8 @@ class ProducerTest < ActiveSupport::TestCase
   setup do
     @full_content = { name: localised_texts(:bread_and_butter_name),
                       description: localised_texts(:bread_and_butter_description),
-                      producer_application: producer_applications(:producer_application_bread_and_butter) }
+                      producer_application: producer_applications(:producer_application_bread_and_butter),
+                      enabled: true }
     @producer = producers :bread_and_butter
   end
 
@@ -31,6 +32,12 @@ class ProducerTest < ActiveSupport::TestCase
   test 'the validity - without producer_application is valid' do
     model = Producer.new @full_content.except(:producer_application)
     assert model.valid?, model.errors.full_messages
+  end
+
+  test 'the validity - without enabled is valid' do
+    model = Producer.new @full_content.except(:enabled)
+    assert model.valid?, model.errors.full_messages
+    assert model.enabled
   end
 
   test '#to_s' do

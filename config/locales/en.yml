@@ -130,6 +130,7 @@ en:
       parents:
         user: User
         producer: Producer
+        tag: Tag
     dashboards:
       see_detail: see detail
       panels:
@@ -149,7 +150,10 @@ en:
       label: Producers
     foods:
       label: Foods
+    tag_types:
+      label: Tag Types
     tags:
+      label: Tags
       categories: Categories
       goes_wells: Goes Well
       ingredients: Ingredients

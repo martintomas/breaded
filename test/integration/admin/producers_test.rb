@@ -74,6 +74,7 @@ class Admin::ProducersTest < ActionDispatch::IntegrationTest
         assert_select 'form#new_producer' do
           assert_select 'textarea[name="producer[name_attributes][text_translations_attributes][0][text]"]'
           assert_select 'textarea[name="producer[description_attributes][text_translations_attributes][0][text]"]'
+          assert_select 'input[name="producer[enabled]"][value="1"]'
         end
       end
     end
@@ -91,6 +92,7 @@ class Admin::ProducersTest < ActionDispatch::IntegrationTest
                         @producer.localized_name
           assert_select 'textarea[name="producer[description_attributes][text_translations_attributes][0][text]"]',
                         @producer.localized_description
+          assert_select 'input[name="producer[enabled]"][value=?]', (@producer.enabled && 1 || 0).to_s
         end
       end
     end
