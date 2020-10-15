@@ -130,6 +130,7 @@ en:
       parents:
         user: User
         producer: Producer
+        order: Order
         tag: Tag
     dashboards:
       see_detail: see detail
@@ -159,3 +160,5 @@ en:
       ingredients: Ingredients
       attributes: Attributes
       others: Others
+    subscription_plans:
+      label: Subscription Plans
