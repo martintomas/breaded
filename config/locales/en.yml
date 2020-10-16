@@ -162,6 +162,10 @@ en:
       others: Others
     orders:
       label: Orders
+    order_states:
+      label: Order States
+    order_foods:
+      label: Order Foods
     subscriptions:
       label: Subscriptions
     subscription_surprises:

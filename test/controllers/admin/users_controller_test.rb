@@ -42,6 +42,12 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#edit' do
+    get edit_admin_user_url(@user)
+
+    assert_response :success
+  end
+
   test '#update' do
     patch admin_user_url(@user), params: { user: { first_name: 'First Name' } }
 

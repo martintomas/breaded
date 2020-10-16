@@ -28,6 +28,12 @@ class Admin::FoodsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test '#edit' do
+    get edit_admin_food_url(@food)
+
+    assert_response :success
+  end
+
   test '#create' do
     assert_difference 'Food.count', 1 do
       assert_difference 'LocalisedText.count', 2 do

@@ -9,5 +9,7 @@ class Order < ApplicationRecord
   has_many :order_states, through: :order_state_relations
   has_one :address, as: :addressable, dependent: :destroy
 
+  accepts_nested_attributes_for :address
+
   validates :delivery_date, presence: true
 end

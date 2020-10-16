@@ -22,6 +22,12 @@ class Admin::SubscriptionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test '#edit' do
+    get edit_admin_subscription_url(@subscription)
+
+    assert_response :success
+  end
+
   test '#update' do
     patch admin_subscription_url(@subscription), params: { subscription: { user_id: users(:customer).id,
                                                                            subscription_plan_id: subscription_plans(:four_times_every_month).id,

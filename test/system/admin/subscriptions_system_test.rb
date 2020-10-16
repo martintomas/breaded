@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class Admin::SubscriptionSystemTest < ApplicationSystemTestCase
+class Admin::SubscriptionsSystemTest < ApplicationSystemTestCase
   setup do
     login_as_admin
     @subscription = subscriptions :surprise_me_subscription

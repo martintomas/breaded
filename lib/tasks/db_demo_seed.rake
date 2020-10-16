@@ -83,7 +83,29 @@ namespace :db do
                                             payments: [{ currency: 'GBP', price: 114.99 }]}]
 
     puts 'Orders'
-    # TODO
+    Seeds::FillOrders.perform_for [{ user: 'test1@test.test', delivery_date: Time.utc(2020, 10, 17),
+                                     states: %i[on_way],
+                                     address: { address_line: 'Address Line', street: 'Street', city: 'London', postal_code: '1234560', state: 'GB' },
+                                     foods: [{ name: 'Flaky Honey Brioche', amount: 5 },
+                                             { name: 'Multigrain Seeded Bread', amount: 3 },
+                                             { name: 'Oatmeal Maple Bread', amount: 2 }]},
+                                   { user: 'test1@test.test', delivery_date: Time.utc(2020, 10, 15),
+                                     address: { address_line: 'Address Line', street: 'Street', city: 'London', postal_code: '1234560', state: 'GB' },
+                                     states: %i[on_way delivered],
+                                     foods: [{ name: 'Overnight Rye Bread', amount: 5 },
+                                             { name: 'Galician Bread', amount: 5 }]},
+                                   { user: 'test2@test.test', delivery_date: Time.utc(2020, 10, 15),
+                                     address: { address_line: 'Address Line', street: 'Street', city: 'London', postal_code: '1234560', state: 'GB' },
+                                     states: %i[on_way delivered],
+                                     foods: [{ name: 'Flaky Honey Brioche', amount: 2 },
+                                             { name: 'Galician Bread', amount: 5 },
+                                             { name: 'Oatmeal Maple Bread', amount: 2 },
+                                             { name: 'Multigrain Seeded Bread', amount: 1 }]},
+                                   { user: 'test2@test.test', delivery_date: Time.utc(2020, 10, 18),
+                                     address: { address_line: 'Address Line', street: 'Street', city: 'London', postal_code: '1234560', state: 'GB' },
+                                     states: %i[],
+                                     foods: [{ name: 'Overnight Rye Bread', amount: 3 },
+                                             { name: 'Oatmeal Maple Bread', amount: 7 }]}]
 
     puts 'DEMO DATABASE HAS BEEN SEEDED'
   end

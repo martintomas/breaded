@@ -47,6 +47,12 @@ class Admin::ProducersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#edit' do
+    get edit_admin_producer_url(@producer)
+
+    assert_response :success
+  end
+
   test '#update' do
     assert_no_difference 'LocalisedText.count' do
       patch admin_producer_url(@producer),

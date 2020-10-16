@@ -41,6 +41,12 @@ class Admin::SubscriptionPlansControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#edit' do
+    get edit_admin_subscription_plan_url(@subscription_plan)
+
+    assert_response :success
+  end
+
   test '#update' do
     patch admin_subscription_plan_url(@subscription_plan), params: { subscription_plan: { price: 10.25 } }
 

@@ -38,6 +38,12 @@ class Admin::TagTypesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#edit' do
+    get edit_admin_tag_type_url(@tag_type)
+
+    assert_response :success
+  end
+
   test '#update' do
     patch admin_tag_type_url(@tag_type), params: { tag_type: { code: 'UPDATED TAG TYPE' } }
 

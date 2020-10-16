@@ -43,6 +43,12 @@ class Admin::TagsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#edit' do
+    get edit_admin_tag_url(@tag)
+
+    assert_response :success
+  end
+
   test '#update' do
     assert_no_difference 'LocalisedText.count' do
       patch admin_tag_url(@tag),

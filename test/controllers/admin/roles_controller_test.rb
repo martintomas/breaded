@@ -38,6 +38,12 @@ class Admin::RolesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#edit' do
+    get edit_admin_role_url(@role)
+
+    assert_response :success
+  end
+
   test '#update' do
     patch admin_role_url(@role), params: { role: { name: 'UPDATED ROLE' } }
 
