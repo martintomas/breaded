@@ -44,4 +44,8 @@ class UserTest < ActiveSupport::TestCase
   test '#current_ability' do
     assert_equal Ability, @user.current_ability.class
   end
+
+  test '#to_s' do
+    assert_equal "#{@user.first_name} #{@user.last_name} (#{@user.email})", @user.to_s
+  end
 end

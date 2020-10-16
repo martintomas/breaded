@@ -4,10 +4,10 @@ require 'test_helper'
 
 class TagTest < ActiveSupport::TestCase
   setup do
-    @tag = tags(:vegetarian_tag)
     @full_content = { name: localised_texts(:vegetarian_localized_text),
                       tag_type: tag_types(:attribute),
                       code: 'code' }
+    @tag = tags(:vegetarian_tag)
   end
 
   test 'the validity - empty is not valid' do
@@ -43,5 +43,9 @@ class TagTest < ActiveSupport::TestCase
     model.save!
     model = Tag.new @full_content.except(:code)
     assert model.valid?, model.errors.full_messages
+  end
+
+  test '#to_s' do
+    assert_equal @tag.localized_name, @tag.to_s
   end
 end

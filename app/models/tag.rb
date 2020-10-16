@@ -16,4 +16,8 @@ class Tag < ApplicationRecord
   scope :attributes, -> { where(tag_type: TagType.the_attribute) }
   scope :goes_well, -> { where(tag_type: TagType.the_goes_well) }
   scope :others, -> { where(tag_type: TagType.the_other) }
+
+  def to_s
+    localized_name
+  end
 end

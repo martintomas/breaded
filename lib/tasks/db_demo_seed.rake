@@ -59,6 +59,32 @@ namespace :db do
                                            { name: 'Maple Syrup', tag_type: TagType.the_ingredient },
                                            { name: 'Honey', tag_type: TagType.the_ingredient }]}]
 
+    puts 'Producer Applications'
+    Seeds::FillProducerApplications.perform_for [{ first_name: 'Super', last_name: 'Baker', email: 'super.baker@gmail.com', phone_number: '123456789',
+                                                   tags: [{ name: 'Sourdough', tag_type: TagType.the_category },
+                                                          { name: 'Brioche', tag_type: TagType.the_category }]},
+                                                 { first_name: 'Poor', last_name: 'Cook', email: 'poor.cook@gmail.com', phone_number: '123456789',
+                                                   tags: [{ name: 'Rye', tag_type: TagType.the_category },
+                                                          { name: 'Baguette', tag_type: TagType.the_category }]}]
+
+    puts 'Demo Customers'
+    Seeds::FillUsers.perform_for [{ first_name: 'Test', last_name: 'Test', email: 'test1@test.test', roles: %w[customer], password: 'testtest' },
+                                  { first_name: 'Test2', last_name: 'Test2', email: 'test2@test.test', roles: %w[customer], password: 'testtest' }]
+
+    puts 'Subscriptions'
+    Seeds::FillSubscriptions.perform_for [{ subscription_plan: { price: 29.99, currency: 'GBP' }, user: 'test1@test.test', active: true, number_of_orders_left: 4,
+                                            payments: [{ currency: 'GBP', price: 29.99 },
+                                                       { currency: 'GBP', price: 29.99}]},
+                                          { subscription_plan: { price: 61.99, currency: 'GBP' }, user: 'test2@test.test', active: true, number_of_orders_left: 2,
+                                            payments: [{ currency: 'GBP', price: 61.99 }],
+                                            surprises: [{ tag: { name: 'Sourdough', tag_type: TagType.the_category }, amount: nil },
+                                                        { tag: { name: 'Gluten free', tag_type: TagType.the_attribute }, amount: 2 }]},
+                                          { subscription_plan: { price: 114.99, currency: 'GBP' }, user: 'test2@test.test', active: false, number_of_orders_left: 0,
+                                            payments: [{ currency: 'GBP', price: 114.99 }]}]
+
+    puts 'Orders'
+    # TODO
+
     puts 'DEMO DATABASE HAS BEEN SEEDED'
   end
 end

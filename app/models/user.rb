@@ -15,4 +15,8 @@ class User < ApplicationRecord
   def current_ability
     @current_ability ||= Ability.new self
   end
+
+  def to_s
+    "#{first_name} #{last_name} (#{email})"
+  end
 end

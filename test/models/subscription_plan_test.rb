@@ -7,6 +7,7 @@ class SubscriptionPlanTest < ActiveSupport::TestCase
     @full_content = { price: 29.99,
                       currency: currencies(:GBP),
                       number_of_deliveries: 1 }
+    @subscription_plan = subscription_plans :once_every_month
   end
 
   test 'the validity - empty is not valid' do
@@ -29,5 +30,10 @@ class SubscriptionPlanTest < ActiveSupport::TestCase
 
   test 'the validity - without number_of_deliveries is not valid' do
     invalid_with_missing SubscriptionPlan, :number_of_deliveries
+  end
+
+  test '#to_s' do
+    assert_equal "#{@subscription_plan.currency.code}: #{@subscription_plan.price}",
+                 @subscription_plan.to_s
   end
 end

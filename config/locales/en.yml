@@ -160,5 +160,13 @@ en:
       ingredients: Ingredients
       attributes: Attributes
       others: Others
+    orders:
+      label: Orders
+    subscriptions:
+      label: Subscriptions
+    subscription_surprises:
+      label: Subscription Surprises
+    payments:
+      label: Payments
     subscription_plans:
       label: Subscription Plans
