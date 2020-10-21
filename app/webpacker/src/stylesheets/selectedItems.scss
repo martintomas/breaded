@@ -103,6 +103,18 @@ body.foods.index, body.foods.surprise_me {
         }
     }
 
+    .shopping-basket-confirm {
+        display: none;
+        font-size: 15px;
+        padding: 10px;
+        margin: 0 auto;
+        width: 75%;
+
+        &.active {
+            display: block;
+        }
+    }
+
     .selectedBreadsActive {
         display: none !important;
     }

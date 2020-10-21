@@ -9,9 +9,8 @@ class Seeds::FillSubscriptions
       subscription_obj = Subscription.new subscription_plan: subscription_plan_for(subscription[:subscription_plan]),
                                           user: User.find_by!(email: subscription[:user]),
                                           active: subscription[:active],
-                                          number_of_orders_left: subscription[:number_of_orders_left],
                                           number_of_items: Rails.application.config.options[:default_number_of_breads]
-      build_surprises_for subscription_obj, subscription[:surprises]
+      build_subscription_period_for subscription_obj, subscription[:periods]
       build_payments_for subscription_obj, subscription[:payments]
       subscription_obj.save!
     end
@@ -21,19 +20,16 @@ class Seeds::FillSubscriptions
     SubscriptionPlan.joins(:currency).find_by! price: values[:price], currencies: { code: values[:currency] }
   end
 
-  def self.build_surprises_for(subscription, values)
-    return if values.blank?
-
-    values.each do |surprise|
-      tag = Tag.joins(name: :text_translations).find_by! text_translations: { text: surprise[:tag][:name] }, tag_type: surprise[:tag][:tag_type]
-      subscription.subscription_surprises.build tag: tag, amount: surprise[:amount]
+  def self.build_subscription_period_for(subscription, values)
+    values.each do |period|
+      subscription.subscription_periods.build started_at: period[:started_at], ended_at: period[:ended_at]
     end
   end
 
   def self.build_payments_for(subscription, values)
     values.each do |payment|
-      subscription.payments.build price: payment[:price],
-                                  currency: Currency.find_by!(code: payment[:currency])
+      subscription.subscription_periods.first.payments.build price: payment[:price],
+                                                             currency: Currency.find_by!(code: payment[:currency])
     end
   end
 end

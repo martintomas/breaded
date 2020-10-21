@@ -15,6 +15,7 @@ class Admin::UsersSystemTest < ApplicationSystemTestCase
       fill_in 'user[first_name]', with: 'First Name'
       fill_in 'user[last_name]', with: 'Last Name'
       fill_in 'user[email]', with: 'test@test.test'
+      fill_in 'user[phone_number]', with: '123456789'
       fill_in 'user[password]', with: 'password'
       click_on 'Create User'
     end
@@ -25,6 +26,7 @@ class Admin::UsersSystemTest < ApplicationSystemTestCase
             assert_selector 'td', text: 'First Name'
             assert_selector 'td', text: 'Last Name'
             assert_selector 'td', text: 'test@test.test'
+            assert_selector 'td', text: '123456789'
           end
         end
       end

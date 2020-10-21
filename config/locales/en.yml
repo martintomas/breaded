@@ -123,8 +123,33 @@ en:
       let_us_surprise_you_html: 'Lets Us</br>Surprise You'
       description: Get up to 10 different types of bread and carefully delivered to your doorstep
       confirm: 'Confirm List'
+    get_breaded:
+      title: Get Breaded
+      submit: Confirm & Get Breaded
+      address:
+        title: Delivery Address
+      calendar:
+        title: Pick Delivery Date & Time
+        delivery_date: Delivery Date
+        close: Close
+        submit: Submit
+      payment:
+        title: Payment
+      plans:
+        title: Select Plan
+        version_1_html: "Once Every Month </br> <i>%{num_breads} Breads x 1</i>"
+        version_2_html: "Twice Every Month </br> <i>%{num_breads} Breads x 2</i>"
+        version_4_html: "Four Times Every Month </br> <i>%{num_breads} Breads x 3</i>"
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
+  activemodel:
+    errors:
+      models:
+        subscriptions/new_subscription_former:
+          attributes:
+            base:
+              missing_items: "Shopping basket doesn't contain required number of items"
+              missing_food_item: "Item with name %{name} was not found. Please remove it from your shopping basket."
   active_admin:
     menu:
       parents:
@@ -142,7 +167,7 @@ en:
       label: Users
       name: Name
       email: Email
-      address: Address
+      addresses: Addresses
     roles:
       label: Roles
     producer_applications:
@@ -166,10 +191,10 @@ en:
       label: Order States
     order_foods:
       label: Order Foods
+    order_surprises:
+      label: Order Surprises
     subscriptions:
       label: Subscriptions
-    subscription_surprises:
-      label: Subscription Surprises
     payments:
       label: Payments
     subscription_plans:

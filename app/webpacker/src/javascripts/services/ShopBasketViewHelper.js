@@ -3,7 +3,8 @@ import { QuerySelectorBuilder } from "./QuerySelectorBuilder";
 import { ShoppingButtonUpdater } from "./ShoppingButtonUpdater";
 
 export class ShopBasketViewHelper {
-    constructor() {
+    constructor(maxItems) {
+        this.maxItems = Number(maxItems);
         this.shopBasketMutation = new ShopBasketMutation();
         this.querySelectorBuilder = new QuerySelectorBuilder('data-food-id');
         this.shoppingButtonUpdater = new ShoppingButtonUpdater(this.shopBasketMutation, this.querySelectorBuilder);
@@ -36,9 +37,18 @@ export class ShopBasketViewHelper {
 
         document.querySelector('.selectedItems .size-of-basket').innerHTML = this.shopBasketMutation.numOfItems();
         document.querySelector('#shopping-basket .number-selected-breads').innerHTML = this.shopBasketMutation.itemIds().length;
+        this.updateConfirmButton()
 
         $.each(this.shopBasketMutation.data, (i, foodValues) => this.addNewBasketItemFor(foodValues));
         $('.shopping-basket-item').not(query).remove();
+    }
+
+    updateConfirmButton() {
+        if(this.shopBasketMutation.numOfItems() === this.maxItems) {
+            $('.selectedItems button.shopping-basket-confirm').addClass('active')
+        } else {
+            $('.selectedItems button.shopping-basket-confirm').removeClass('active')
+        }
     }
 
     addNewBasketItemFor(foodValues) {

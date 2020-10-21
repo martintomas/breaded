@@ -1,0 +1,17 @@
+section.container
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='payment' data-payment-variant="#{@subscription_former.shopping_basket_variant}"
+    h2 = t 'app.get_breaded.title'
+    section
+      == render 'shared/error_messages', resource: @subscription_former
+      = form_for @subscription_former, url: subscriptions_path, method: :post, html: { class: 'breadedPlan' },
+            data: { target: 'payment.form', action: 'submit->payment#formSubmitted' } do |f|
+        = f.hidden_field :shopping_basket_variant
+        = f.hidden_field :delivery_date_from
+        = f.hidden_field :delivery_date_to
+        == render partial: 'subscriptions/new/subscription_plans', locals: { f: f }
+        == render partial: 'subscriptions/new/calendar', locals: { f: f }
+        == render partial: 'subscriptions/new/address', locals: { f: f }
+        == render partial: 'subscriptions/new/payment', locals: { f: f }
+        = submit_tag I18n.t('app.get_breaded.submit')
+  .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12
+== render partial: 'shared/gift'

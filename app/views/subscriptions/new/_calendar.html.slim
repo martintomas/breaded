@@ -1,0 +1,48 @@
+span = t 'app.get_breaded.calendar.title'
+.textFeild
+  = text_field_tag :delivery_date, f.object.delivery_date_from&.strftime('%d-%m-%Y'), required: true
+  = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
+  = link_to image_pack_tag('media/images/calender.png'), '#calender', class: 'calenderSec', data: { turbolinks: false }
+#calender.overlay
+  .popup
+    .monthSec
+      label = '1 October - 1 November '
+      = link_to I18n.t('app.get_breaded.calendar.close'), '#', class: 'close', data: { turbolinks: false }
+    .dateSec.disableArrow
+      ul
+        li
+          span = '1 Thu'
+          span = 'Oct, 2020'
+        li
+          span = '12 Mon'
+          span = 'Oct, 2020'
+        li
+          span = '16 Fri'
+          span = 'Oct, 2020'
+        li
+          span = '22 Thu'
+          span = 'Oct, 2020'
+    .timeSec
+      ul
+        li
+          span = '9:00am - 12:00pm'
+        li
+          span = '1:00pm - 4:00pm'
+        li
+          span = '4:00pm - 9:00pm'
+      ul
+        li
+          span = '1:00am - 4:00pm'
+        li
+          span = '4:00pm - 9:00pm'
+      ul
+        li
+          span = '1:00am - 4:00pm'
+        li
+          span = '4:00pm - 9:00pm'
+      ul
+        li
+          span = '1:00am - 4:00pm'
+        li
+          span = '4:00pm - 9:00pm'
+    button = t 'app.get_breaded.calendar.submit'

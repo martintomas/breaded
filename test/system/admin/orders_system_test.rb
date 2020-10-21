@@ -12,7 +12,7 @@ class Admin::OrdersSystemTest < ApplicationSystemTestCase
     visit edit_admin_order_url(@order)
 
     within "form#edit_order_#{@order.id}" do
-      select Subscription.first.to_s, from: 'order[subscription_id]'
+      select SubscriptionPeriod.first.to_s, from: 'order[subscription_period_id]'
       select User.first.to_s, from: 'order[user_id]'
       fill_in 'order[address_attributes][address_line]', with: 'Address Line'
       fill_in 'order[address_attributes][street]', with: 'Street'
@@ -26,7 +26,7 @@ class Admin::OrdersSystemTest < ApplicationSystemTestCase
         within 'div.panel:nth-of-type(1)' do
           within 'table' do
             assert_selector 'td', text: User.first.email
-            assert_selector 'td', text: Subscription.first.to_s
+            assert_selector 'td', text: SubscriptionPeriod.first.to_s
           end
         end
         within 'div.panel#address' do

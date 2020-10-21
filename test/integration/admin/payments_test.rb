@@ -37,7 +37,7 @@ class Admin::PaymentsTest < ActionDispatch::IntegrationTest
           assert_select 'table#index_table_payments' do
             Payment.all.each do |payment|
               assert_select 'tr' do
-                assert_select 'td', payment.subscription.to_s
+                assert_select 'td', payment.subscription_period.to_s
                 assert_select 'td', payment.currency.to_s
                 assert_select 'td', payment.price.to_s
               end
@@ -57,6 +57,7 @@ class Admin::PaymentsTest < ActionDispatch::IntegrationTest
       assert_select 'div#main_content' do
         assert_select 'div.panel' do
           assert_select 'table' do
+            assert_select 'td', @payment.subscription_period.to_s
             assert_select 'td', @payment.subscription.to_s
             assert_select 'td', @payment.currency.to_s
             assert_select 'td', @payment.price.to_s

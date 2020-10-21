@@ -7,7 +7,8 @@ class UserTest < ActiveSupport::TestCase
     @full_content = { first_name: 'Super',
                       last_name: 'Admin',
                       email: 'new.admin@breaded.net',
-                      password: 'password' }
+                      password: 'password',
+                      phone_number: '+420734370408' }
     @user = users :customer
   end
 
@@ -39,6 +40,11 @@ class UserTest < ActiveSupport::TestCase
 
   test 'the validity email needs to be unique' do
     already_taken_unique User, :email
+  end
+
+  test 'the validity - without phone_number is valid' do
+    model = User.new @full_content.except(:phone_number)
+    assert model.valid?, model.errors.full_messages
   end
 
   test '#current_ability' do

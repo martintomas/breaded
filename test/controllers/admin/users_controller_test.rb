@@ -33,11 +33,13 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
       post admin_users_url, params: { user: { first_name: 'First Name',
                                               last_name: 'Last Name',
                                               email: 'test@test.test',
+                                              phone_number: '123456789',
                                               password: '111111' } }
       user = User.last
       assert_equal user.first_name, 'First Name'
       assert_equal user.last_name, 'Last Name'
       assert_equal user.email, 'test@test.test'
+      assert_equal user.phone_number, '123456789'
       assert_redirected_to admin_user_url(user)
     end
   end

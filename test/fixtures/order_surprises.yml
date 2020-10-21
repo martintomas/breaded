@@ -2,7 +2,7 @@
 
 surprise_with_amount:
   amount: 2
-  subscription: surprise_me_subscription
+  order: surprise_order
 
 surprise_without_amount:
-  subscription: surprise_me_subscription
+  order: surprise_order

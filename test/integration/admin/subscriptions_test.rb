@@ -7,7 +7,7 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
 
   setup do
     sign_in users(:admin)
-    @subscription = subscriptions :surprise_me_subscription
+    @subscription = subscriptions :customer_subscription_1
   end
 
   test 'is shown at menu' do
@@ -39,7 +39,6 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
               assert_select 'tr' do
                 assert_select 'td', subscription.user.email
                 assert_select 'td', subscription.subscription_plan.to_s
-                assert_select 'td', subscription.number_of_orders_left.to_s
               end
             end
           end
@@ -59,18 +58,6 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
           assert_select 'table' do
             assert_select 'td', @subscription.user.email
             assert_select 'td', @subscription.subscription_plan.to_s
-            assert_select 'td', @subscription.number_of_orders_left.to_s
-          end
-        end
-        assert_select 'div.panel#subscription_surprises' do
-          assert_select 'table' do
-            assert_select 'tr' do
-              @subscription.subscription_surprises.each do |subscription_surprise|
-                assert_select 'td', subscription_surprise.tag.to_s
-                assert_select 'td', subscription_surprise.tag.tag_type.to_s
-                assert_select 'td', subscription_surprise.amount.to_s if subscription_surprise.amount.present?
-              end
-            end
           end
         end
       end
@@ -87,7 +74,7 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
           assert_select 'table' do
             assert_select 'tr' do
               subscription.orders.each do |order|
-                assert_select 'td', order.delivery_date&.strftime('%B %d, %Y %H:%M')
+                assert_select 'td', order.delivery_date
                 assert_select 'td', order.created_at.strftime('%B %d, %Y %H:%M')
                 assert_select 'td', I18n.t('active_admin.dashboards.see_detail')
               end
@@ -124,7 +111,6 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
           assert_select 'select[name="subscription[user_id]"]' do
             assert_select 'option[selected="selected"]', @subscription.user.to_s
           end
-          assert_select 'input[name="subscription[number_of_orders_left]"][value=?]', @subscription.number_of_orders_left.to_s
           assert_select 'input[name="subscription[number_of_items]"][value=?]', @subscription.number_of_items.to_s
           assert_select 'input[name="subscription[active]"][value=?]', (@subscription.active && 1 || 0).to_s
         end

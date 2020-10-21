@@ -9,14 +9,18 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super do
+      flash.discard
+    end
+  end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super do
+      flash.discard
+    end
+  end
 
   # protected
 
@@ -25,8 +29,8 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   def after_sign_in_path_for(resource)
-    return super unless resource.has_role? :admin
+    return admin_dashboard_path if resource.has_role? :admin
 
-    admin_dashboard_path
+    stored_location_for(:user) || super
   end
 end

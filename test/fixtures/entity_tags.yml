@@ -25,9 +25,9 @@ producer_application_rye_tag:
   tag: rye_tag
 
 surprise_me_tag_category:
-  entity: surprise_with_amount (SubscriptionSurprise)
+  entity: surprise_with_amount (OrderSurprise)
   tag: rye_tag
 
 surprise_me_tag_ingredient:
-  entity: surprise_without_amount (SubscriptionSurprise)
+  entity: surprise_without_amount (OrderSurprise)
   tag: vegetarian_tag

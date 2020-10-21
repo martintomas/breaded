@@ -8,12 +8,18 @@ class User < ApplicationRecord
 
   has_many :subscriptions, dependent: :restrict_with_exception
   has_many :orders, dependent: :restrict_with_exception
-  has_one :address, as: :addressable, dependent: :destroy
+  has_many :addresses, as: :addressable, dependent: :destroy
+
+  accepts_nested_attributes_for :addresses
 
   validates :first_name, :last_name, presence: true
 
   def current_ability
     @current_ability ||= Ability.new self
+  end
+
+  def address
+    addresses.detect(&:main?) || addresses.first
   end
 
   def to_s

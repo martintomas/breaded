@@ -1,9 +1,10 @@
 = semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
   = f.semantic_errors
   = f.inputs do
-    = f.input :subscription
+    = f.input :subscription_period
     = f.input :user
-    = f.input :delivery_date
+    = f.input :delivery_date_from
+    = f.input :delivery_date_to
     = f.fields_for(:address, resource.address || Address.new) do |address|
       = address.input :address_line
       = address.input :street

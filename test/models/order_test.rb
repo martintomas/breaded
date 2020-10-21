@@ -4,9 +4,10 @@ require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
   setup do
-    @full_content = { subscription: subscriptions(:customer_subscription_1),
+    @full_content = { subscription_period: subscription_periods(:customer_subscription_1_period),
                       user: users(:customer),
-                      delivery_date: 2.day.from_now }
+                      delivery_date_from: 2.day.from_now,
+                      delivery_date_to: 2.days.from_now + 3.hours }
   end
 
   test 'the validity - empty is not valid' do
@@ -19,15 +20,19 @@ class OrderTest < ActiveSupport::TestCase
     assert model.valid?, model.errors.full_messages
   end
 
-  test 'the validity - without subscription is not valid' do
-    invalid_with_missing Order, :subscription
+  test 'the validity - without subscription_period is not valid' do
+    invalid_with_missing Order, :subscription_period
   end
 
   test 'the validity - without user is not valid' do
     invalid_with_missing Order, :user
   end
 
-  test 'the validity - without delivery_date is not valid' do
-    invalid_with_missing Order, :delivery_date
+  test 'the validity - without delivery_date_from is not valid' do
+    invalid_with_missing Order, :delivery_date_from
+  end
+
+  test 'the validity - without delivery_date_to is not valid' do
+    invalid_with_missing Order, :delivery_date_to
   end
 end

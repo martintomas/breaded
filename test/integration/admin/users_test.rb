@@ -40,6 +40,7 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
                 assert_select 'td', user.first_name
                 assert_select 'td', user.last_name
                 assert_select 'td', user.email
+                assert_select 'td', user.phone_number
               end
             end
           end
@@ -60,6 +61,7 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
             assert_select 'td', @user.first_name
             assert_select 'td', @user.last_name
             assert_select 'td', @user.email
+            assert_select 'td', @user.phone_number
             assert_select 'td', @user.reset_password_token
             assert_select 'td', @user.reset_password_sent_at&.strftime('%B %d, %Y %H:%M')
             assert_select 'td', @user.confirmed_at&.strftime('%B %d, %Y %H:%M')
@@ -77,13 +79,17 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
             end
           end
         end
-        assert_select 'div.panel#address' do
+        assert_select 'div.panel#addresses' do
           assert_select 'table' do
-            assert_select 'td', @user.address.address_line
-            assert_select 'td', @user.address.street
-            assert_select 'td', @user.address.postal_code.to_s
-            assert_select 'td', @user.address.city
-            assert_select 'td', @user.address.state
+            assert_select 'tr' do
+              @user.addresses.each do |address|
+                assert_select 'td', address.address_line
+                assert_select 'td', address.street
+                assert_select 'td', address.postal_code.to_s
+                assert_select 'td', address.city
+                assert_select 'td', address.state
+              end
+            end
           end
         end
       end
@@ -101,6 +107,7 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
           assert_select 'input[name="user[first_name]"]'
           assert_select 'input[name="user[last_name]"]'
           assert_select 'input[name="user[email]"]'
+          assert_select 'input[name="user[phone_number]"]'
           assert_select 'input[name="user[password]"]'
           assert_select 'li#user_reset_password_sent_at_input'
           assert_select 'li#user_confirmed_at_input'
@@ -125,6 +132,7 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
           assert_select 'input[name="user[first_name]"][value=?]', @user.first_name
           assert_select 'input[name="user[last_name]"][value=?]', @user.last_name
           assert_select 'input[name="user[email]"][value=?]', @user.email
+          assert_select 'input[name="user[phone_number]"][value=?]', @user.phone_number.to_s if @user.phone_number.present?
           assert_select 'input[name="user[password]"]'
           assert_select 'select[name="user[role_ids][]"]' do
             @user.roles.each do |role|

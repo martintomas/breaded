@@ -3,27 +3,17 @@
 customer_subscription_1:
   user: customer
   subscription_plan: once_every_month
-  number_of_orders_left: 1
   number_of_items: 10
   active: true
 
 customer_subscription_2:
   user: customer_2
   subscription_plan: twice_every_month
-  number_of_orders_left: 2
   number_of_items: 10
   active: true
 
 not_active_subscription:
   user: customer
   subscription_plan: twice_every_month
-  number_of_orders_left: 0
   number_of_items: 10
   active: false
-
-surprise_me_subscription:
-  user: surprise_me_customer
-  subscription_plan: twice_every_month
-  number_of_orders_left: 2
-  number_of_items: 10
-  active: true

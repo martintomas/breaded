@@ -39,7 +39,8 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
               assert_select 'tr' do
                 assert_select 'td', order.user.email
                 assert_select 'td', order.subscription.to_s
-                assert_select 'td', order.delivery_date&.strftime('%B %d, %Y %H:%M')
+                assert_select 'td', order.delivery_date_from&.strftime('%B %d, %Y %H:%M')
+                assert_select 'td', order.delivery_date_to&.strftime('%B %d, %Y %H:%M')
               end
             end
           end
@@ -58,8 +59,21 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
         assert_select 'div.panel' do
           assert_select 'table' do
             assert_select 'td', @order.user.email
+            assert_select 'td', @order.subscription_period.to_s
             assert_select 'td', @order.subscription.to_s
-            assert_select 'td', @order.delivery_date&.strftime('%B %d, %Y %H:%M')
+            assert_select 'td', @order.delivery_date_from&.strftime('%B %d, %Y %H:%M')
+            assert_select 'td', @order.delivery_date_to&.strftime('%B %d, %Y %H:%M')
+          end
+        end
+        assert_select 'div.panel#order_surprises' do
+          assert_select 'table' do
+            assert_select 'tr' do
+              @order.order_surprises.each do |order_surprise|
+                assert_select 'td', order_surprise.tag.to_s
+                assert_select 'td', order_surprise.tag.tag_type.to_s
+                assert_select 'td', order_surprise.amount.to_s if order_surprise.amount.present?
+              end
+            end
           end
         end
         assert_select 'div.panel#address' do
@@ -94,6 +108,26 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#show - order surprises' do
+    order = orders :surprise_order
+    get admin_order_url(order)
+    assert_select 'div#active_admin_content' do
+      assert_select 'div#main_content' do
+        assert_select 'div.panel#order_surprises' do
+          assert_select 'table' do
+            assert_select 'tr' do
+              order.order_surprises.each do |order_surprise|
+                assert_select 'td', order_surprise.tag.to_s
+                assert_select 'td', order_surprise.tag.tag_type.to_s
+                assert_select 'td', order_surprise.amount.to_s if order_surprise.amount.present?
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
   test '#edit' do
     get edit_admin_order_url(@order)
     assert_select 'div.title_bar' do
@@ -102,8 +136,8 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
     assert_select 'div#active_admin_content' do
       assert_select 'div#main_content' do
         assert_select 'form' do
-          assert_select 'select[name="order[subscription_id]"]' do
-            assert_select 'option[selected="selected"]', @order.subscription.to_s
+          assert_select 'select[name="order[subscription_period_id]"]' do
+            assert_select 'option[selected="selected"]', @order.subscription_period.to_s
           end
           assert_select 'select[name="order[user_id]"]' do
             assert_select 'option[selected="selected"]', @order.user.to_s

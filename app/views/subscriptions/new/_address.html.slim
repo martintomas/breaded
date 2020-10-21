@@ -1,0 +1,14 @@
+span = t 'app.get_breaded.address.title'
+.textFeild
+  span
+    = f.text_field :address_line, required: true
+    = f.label :address_line
+  span
+    = f.text_field :street, required: true
+    = f.label :street
+  span
+    = f.text_field :city, required: true
+    = f.label :city
+  span
+    = f.text_field :postal_code, required: true
+    = f.label :postal_code

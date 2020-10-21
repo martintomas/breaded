@@ -10,7 +10,7 @@ puts 'Languages'
 Seeds::FillBaseType.perform_for Language, codes: %w[en]
 
 puts 'Order States'
-Seeds::FillBaseType.perform_for OrderState, codes: %w[on_way delivered]
+Seeds::FillBaseType.perform_for OrderState, codes: %w[new finalised_by_user finalised_automatically on_way delivered]
 
 puts 'Tag types'
 Seeds::FillBaseType.perform_for TagType, codes: %w[category goes_well attribute ingredient other]
@@ -22,6 +22,9 @@ Seeds::FillTags.perform_for ['Sourdough', 'Brioche', 'Rye', 'Baguette', 'Ciabatt
 
 puts 'Tag others'
 Seeds::FillTags.perform_for ['Featured'], tag_type: TagType.the_other
+
+puts 'Address types'
+Seeds::FillBaseType.perform_for AddressType, codes: %w[personal friends_home]
 
 puts 'Subscription Plans'
 Seeds::FillSubscriptionPlans.perform_for [{ price: 29.99, currency: 'GBP' , number_of_deliveries: 1 },

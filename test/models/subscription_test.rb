@@ -6,7 +6,6 @@ class SubscriptionTest < ActiveSupport::TestCase
   setup do
     @full_content = { user: users(:customer),
                       subscription_plan: subscription_plans(:once_every_month),
-                      number_of_orders_left: 0,
                       number_of_items: 10,
                       active: true }
     @subscription = subscriptions :customer_subscription_1
@@ -30,9 +29,6 @@ class SubscriptionTest < ActiveSupport::TestCase
     invalid_with_missing Subscription, :subscription_plan
   end
 
-  test 'the validity - without number_of_orders_left is not valid' do
-    invalid_with_missing Subscription, :number_of_orders_left
-  end
 
   test 'the validity - without number_of_items is not valid' do
     invalid_with_missing Subscription, :number_of_items

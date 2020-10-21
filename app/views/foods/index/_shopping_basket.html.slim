@@ -11,3 +11,4 @@
       i.close-basket-button.active data-action='click->shop-basket#closeBasket'
         = t 'app.browse_bread.shopping_basket.close_button'
     .shopping-basket-items.active
+  button.shopping-basket-confirm onclick="Turbolinks.visit('#{new_subscription_path(shopping_basket_variant: Subscriptions::NewSubscriptionFormer::PICK_UP_TYPE)}')" = t 'app.surprise_me.confirm'

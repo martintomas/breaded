@@ -5,11 +5,13 @@ require 'test_helper'
 class AddressTest < ActiveSupport::TestCase
   setup do
     @full_content = { addressable: users(:customer),
+                      address_type: address_types(:personal),
                       address_line: 'Address Line',
                       street: 'Street 1',
                       postal_code: '54546',
                       city: 'London',
-                      state: 'UK' }
+                      state: 'UK',
+                      main: false }
   end
 
   test 'the validity - empty is not valid' do
@@ -26,8 +28,13 @@ class AddressTest < ActiveSupport::TestCase
     invalid_with_missing Address,:addressable
   end
 
-  test 'the validity - without address_line is not valid' do
-    invalid_with_missing Address,:address_line
+  test 'the validity - without address_type is not valid' do
+    invalid_with_missing Address,:address_type
+  end
+
+  test 'the validity - without address_line is valid' do
+    model = Address.new @full_content.except(:address_line)
+    assert model.valid?, model.errors.full_messages
   end
 
   test 'the validity - without street is not valid' do
@@ -44,5 +51,11 @@ class AddressTest < ActiveSupport::TestCase
 
   test 'the validity - without state is not valid' do
     invalid_with_missing Address,:state
+  end
+
+  test 'the validity - without main is valid' do
+    model = Address.new @full_content.except(:main)
+    assert model.valid?, model.errors.full_messages
+    refute model.main
   end
 end

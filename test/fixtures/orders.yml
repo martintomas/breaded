@@ -1,21 +1,31 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 customer_order_1:
-  subscription: customer_subscription_1
+  subscription_period: customer_subscription_1_period
   user: customer
-  delivery_date: <%= 2.day.from_now %>
+  delivery_date_from: <%= 2.day.from_now %>
+  delivery_date_to: <%= 2.day.from_now + 2.hours %>
 
 customer_order_2:
-  subscription: customer_subscription_2
+  subscription_period: customer_subscription_2_period
   user: customer_2
-  delivery_date: <%= 3.days.from_now %>
+  delivery_date_from: <%= 3.days.from_now %>
+  delivery_date_to: <%= 3.days.from_now + 2.hours %>
 
 customer_order_3:
-  subscription: customer_subscription_1
+  subscription_period: customer_subscription_1_period
   user: customer
-  delivery_date: <%= 1.day.from_now %>
+  delivery_date_from: <%= 1.day.from_now %>
+  delivery_date_to: <%= 1.day.from_now + 2.hours %>
 
 customer_order_4:
-  subscription: customer_subscription_1
+  subscription_period: customer_subscription_1_period
   user: customer
-  delivery_date: <%= 1.day.ago %>
+  delivery_date_from: <%= 1.day.ago %>
+  delivery_date_to: <%= 1.day.ago + 2.hours %>
+
+surprise_order:
+  subscription_period: customer_subscription_1_period
+  user: customer
+  delivery_date_from: <%= 1.day.ago %>
+  delivery_date_to: <%= 1.day.ago + 2.hours %>

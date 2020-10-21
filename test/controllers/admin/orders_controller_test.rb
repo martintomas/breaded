@@ -31,8 +31,9 @@ class Admin::OrdersControllerTest < ActionDispatch::IntegrationTest
   test '#update' do
     frozen_time = Time.current
     patch admin_order_url(@order), params: { order: { user_id: users(:customer).id,
-                                                      subscription_id: subscriptions(:surprise_me_subscription).id,
-                                                      delivery_date: frozen_time,
+                                                      subscription_id: subscriptions(:customer_subscription_1).id,
+                                                      delivery_date_from: frozen_time,
+                                                      delivery_date_to: frozen_time,
                                                       address_attributes: { address_line: 'address line',
                                                                             street: 'street',
                                                                             city: 'city',
@@ -41,8 +42,9 @@ class Admin::OrdersControllerTest < ActionDispatch::IntegrationTest
 
     @order.reload
     assert_equal @order.user, users(:customer)
-    assert_equal @order.subscription, subscriptions(:surprise_me_subscription)
-    assert_equal @order.delivery_date.to_i, frozen_time.to_i
+    assert_equal @order.subscription, subscriptions(:customer_subscription_1)
+    assert_equal @order.delivery_date_from.to_i, frozen_time.to_i
+    assert_equal @order.delivery_date_to.to_i, frozen_time.to_i
     assert_equal @order.address.address_line, 'address line'
     assert_equal @order.address.street, 'street'
     assert_equal @order.address.city, 'city'

@@ -6,7 +6,7 @@ ActiveAdmin.register User do
   filter :first_name_or_last_name_cont, as: :string, label: I18n.t('active_admin.users.name')
   filter :email_contains, as: :string, label: I18n.t('active_admin.users.email')
 
-  permit_params :first_name, :last_name, :email, :password, role_ids: []
+  permit_params :first_name, :last_name, :email, :phone_number, :password, role_ids: []
 
   index do
     selectable_column
@@ -14,6 +14,7 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :email
+    column :phone_number
     column :created_at
     column :updated_at
     actions
@@ -26,8 +27,8 @@ ActiveAdmin.register User do
         column :name
       end
     end
-    panel I18n.t('active_admin.users.address'), id: 'address' do
-      table_for resource.address do
+    panel I18n.t('active_admin.users.addresses'), id: 'addresses' do
+      table_for resource.addresses do
         column :address_line
         column :street
         column :postal_code

@@ -16,5 +16,6 @@ Rails.application.routes.draw do
       get :surprise_me
     end
   end
+  resources :subscriptions, only: %i[new create]
   resources :producer_applications, only: %i[new create]
 end

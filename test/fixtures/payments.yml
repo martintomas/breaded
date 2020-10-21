@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 payment_1:
-  subscription: customer_subscription_1
+  subscription_period: customer_subscription_1_period
   currency: GBP
   price: 29.99
 
 payment_2:
-  subscription: customer_subscription_2
+  subscription_period: customer_subscription_2_period
   currency: GBP
   price: 61.99

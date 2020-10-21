@@ -10,7 +10,7 @@ ActiveAdmin.register Subscription do
 
   actions :index, :show, :edit, :update
 
-  permit_params :user_id, :subscription_plan_id, :active, :number_of_orders_left, :number_of_items
+  permit_params :user_id, :subscription_plan_id, :active, :number_of_items
 
   index do
     selectable_column
@@ -18,19 +18,11 @@ ActiveAdmin.register Subscription do
     column :user
     column :subscription_plan
     column :active
-    column :number_of_orders_left
     actions
   end
 
   show do
     default_main_content
-    panel I18n.t('active_admin.subscription_surprises.label'), id: 'subscription_surprises' do
-      table_for resource.subscription_surprises.includes(tag: [:tag_type, name: { text_translations: :language }]) do
-        column :tag
-        column :tag_type, -> (record_data) { record_data.tag.tag_type }
-        column :amount
-      end
-    end
     panel I18n.t('active_admin.orders.label'), id: 'orders' do
       table_for resource.orders do
         column :delivery_date

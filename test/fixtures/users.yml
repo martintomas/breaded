@@ -15,17 +15,11 @@ customer:
   roles: customer
   encrypted_password: <%= Devise::Encryptor.digest(User, 'customer') %>
   confirmed_at: <%= Time.current %>
+  phone_number: +420734370408
 
 customer_2:
   first_name: Martin
   last_name: Tomas
   email: martin.tomas@breaded.net
-  roles: customer
-  confirmed_at: <%= Time.current %>
-
-surprise_me_customer:
-  first_name: Surprise
-  last_name: Me
-  email: surprise.me@breaded.net
   roles: customer
   confirmed_at: <%= Time.current %>

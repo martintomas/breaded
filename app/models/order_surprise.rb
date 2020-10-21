@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class SubscriptionSurprise < ApplicationRecord
-  belongs_to :subscription
+class OrderSurprise < ApplicationRecord
+  belongs_to :order
 
   has_one :entity_tag, as: :entity, dependent: :destroy
   has_one :tag, through: :entity_tag
