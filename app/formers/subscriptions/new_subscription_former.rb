@@ -4,13 +4,10 @@ module Subscriptions
   class NewSubscriptionFormer
     include ActiveModel::Model
 
-    PICK_UP_TYPE = 'pick-up'.freeze
-    SURPRISE_ME_TYPE = 'surprise-me'.freeze
+    attr_accessor :subscription, :subscription_plan_id, :stripe_token, :delivery_date_from, :delivery_date_to, :address_line, :street,
+                  :city, :postal_code, :shopping_basket_variant, :user, :basket_items
 
-    attr_accessor :subscription_plan_id, :stripe_token, :delivery_date_from, :delivery_date_to, :address_line, :street,
-                  :city, :postal_code, :shopping_basket_variant, :user, :basket_items, :basket_items_parsed
-
-    validates :subscription_plan_id, :stripe_token, :delivery_date_from, :delivery_date_to, :address_line, :street, :city,
+    validates :subscription_plan_id, :stripe_token, :delivery_date_from, :delivery_date_to, :street, :city,
               :postal_code, :shopping_basket_variant, :basket_items, :user, presence: true
 
     def initialize(attributes = {})
@@ -24,24 +21,33 @@ module Subscriptions
       return false unless valid?
 
       ActiveRecord::Base.transaction do
-        user.address.save!
-        subscription = save_subscription!
-        charge_user_for! subscription
-        save_order_for! subscription
-        errors.blank?
+        process_subscription
+        raise ActiveRecord::Rollback if errors.present?
       end
-    rescue ActiveRecord::RecordNotFound, ActiveModel::ValidationError => e
-      errors.add :base, e.message
-      false
+      errors.blank?
     end
 
     def valid?
-      super && valid_address? && valid_basket?
+      super && valid_address? && valid_subscription? && valid_basket?
 
       errors.blank?
     end
 
     private
+
+    def process_subscription
+      subscription.save!
+      user.address.save!
+      run_subscriber!
+    end
+
+    def run_subscriber!
+      subscriber = Subscriptions::Subscribe.new(subscription, delivery_date: delivery_date_from, token: token)
+      subscriber.perform do |orders|
+        Orders::UpdateFromBasket.new(orders.sort_by(&:delivery_date_from).first, basket_items).perform_for shopping_basket_variant
+      end
+      subscriber.errors.each { |e| errors << e }
+    end
 
     def valid_address?
       address_params = { address_line: address_line, street: street, city: city, postal_code: postal_code, state: 'UK' }
@@ -50,53 +56,16 @@ module Subscriptions
     end
 
     def valid_basket?
-      self.basket_items_parsed = JSON.parse(basket_items).map(&:deep_symbolize_keys)
-      validate_pick_up_items! if shopping_basket_variant == PICK_UP_TYPE
+      self.basket_items = JSON.parse(basket_items).map(&:deep_symbolize_keys)
+      BasketItemValidator.new(self, basket_items).run_validations_for shopping_basket_variant
     end
 
-    def validate_pick_up_items!
-      num_of_items = basket_items_parsed.sum { |item| item[:amount].to_i }
-      return errors.add(:base, :missing_items) unless num_of_items == Rails.application.config.options[:default_number_of_breads]
-
-      available_foods = Food.enabled.pluck(:id)
-      basket_items_parsed.map do |item|
-        errors.add(:base, :missing_food_item, name: item[:name]) unless item[:id].in? available_foods
-      end
-    end
-
-    def save_subscription!
-      subscription_plan = SubscriptionPlan.find subscription_plan_id
-      subscription = Subscription.new subscription_plan: subscription_plan,
+    def valid_subscription?
+      subscription = Subscription.new subscription_plan: SubscriptionPlan.find_by_id(subscription_plan_id),
                                       user: user,
                                       active: true,
                                       number_of_items: Rails.application.config.options[:default_number_of_breads]
-      add_surprise_me_tags_to(subscription) if shopping_basket_variant == SURPRISE_ME_TYPE
-      subscription.tap { |s| s.save! }
-    end
-
-    def add_surprise_me_tags_to(subscription)
-      basket_items_parsed.map do |item|
-        subscription.subscription_surprises.build amount: item[:amount], tag_id: item[:id]
-      end
-    end
-    
-    def save_order_for!(subscription)
-      return unless errors.blank?
-      return Orders::PredictJob.perform_later subscription, delivery_date_from, delivery_date_to if shopping_basket_variant == SURPRISE_ME_TYPE
-
-      order = Order.new subscription: subscription, user: user, delivery_date_from: delivery_date_from,
-                        delivery_date_to: delivery_date_to
-      basket_items_parsed.each { |item| order.order_foods.build food_id: item[:id], automatic: false, amount: item[:amount] }
-      order.build_address user.address.attributes.slice('address_line', 'street', 'city', 'postal_code', 'state')
-      order.save!
-    end
-
-    def charge_user_for!(subscription)
-      return unless errors.blank?
-
-      charger = PaymentMethods::Charger.new user, subscription.subscription_plan, stripe_token
-      charger.charge!
-      errors.add(:base, charger.error) if charger.error.present?
+      subscription.valid? || promote_errors(subscription.errors)
     end
 
     def promote_errors(child_errors)

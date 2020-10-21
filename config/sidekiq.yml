@@ -11,3 +11,8 @@ production:
   - active_storage_analysis
   - active_storage_purge
   - [mailers, 5]
+:schedule:
+  Subscriptions::SubscribeJob:
+    cron: '0 1 * * *' # 01:00 every day
+  Orders::FinalizeJob:
+    cron: '0 2 * * *' # 02:00 every day

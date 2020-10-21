@@ -14,5 +14,6 @@ data:
   STORAGE_ENDPOINT: "https://ams3.digitaloceanspaces.com"
   STORAGE_BUCKET: "assets-breaded"
   STRIPE_PUBLISHABLE_KEY: "pk_test_51HeFW8I4g05dLynGZJRfdRRsDN27EsdFzXdp2mKrQ58QqhgVBIPENjzPUFvbQs1PAph7ZkVKSnSKyIAhpmnQFMI6007G0NWpTK"
+  TWILIO_ACCOUNT_SID: "TWILIO_ACCOUNT_SID"
   HOST_URL: "https://breaded.cz"
   CDN_HOST: "assets.breaded.cz"

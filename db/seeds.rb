@@ -10,7 +10,7 @@ puts 'Languages'
 Seeds::FillBaseType.perform_for Language, codes: %w[en]
 
 puts 'Order States'
-Seeds::FillBaseType.perform_for OrderState, codes: %w[new finalised_by_user finalised_automatically on_way delivered]
+Seeds::FillBaseType.perform_for OrderState, codes: %w[new finalised on_way delivered]
 
 puts 'Tag types'
 Seeds::FillBaseType.perform_for TagType, codes: %w[category goes_well attribute ingredient other]

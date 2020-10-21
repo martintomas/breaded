@@ -31,19 +31,22 @@ gem 'active_storage_validations'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'cancancan'
 gem 'devise'
 gem 'inline_svg'
-gem 'cancancan'
+
+gem 'pagy'
+
 gem 'rolify'
 
+gem 'sentry-raven'
 gem 'sidekiq'
 gem 'sidekiq_alive'
 gem 'sidekiq-scheduler'
-
 gem 'slim-rails'
-gem 'sentry-raven'
-gem 'pagy'
 gem 'stripe'
+
+gem 'twilio-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

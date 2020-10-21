@@ -142,6 +142,8 @@ en:
         version_4_html: "Four Times Every Month </br> <i>%{num_breads} Breads x 3</i>"
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
+    stripe:
+      card_errors_message: 'Card returned following error message: %{message}'
   activemodel:
     errors:
       models:

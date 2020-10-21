@@ -9,8 +9,5 @@ delivered:
 new:
   code: $LABEL
 
-finalised_by_user:
-  code: $LABEL
-
-finalised_automatically:
+finalised:
   code: $LABEL

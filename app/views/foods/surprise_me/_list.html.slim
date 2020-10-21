@@ -4,4 +4,4 @@
     span = t 'app.surprise_me.ingredients_preferences'
   .favourite_bread_types
     span = t 'app.surprise_me.favourite_bread_types'
-  button onclick="Turbolinks.visit('#{new_subscription_path(shopping_basket_variant: Subscriptions::NewSubscriptionFormer::SURPRISE_ME_TYPE)}')" = t 'app.surprise_me.confirm'
+  button onclick="Turbolinks.visit('#{new_subscription_path(shopping_basket_variant: Orders::UpdateFromBasket::SURPRISE_ME_TYPE)}')" = t 'app.surprise_me.confirm'
