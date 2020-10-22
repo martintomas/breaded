@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
   include Pagy::Backend
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, except: :subscription_webhook
 
   before_action :set_locale
 

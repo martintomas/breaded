@@ -4,6 +4,7 @@ class SubscriptionPeriod < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :payments, dependent: :restrict_with_exception
 
+  validates :paid, inclusion: { in: [true, false] }
   validates :started_at, :ended_at, presence: true
 
   def to_s

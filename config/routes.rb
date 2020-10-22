@@ -16,6 +16,20 @@ Rails.application.routes.draw do
       get :surprise_me
     end
   end
-  resources :subscriptions, only: %i[new create]
+
+  resources :subscriptions, only: %i[new create] do
+    member do
+      get :checkout
+    end
+  end
+
+  resources :stripe, only: %i[] do
+    collection do
+      post :checkout_session
+      post :subscription_webhook
+    end
+  end
+
   resources :producer_applications, only: %i[new create]
+  resources :users, only: %i[show]
 end

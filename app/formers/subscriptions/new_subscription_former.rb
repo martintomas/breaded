@@ -4,10 +4,10 @@ module Subscriptions
   class NewSubscriptionFormer
     include ActiveModel::Model
 
-    attr_accessor :subscription, :subscription_plan_id, :stripe_token, :delivery_date_from, :delivery_date_to, :address_line, :street,
+    attr_accessor :subscription, :subscription_plan_id, :delivery_date_from, :delivery_date_to, :address_line, :street,
                   :city, :postal_code, :shopping_basket_variant, :user, :basket_items
 
-    validates :subscription_plan_id, :stripe_token, :delivery_date_from, :delivery_date_to, :street, :city,
+    validates :subscription_plan_id, :delivery_date_from, :delivery_date_to, :street, :city,
               :postal_code, :shopping_basket_variant, :basket_items, :user, presence: true
 
     def initialize(attributes = {})
@@ -42,10 +42,9 @@ module Subscriptions
     end
 
     def run_subscriber!
-      subscriber = Subscriptions::Subscribe.new(subscription, delivery_date: delivery_date_from, token: token)
-      subscriber.perform do |orders|
-        Orders::UpdateFromBasket.new(orders.sort_by(&:delivery_date_from).first, basket_items).perform_for shopping_basket_variant
-      end
+      subscriber = Subscriptions::Subscribe.new subscription, delivery_date: delivery_date_from
+      orders = subscriber.perform
+      Orders::UpdateFromBasket.new(orders.sort_by(&:delivery_date_from).first, basket_items).perform_for shopping_basket_variant
       subscriber.errors.each { |e| errors << e }
     end
 

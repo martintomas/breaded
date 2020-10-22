@@ -138,11 +138,17 @@ en:
       plans:
         title: Select Plan
         version_1_html: "Once Every Month </br> <i>%{num_breads} Breads x 1</i>"
+        version_1: "Once Every Month %{num_breads} Breads"
         version_2_html: "Twice Every Month </br> <i>%{num_breads} Breads x 2</i>"
+        version_2: "Twice Every Month %{num_breads} Breads"
         version_4_html: "Four Times Every Month </br> <i>%{num_breads} Breads x 3</i>"
+        version_4: "Four Times Every Month %{num_breads} Breads"
+    checkout:
+      title: Redirecting to payment gate
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
     stripe:
+      subscription_already_paid: 'Subscription is already paid!'
       card_errors_message: 'Card returned following error message: %{message}'
   activemodel:
     errors:

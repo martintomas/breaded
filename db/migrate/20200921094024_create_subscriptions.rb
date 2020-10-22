@@ -5,6 +5,7 @@ class CreateSubscriptions < ActiveRecord::Migration[6.0]
       t.references :user, null: false, foreign_key: true
       t.integer :number_of_items
       t.boolean :active, default: true
+      t.string :stripe_subscription
 
       t.timestamps
     end

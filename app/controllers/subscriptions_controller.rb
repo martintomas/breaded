@@ -12,13 +12,14 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription_former = Subscriptions::NewSubscriptionFormer.new subscription_former_params.merge(user: current_user)
                                                                       .merge(subscription_params)
-
     if @subscription_former.save
-      redirect_to foods_path
+      redirect_to checkout_subscription_path(@subscription_former.subscription)
     else
       render :new
     end
   end
+
+  def checkout; end
 
   private
 
@@ -29,7 +30,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscription_params
-    params.permit(:stripe_token, :basket_items)
+    params.permit(:basket_items)
   end
 
   def store_user_location!

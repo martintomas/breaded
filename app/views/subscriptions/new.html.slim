@@ -11,7 +11,6 @@ section.container
         == render partial: 'subscriptions/new/subscription_plans', locals: { f: f }
         == render partial: 'subscriptions/new/calendar', locals: { f: f }
         == render partial: 'subscriptions/new/address', locals: { f: f }
-        == render partial: 'subscriptions/new/payment', locals: { f: f }
         = submit_tag I18n.t('app.get_breaded.submit')
   .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12
 == render partial: 'shared/gift'

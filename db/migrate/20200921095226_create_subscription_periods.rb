@@ -4,6 +4,7 @@ class CreateSubscriptionPeriods < ActiveRecord::Migration[6.0]
       t.references :subscription, null: false, foreign_key: true
       t.datetime :started_at
       t.datetime :ended_at
+      t.boolean :paid, default: false
 
       t.timestamps
     end

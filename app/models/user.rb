@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
+  after_create :create_stripe_customer
+
   def current_ability
     @current_ability ||= Ability.new self
   end
@@ -24,5 +26,11 @@ class User < ApplicationRecord
 
   def to_s
     "#{first_name} #{last_name} (#{email})"
+  end
+
+  private
+
+  def create_stripe_customer
+    Stripe::CreateCustomerJob.perform_later self
   end
 end
