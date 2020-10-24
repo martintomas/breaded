@@ -2,10 +2,15 @@
 
 availability_monday:
   day_in_week: 1
-  time_from: 2020-10-21 10:00:00
-  time_to: 2020-10-21 14:00:00
+  time_from: <%= Time.find_zone("UTC").parse("10:00") %>
+  time_to: <%= Time.find_zone("UTC").parse("14:00") %>
 
-availability_tuesday:
+availability_tuesday_1:
   day_in_week: 2
-  time_from: 2020-10-21 10:00:00
-  time_to: 2020-10-21 14:00:00
+  time_from: <%= Time.find_zone("UTC").parse("8:00") %>
+  time_to: <%= Time.find_zone("UTC").parse("10:00") %>
+
+availability_tuesday_2:
+  day_in_week: 2
+  time_from: <%= Time.find_zone("UTC").parse("10:00") %>
+  time_to: <%= Time.find_zone("UTC").parse("14:00") %>

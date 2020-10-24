@@ -156,7 +156,8 @@ en:
         subscriptions/new_subscription_former:
           attributes:
             base:
-              missing_items: "Shopping basket doesn't contain required number of items"
+              missing_items: "Shopping basket doesn't contain required number of items."
+              too_many_items: "Your shopping basket contains too many items. Please remove some of them before you will proceed."
               missing_food_item: "Item with name %{name} was not found. Please remove it from your shopping basket."
   active_admin:
     menu:

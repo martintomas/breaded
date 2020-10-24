@@ -43,14 +43,15 @@ module Subscriptions
 
     def run_subscriber!
       subscriber = Subscriptions::Subscribe.new subscription, delivery_date: delivery_date_from
-      orders = subscriber.perform
-      Orders::UpdateFromBasket.new(orders.sort_by(&:delivery_date_from).first, basket_items).perform_for shopping_basket_variant
+      order = subscriber.perform.sort_by(&:delivery_date_from).first
+      Orders::UpdateFromBasket.new(order, basket_items).perform_for shopping_basket_variant
+      order.address.create! user.address.attributes.slice('address_line', 'street', 'postal_code', 'city', 'state', 'address_type_id')
       subscriber.errors.each { |e| errors << e }
     end
 
     def valid_address?
       address_params = { address_line: address_line, street: street, city: city, postal_code: postal_code, state: 'UK' }
-      user.address.present? ? user.address.assign_attributes(address_params) : user.build_address(address_params)
+      user.address.present? ? user.address.assign_attributes(address_params) : user.addresses.new(address_params)
       user.address.valid? || promote_errors(user.address.errors)
     end
 

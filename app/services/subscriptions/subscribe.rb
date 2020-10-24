@@ -19,14 +19,15 @@ class Subscriptions::Subscribe
   def create_subscription_period!
     return if errors.present?
 
-    self.subscription_period = subscription.subscription_periods.create! started_at: delivery_date_subscription,
-                                                                         ended_at: delivery_date_subscription + 1.month
+    self.subscription_period = SubscriptionPeriod.create! subscription: subscription,
+                                                          started_at: delivery_date_subscription,
+                                                          ended_at: delivery_date_subscription + 1.month
   end
 
   def create_orders_for(subscription_period)
     return if errors.present?
 
-    delivery_date_from, delivery_date_to = Availabilities::FirstSuitable.new(delivery_date_order).find
+    delivery_date_from, delivery_date_to = Availabilities::FirstSuitable.new(time: delivery_date_order).find
     number_of_deliveries = subscription.subscription_plan.number_of_deliveries
 
     number_of_deliveries.times.map do |i|
@@ -40,7 +41,6 @@ class Subscriptions::Subscribe
                                              delivery_date_from: delivery_date_from + week_modification.weeks,
                                              delivery_date_to: delivery_date_to + week_modification.weeks
     order.order_state_relations.build order_state: OrderState.the_new
-    order.build_address order.user.address.attributes.slice('address_line', 'street', 'postal_code', 'city', 'state', 'address_type_id')
     order.tap { |o| o.save! }
   end
 
@@ -56,7 +56,7 @@ class Subscriptions::Subscribe
     last_order_date = subscription.orders.order(:delivery_date_from).last&.delivery_date_from
     return subscription_delivery_date if last_order_date.blank?
 
-    4.times { return last_order_date if (last_order_date += 1.week) >= subscription_delivery_date  }
-    subscription_delivery_date
+    week_diff = last_order_date.to_date.step(subscription_delivery_date.to_date, 7).count
+    last_order_date + week_diff.weeks
   end
 end

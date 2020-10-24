@@ -109,7 +109,7 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
   end
 
   test '#show - order surprises' do
-    order = orders :surprise_order
+    order = orders :customer_surprise_order
     get admin_order_url(order)
     assert_select 'div#active_admin_content' do
       assert_select 'div#main_content' do

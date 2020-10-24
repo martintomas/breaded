@@ -8,24 +8,31 @@ module Stripe
 
     def perform(subscription_plan)
       @subscription_plan = subscription_plan
-      subscription_plan.update! stripe_product: product.id, stripe_price: price.id, skip_stripe_sync: true
-      # TODO: update also existing subscriptions
+
+      upsert_product!
+      upsert_price!
+
+      subscription_plan.skip_stripe_sync = true
+      subscription_plan.save!
     end
 
     private
 
-    def product
+    def upsert_product!
+      return if subscription_plan.stripe_product.present?
+
       name = I18n.t("app.get_breaded.plans.version_#{subscription_plan.number_of_deliveries}",
                     num_breads: Rails.application.config.options[:default_number_of_breads])
-
-      @product ||= Stripe::Product.create name: name, description: name
+      product = Stripe::Product.create name: name, description: name
+      subscription_plan.stripe_product = product.id
     end
 
-    def price
-      @price ||= begin
-        Stripe::Price.create product: product.id, unit_amount: (subscription_plan.price * 100).to_i,
-                             currency: subscription_plan.currency.code.downcase, recurring: { interval: 'month' }
-      end
+    def upsert_price!
+      params = { unit_amount: (subscription_plan.price * 100).to_i, currency: subscription_plan.currency.code.downcase }
+      return Stripe::Price.update subscription_plan.stripe_price, params if subscription_plan.stripe_price.present?
+
+      price = Stripe::Price.create({ product: subscription_plan.stripe_product, recurring: { interval: 'month' } }.merge(params))
+      subscription_plan.stripe_price = price.id
     end
   end
 end

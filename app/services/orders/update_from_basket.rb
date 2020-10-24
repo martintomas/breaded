@@ -27,7 +27,16 @@ class Orders::UpdateFromBasket
 
   def add_surprise_me_items!
     basket_items.each do |item|
-      order.order_surprises.create! tag_id: item[:id], amount: item[:amount]
+      next if tags[item[:id]].blank?
+
+      order.order_surprises.create! tag: tags[item[:id]], amount: item[:amount]
+    end
+  end
+
+  def tags
+    @tags ||= begin
+      records = Tag.where(id: basket_items.map { |i| i[:id] })
+      records.each_with_object({}) { |record, result| result[record.id] = record }
     end
   end
 end

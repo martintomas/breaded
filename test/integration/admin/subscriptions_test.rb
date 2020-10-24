@@ -74,7 +74,7 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
           assert_select 'table' do
             assert_select 'tr' do
               subscription.orders.each do |order|
-                assert_select 'td', order.delivery_date
+                assert_select 'td', order.delivery_date.strip
                 assert_select 'td', order.created_at.strftime('%B %d, %Y %H:%M')
                 assert_select 'td', I18n.t('active_admin.dashboards.see_detail')
               end

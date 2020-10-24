@@ -4,10 +4,11 @@ require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
   setup do
-    @full_content = { subscription_period: subscription_periods(:customer_subscription_1_period),
+    @full_content = { subscription_period: subscription_periods(:customer_1_subscription_1_period),
                       user: users(:customer),
                       delivery_date_from: 2.day.from_now,
                       delivery_date_to: 2.days.from_now + 3.hours }
+    @order = orders :customer_order_1
   end
 
   test 'the validity - empty is not valid' do
@@ -34,5 +35,10 @@ class OrderTest < ActiveSupport::TestCase
 
   test 'the validity - without delivery_date_to is not valid' do
     invalid_with_missing Order, :delivery_date_to
+  end
+
+  test '#delivery_date' do
+    assert_equal "#{@order.delivery_date_from.strftime('%e.%B %Y')} #{@order.delivery_date_from.strftime('%I%p')}-#{@order.delivery_date_to.strftime('%I%p')}",
+                 @order.delivery_date
   end
 end

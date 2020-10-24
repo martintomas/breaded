@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :confirmable, :registerable, :validatable
   rolify
 
+  attr_accessor :skip_stripe_sync
+
   has_many :subscriptions, dependent: :restrict_with_exception
   has_many :orders, dependent: :restrict_with_exception
   has_many :addresses, as: :addressable, dependent: :destroy
@@ -14,7 +16,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
-  after_create :create_stripe_customer
+  after_save :stripe_sync, unless: :skip_stripe_sync
 
   def current_ability
     @current_ability ||= Ability.new self
@@ -30,7 +32,7 @@ class User < ApplicationRecord
 
   private
 
-  def create_stripe_customer
-    Stripe::CreateCustomerJob.perform_later self
+  def stripe_sync
+    Stripe::UpdateCustomerJob.perform_later self
   end
 end

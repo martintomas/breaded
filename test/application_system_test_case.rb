@@ -21,12 +21,20 @@ Capybara.register_driver :selenium_chrome_in_container do |app|
 end
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :headless_selenium_chrome_in_container
+  if ENV['SELENIUM_URL']
+    driven_by :headless_selenium_chrome_in_container
 
-  setup do
-    Capybara.server_host = '0.0.0.0'
-    Capybara.app_host = "http://#{Socket.ip_address_list.detect(&:ipv4_private?).ip_address}:#{Capybara.server_port}"
-    Capybara.ignore_hidden_elements = false
+    setup do
+      Capybara.server_host = '0.0.0.0'
+      Capybara.app_host = "http://#{Socket.ip_address_list.detect(&:ipv4_private?).ip_address}:#{Capybara.server_port}"
+      Capybara.ignore_hidden_elements = false
+    end
+  else
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 768]
+
+    setup do
+      Capybara.ignore_hidden_elements = false
+    end
   end
 
   def login_as_admin

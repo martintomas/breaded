@@ -51,6 +51,15 @@ class UserTest < ActiveSupport::TestCase
     assert_equal Ability, @user.current_ability.class
   end
 
+  test '#address - return main address always' do
+    assert_equal addresses(:customer_address), @user.address
+  end
+
+  test '#address - return first available address when main address is missing' do
+    addresses(:customer_address).delete
+    assert_equal addresses(:customer_address_1), @user.address
+  end
+
   test '#to_s' do
     assert_equal "#{@user.first_name} #{@user.last_name} (#{@user.email})", @user.to_s
   end

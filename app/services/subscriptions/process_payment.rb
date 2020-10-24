@@ -22,13 +22,13 @@ class Subscriptions::ProcessPayment
 
   def run_checkout_completed_actions
     checkout_session = stripe_event['data']['object']
-    subscription = Subscription.find checkout_session['metadata']['subscription_id']
+    subscription = Subscription.find checkout_session.metadata['subscription_id']
     subscription.update! stripe_subscription: checkout_session.subscription
     mark_paid! subscription
   end
 
   def run_invoice_paid_actions
-    invoice = stripe_event.invoice
+    invoice = stripe_event.object
     return if invoice.billing_reason == 'subscription_create'
 
     subscription = Subscription.find_by! stripe_subscription: invoice.subscription
@@ -36,17 +36,22 @@ class Subscriptions::ProcessPayment
   end
 
   def mark_paid!(subscription)
-    subscription_period = subscription.subscription_periods.where(paid: false).where('ended_at >= ?', Time.current).order(:ended_at).first
-    subscription_period ||= prepare_new_subscription_period_for! subscription
+    subscription_period = subscription_period_for subscription
     subscription_period.update! paid: true
     subscription_period.payments.create! price: subscription.subscription_plan.price, currency: subscription.subscription_plan.currency
+    SubscriptionPeriods::Move.new(subscription_period, to: Time.current).perform
   end
 
   def inform_user_about_fail
-    return unless stripe_event['data']['object']['attempt_count'] > 1
+    return unless stripe_event.object.attempt_count > 1
 
-    # subscription = Subscription.find_by! stripe_subscription: stripe_event.invoice.subscription
+    # subscription = Subscription.find_by! stripe_subscription: stripe_event.object.subscription
     # TODO: inform user
+  end
+
+  def subscription_period_for(subscription)
+    subscription.subscription_periods.where(paid: false).where('ended_at >= ?', Time.current).order(:ended_at).first ||
+      prepare_new_subscription_period_for!(subscription)
   end
 
   def prepare_new_subscription_period_for!(subscription)

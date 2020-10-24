@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BasketItemValidator
+class BasketItemsValidator
   attr_accessor :resource, :basket_items
 
   def initialize(resource, basket_items)
@@ -15,13 +15,14 @@ class BasketItemValidator
   private
 
   def validate_pick_up_items!
-    minimum_required_number
+    check_amount_of_items
     all_food_is_available
   end
 
-  def minimum_required_number
+  def check_amount_of_items
     num_of_items = basket_items.sum { |item| item[:amount].to_i }
-    resource.errors.add(:base, :missing_items) unless num_of_items == Rails.application.config.options[:default_number_of_breads]
+    resource.errors.add(:base, :missing_items) if num_of_items < Rails.application.config.options[:default_number_of_breads]
+    resource.errors.add(:base, :too_many_items) if num_of_items > Rails.application.config.options[:default_number_of_breads]
   end
 
   def all_food_is_available

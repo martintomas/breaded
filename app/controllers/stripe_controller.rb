@@ -4,8 +4,10 @@ class StripeController < ApplicationController
   before_action :authenticate_user!, except: :subscription_webhook
 
   def checkout_session
-    checkout = Subscriptions::Checkout.new Subscription.find(params[:subscription_id])
-    checkout.perform
+    subscription = Subscription.find params[:subscription_id]
+    return head :forbidden unless subscription.user == current_user
+
+    checkout = Subscriptions::Checkout.new(subscription).perform
     render json: { errors: checkout.errors, response: { id: checkout.session_id }}.to_json
   end
 

@@ -32,9 +32,9 @@ class SubscriptionPeriodTest < ActiveSupport::TestCase
     invalid_with_missing SubscriptionPeriod, :ended_at
   end
 
-  test 'the validity - without enabled is valid' do
-    model = Food.new @full_content.except(:enabled)
+  test 'the validity - without paid is valid' do
+    model = SubscriptionPeriod.new @full_content.except(:paid)
     assert model.valid?, model.errors.full_messages
-    assert model.enabled
+    refute model.paid
   end
 end

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class OrderStateRelationTest < ActiveSupport::TestCase
   setup do
-    @full_content = { order: orders(:customer_order_4),
+    @full_content = { order: orders(:customer_order_2),
                       order_state: order_states(:on_way) }
   end
 
@@ -24,7 +24,7 @@ class OrderStateRelationTest < ActiveSupport::TestCase
     invalid_with_missing OrderStateRelation, :order_state
   end
 
-  test 'the validity - combination of language and localised_text has to be unique' do
+  test 'the validity - combination of state and order has to be unique' do
     OrderStateRelation.create! @full_content
     refute OrderStateRelation.new(@full_content).valid?
   end

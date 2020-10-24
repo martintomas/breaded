@@ -4,7 +4,7 @@ require 'test_helper'
 
 class PaymentTest < ActiveSupport::TestCase
   setup do
-    @full_content = { subscription_period: subscription_periods(:customer_subscription_1_period),
+    @full_content = { subscription_period: subscription_periods(:customer_1_subscription_1_period),
                       currency: currencies(:GBP),
                       price: 29.99 }
   end

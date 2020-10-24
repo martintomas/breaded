@@ -13,12 +13,15 @@ class Subscriptions::Checkout
   def perform
     errors << I18n.t('app.stripe.subscription_already_paid') if subscription.stripe_subscription.present?
 
-    self.session_id = generate_session.id
+    self.session_id = generate_session&.id
+    self
   end
 
   private
 
   def generate_session
+    return if errors.present?
+
     Stripe::Checkout::Session.create payment_method_types: ['card'],
                                      line_items: [{ price: subscription.subscription_plan.stripe_price, quantity: 1 }],
                                      mode: 'subscription',

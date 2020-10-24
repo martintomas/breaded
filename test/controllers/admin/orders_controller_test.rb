@@ -31,10 +31,11 @@ class Admin::OrdersControllerTest < ActionDispatch::IntegrationTest
   test '#update' do
     frozen_time = Time.current
     patch admin_order_url(@order), params: { order: { user_id: users(:customer).id,
-                                                      subscription_id: subscriptions(:customer_subscription_1).id,
+                                                      subscription_period_id: subscription_periods(:customer_1_subscription_1_period).id,
                                                       delivery_date_from: frozen_time,
                                                       delivery_date_to: frozen_time,
-                                                      address_attributes: { address_line: 'address line',
+                                                      address_attributes: { address_type_id: address_types(:personal).id,
+                                                                            address_line: 'address line',
                                                                             street: 'street',
                                                                             city: 'city',
                                                                             postal_code: '123456',

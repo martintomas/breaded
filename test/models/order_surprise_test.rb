@@ -2,7 +2,7 @@ require 'test_helper'
 
 class OrderSurpriseTest < ActiveSupport::TestCase
   setup do
-    @full_content = { order: orders(:surprise_order),
+    @full_content = { order: orders(:customer_surprise_order),
                       amount: 10,
                       tag: tags(:butter_tag) }
   end

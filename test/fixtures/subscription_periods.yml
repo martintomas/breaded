@@ -1,11 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-customer_subscription_1_period:
+customer_1_subscription_1_period:
   subscription: customer_subscription_1
-  started_at: <%= Time.current %>
-  ended_at: <%= Time.current + 1.month %>
+  started_at: <%= 1.month.ago %>
+  ended_at: <%= 1.day.ago %>
 
-customer_subscription_2_period:
+customer_1_subscription_2_period:
+  subscription: customer_subscription_1
+  started_at: <%= 1.day.ago %>
+  ended_at: <%= 1.day.ago + 1.month %>
+
+customer_2_subscription_2_period:
   subscription: customer_subscription_2
   started_at: <%= Time.current %>
   ended_at: <%= Time.current + 1.month %>
