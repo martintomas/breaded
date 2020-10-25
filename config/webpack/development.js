@@ -1,17 +1,6 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+process.env.STRIPE_PUBLISHABLE_KEY = 'pk_test_51HeFW8I4g05dLynGZJRfdRRsDN27EsdFzXdp2mKrQ58QqhgVBIPENjzPUFvbQs1PAph7ZkVKSnSKyIAhpmnQFMI6007G0NWpTK'
 
 const environment = require('./environment')
-const webpack = require('webpack')
-const dotenv = require('dotenv')
-
-const dotenvFiles = ['.env']
-dotenvFiles.forEach((dotenvFile) => {
-    dotenv.config({ path: dotenvFile, silent: true })
-})
-
-environment.plugins.insert(
-    "Environment",
-    new webpack.EnvironmentPlugin(process.env)
-)
 
 module.exports = environment.toWebpackConfig()

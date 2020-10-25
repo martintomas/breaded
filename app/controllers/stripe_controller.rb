@@ -16,9 +16,7 @@ class StripeController < ApplicationController
       event = Stripe::Webhook.construct_event(request.body.read, request.env['HTTP_STRIPE_SIGNATURE'], ENV['STRIPE_WEBHOOK_SECRET'])
       Subscriptions::ProcessPayment.new(event).perform
       head :ok
-    rescue JSON::ParserError => e
-      head :bad_request
-    rescue Stripe::SignatureVerificationError => e
+    rescue JSON::ParserError, Stripe::SignatureVerificationError, ActiveRecord::RecordNotFound => e
       head :bad_request
     end
   end
