@@ -1,4 +1,6 @@
 section.container data-controller='stripe-checkout' data-stripe-checkout-url="#{checkout_session_stripe_index_path}" data-stripe-checkout-subscription-id="#{params[:id]}"
   .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads
-  h2.payment-redirection data-target="stripe-checkout.waitingText" = t 'app.checkout.title'
+  .payment-redirection
+    h2 = t 'app.checkout.title'
+    p data-target="stripe-checkout.waitingText" = t 'app.checkout.subtitle'
 == render partial: 'shared/gift'

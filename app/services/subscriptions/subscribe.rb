@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class Subscriptions::Subscribe
-  attr_accessor :subscription, :subscription_period, :delivery_date_subscription, :delivery_date_order, :errors
+  attr_accessor :subscription, :subscription_period, :delivery_date_subscription, :delivery_date_order
 
   def initialize(subscription, delivery_date: nil)
     @subscription = subscription
     @delivery_date_subscription = delivery_date || subscription_delivery_date
     @delivery_date_order = delivery_date || order_delivery_date
-    @errors = []
   end
 
   def perform
@@ -17,16 +16,12 @@ class Subscriptions::Subscribe
   private
 
   def create_subscription_period!
-    return if errors.present?
-
     self.subscription_period = SubscriptionPeriod.create! subscription: subscription,
                                                           started_at: delivery_date_subscription,
                                                           ended_at: delivery_date_subscription + 1.month
   end
 
   def create_orders_for(subscription_period)
-    return if errors.present?
-
     delivery_date_from, delivery_date_to = Availabilities::FirstSuitable.new(time: delivery_date_order).find
     number_of_deliveries = subscription.subscription_plan.number_of_deliveries
 

@@ -1,16 +1,21 @@
 export class BaseStorage {
     constructor(storageName, defaultStructure) {
         this.storageName = storageName;
-        this.loadStorage(storageName, defaultStructure);
+        this.defaultStructure = defaultStructure;
+        this.loadStorage();
     }
 
-    loadStorage(storageName, defaultStructure) {
-        if(window.sessionStorage.getItem(storageName)) {
-            this.storage = JSON.parse(window.sessionStorage.getItem(storageName));
+    loadStorage() {
+        if(window.sessionStorage.getItem(this.storageName)) {
+            this.storage = JSON.parse(window.sessionStorage.getItem(this.storageName));
         } else {
-            defaultStructure['version'] = process.env.FE_VERSION;
-            this.storage = defaultStructure;
+            this.defaultStructure['version'] = process.env.FE_VERSION;
+            this.storage = this.defaultStructure;
         }
+    }
+
+    reset() {
+        window.sessionStorage.removeItem(this.storageName);
     }
 
     save() {

@@ -3,6 +3,8 @@
 class Availabilities::FirstSuitable
   attr_accessor :time
 
+  class MissingAvailabilitiesException < StandardError; end
+
   def initialize(time: Time.current)
     @time = skip_past_date_for time
   end
@@ -32,6 +34,7 @@ class Availabilities::FirstSuitable
       availabilities = Availability.where(day_in_week: day_in_week)
       return [availabilities, i] if availabilities.exists?
     end
+    raise MissingAvailabilitiesException, 'missing availabilities!'
   end
 
   def closest_one_from(availabilities)

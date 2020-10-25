@@ -3,6 +3,7 @@
 class SubscriptionsController < ApplicationController
   before_action :store_user_location!
   before_action :authenticate_user!
+  before_action :set_subscription, only: :checkout
 
   def new
     @subscription_former = Subscriptions::NewSubscriptionFormer.new shopping_basket_variant: params[:shopping_basket_variant],
@@ -19,9 +20,16 @@ class SubscriptionsController < ApplicationController
     end
   end
 
-  def checkout; end
+  def checkout
+    return head :forbidden unless @subscription.user == current_user
+    redirect_to user_url(@subscription.user, stripe_state: :success) if @subscription.stripe_subscription.present?
+  end
 
   private
+
+  def set_subscription
+    @subscription = Subscription.find params[:id]
+  end
 
   def subscription_former_params
     params.require(:subscriptions_new_subscription_former).permit(:subscription_plan_id, :delivery_date_from,

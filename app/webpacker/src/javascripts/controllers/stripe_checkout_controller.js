@@ -1,14 +1,17 @@
 import { Controller } from "stimulus"
+import { ShopBasketStorage } from "../storages/ShopBasketStorage";
 
 export default class extends Controller {
     static targets = ["waitingText"]
 
     initialize() {
         this.stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY)
+        this.basketStorage = ShopBasketStorage.getStorage();
     }
 
     connect() {
         this.interval = setInterval(() => this.waitingTextTarget.innerHTML += '.', 1000)
+        this.basketStorage.reset();
         this.redirectToCheckout();
     }
 
@@ -29,6 +32,11 @@ export default class extends Controller {
                     alert(data.errors[0].message);
                 } else {
                     this.stripe.redirectToCheckout({ sessionId: data.response.id })
+                }
+            },
+            statusCode: {
+                403: () => {
+                    alert("forbidden");
                 }
             }
         });

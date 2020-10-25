@@ -23,7 +23,7 @@ class Subscriptions::ProcessPayment
   def run_checkout_completed_actions
     checkout_session = stripe_event['data']['object']
     subscription = Subscription.find checkout_session.metadata['subscription_id']
-    subscription.update! stripe_subscription: checkout_session.subscription
+    subscription.update! stripe_subscription: checkout_session.subscription, active: true
     mark_paid! subscription
   end
 

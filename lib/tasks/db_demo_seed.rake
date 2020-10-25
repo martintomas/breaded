@@ -110,6 +110,12 @@ namespace :db do
                                      foods: [{ name: 'Overnight Rye Bread', amount: 3 },
                                              { name: 'Oatmeal Maple Bread', amount: 7 }]}]
 
+    puts 'Availabilities'
+    Seeds::FillAvailabilities.perform_for [{ day_in_week: 1, time_from: Time.find_zone("UTC").parse("10:00"), time_to: Time.find_zone("UTC").parse("14:00") },
+                                           { day_in_week: 2, time_from: Time.find_zone("UTC").parse("8:00"), time_to: Time.find_zone("UTC").parse("10:00") },
+                                           { day_in_week: 2, time_from: Time.find_zone("UTC").parse("10:00"), time_to: Time.find_zone("UTC").parse("14:00") },
+                                           { day_in_week: 5, time_from: Time.find_zone("UTC").parse("10:00"), time_to: Time.find_zone("UTC").parse("14:00") }]
+
     puts 'DEMO DATABASE HAS BEEN SEEDED'
   end
 end

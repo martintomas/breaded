@@ -15,7 +15,10 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
 
   test '#perform - checkout.session.completed updates stripe_subscription' do
     Subscriptions::ProcessPayment.new(@checkout_params).perform
-    assert_equal "NEW CHECKOUT SUBSCRIPTION", @subscription.reload.stripe_subscription
+
+    @subscription.reload
+    assert_equal "NEW CHECKOUT SUBSCRIPTION", @subscription.stripe_subscription
+    assert @subscription.active
   end
 
   test '#perform - checkout.session.completed creates payment record' do

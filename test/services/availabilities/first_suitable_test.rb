@@ -64,4 +64,11 @@ class  Availabilities::FirstSuitableTest < ActiveSupport::TestCase
       assert_equal Time.zone.parse('26th Oct 2020 14:00:00'), time_to
     end
   end
+
+  test '#find - assert raise when no availabilities exists' do
+    Availability.delete_all
+    assert_raise(Availabilities::FirstSuitable::MissingAvailabilitiesException) do
+      Availabilities::FirstSuitable.new(time: Time.zone.parse('20th Oct 2020 04:00:00')).find
+    end
+  end
 end
