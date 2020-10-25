@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_admin_timezone
+    Time.zone = 'London'
+  end
+
   def set_locale
     # TODO: refactor at future
     I18n.locale = :en
