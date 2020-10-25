@@ -28,9 +28,10 @@ class Subscriptions::ProcessPayment
   end
 
   def run_invoice_paid_actions
-    return if stripe_event.billing_reason == 'subscription_create'
+    invoice = stripe_event['data']['object']
+    return if invoice.billing_reason == 'subscription_create'
 
-    subscription = Subscription.find_by! stripe_subscription: stripe_event.subscription
+    subscription = Subscription.find_by! stripe_subscription: invoice.subscription
     mark_paid! subscription
   end
 
@@ -42,7 +43,7 @@ class Subscriptions::ProcessPayment
   end
 
   def inform_user_about_fail
-    return unless stripe_event.attempt_count > 1
+    return unless stripe_event['data']['object'].attempt_count > 1
 
     # subscription = Subscription.find_by! stripe_subscription: stripe_event.object.subscription
     # TODO: inform user

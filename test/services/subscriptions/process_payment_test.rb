@@ -9,8 +9,8 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
 
     @checkout_params = object_to_methods JSON.parse(file_fixture('stripe/checkout_session_completed.json').read)
     @checkout_params['data']['object'].metadata['subscription_id'] = @subscription.id
-    @invoice_paid_params = JSON.parse(file_fixture('stripe/invoice_paid.json').read)
-    @invoice_payment_failed_params = JSON.parse(file_fixture('stripe/invoice_payment_failed.json').read)
+    @invoice_paid_params = object_to_methods JSON.parse(file_fixture('stripe/invoice_paid.json').read)
+    @invoice_payment_failed_params = object_to_methods JSON.parse(file_fixture('stripe/invoice_payment_failed.json').read)
   end
 
   test '#perform - checkout.session.completed updates stripe_subscription' do
@@ -77,22 +77,22 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
 
   test '#perform - invoice.paid checkout is skipped when subscription_create' do
     assert_no_difference -> { Payment.count } do
-      @invoice_paid_params['data']['object']['billing_reason'] = 'subscription_create'
+      @invoice_paid_params['data']['object'].billing_reason = 'subscription_create'
 
-      Subscriptions::ProcessPayment.new(mock_invoice_for('invoice.paid', @invoice_paid_params)).perform
+      Subscriptions::ProcessPayment.new(@invoice_paid_params).perform
     end
   end
 
   test '#perform - invoice.paid payment is created when invoice is paid' do
     assert_difference -> { Payment.count }, 1 do
-      @invoice_paid_params['data']['object']['billing_reason'] = 'manual'
+      @invoice_paid_params['data']['object'].billing_reason = 'manual'
 
-      Subscriptions::ProcessPayment.new(mock_invoice_for('invoice.paid', @invoice_paid_params)).perform
+      Subscriptions::ProcessPayment.new(@invoice_paid_params).perform
     end
   end
 
   test '#perform - invoice.payment_failed is taken into account' do
-    Subscriptions::ProcessPayment.new(mock_invoice_for('invoice.payment_failed', @invoice_payment_failed_params)).perform
+    Subscriptions::ProcessPayment.new(@invoice_payment_failed_params).perform
   end
 
   private
@@ -100,11 +100,5 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
   def object_to_methods(data)
     data['data']['object'] = OpenStruct.new data['data']['object']
     data
-  end
-
-  def mock_invoice_for(type, data)
-    invoice_event_mock = Minitest::Mock.new
-    invoice_event_mock.expect :[], type, ['type']
-    invoice_event_mock.expect :object, OpenStruct.new(data['data']['object'])
   end
 end

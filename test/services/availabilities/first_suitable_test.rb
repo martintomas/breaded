@@ -65,6 +65,14 @@ class  Availabilities::FirstSuitableTest < ActiveSupport::TestCase
     end
   end
 
+  test '#find - availabilities are stored at utc' do
+    travel_to Time.parse('20th Oct 2020 04:00:00').in_time_zone('Japan') do
+      time_from, time_to = Availabilities::FirstSuitable.new(time: Time.parse('20th Oct 2020 04:00:00').in_time_zone('Japan')).find
+      assert_equal Time.find_zone('Japan').parse('26th Oct 2020 10:00:00'), time_from
+      assert_equal Time.find_zone('Japan').parse('26th Oct 2020 14:00:00'), time_to
+    end
+  end
+
   test '#find - assert raise when no availabilities exists' do
     Availability.delete_all
     assert_raise(Availabilities::FirstSuitable::MissingAvailabilitiesException) do
