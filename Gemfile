@@ -37,6 +37,7 @@ gem 'devise'
 gem 'inline_svg'
 
 gem 'pagy'
+gem 'phony_rails'
 
 gem 'rolify'
 

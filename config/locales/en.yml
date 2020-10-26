@@ -143,6 +143,13 @@ en:
         version_2: "Twice Every Month %{num_breads} Breads"
         version_4_html: "Four Times Every Month </br> <i>%{num_breads} Breads x 3</i>"
         version_4: "Four Times Every Month %{num_breads} Breads"
+      phone_number:
+        title: Your Phone Number
+        link: Verify Phone Number
+        popup:
+          title: Verify your phone number
+          resend: Resend OTP
+          confirm: Confirm & Verify
     checkout:
       title: Thank you for your subscription!
       subtitle: Redirecting to payment gate
@@ -151,6 +158,14 @@ en:
     stripe:
       subscription_already_paid: 'Subscription is already paid!'
       card_errors_message: 'Card returned following error message: %{message}'
+    twilio:
+      phone_verification:
+        message: "Your Breaded verification code is: %{code}"
+        invalid_number: "Your phone number doesn't seem valid. Please double check filled phone number!"
+        too_many_requests:
+          one: "New verification SMS can be sent at %{minutes} minute."
+          other: "New verification SMS can be sent at %{minutes} minutes."
+        invalid_phone_token: "Verification code doesn't match!"
   activemodel:
     errors:
       models:
@@ -161,6 +176,8 @@ en:
               too_many_items: "Your shopping basket contains too many items. Please remove some of them before you will proceed."
               missing_food_item: "Item with name %{name} was not found. Please remove it from your shopping basket."
               already_active_subscription: "You already have active subscription. Please visit your profile page if you want to manipulate with your subscription."
+            phone_number:
+              not_valid: 'has to be filled and verified.'
   active_admin:
     menu:
       parents:

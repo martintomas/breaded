@@ -31,6 +31,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :twilio, only: %i[] do
+    collection do
+      post :sent_verification_sms
+      post :verify_phone_number
+    end
+  end
+
   resources :producer_applications, only: %i[new create]
   resources :users, only: %i[show]
 end

@@ -1,0 +1,21 @@
+span.phoneNum
+  = t 'app.get_breaded.phone_number.title'
+  = required_field
+.textFeild data-controller='phone-number' data-phone-number-sms-verification-url="#{sent_verification_sms_twilio_index_path}" data-phone-number-code-verification-url="#{verify_phone_number_twilio_index_path}"
+  .phone-number-errors data-target="phone-number.sentVerificationErrors"
+  span
+    = f.phone_field :phone_number, required: true, placeholder: '+44 7887554637', data: { target: "phone-number.phoneNumberInput" }
+    = f.label :phone_number
+    = link_to I18n.t('app.get_breaded.phone_number.link'), '#phoneNumberCode', data: { turbolinks: false, action: 'phone-number#sendVerificationCode' }, class: 'verifyPhone'
+    #phoneNumberCode.overlay
+      .popup
+        = link_to I18n.t('app.get_breaded.calendar.close'), '#', class: 'close', data: { turbolinks: false }
+        div
+          h3 = t 'app.get_breaded.phone_number.popup.title'
+          .textFeild
+            .phone-number-errors data-target="phone-number.confirmVerificationErrors"
+            span
+              = password_field_tag 'OTP Code', '', data: { target: "phone-number.phoneTokenInput" }
+              = label_tag 'OTP Code'
+              = link_to I18n.t('app.get_breaded.phone_number.popup.resend'), '#', data: { turbolinks: false, action: 'phone-number#sendVerificationCode' }
+          button data-action='phone-number#verifyVerificationCode' = I18n.t('app.get_breaded.phone_number.popup.confirm')

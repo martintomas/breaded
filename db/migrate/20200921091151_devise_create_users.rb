@@ -35,7 +35,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       # t.datetime :locked_at
 
       t.string :stripe_customer
+
+      ## Phone Number
       t.string :phone_number
+      t.string :unconfirmed_phone
+      t.string :phone_confirmation_token
+      t.datetime :phone_confirmation_sent_at
 
       t.timestamps null: false
     end

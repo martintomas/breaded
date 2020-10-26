@@ -2,4 +2,8 @@
 
 module ApplicationHelper
   include Pagy::Frontend
+
+  def required_field
+    content_tag(:sup, '*')
+  end
 end

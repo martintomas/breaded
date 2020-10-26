@@ -1,4 +1,6 @@
-span = t 'app.get_breaded.address.title'
+span
+  = t 'app.get_breaded.address.title'
+  = required_field
 .textFeild
   span
     = f.text_field :address_line

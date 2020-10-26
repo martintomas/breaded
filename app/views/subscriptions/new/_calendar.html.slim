@@ -1,8 +1,11 @@
-span = t 'app.get_breaded.calendar.title'
+span
+  = t 'app.get_breaded.calendar.title'
+  = required_field
 .textFeild
-  = text_field_tag :delivery_date, f.object.delivery_date_from&.strftime('%d-%m-%Y'), required: true
-  = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
-  = link_to image_pack_tag('media/images/calender.png'), '#calender', class: 'calenderSec', data: { turbolinks: false }
+  a.calenderSec href="#calender" data-turbolinks="false"
+    = text_field_tag :delivery_date, f.object.delivery_date_from&.strftime('%d-%m-%Y'), required: true
+    = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
+    = image_pack_tag('media/images/calender.png')
 #calender.overlay
   .popup
     .monthSec

@@ -5,7 +5,7 @@ module Subscriptions
     include ActiveModel::Model
 
     attr_accessor :subscription, :address, :subscription_plan_id, :delivery_date_from, :delivery_date_to, :address_line,
-                  :street, :city, :postal_code, :shopping_basket_variant, :user, :basket_items
+                  :street, :city, :postal_code, :shopping_basket_variant, :user, :phone_number, :basket_items
 
     validates :subscription_plan_id, :delivery_date_from, :delivery_date_to, :street, :city,
               :postal_code, :shopping_basket_variant, :basket_items, :user, presence: true
@@ -15,6 +15,7 @@ module Subscriptions
       self.delivery_date_from ||= 1.hour.from_now # TODO - remove after calendar is ready
       self.delivery_date_to ||= 3.hour.from_now # TODO - remove after calendar is ready
       preload_address
+      self.phone_number = user&.phone_number
     end
 
     def save
@@ -50,6 +51,7 @@ module Subscriptions
 
     def valid_user?
       errors.add(:base, :already_active_subscription) if user.subscriptions.where(active: true).exists?
+      errors.add(:phone_number, :not_valid) if user.phone_number.blank?
 
       errors.blank?
     end
