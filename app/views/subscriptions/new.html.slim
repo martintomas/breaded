@@ -6,8 +6,7 @@ section.container
       = form_for @subscription_former, url: subscriptions_path, method: :post, html: { class: 'breadedPlan' },
             data: { target: 'payment.form', action: 'submit->payment#formSubmitted' } do |f|
         = f.hidden_field :shopping_basket_variant
-        = f.hidden_field :delivery_date_from
-        = f.hidden_field :delivery_date_to
+        = f.hidden_field :delivery_date_from, id: :delivery_date_from_hidden_field
         == render partial: 'subscriptions/new/subscription_plans', locals: { f: f }
         == render partial: 'subscriptions/new/calendar', locals: { f: f }
         == render partial: 'subscriptions/new/phone_number', locals: { f: f }

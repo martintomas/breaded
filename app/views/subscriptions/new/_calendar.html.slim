@@ -1,51 +1,25 @@
+- calendar_presenter = Availabilities::CalendarPresenter.new
+
 span
   = t 'app.get_breaded.calendar.title'
   = required_field
 .textFeild
   a.calenderSec href="#calender" data-turbolinks="false"
-    = text_field_tag :delivery_date, f.object.delivery_date_from&.strftime('%d-%m-%Y'), required: true
+    = text_field_tag :delivery_date, '', required: true, id: :delivery_date_from_field
     = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
     = image_pack_tag('media/images/calender.png')
-#calender.overlay
+#calender.overlay data-controller='calendar'
   .popup
     .monthSec
-      label = '1 October - 1 November '
+      label = "#{calendar_presenter.start_date} - #{calendar_presenter.end_date}"
       = link_to I18n.t('app.get_breaded.calendar.close'), '#', class: 'close', data: { turbolinks: false }
-    .dateSec.disableArrow
-      ul
-        li
-          span = '1 Thu'
-          span = 'Oct, 2020'
-        li
-          span = '12 Mon'
-          span = 'Oct, 2020'
-        li
-          span = '16 Fri'
-          span = 'Oct, 2020'
-        li
-          span = '22 Thu'
-          span = 'Oct, 2020'
-    .timeSec
-      ul
-        li
-          span = '9:00am - 12:00pm'
-        li
-          span = '1:00pm - 4:00pm'
-        li
-          span = '4:00pm - 9:00pm'
-      ul
-        li
-          span = '1:00am - 4:00pm'
-        li
-          span = '4:00pm - 9:00pm'
-      ul
-        li
-          span = '1:00am - 4:00pm'
-        li
-          span = '4:00pm - 9:00pm'
-      ul
-        li
-          span = '1:00am - 4:00pm'
-        li
-          span = '4:00pm - 9:00pm'
-    button = t 'app.get_breaded.calendar.submit'
+    .dateSec.disableArrow.dateSlider
+      - calendar_presenter.times_grouped_by_days.each do |date, times|
+        ul.slide
+          li
+            span = date.strftime('%e %a')
+            span = date.strftime('%b, %Y')
+          - times.each do |_, time|
+            li
+              span data-action="click->calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
+    /button = t 'app.get_breaded.calendar.submit'

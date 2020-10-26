@@ -11,7 +11,8 @@
     "stimulus": "^1.1.1",
     "imagesloaded": "^4.1.4",
     "@sentry/browser": "^5.24.2",
-    "intersection-observer": "^0.11.0"
+    "intersection-observer": "^0.11.0",
+    "slick-carousel": "^1.8.1"
   },
   "version": "0.1.0",
   "devDependencies": {

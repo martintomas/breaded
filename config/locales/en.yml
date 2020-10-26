@@ -167,6 +167,9 @@ en:
           other: "New verification SMS can be sent at %{minutes} minutes."
         invalid_phone_token: "Verification code doesn't match!"
   activemodel:
+    attributes:
+      subscriptions/new_subscription_former:
+        delivery_date_from: 'Delivery date'
     errors:
       models:
         subscriptions/new_subscription_former:
@@ -178,6 +181,8 @@ en:
               already_active_subscription: "You already have active subscription. Please visit your profile page if you want to manipulate with your subscription."
             phone_number:
               not_valid: 'has to be filled and verified.'
+            delivery_date_from:
+              invalid_date: 'has invalid value. Please select different date from calendar.'
   active_admin:
     menu:
       parents:
@@ -185,10 +190,13 @@ en:
         producer: Producer
         order: Order
         tag: Tag
+        availability: Availability
     dashboards:
       see_detail: see detail
       panels:
         recent_applications: Recent Baker Applications
+    availabilities:
+      label: Availabilities
     addresses:
       label: Addresses
     users:

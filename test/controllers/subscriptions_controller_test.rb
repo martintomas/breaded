@@ -28,7 +28,6 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
               post subscriptions_path, params: { subscriptions_new_subscription_former:
                                                    { subscription_plan_id: subscription_plans(:once_every_month).id,
                                                      delivery_date_from: Time.zone.parse('19th Oct 2020 10:00:00'),
-                                                     delivery_date_to: Time.zone.parse('19th Oct 2020 14:00:00'),
                                                      address_line: 'Address Line',
                                                      street: 'Street',
                                                      city: 'City',

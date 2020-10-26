@@ -43,10 +43,7 @@ class Availabilities::FirstSuitable
 
   def closest_one_from(availabilities)
     availabilities.each do |availability|
-      if availability.time_from.utc.strftime('%H%M') <= time.strftime('%H%M') &&
-        availability.time_to.utc.strftime('%H%M') > time.strftime('%H%M')
-        return availability
-      end
+      return availability if availability.available_at? time
     end
     availabilities.first
   end

@@ -33,8 +33,8 @@ class SubscriptionsController < ApplicationController
 
   def subscription_former_params
     params.require(:subscriptions_new_subscription_former).permit(:subscription_plan_id, :delivery_date_from,
-                                                                  :delivery_date_to, :address_line, :street, :city,
-                                                                  :postal_code, :shopping_basket_variant)
+                                                                  :address_line, :street, :city, :postal_code, :phone_number,
+                                                                  :shopping_basket_variant)
   end
 
   def subscription_params

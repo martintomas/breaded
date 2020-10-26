@@ -282,6 +282,7 @@ body.subscriptions {
     display: inline-block;
     font-size: 13px;
     position: relative;
+    vertical-align: text-top;
   }
 
   .breadedPlan span i {
@@ -523,72 +524,59 @@ body.subscriptions {
     position: relative;
   }
 
-  .dateSec::before,
-  .dateSec::after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 12px;
-    cursor: pointer;
-    background-image: url("../images/arrow.png");
-    background-size: 7px;
-    width: 15px;
-    background-repeat: no-repeat;
-  }
-
   .dateSec::before {
     content: "";
-    left: 10px;
-    transform: rotate(180deg);
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    left: 0;
+    border-top: none;
+    border-bottom: 1px solid #ccc !important;
   }
 
-  .disableArrow::before {
-    opacity: .5;
-    pointer-events: none;
-  }
-
-  .dateSec::after {
-    content: "";
-    right: 15px;
-
-  }
-
-  .dateSec ul li {
+  .dateSec ul {
     display: inline-block;
+    vertical-align: text-top;
     width: 155px;
   }
 
-  .dateSec ul li span {
+  .dateSec ul li {
+    display: block;
+    width: 155px;
+    margin-bottom: 25px;
+  }
+
+  .dateSec ul li:first-child {
+    padding-bottom: 25px;
+  }
+
+  .dateSec ul li:first-child span {
+    font-size: 13px;
+    padding: 0px;
+    border: 0;
+    color: #333333;
+    border-radius: 0px;
+    cursor: context-menu;
     display: block;
   }
 
-  .timeSec {
-    display: table;
-    padding: 15px 0 15px 2em;
-    width: 100%;
-    text-align: left;
+  .dateSec ul li:first-child span:hover {
+    background: #ffffff;
+    color: #333333;
+    font-weight: 400;
   }
 
-  .timeSec ul {
-    display: table-cell;
-  }
-
-  .timeSec ul li {
-    margin-bottom: 20px;
-    width: 160px;
-  }
-
-  .timeSec ul li span {
+  .dateSec ul li span {
     font-size: 10px;
     padding: 10px;
     border: 1px solid #707070;
     color: #333333;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block;
   }
 
-  .timeSec ul li span:hover {
+  .dateSec ul li span:hover {
     background: black;
     color: #fff;
     font-weight: 500;
@@ -601,7 +589,7 @@ body.subscriptions {
     font-weight: 500;
     width: 100px;
     padding: 10px 25px;
-    margin: 0 25px 40px;
+    margin: 40px 25px 40px;
   }
 
   .verifyPhone {
@@ -672,9 +660,159 @@ body.subscriptions {
     color: #333;
   }
 
-  @media (max-width: 500px) {
-    .calenderSec {
-      left: calc(100% - 38px) !important;
+  @media (max-width: 730px) {
+    .popup {
+      width: 90%;
+      margin: 70px auto;
     }
+  }
+
+  @media (max-width: 500px) {
+    .dateSec {
+      padding: 25px 0 25px 33px;
+    }
+  }
+
+  /* Slider */
+
+  .slick-slide {
+    margin: 0px 20px;
+  }
+
+  .slick-slide img {
+    width: 100%;
+  }
+
+  .slick-slider
+  {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .slick-list
+  {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  .slick-list:focus
+  {
+    outline: none;
+  }
+  .slick-list.dragging
+  {
+    cursor: pointer;
+    cursor: hand;
+  }
+
+  .slick-slider .slick-track,
+  .slick-slider .slick-list
+  {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .slick-track
+  {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+  .slick-track:before,
+  .slick-track:after
+  {
+    display: table;
+    content: '';
+  }
+  .slick-track:after
+  {
+    clear: both;
+  }
+  .slick-loading .slick-track
+  {
+    visibility: hidden;
+  }
+
+  .slick-slide
+  {
+    display: none;
+    float: left;
+    min-height: 1px;
+  }
+  [dir='rtl'] .slick-slide
+  {
+    float: right;
+  }
+  .slick-slide img
+  {
+    display: block;
+  }
+  .slick-slide.slick-loading img
+  {
+    display: none;
+  }
+  .slick-slide.dragging img
+  {
+    pointer-events: none;
+  }
+  .slick-initialized .slick-slide
+  {
+    display: block;
+  }
+  .slick-loading .slick-slide
+  {
+    visibility: hidden;
+  }
+  .slick-vertical .slick-slide
+  {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+  }
+  .slick-arrow img {
+    width: 7px;
+  }
+  .slick-arrow.slick-hidden {
+    display: none;
+  }
+  .slick-prev {
+    transform: rotate(180deg);
+    left: 15px;
+
+    img {
+      vertical-align: bottom;
+    }
+  }
+  .slick-next {
+    right: 15px;
+
+    img {
+      vertical-align: top;
+    }
+  }
+  .slick-arrow {
+    position: absolute;
+    top: 33px;
+    margin: auto;
+    cursor: pointer;
+  }
+  .slick-disabled {
+    opacity: .5;
   }
 }

@@ -4,16 +4,14 @@ module Subscriptions
   class NewSubscriptionFormer
     include ActiveModel::Model
 
-    attr_accessor :subscription, :address, :subscription_plan_id, :delivery_date_from, :delivery_date_to, :address_line,
+    attr_accessor :subscription, :address, :subscription_plan_id, :delivery_date_from, :address_line,
                   :street, :city, :postal_code, :shopping_basket_variant, :user, :phone_number, :basket_items
 
-    validates :subscription_plan_id, :delivery_date_from, :delivery_date_to, :street, :city,
-              :postal_code, :shopping_basket_variant, :basket_items, :user, presence: true
+    validates :subscription_plan_id, :delivery_date_from, :street, :city, :postal_code, :shopping_basket_variant,
+              :basket_items, :user, presence: true
 
     def initialize(attributes = {})
       super attributes
-      self.delivery_date_from ||= 1.hour.from_now # TODO - remove after calendar is ready
-      self.delivery_date_to ||= 3.hour.from_now # TODO - remove after calendar is ready
       preload_address
       self.phone_number = user&.phone_number
     end
@@ -66,9 +64,9 @@ module Subscriptions
 
     def valid_delivery_dates?
       self.delivery_date_from = Time.zone.parse(delivery_date_from) if delivery_date_from.is_a? String
-      self.delivery_date_to = Time.zone.parse(delivery_date_to) if delivery_date_to.is_a? String
-      # TODO - add after calendar will be finished
-      true
+      errors.add(:delivery_date_from, :invalid_date) unless Availability.available_at? delivery_date_from
+
+      errors.blank?
     end
 
     def valid_basket?

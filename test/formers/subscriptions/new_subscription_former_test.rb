@@ -6,8 +6,7 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
   setup do
     @user = users(:customer)
     @full_content = { subscription_plan_id: subscription_plans(:once_every_month).id,
-                      delivery_date_from: Time.zone.parse('19th Oct 2020 10:00:00'),
-                      delivery_date_to: Time.zone.parse('19th Oct 2020 14:00:00'),
+                      delivery_date_from: '19th Oct 2020 10:00:00',
                       address_line: 'Address Line',
                       street: 'Street',
                       city: 'City',
@@ -35,13 +34,7 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
   end
 
   test 'the validity - without delivery_date_from is valid' do
-    model = Subscriptions::NewSubscriptionFormer.new @full_content.except(:delivery_date_from)
-    assert model.valid?, model.errors.full_messages
-  end
-
-  test 'the validity - without delivery_date_to is valid' do
-    model = Subscriptions::NewSubscriptionFormer.new @full_content.except(:delivery_date_to)
-    assert model.valid?, model.errors.full_messages
+    invalid_with_missing Subscriptions::NewSubscriptionFormer, :delivery_date_from
   end
 
   test 'the validity - without address_line is valid' do
