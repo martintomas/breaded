@@ -1,5 +1,5 @@
 span = t 'app.get_breaded.plans.title'
-- SubscriptionPlan.includes(:currency).each_with_index do |subscription_plan, index|
+- SubscriptionPlan.includes(:currency).order(:id).each_with_index do |subscription_plan, index|
   div
     = f.radio_button :subscription_plan_id, subscription_plan.id, checked: index.zero?
     = f.label :subscription_plan_id, value: subscription_plan.id do

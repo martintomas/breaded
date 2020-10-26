@@ -28,10 +28,10 @@ module Stripe
     end
 
     def upsert_price!
-      params = { unit_amount: (subscription_plan.price * 100).to_i, currency: subscription_plan.currency.code.downcase }
-      return Stripe::Price.update subscription_plan.stripe_price, params if subscription_plan.stripe_price.present?
-
-      price = Stripe::Price.create({ product: subscription_plan.stripe_product, recurring: { interval: 'month' } }.merge(params))
+      price = Stripe::Price.create unit_amount: (subscription_plan.price * 100).to_i,
+                                   currency: subscription_plan.currency.code.downcase,
+                                   product: subscription_plan.stripe_product,
+                                   recurring: { interval: 'month' }
       subscription_plan.stripe_price = price.id
     end
   end

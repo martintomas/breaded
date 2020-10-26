@@ -16,8 +16,10 @@ class  Stripe::UpdateSubscriptionPlanJobTest < ActiveSupport::TestCase
                currency: @subscription_plan.currency.code.downcase,
                product: 'product_test',
                recurring: { interval: 'month' } }
-    Stripe::Price.stub :update, true, ['price_test', params] do
+    Stripe::Price.stub :create, OpenStruct.new(id: 'price_test_new'), [params] do
       Stripe::UpdateSubscriptionPlanJob.perform_now @subscription_plan
+
+      assert_equal 'price_test_new', @subscription_plan.stripe_price
     end
   end
 
