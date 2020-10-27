@@ -29,7 +29,7 @@ export default class extends Controller {
     }
 
     initializeSlider() {
-        $('.dateSlider').slick({
+        $('.dateSlider').not('.slick-initialized').slick({
             slidesToShow: 4,
             slidesToScroll: 1,
             autoplay: false,

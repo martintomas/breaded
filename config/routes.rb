@@ -18,11 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptions, only: %i[new create] do
-    member do
-      get :checkout
-    end
-  end
+  resources :subscriptions, only: %i[new create]
 
   resources :stripe, only: %i[] do
     collection do

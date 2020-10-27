@@ -125,7 +125,9 @@ en:
       confirm: 'Confirm List'
     get_breaded:
       title: Get Breaded
-      submit: Confirm & Get Breaded
+      submit: Confirm & Procceed to Payment
+      confirming: Confirming...
+      redirecting_to_payment_gate: Redirecting to Payment Gate...
       address:
         title: Delivery Address
       calendar:

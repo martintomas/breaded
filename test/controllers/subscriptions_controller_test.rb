@@ -4,6 +4,7 @@ require 'test_helper'
 
 class StripeControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  include Rails.application.routes.url_helpers
 
   setup do
     @user = users :customer
@@ -36,8 +37,13 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
                                                  basket_items:
                                                    [{ id: foods(:rye_bread).id, amount: 5 },
                                                     { id: foods(:seeded_bread).id,
-                                                      amount: Rails.application.config.options[:default_number_of_breads] - 5 }].to_json }
-              assert_redirected_to checkout_subscription_path(Subscription.last)
+                                                      amount: Rails.application.config.options[:default_number_of_breads] - 5 }].to_json }, as: :json
+              assert_response :success
+
+              body = JSON.parse(response.body).deep_symbolize_keys
+              assert_empty body[:errors]
+              assert_equal Subscription.last.id, body[:response][:subscription_id]
+              assert_equal checkout_session_stripe_index_path, body[:response][:stripe_checkout]
             end
           end
         end
@@ -51,32 +57,14 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
         assert_no_difference -> { SubscriptionPeriod.count } do
           assert_no_difference -> { Order.count } do
             post subscriptions_path, params: { subscriptions_new_subscription_former: { street: 'Street' },
-                                               basket_items: [] }
+                                               basket_items: [] }, as: :json
 
             assert_response :success
+            body = JSON.parse(response.body).deep_symbolize_keys
+            refute_empty body[:errors]
           end
         end
       end
     end
-  end
-
-  test '#checkout' do
-    get checkout_subscription_path(@subscription)
-
-    assert_response :success
-  end
-
-  test '#checkout - forbidden when not your subscription' do
-    @subscription.update! user: users(:customer_2)
-    get checkout_subscription_path(@subscription)
-
-    assert_response :forbidden
-  end
-
-  test '#checkout - redirected immediately when subscription is already paid' do
-    @subscription.update! stripe_subscription: 'STRIPE_TOKEN'
-    get checkout_subscription_path(@subscription)
-
-    assert_redirected_to user_url(@subscription.user, stripe_state: :success)
   end
 end
