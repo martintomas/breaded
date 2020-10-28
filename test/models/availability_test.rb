@@ -30,4 +30,23 @@ class AvailabilityTest < ActiveSupport::TestCase
   test 'the validity - without time_to is not valid' do
     invalid_with_missing Availability, :time_to
   end
+
+  test '#available_at?' do
+    availability = availabilities :availability_tuesday_1
+
+    refute availability.available_at?(Time.zone.parse('19th Oct 2020 04:00:00'))
+    refute availability.available_at?(Time.zone.parse('20th Oct 2020 04:00:00'))
+    assert availability.available_at?(Time.zone.parse('20th Oct 2020 08:00:00'))
+    refute availability.available_at?(Time.zone.parse('20th Oct 2020 10:00:00'))
+  end
+
+  test '.available_at?' do
+    assert Availability.available_at?(Time.zone.parse('19th Oct 2020 10:00:00'))
+    assert Availability.available_at?(Time.zone.parse('20th Oct 2020 08:00:00'))
+    assert Availability.available_at?(Time.zone.parse('20th Oct 2020 10:00:00'))
+
+    refute Availability.available_at?(Time.zone.parse('21th Oct 2020 10:00:00'))
+    refute Availability.available_at?(Time.zone.parse('20th Oct 2020 14:00:00'))
+    refute Availability.available_at?(Time.zone.parse('20th Oct 2020 4:00:00'))
+  end
 end

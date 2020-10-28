@@ -37,7 +37,7 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
           assert_select 'table#index_table_orders' do
             Order.all.each do |order|
               assert_select 'tr' do
-                assert_select 'td', order.user.email
+                assert_select 'td', order.user.full_name
                 assert_select 'td', order.subscription.to_s
                 assert_select 'td', order.delivery_date_from&.strftime('%B %d, %Y %H:%M')
                 assert_select 'td', order.delivery_date_to&.strftime('%B %d, %Y %H:%M')
@@ -58,7 +58,7 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
       assert_select 'div#main_content' do
         assert_select 'div.panel' do
           assert_select 'table' do
-            assert_select 'td', @order.user.email
+            assert_select 'td', @order.user.full_name
             assert_select 'td', @order.subscription_period.to_s
             assert_select 'td', @order.subscription.to_s
             assert_select 'td', @order.delivery_date_from&.strftime('%B %d, %Y %H:%M')
@@ -140,7 +140,7 @@ class Admin::OrdersTest < ActionDispatch::IntegrationTest
             assert_select 'option[selected="selected"]', @order.subscription_period.to_s
           end
           assert_select 'select[name="order[user_id]"]' do
-            assert_select 'option[selected="selected"]', @order.user.to_s
+            assert_select 'option[selected="selected"]', @order.user.full_name
           end
           assert_select 'input[name="order[address_attributes][address_line]"][value=?]', @order.address.address_line
           assert_select 'input[name="order[address_attributes][street]"][value=?]', @order.address.street

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-class Subscriptions::AttachToUser
-
+class Stripe::CreateSubscription
   attr_accessor :subscription, :errors
 
   def initialize(subscription)
@@ -12,7 +11,7 @@ class Subscriptions::AttachToUser
   def perform_for(payment_method_id)
     run_stripe_actions_for payment_method_id
   rescue Stripe::CardError => e
-    errors << e.error.message
+    errors << e.message
   end
 
   private
@@ -26,8 +25,9 @@ class Subscriptions::AttachToUser
   end
 
   def stripe_customer_id
-    Stripe::UpdateCustomerJob.perform_now subscription.user if subscription.user.stripe_customer.blank?
-
-    subscription.user.stripe_customer
+    @stripe_customer_id ||= begin
+      Stripe::UpdateCustomerJob.perform_now subscription.user if subscription.user.stripe_customer.blank?
+      subscription.user.stripe_customer
+    end
   end
 end

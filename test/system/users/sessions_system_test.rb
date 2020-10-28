@@ -6,7 +6,7 @@ class Users::SessionsSystemTest < ApplicationSystemTestCase
   test 'can login as admin' do
     login_as_admin
     within 'ul#utility_nav' do
-      assert_selector 'li#current_user', text: users(:admin).email
+      assert_selector 'li#current_user', text: users(:admin).full_name
     end
   end
 

@@ -19,7 +19,7 @@ span
           li
             span = date.strftime('%e %a')
             span = date.strftime('%b, %Y')
-          - times.each do |_, time|
+          - times.each do |time|
             li
               span data-action="click->calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
     /button = t 'app.get_breaded.calendar.submit'

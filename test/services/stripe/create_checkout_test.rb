@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class Subscriptions::CheckoutTest < ActiveSupport::TestCase
+class Stripe::CreateCheckoutTest < ActiveSupport::TestCase
   include Rails.application.routes.url_helpers
 
   setup do
@@ -12,7 +12,7 @@ class Subscriptions::CheckoutTest < ActiveSupport::TestCase
   test '#perform - one subscription cannot have checkout multiple times' do
     @subscription.update! stripe_subscription: 'DONE'
 
-    checkout = Subscriptions::Checkout.new(@subscription).perform
+    checkout = Stripe::CreateCheckout.new(@subscription).perform
     assert_equal [I18n.t('app.stripe.subscription_already_paid')], checkout.errors
   end
 
@@ -25,7 +25,7 @@ class Subscriptions::CheckoutTest < ActiveSupport::TestCase
                metadata: { subscription_id: @subscription.id } }
 
     Stripe::Checkout::Session.stub :create, OpenStruct.new(id: 'session_id'), [params] do
-      checkout = Subscriptions::Checkout.new(@subscription).perform
+      checkout = Stripe::CreateCheckout.new(@subscription).perform
       assert_equal 'session_id', checkout.session_id
     end
   end

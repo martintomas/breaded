@@ -7,12 +7,12 @@ class StripeController < ApplicationController
     subscription = Subscription.find params[:subscription_id]
     return head :forbidden unless subscription.user == current_user
 
-    checkout = Subscriptions::Checkout.new(subscription).perform
+    checkout = Stripe::CreateCheckout.new(subscription).perform
     render json: { errors: checkout.errors, response: { id: checkout.session_id }}.to_json
   end
 
   def create_subscription
-    service = Subscriptions::AttachToUser.new Subscription.find(params[:subscription_id])
+    service = Stripe::CreateSubscription.new Subscription.find(params[:subscription_id])
     subscription = service.perform_for params[:payment_method_id]
     render json: { errors: service.errors, response: subscription }.to_json
   end

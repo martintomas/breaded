@@ -3,7 +3,7 @@
 class Twilio::VerifyPhoneNumber
   attr_accessor :user, :phone_number, :errors
 
-  DELAY_BETWEEN_SMS = 5 # minutes
+  DELAY_BETWEEN_SMS = 3 # minutes
 
   def initialize(user, phone_number)
     @user = user

@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @full_content = { first_name: 'Super',
                       last_name: 'Admin',
@@ -47,6 +49,25 @@ class UserTest < ActiveSupport::TestCase
     assert model.valid?, model.errors.full_messages
   end
 
+  test 'the validity - phone number has to be valid' do
+    @full_content[:phone_number] = '123456789'
+    model = User.new @full_content
+    refute model.valid?
+    assert model.errors.include?(:phone_number)
+  end
+
+  test '#phony_normalize of phone number' do
+    @full_content[:phone_number] = '420 734 370 408'
+    model = User.new @full_content
+    assert_equal '+420734370408', model.normalized_phone_number
+  end
+
+  test '#phony_normalize of unconfirmed phone number' do
+    @full_content[:unconfirmed_phone] = '420 734 370 408'
+    model = User.new @full_content
+    assert_equal '+420734370408', model.normalized_unconfirmed_phone
+  end
+
   test '#current_ability' do
     assert_equal Ability, @user.current_ability.class
   end
@@ -58,6 +79,35 @@ class UserTest < ActiveSupport::TestCase
   test '#address - return first available address when main address is missing' do
     addresses(:customer_address).delete
     assert_equal addresses(:customer_address_1), @user.address
+  end
+
+  test '#stripe_sync - is triggered after create' do
+    assert_enqueued_jobs 1, only: Stripe::UpdateCustomerJob do
+      User.create! @full_content
+    end
+  end
+
+  test '#stripe_sync - is triggered when email is updated' do
+    assert_enqueued_jobs 1, only: Stripe::UpdateCustomerJob do
+      @user.skip_reconfirmation!
+      @user.update! email: 'new.email@test.test'
+    end
+  end
+
+  test '#stripe_sync - is not triggered when different field of user is updated' do
+    assert_no_enqueued_jobs only: Stripe::UpdateCustomerJob do
+      @user.update! first_name: 'New Name'
+    end
+  end
+
+  test '#stripe_sync - is not triggered on destroy' do
+    assert_no_enqueued_jobs only: Stripe::UpdateCustomerJob do
+      users(:admin).destroy!
+    end
+  end
+
+  test '#full_name' do
+    assert_equal "#{@user.first_name} #{@user.last_name}", @user.full_name
   end
 
   test '#to_s' do

@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class SubscriptionPlanTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @full_content = { price: 29.99,
                       currency: currencies(:GBP),
@@ -30,6 +32,36 @@ class SubscriptionPlanTest < ActiveSupport::TestCase
 
   test 'the validity - without number_of_deliveries is not valid' do
     invalid_with_missing SubscriptionPlan, :number_of_deliveries
+  end
+
+  test '#stripe_sync - is triggered after create' do
+    assert_enqueued_jobs 1, only: Stripe::UpdateSubscriptionPlanJob do
+      SubscriptionPlan.create! @full_content
+    end
+  end
+
+  test '#stripe_sync - is triggered when price is updated' do
+    assert_enqueued_jobs 1, only: Stripe::UpdateSubscriptionPlanJob do
+      @subscription_plan.update! price: 10
+    end
+  end
+
+  test '#stripe_sync - is triggered when currency is updated' do
+    assert_enqueued_jobs 1, only: Stripe::UpdateSubscriptionPlanJob do
+      @subscription_plan.update! currency: currencies(:EUR)
+    end
+  end
+
+  test '#stripe_sync - is not triggered when different field of user is updated' do
+    assert_no_enqueued_jobs only: Stripe::UpdateSubscriptionPlanJob do
+      @subscription_plan.update! number_of_deliveries: 0
+    end
+  end
+
+  test '#stripe_sync - is not triggered on destroy' do
+    assert_no_enqueued_jobs only: Stripe::UpdateSubscriptionPlanJob do
+      subscription_plans(:four_times_every_month).destroy!
+    end
   end
 
   test '#to_s' do

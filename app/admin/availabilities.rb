@@ -16,4 +16,14 @@ ActiveAdmin.register Availability do
     column :created_at
     actions
   end
+
+  show do
+    attributes_table do
+      row(:day_in_week)
+      row(:time_from) { |row_record| row_record.time_from.strftime( "%H:%M") }
+      row(:time_to) { |row_record| row_record.time_to.strftime( "%H:%M") }
+      row :created_at
+      row :updated_at
+    end
+  end
 end

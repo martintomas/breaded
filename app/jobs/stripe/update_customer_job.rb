@@ -9,7 +9,7 @@ module Stripe
         return Stripe::Customer.update user.stripe_customer, email: user.email if user.stripe_customer.present?
 
         customer = Stripe::Customer.create email: user.email
-        user.update! stripe_customer: customer.id, skip_stripe_sync: true
+        user.update! stripe_customer: customer.id
       end
     end
   end

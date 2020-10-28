@@ -37,7 +37,7 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
           assert_select 'table#index_table_subscriptions' do
             Subscription.all.each do |subscription|
               assert_select 'tr' do
-                assert_select 'td', subscription.user.email
+                assert_select 'td', subscription.user.full_name
                 assert_select 'td', subscription.subscription_plan.to_s
               end
             end
@@ -56,7 +56,7 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
       assert_select 'div#main_content' do
         assert_select 'div.panel' do
           assert_select 'table' do
-            assert_select 'td', @subscription.user.email
+            assert_select 'td', @subscription.user.full_name
             assert_select 'td', @subscription.subscription_plan.to_s
           end
         end
@@ -109,7 +109,7 @@ class Admin::SubscriptionsTest < ActionDispatch::IntegrationTest
             assert_select 'option[selected="selected"]', @subscription.subscription_plan.to_s
           end
           assert_select 'select[name="subscription[user_id]"]' do
-            assert_select 'option[selected="selected"]', @subscription.user.to_s
+            assert_select 'option[selected="selected"]', @subscription.user.full_name
           end
           assert_select 'input[name="subscription[number_of_items]"][value=?]', @subscription.number_of_items.to_s
           assert_select 'input[name="subscription[active]"][value=?]', (@subscription.active && 1 || 0).to_s

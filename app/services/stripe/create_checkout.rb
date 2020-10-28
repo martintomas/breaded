@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Subscriptions::Checkout
+class Stripe::CreateCheckout
   include Rails.application.routes.url_helpers
 
   attr_accessor :subscription, :errors, :session_id

@@ -4,7 +4,6 @@ require 'test_helper'
 
 class StripeControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
-  include Rails.application.routes.url_helpers
 
   setup do
     @user = users :customer
@@ -43,7 +42,6 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
               body = JSON.parse(response.body).deep_symbolize_keys
               assert_empty body[:errors]
               assert_equal Subscription.last.id, body[:response][:subscription_id]
-              assert_equal checkout_session_stripe_index_path, body[:response][:stripe_checkout]
             end
           end
         end

@@ -13,7 +13,7 @@ class Admin::OrdersSystemTest < ApplicationSystemTestCase
 
     within "form#edit_order_#{@order.id}" do
       select SubscriptionPeriod.first.to_s, from: 'order[subscription_period_id]'
-      select User.first.to_s, from: 'order[user_id]'
+      select User.first.full_name, from: 'order[user_id]'
       fill_in 'order[address_attributes][address_line]', with: 'Address Line'
       fill_in 'order[address_attributes][street]', with: 'Street'
       fill_in 'order[address_attributes][postal_code]', with: '123456'

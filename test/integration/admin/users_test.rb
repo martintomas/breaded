@@ -52,7 +52,7 @@ class Admin::UsersTest < ActionDispatch::IntegrationTest
   test '#show' do
     get admin_user_url(@user)
     assert_select 'div.title_bar' do
-      assert_select 'h2#page_title', @user.email
+      assert_select 'h2#page_title', @user.full_name
     end
     assert_select 'div#active_admin_content' do
       assert_select 'div#main_content' do

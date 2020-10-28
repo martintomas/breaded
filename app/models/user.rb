@@ -6,8 +6,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :confirmable, :registerable, :validatable
   rolify
 
-  attr_accessor :skip_stripe_sync
-
   phony_normalize :phone_number, :unconfirmed_phone, default_country_code: 'UK'
   phony_normalized_method :phone_number, :unconfirmed_phone
 
@@ -20,7 +18,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :phone_number, :unconfirmed_phone, phony_plausible: true
 
-  after_save :stripe_sync, unless: :skip_stripe_sync
+  after_save :stripe_sync, if: :saved_change_to_email?
 
   def current_ability
     @current_ability ||= Ability.new self

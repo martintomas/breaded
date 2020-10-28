@@ -46,4 +46,41 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
       assert_response :bad_request
     end
   end
+
+  test '#create_subscription - success' do
+    sign_in @user
+    subscription = @user.subscriptions.first
+
+    Stripe::Customer.stub :create, OpenStruct.new(id: 'stripe_customer_id'), [email: @user.email] do
+      Stripe::PaymentMethod.stub :attach, true, ['stripe_payment_method_id', { customer: 'stripe_customer_id' }] do
+        Stripe::Customer.stub :update, true, ['stripe_customer_id',
+                                              invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
+          Stripe::Subscription.stub :create, 'subscription', [customer: 'stripe_customer_id',
+                                                    items: [{ price: subscription.subscription_plan.stripe_price }],
+                                                    expand: %w[latest_invoice.payment_intent]] do
+            post create_subscription_stripe_index_path, params: { subscription_id: subscription.id }
+
+            assert_response :success
+            body = JSON.parse(response.body).deep_symbolize_keys
+            assert_empty body[:errors]
+            assert_equal 'subscription', body[:response]
+          end
+        end
+      end
+    end
+  end
+
+  test '#create_subscription - error' do
+    sign_in @user
+
+    Stripe::Customer.stub :create, OpenStruct.new(id: 'stripe_customer_id'), [email: @user.email] do
+      Stripe::PaymentMethod.stub :attach, -> (*) { raise Stripe::CardError.new('test', {})} do
+        post create_subscription_stripe_index_path, params: { subscription_id: @user.subscriptions.first.id }
+
+        assert_response :success
+        body = JSON.parse(response.body).deep_symbolize_keys
+        assert_equal ['test'], body[:errors]
+      end
+    end
+  end
 end
