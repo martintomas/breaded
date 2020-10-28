@@ -35,7 +35,7 @@ class Subscriptions::Subscribe
     order = subscription_period.orders.build user: subscription.user,
                                              delivery_date_from: delivery_date_from + week_modification.weeks,
                                              delivery_date_to: delivery_date_to + week_modification.weeks
-    order.order_state_relations.build order_state: OrderState.the_new
+    order.order_state_relations.build order_state_id: OrderState.the_new.id
     order.tap { |o| o.save! }
   end
 

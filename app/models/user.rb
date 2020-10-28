@@ -30,6 +30,10 @@ class User < ApplicationRecord
     addresses.detect(&:main?) || addresses.first
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def to_s
     "#{first_name} #{last_name} (#{email})"
   end

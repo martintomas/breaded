@@ -1,24 +1,36 @@
 import { Controller } from "stimulus"
 import { ShopBasketStorage } from "../storages/ShopBasketStorage";
 import { FormHelper } from "../services/FormHelper";
+import { SubscriptionPayment } from "../services/SubscriptionPayment";
 
 export default class extends Controller {
-    static targets = [ "form", "button" ]
+    static targets = [ "form", "button", "card" ]
 
     initialize() {
         this.basketStorage = ShopBasketStorage.getStorage();
         this.errorsArea = $('#error_explanation > ul');
+        this.subscriptionPayment = new SubscriptionPayment(this.cardTarget, this.buttonTarget);
+        this.confirmedData = null;
+        this.paid = false;
+    }
+
+    connect() {
+        this.subscriptionPayment.show();
+    }
+
+    disconnect() {
+        this.subscriptionPayment.destroyCardFields();
     }
 
     formSubmitted(event) {
         event.preventDefault();
         this.buttonTarget.disabled = true;
-        this.addBasketItems();
-        this.submitForm();
+        this.processWithFlow();
     }
 
-    submitForm() {
+    confirmForm() {
         this.buttonTarget.value = this.buttonTarget.dataset.confirmText;
+        this.addBasketItems();
 
         $.ajax({
             type: 'POST',
@@ -30,31 +42,31 @@ export default class extends Controller {
                     this.printErrors(data.errors);
                     window.scrollTo(0, this.errorsArea);
                 } else {
-                    this.basketStorage.reset();
-                    this.redirectToCheckout(data.response.subscription_id, data.response.stripe_checkout)
+                    this.confirmedData = data.response;
+                    this.processWithFlow()
                 }
             }
         });
     }
 
-    redirectToCheckout(subscriptionID, checkoutURL) {
-        this.buttonTarget.value = this.buttonTarget.dataset.redirectText;
+    doPayment() {
+        this.buttonTarget.value = this.buttonTarget.dataset.processingPayment;
 
-        $.ajax({
-            type: 'POST',
-            url: checkoutURL,
-            data: {
-                subscription_id: subscriptionID
-            },
-            dataType: 'json',
-            success: (data) => {
-                if(data.errors.length > 0) {
-                    alert(data.errors[0].message);
-                } else {
-                    this.stripe.redirectToCheckout({ sessionId: data.response.id })
-                }
-            }
+        this.subscriptionPayment.payFor(this.confirmedData.subscription_id, () => {
+            this.paid = true
+            this.processWithFlow();
         });
+    }
+
+    processWithFlow() {
+        if(this.confirmedData === null) {
+            this.confirmForm();
+        } else if(!this.paid) {
+            this.doPayment();
+        } else {
+            this.basketStorage.reset();
+            location.href = this.data.get('on-success-url');
+        }
     }
 
     addBasketItems() {

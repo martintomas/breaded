@@ -338,7 +338,7 @@ body.subscriptions {
     vertical-align: middle;
 
     height: 60px;
-    max-width: 350px;
+    max-width: 330px;
 
     padding: 20px 12px;
 
@@ -361,6 +361,15 @@ body.subscriptions {
 
   .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
+  }
+
+  .payment-card {
+    max-width: 330px;
+  }
+
+  .payment-card-holder {
+    max-width: 330px;
+    margin: 25px 0 0 0;
   }
 
   .textFeild label {

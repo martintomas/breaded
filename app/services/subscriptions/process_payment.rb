@@ -43,10 +43,11 @@ class Subscriptions::ProcessPayment
   end
 
   def inform_user_about_fail
-    return unless stripe_event['data']['object'].attempt_count > 1
+    invoice = stripe_event['data']['object']
+    return unless invoice.attempt_count > 1
 
-    # subscription = Subscription.find_by! stripe_subscription: stripe_event.object.subscription
-    # TODO: inform user
+    # subscription = Subscription.find_by! stripe_subscription: invoice.subscription
+    # TODO: inform user and prepare place where they can change their card
   end
 
   def subscription_period_for(subscription)

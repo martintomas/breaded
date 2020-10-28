@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     collection do
       post :checkout_session
       post :subscription_webhook
+      post :create_subscription
     end
   end
 

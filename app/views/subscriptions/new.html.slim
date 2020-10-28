@@ -1,5 +1,5 @@
 section.container
-  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='payment' data-payment-variant="#{@subscription_former.shopping_basket_variant}"
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='payment' data-payment-variant="#{@subscription_former.shopping_basket_variant}" data-payment-on-success-url="#{user_url(current_user)}"
     h2 = t 'app.get_breaded.title'
     section
       #error_explanation
@@ -12,7 +12,10 @@ section.container
         == render partial: 'subscriptions/new/calendar', locals: { f: f }
         == render partial: 'subscriptions/new/phone_number', locals: { f: f }
         == render partial: 'subscriptions/new/address', locals: { f: f }
-        = submit_tag I18n.t('app.get_breaded.submit'), data: { target: 'payment.button', 'origin-text' => I18n.t('app.get_breaded.submit'),
-              'confirm-text': I18n.t('app.get_breaded.confirming'), 'redirect-text': I18n.t('app.get_breaded.redirecting_to_payment_gate') }
+        == render partial: 'subscriptions/new/payment', locals: { f: f }
+        = submit_tag I18n.t('app.get_breaded.submit'), data: { target: 'payment.button',
+              'origin-text': I18n.t('app.get_breaded.submit'),
+              'confirm-text': I18n.t('app.stripe.confirming'),
+              'processing-payment': I18n.t('app.stripe.processing_payment') }
   .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12
 == render partial: 'shared/gift'

@@ -7,13 +7,15 @@ module Stripe
     attr_accessor :subscription_plan
 
     def perform(subscription_plan)
-      @subscription_plan = subscription_plan
+      subscription_plan.with_lock do
+        @subscription_plan = subscription_plan
 
-      upsert_product!
-      upsert_price!
+        upsert_product!
+        upsert_price!
 
-      subscription_plan.skip_stripe_sync = true
-      subscription_plan.save!
+        subscription_plan.skip_stripe_sync = true
+        subscription_plan.save!
+      end
     end
 
     private

@@ -14,8 +14,7 @@ class SubscriptionsController < ApplicationController
                                                                       .merge(subscription_params)
     @subscription_former.save
     render json: { errors: @subscription_former.errors.full_messages,
-                   response: { subscription_id: @subscription_former.subscription&.id,
-                               stripe_checkout: checkout_session_stripe_index_path } }.to_json
+                   response: { subscription_id: @subscription_former.subscription&.id } }.to_json
   end
 
   private

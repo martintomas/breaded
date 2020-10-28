@@ -11,6 +11,12 @@ class StripeController < ApplicationController
     render json: { errors: checkout.errors, response: { id: checkout.session_id }}.to_json
   end
 
+  def create_subscription
+    service = Subscriptions::AttachToUser.new Subscription.find(params[:subscription_id])
+    subscription = service.perform_for params[:payment_method_id]
+    render json: { errors: service.errors, response: subscription }.to_json
+  end
+
   def subscription_webhook
     begin
       event = Stripe::Webhook.construct_event(request.body.read, request.env['HTTP_STRIPE_SIGNATURE'], ENV['STRIPE_WEBHOOK_SECRET'])

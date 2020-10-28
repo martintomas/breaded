@@ -126,8 +126,7 @@ en:
     get_breaded:
       title: Get Breaded
       submit: Confirm & Procceed to Payment
-      confirming: Confirming...
-      redirecting_to_payment_gate: Redirecting to Payment Gate...
+
       address:
         title: Delivery Address
       calendar:
@@ -160,6 +159,9 @@ en:
     stripe:
       subscription_already_paid: 'Subscription is already paid!'
       card_errors_message: 'Card returned following error message: %{message}'
+      confirming: Confirming...
+      processing_payment: Processing Payment...
+      default_error: Payment was denied!
     twilio:
       phone_verification:
         message: "Your Breaded verification code is: %{code}"
