@@ -125,8 +125,7 @@ en:
       confirm: 'Confirm List'
     get_breaded:
       title: Get Breaded
-      submit: Confirm & Procceed to Payment
-
+      submit: Confirm & Pay
       address:
         title: Delivery Address
       calendar:
@@ -134,8 +133,6 @@ en:
         delivery_date: Delivery Date
         close: Close
         submit: Submit
-      payment:
-        title: Payment
       plans:
         title: Select Plan
         version_1_html: "Once Every Month </br> <i>%{num_breads} Breads x 1</i>"
@@ -151,9 +148,9 @@ en:
           title: Verify your phone number
           resend: Resend OTP
           confirm: Confirm & Verify
-    checkout:
-      title: Thank you for your subscription!
-      subtitle: Redirecting to payment gate
+      payment:
+        title: Your account details
+        submit: Confirm & Get Breaded
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
     stripe:

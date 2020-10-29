@@ -6,9 +6,9 @@
   #shopping-basket.selectedBreads.selectedBreadsActive
     span
       = t 'app.browse_bread.shopping_basket.breads_selected_html'
-      i.open-basket-button data-action='click->shop-basket#openBasket'
+      i.open-basket-button data-action='click->foods--shop-basket#openBasket'
         = t 'app.browse_bread.shopping_basket.open_button'
-      i.close-basket-button.active data-action='click->shop-basket#closeBasket'
+      i.close-basket-button.active data-action='click->foods--shop-basket#closeBasket'
         = t 'app.browse_bread.shopping_basket.close_button'
     .shopping-basket-items.active
   button.shopping-basket-confirm onclick="Turbolinks.visit('#{new_subscription_path(shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE)}')" = t 'app.surprise_me.confirm'

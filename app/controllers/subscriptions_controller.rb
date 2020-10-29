@@ -5,16 +5,22 @@ class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @subscription_former = Subscriptions::NewSubscriptionFormer.new shopping_basket_variant: params[:shopping_basket_variant],
+    subscription = Subscription.find_by_id params[:subscription_id]
+    @subscription_former = Subscriptions::NewSubscriptionFormer.new subscription: subscription,
+                                                                    shopping_basket_variant: params[:shopping_basket_variant],
                                                                     user: current_user
   end
 
   def create
     @subscription_former = Subscriptions::NewSubscriptionFormer.new subscription_former_params.merge(user: current_user)
                                                                       .merge(subscription_params)
-    @subscription_former.save
-    render json: { errors: @subscription_former.errors.full_messages,
-                   response: { subscription_id: @subscription_former.subscription&.id } }.to_json
+    if @subscription_former.save
+      puts params[:shopping_basket_variant].inspect
+      redirect_to new_subscription_payment_path(@subscription_former.subscription,
+                                                shopping_basket_variant: @subscription_former.shopping_basket_variant)
+    else
+      render :new
+    end
   end
 
   private

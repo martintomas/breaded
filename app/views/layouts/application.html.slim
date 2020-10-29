@@ -18,7 +18,7 @@ html[lang="#{I18n.locale}"]
     == csrf_meta_tags
     == csp_meta_tag
 
-  body.demo-1.loading data-controller='body' class="#{ controller.controller_name } #{ controller.action_name }" data-action='scroll@window->body#checkIfInView resize@window->body#checkIfInView'
+  body.demo-1.loading data-controller='components--body' class="#{ controller.controller_name } #{ controller.action_name }" data-action='scroll@window->components--body#checkIfInView resize@window->components--body#checkIfInView'
     == render partial: 'shared/menu'
     == yield
     == render partial: 'shared/footer'

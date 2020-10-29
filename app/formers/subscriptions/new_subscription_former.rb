@@ -12,8 +12,10 @@ module Subscriptions
 
     def initialize(attributes = {})
       super attributes
-      preload_address
       self.phone_number = user&.phone_number
+      self.subscription_plan_id ||= SubscriptionPlan.order(:id).first.id
+      preload_address
+      preload_subscription
     end
 
     def save
@@ -84,6 +86,13 @@ module Subscriptions
 
     def promote_errors(child_errors)
       child_errors.each { |attribute, message| errors.add(attribute, message) }
+    end
+
+    def preload_subscription
+      return if subscription.blank? || subscription.user != user || subscription.stripe_subscription.present?
+
+      self.subscription_plan_id = subscription.subscription_plan_id
+      self.delivery_date_from = subscription.orders.order(:delivery_date_from).first&.delivery_date_from
     end
 
     def preload_address

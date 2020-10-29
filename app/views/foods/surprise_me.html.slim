@@ -6,7 +6,7 @@ section.container
     #container
       #tab-container
         == render partial: 'foods/menu_tabs', locals: { page: 'surprise_me' }
-        #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12 data-controller='surprise-me' data-surprise-me-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
+        #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12 data-controller='foods--surprise-me' data-foods--surprise-me-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
           .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.surpriseSection.active
             .breads-lg-8.breads-md-8.breads-sm-8.breads-xs-12
               div == render partial: 'foods/surprise_me/ingredient_preferences'

@@ -2,31 +2,31 @@
 - featured_tag = Tag.find_by! code: 'featured', tag_type: TagType.the_other
 - producers = Producer.with_translations.order(:id)
 
-.filterSetion.sticker data-action='scroll@window->browse-bread-filter#keepFilterStick'
+.filterSetion.sticker data-action='scroll@window->foods--filter#keepFilterStick'
   span = t 'app.browse_bread.filter.label'
   ul.bakersBread
-    li#breads data-action='click->browse-bread-filter#changeFilterSection' = t 'app.browse_bread.filter.bread_section'
-    li#bakers data-action='click->browse-bread-filter#changeFilterSection' = t 'app.browse_bread.filter.bakers_section'
+    li#breads data-action='click->foods--filter#changeFilterSection' = t 'app.browse_bread.filter.bread_section'
+    li#bakers data-action='click->foods--filter#changeFilterSection' = t 'app.browse_bread.filter.bakers_section'
   ul.listItems.breadsList
-    li data-action='click->browse-bread-filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "breads-all" }
-    li data-action='click->browse-bread-filter#changeFilterCategory' = link_to featured_tag.localized_name, '#', data: { name: "breads-#{featured_tag.id}" }
+    li data-action='click->foods--filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "breads-all" }
+    li data-action='click->foods--filter#changeFilterCategory' = link_to featured_tag.localized_name, '#', data: { name: "breads-#{featured_tag.id}" }
     - tags.each do |tag|
-      li data-action='click->browse-bread-filter#changeFilterCategory' = link_to tag.localized_name, '#', data: { name: "breads-#{tag.id}" }
+      li data-action='click->foods--filter#changeFilterCategory' = link_to tag.localized_name, '#', data: { name: "breads-#{tag.id}" }
   ul.listItems.bakersList
-    li data-action='click->browse-bread-filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "bakers-all" }
+    li data-action='click->foods--filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "bakers-all" }
     - producers.each do |producer|
-      li data-action='click->browse-bread-filter#changeFilterCategory' = link_to producer.localized_name, '#', data: { name: "bakers-#{producer.id}" }
+      li data-action='click->foods--filter#changeFilterCategory' = link_to producer.localized_name, '#', data: { name: "bakers-#{producer.id}" }
   section.main
     .wrapper-demo
       .wrapper-dropdown-3 tabindex="1"
-        i#dd data-action='click->browse-bread-filter#toggleMobDropdown'
+        i#dd data-action='click->foods--filter#toggleMobDropdown'
         span.dd = ''
         ul.dropdown.breadsListMob
-          li data-action='click->browse-bread-filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "breads-all" }
-          li data-action='click->browse-bread-filter#changeFilterCategory' = link_to featured_tag.localized_name, '#', data: { name: "breads-#{featured_tag.id}" }
+          li data-action='click->foods--filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "breads-all" }
+          li data-action='click->foods--filter#changeFilterCategory' = link_to featured_tag.localized_name, '#', data: { name: "breads-#{featured_tag.id}" }
           - tags.each do |tag|
-            li data-action='click->browse-bread-filter#changeFilterCategory' = link_to tag.localized_name, '#', data: { name: "breads-#{tag.id}" }
+            li data-action='click->foods--filter#changeFilterCategory' = link_to tag.localized_name, '#', data: { name: "breads-#{tag.id}" }
         ul.dropdown.bakersListMob
-          li data-action='click->browse-bread-filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "baker-all" }
+          li data-action='click->foods--filter#changeFilterCategory' = link_to t('app.browse_bread.filter.all'), '#', data: { name: "baker-all" }
           - producers.each do |producer|
-            li data-action='click->browse-bread-filter#changeFilterCategory' = link_to producer.localized_name, '#', data: { name: "bakers-#{producer.id}" }
+            li data-action='click->foods--filter#changeFilterCategory' = link_to producer.localized_name, '#', data: { name: "bakers-#{producer.id}" }

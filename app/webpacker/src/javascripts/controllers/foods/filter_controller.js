@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
-import { ShopBasketMutation } from "../mutations/ShopBasketMutation";
-import { QuerySelectorBuilder } from "../services/QuerySelectorBuilder";
-import { ShoppingButtonUpdater } from "../services/ShoppingButtonUpdater";
+import { ShopBasketMutation } from "../../mutations/ShopBasketMutation";
+import { QuerySelectorBuilder } from "../../services/foods/QuerySelectorBuilder";
+import { ShoppingButtonUpdater } from "../../services/foods/ShoppingButtonUpdater";
 
 require('intersection-observer');
 

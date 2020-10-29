@@ -8,7 +8,7 @@ span
     = text_field_tag :delivery_date, '', required: true, id: :delivery_date_from_field
     = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
     = image_pack_tag('media/images/calender.png')
-#calender.overlay data-controller='calendar'
+#calender.overlay data-controller='components--calendar'
   .popup
     .monthSec
       label = "#{calendar_presenter.start_date} - #{calendar_presenter.end_date}"
@@ -21,5 +21,5 @@ span
             span = date.strftime('%b, %Y')
           - times.each do |time|
             li
-              span data-action="click->calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
+              span data-action="click->components--calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
     /button = t 'app.get_breaded.calendar.submit'

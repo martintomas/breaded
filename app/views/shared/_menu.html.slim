@@ -1,7 +1,7 @@
-header.header data-controller='header' data-target='header.menu' data-action='scroll@window->header#hideHeader' data-header-last-scroll='0' data-header-delta='5'
+header.header data-controller='components--header' data-target='components--header.menu' data-action='scroll@window->components--header#hideHeader' data-components--header-last-scroll='0' data-components--header-delta='5'
   div
     = link_to inline_svg_pack_tag('media/images/logo.svg', style: 'width: 150px; height: 64px;'), root_path, class: 'logo'
-    input.menu-btn#menu-btn type='checkbox' data-action='click->header#toggleMobMenu'
+    input.menu-btn#menu-btn type='checkbox' data-action='click->components--header#toggleMobMenu'
     label.menu-icon for='menu-btn'
       span.navicon
     ul.menu

@@ -1,6 +1,6 @@
 import { Controller } from "stimulus"
-import { ShopBasketMutation } from "../mutations/ShopBasketMutation";
-import { ShopBasketViewHelper } from "../services/ShopBasketViewHelper";
+import { ShopBasketMutation } from "../../mutations/ShopBasketMutation";
+import { ShopBasketViewHelper } from "../../services/foods/ShopBasketViewHelper";
 
 export default class extends Controller {
     initialize() {

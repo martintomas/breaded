@@ -1,21 +1,16 @@
 section.container
-  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='payment' data-payment-variant="#{@subscription_former.shopping_basket_variant}" data-payment-on-success-url="#{user_url(current_user)}"
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='subscriptions--confirmation' data-subscriptions--confirmation-variant="#{@subscription_former.shopping_basket_variant}"
     h2 = t 'app.get_breaded.title'
     section
-      #error_explanation
-        ul
+      == render 'shared/error_messages', resource: @subscription_former
       = form_for @subscription_former, url: subscriptions_path, method: :post, html: { class: 'breadedPlan' },
-            data: { target: 'payment.form', action: 'submit->payment#formSubmitted' } do |f|
+            data: { target: 'subscriptions--confirmation.form', action: 'submit->subscriptions--confirmation#formSubmitted' } do |f|
         = f.hidden_field :shopping_basket_variant
         = f.hidden_field :delivery_date_from, id: :delivery_date_from_hidden_field
         == render partial: 'subscriptions/new/subscription_plans', locals: { f: f }
         == render partial: 'subscriptions/new/calendar', locals: { f: f }
         == render partial: 'subscriptions/new/phone_number', locals: { f: f }
         == render partial: 'subscriptions/new/address', locals: { f: f }
-        == render partial: 'subscriptions/new/payment', locals: { f: f }
-        = submit_tag I18n.t('app.get_breaded.submit'), data: { target: 'payment.button',
-              'origin-text': I18n.t('app.get_breaded.submit'),
-              'confirm-text': I18n.t('app.stripe.confirming'),
-              'processing-payment': I18n.t('app.stripe.processing_payment') }
+        = submit_tag I18n.t('app.get_breaded.submit')
   .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12
 == render partial: 'shared/gift'

@@ -1,5 +1,5 @@
 section.container
-  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.breadDescription data-controller='shop-basket' data-shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
+  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.breadDescription data-controller='foods--shop-basket' data-foods--shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
     .breads-lg-8.breads-md-8.breads-sm-8.breads-xs-12
       ul.breadcrumbs
         li onclick="Turbolinks.visit('#{foods_path}')" = t 'app.menu.browse_breads'

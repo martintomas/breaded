@@ -1,8 +1,0 @@
-span = t 'app.get_breaded.payment.title'
-#card-errors
-.textFeild
-  .payment-card data-target='payment.card' data-subscription-url="#{create_subscription_stripe_index_path}" data-default-error="#{I18n.t('app.stripe.default_error')}"
-.textFeild
-  .payment-card-holder data-target='payment.cardHolder'
-    = text_field_tag :cardholder, current_user.full_name
-    = label_tag :cardholder

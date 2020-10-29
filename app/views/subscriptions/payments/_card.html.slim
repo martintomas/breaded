@@ -1,0 +1,9 @@
+.textFeild
+  span
+    = f.text_field :first_name, data: { target: 'subscriptions--payment.firstName' }
+    = f.label :first_name
+  span
+    = f.text_field :last_name, data: { target: 'subscriptions--payment.lastName' }
+    = f.label :last_name
+.textFeild
+  .payment-card data-target='subscriptions--payment.card'

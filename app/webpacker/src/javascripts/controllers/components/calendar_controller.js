@@ -4,7 +4,7 @@ require('slick-carousel');
 
 export default class extends Controller {
     initialize() {
-        this.arrowImage = require('../../../images/arrow.png');
+        this.arrowImage = require('../../../../images/arrow.png');
         this.dateField = $('#delivery_date_from_field');
         this.dateFieldHidden = $('#delivery_date_from_hidden_field');
     }

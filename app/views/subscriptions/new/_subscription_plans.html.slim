@@ -1,7 +1,7 @@
 span = t 'app.get_breaded.plans.title'
 - SubscriptionPlan.includes(:currency).order(:id).each_with_index do |subscription_plan, index|
   div
-    = f.radio_button :subscription_plan_id, subscription_plan.id, checked: index.zero?
+    = f.radio_button :subscription_plan_id, subscription_plan.id
     = f.label :subscription_plan_id, value: subscription_plan.id do
       span = t "app.get_breaded.plans.version_#{subscription_plan.number_of_deliveries}_html",
               num_breads: Rails.application.config.options[:default_number_of_breads]

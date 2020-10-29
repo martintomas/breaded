@@ -1,6 +1,6 @@
 import { Controller } from "stimulus"
-import { SurpriseMeMutation } from "../mutations/SurpriseMeMutation";
-import { SurpriseMeViewHelper } from "../services/SurpriseMeViewHelper";
+import { SurpriseMeMutation } from "../../mutations/SurpriseMeMutation";
+import { SurpriseMeViewHelper } from "../../services/foods/SurpriseMeViewHelper";
 
 export default class extends Controller {
   initialize() {

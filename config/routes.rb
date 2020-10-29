@@ -18,7 +18,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :subscriptions, only: %i[new create]
+  resources :subscriptions, only: %i[new create] do
+    scope module: :subscriptions do
+      resources :payments, only: %i[new]
+    end
+  end
 
   resources :stripe, only: %i[] do
     collection do

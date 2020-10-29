@@ -1,4 +1,4 @@
-import { SurpriseMeMutation } from "../mutations/SurpriseMeMutation";
+import { SurpriseMeMutation } from "../../mutations/SurpriseMeMutation";
 import { QuerySelectorBuilder } from "./QuerySelectorBuilder";
 import { ShoppingButtonUpdater } from "./ShoppingButtonUpdater";
 

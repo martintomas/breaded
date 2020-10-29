@@ -1,4 +1,4 @@
-import { ShopBasketMutation } from "../mutations/ShopBasketMutation";
+import { ShopBasketMutation } from "../../mutations/ShopBasketMutation";
 import { QuerySelectorBuilder } from "./QuerySelectorBuilder";
 import { ShoppingButtonUpdater } from "./ShoppingButtonUpdater";
 

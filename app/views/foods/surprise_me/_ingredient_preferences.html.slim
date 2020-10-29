@@ -8,6 +8,6 @@ span
       li = tag.localized_name
       li
         .numbers-row
-          .inc.button data-tag-id="#{tag.id}" data-tag-name="#{tag.localized_name}" data-action='click->surprise-me#addItem' = '+'
+          .inc.button data-tag-id="#{tag.id}" data-tag-name="#{tag.localized_name}" data-action='click->foods--surprise-me#addItem' = '+'
           input type="text" value="0"
-          .dec.button data-tag-id="#{tag.id}" data-action='click->surprise-me#removeItem' = '-'
+          .dec.button data-tag-id="#{tag.id}" data-action='click->foods--surprise-me#removeItem' = '-'
