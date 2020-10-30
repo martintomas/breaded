@@ -163,6 +163,7 @@ en:
       phone_verification:
         message: "Your Breaded verification code is: %{code}"
         invalid_number: "Your phone number doesn't seem valid. Please double check filled phone number!"
+        already_verified: "Your phone number is already verified!"
         too_many_requests:
           one: "New verification SMS can be sent at %{minutes} minute."
           other: "New verification SMS can be sent at %{minutes} minutes."
@@ -176,9 +177,9 @@ en:
         subscriptions/new_subscription_former:
           attributes:
             base:
-              missing_items: "Shopping basket doesn't contain required number of items."
-              too_many_items: "Your shopping basket contains too many items. Please remove some of them before you will proceed."
-              missing_food_item: "Item with name %{name} was not found. Please remove it from your shopping basket."
+              missing_items: "Shopping basket doesn't contain required number of items. Please pick some breads ;)"
+              too_many_items: "Your shopping basket contains too many breads. Please remove some of them before you will proceed."
+              missing_food_item: "Bread with name %{name} was not found. Please remove it from your shopping basket."
               already_active_subscription: "You already have active subscription. Please visit your profile page if you want to manipulate with your subscription."
             phone_number:
               not_valid: 'has to be filled and verified.'

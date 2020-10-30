@@ -31,20 +31,26 @@ class Twilio::VerifyPhoneNumberTest < ActiveSupport::TestCase
     assert_equal [I18n.t('app.twilio.phone_verification.too_many_requests', minutes: delay, count: delay)], service.errors
   end
 
+  test '#send - already verified' do
+    service = Twilio::VerifyPhoneNumber.new(@user, @user.phone_number)
+    service.send
+    assert_equal [I18n.t('app.twilio.phone_verification.already_verified')], service.errors
+  end
+
   test '#send - sends sms when phone number is valid' do
     frozen_time = Time.current
     expected_message = { body: I18n.t('app.twilio.phone_verification.message', code: @random_number),
                          from: ENV['TWILIO_PHONE_NUMBER'],
-                         to: '+420734370408' }
+                         to: '+420734370407' }
     travel_to frozen_time do
       Twilio::VerifyPhoneNumber.stub_any_instance :random_number, @random_number do
         Twilio::REST::Client.stub :new, mock_twilio_for(expected_message) do
-          service = Twilio::VerifyPhoneNumber.new(@user, '+420734370408')
+          service = Twilio::VerifyPhoneNumber.new(@user, '+420734370407')
           service.send
 
           @user.reload
           assert_empty service.errors
-          assert_equal '+420734370408', @user.unconfirmed_phone
+          assert_equal '+420734370407', @user.unconfirmed_phone
           assert_equal @random_number.to_s, @user.phone_confirmation_token
           assert_equal frozen_time.to_i, @user.phone_confirmation_sent_at.to_i
         end
@@ -56,12 +62,27 @@ class Twilio::VerifyPhoneNumberTest < ActiveSupport::TestCase
     @user.update! phone_confirmation_sent_at: Time.current - Twilio::VerifyPhoneNumber::DELAY_BETWEEN_SMS.minutes
     Twilio::VerifyPhoneNumber.stub_any_instance :random_number, @random_number do
       Twilio::REST::Client.stub :new, mock_twilio_for do
-        service = Twilio::VerifyPhoneNumber.new(@user, '+420734370408')
+        service = Twilio::VerifyPhoneNumber.new(@user, '+420734370407')
         service.send
 
         @user.reload
         assert_empty service.errors
-        assert_equal '+420734370408', @user.unconfirmed_phone
+        assert_equal '+420734370407', @user.unconfirmed_phone
+        assert_equal @random_number.to_s, @user.phone_confirmation_token
+      end
+    end
+  end
+
+  test '#send - sends sms when phone number is valid and user do not have any verified phone number yet' do
+    @user.update! phone_number: nil
+    Twilio::VerifyPhoneNumber.stub_any_instance :random_number, @random_number do
+      Twilio::REST::Client.stub :new, mock_twilio_for do
+        service = Twilio::VerifyPhoneNumber.new(@user, '+420734370407')
+        service.send
+
+        @user.reload
+        assert_empty service.errors
+        assert_equal '+420734370407', @user.unconfirmed_phone
         assert_equal @random_number.to_s, @user.phone_confirmation_token
       end
     end

@@ -12,7 +12,7 @@ class Twilio::VerifyPhoneNumber
   end
 
   def send
-    return if too_many_requests? || !valid_number?
+    return if too_many_requests? || !valid_number? || already_verified?
 
     send_sms
     user.update! unconfirmed_phone: phone_number, phone_confirmation_token: random_number, phone_confirmation_sent_at: Time.current
@@ -23,7 +23,7 @@ class Twilio::VerifyPhoneNumber
   private
 
   def valid_number?
-    self.phone_number = Phony.normalize phone_number
+    self.phone_number = add_missing_plus_to Phony.normalize(phone_number)
     errors << I18n.t('app.twilio.phone_verification.invalid_number') unless Phony.plausible?(phone_number)
     errors.blank?
   end
@@ -37,9 +37,20 @@ class Twilio::VerifyPhoneNumber
     !errors.blank?
   end
 
+  def already_verified?
+    errors << I18n.t('app.twilio.phone_verification.already_verified') if phone_number == add_missing_plus_to(user.phone_number)
+    !errors.blank?
+  end
+
   def send_sms
     client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
-    client.messages.create(body: message, from: ENV['TWILIO_PHONE_NUMBER'], to: '+' + phone_number)
+    client.messages.create(body: message, from: ENV['TWILIO_PHONE_NUMBER'], to: phone_number)
+  end
+
+  def add_missing_plus_to(phone_number)
+    return phone_number if phone_number.blank? || phone_number[0] == '+'
+
+    '+' + phone_number
   end
 
   def random_number

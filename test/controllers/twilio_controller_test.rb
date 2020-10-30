@@ -25,14 +25,14 @@ class TwilioControllerTest < ActionDispatch::IntegrationTest
 
   test '#sent_verification_sms - sms is send successfully' do
     Twilio::REST::Client.stub :new, mock_twilio_for do
-      post sent_verification_sms_twilio_index_path, params: { phone_number: '+420734370408' }
+      post sent_verification_sms_twilio_index_path, params: { phone_number: '+420734370407' }
 
       assert_response :success
 
       @user.reload
       body = JSON.parse(response.body).symbolize_keys
       assert_empty body[:errors]
-      assert_equal '+420734370408', @user.unconfirmed_phone
+      assert_equal '+420734370407', @user.unconfirmed_phone
     end
   end
 

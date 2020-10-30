@@ -36,12 +36,9 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
                                                  basket_items:
                                                    [{ id: foods(:rye_bread).id, amount: 5 },
                                                     { id: foods(:seeded_bread).id,
-                                                      amount: Rails.application.config.options[:default_number_of_breads] - 5 }].to_json }, as: :json
-              assert_response :success
-
-              body = JSON.parse(response.body).deep_symbolize_keys
-              assert_empty body[:errors]
-              assert_equal Subscription.last.id, body[:response][:subscription_id]
+                                                      amount: Rails.application.config.options[:default_number_of_breads] - 5 }].to_json }
+              assert_redirected_to new_subscription_payment_path(Subscription.last,
+                                                                 shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE)
             end
           end
         end
@@ -55,11 +52,9 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
         assert_no_difference -> { SubscriptionPeriod.count } do
           assert_no_difference -> { Order.count } do
             post subscriptions_path, params: { subscriptions_new_subscription_former: { street: 'Street' },
-                                               basket_items: [] }, as: :json
+                                               basket_items: [] }
 
             assert_response :success
-            body = JSON.parse(response.body).deep_symbolize_keys
-            refute_empty body[:errors]
           end
         end
       end

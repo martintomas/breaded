@@ -29,8 +29,10 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
     assert model.valid?, model.errors.full_messages
   end
 
-  test 'the validity - without subscription_plan_id is not valid' do
-    invalid_with_missing Subscriptions::NewSubscriptionFormer, :subscription_plan_id
+  test 'the validity - without subscription_plan_id is valid' do
+    model = Subscriptions::NewSubscriptionFormer.new @full_content.except(:subscription_plan_id)
+    assert model.valid?, model.errors.full_messages
+    assert_equal SubscriptionPlan.order(:id).first.id, model.subscription_plan_id
   end
 
   test 'the validity - without delivery_date_from is valid' do

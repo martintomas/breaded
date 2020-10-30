@@ -15,7 +15,6 @@ class SubscriptionsController < ApplicationController
     @subscription_former = Subscriptions::NewSubscriptionFormer.new subscription_former_params.merge(user: current_user)
                                                                       .merge(subscription_params)
     if @subscription_former.save
-      puts params[:shopping_basket_variant].inspect
       redirect_to new_subscription_payment_path(@subscription_former.subscription,
                                                 shopping_basket_variant: @subscription_former.shopping_basket_variant)
     else
