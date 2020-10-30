@@ -91,8 +91,8 @@ module Subscriptions
     def preload_subscription
       return if subscription.blank? || subscription.user != user || subscription.stripe_subscription.present?
 
-      self.subscription_plan_id = subscription.subscription_plan_id
-      self.delivery_date_from = subscription.orders.order(:delivery_date_from).first&.delivery_date_from
+      self.subscription_plan_id ||= subscription.subscription_plan_id
+      self.delivery_date_from ||= subscription.orders.order(:delivery_date_from).first&.delivery_date_from
     end
 
     def preload_address

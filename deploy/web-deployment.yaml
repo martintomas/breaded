@@ -28,11 +28,11 @@ spec:
         image: registry.digitalocean.com/breaded/breaded-production:fb6f057
         resources:
           limits:
-            memory: 400Mi
+            memory: 300Mi
             cpu: 250m
           requests:
             cpu: 250m
-            memory: 400Mi
+            memory: 300Mi
         name: web
         ports:
         - containerPort: 3000

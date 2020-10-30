@@ -68,6 +68,14 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
     invalid_with_missing Subscriptions::NewSubscriptionFormer, :basket_items
   end
 
+  test 'the validity - delivery date from has to be at predefined times' do
+    @full_content[:delivery_date_from] = '14th Nov 2020 10:00:00'
+
+    former = Subscriptions::NewSubscriptionFormer.new @full_content
+    refute former.valid?
+    assert_equal :invalid_date, former.errors.details[:delivery_date_from].first[:error]
+  end
+
   test 'the validity - user cannot have any active subscription' do
     @user.subscriptions.first.update! active: true
 
@@ -93,6 +101,33 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
     assert_equal 'Street 1', former.street
     assert_equal '54546', former.postal_code
     assert_equal 'London', former.city
+  end
+
+  test '#initialize - it preloads data from old subscription' do
+    subscription = @user.subscriptions.first
+    @full_content[:subscription] = subscription
+
+    former = Subscriptions::NewSubscriptionFormer.new @full_content.except(:subscription_plan_id, :delivery_date_from)
+    assert_equal subscription.subscription_plan_id, former.subscription_plan_id
+    assert_equal subscription.orders.order(:delivery_date_from).first&.delivery_date_from, former.delivery_date_from
+  end
+
+  test '#initialize - it does not preload data when subscription is not yours' do
+    @full_content[:subscription] = subscriptions :customer_subscription_2
+
+    former = Subscriptions::NewSubscriptionFormer.new @full_content.except(:subscription_plan_id, :delivery_date_from)
+    assert_equal SubscriptionPlan.order(:id).first.id, former.subscription_plan_id
+    assert_nil former.delivery_date_from
+  end
+
+  test '#initialize - it does not preload data when subscription is already paid' do
+    subscription = @user.subscriptions.first
+    subscription.update! stripe_subscription: 'test', active: true
+    @full_content[:subscription] = subscription
+
+    former = Subscriptions::NewSubscriptionFormer.new @full_content.except(:subscription_plan_id, :delivery_date_from)
+    assert_equal SubscriptionPlan.order(:id).first.id, former.subscription_plan_id
+    assert_nil former.delivery_date_from
   end
 
   test '#save - new subscription gets saved' do

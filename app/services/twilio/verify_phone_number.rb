@@ -23,8 +23,8 @@ class Twilio::VerifyPhoneNumber
   private
 
   def valid_number?
-    self.phone_number = add_missing_plus_to Phony.normalize(phone_number)
-    errors << I18n.t('app.twilio.phone_verification.invalid_number') unless Phony.plausible?(phone_number)
+    self.phone_number = add_missing_plus_to PhonyRails.normalize_number(phone_number, default_country_code: 'UK')
+    errors << I18n.t('app.twilio.phone_verification.invalid_number') if phone_number.blank? || !Phony.plausible?(phone_number)
     errors.blank?
   end
 

@@ -146,6 +146,7 @@ en:
         link: Verify Phone Number
         popup:
           title: Verify your phone number
+          otp_code: OTP Code
           resend: Resend OTP
           confirm: Confirm & Verify
       payment:

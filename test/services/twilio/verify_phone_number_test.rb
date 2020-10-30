@@ -87,4 +87,18 @@ class Twilio::VerifyPhoneNumberTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test '#send - sends sms when phone number is in london format' do
+    Twilio::VerifyPhoneNumber.stub_any_instance :random_number, @random_number do
+      Twilio::REST::Client.stub :new, mock_twilio_for do
+        service = Twilio::VerifyPhoneNumber.new(@user, '07394111583')
+        service.send
+
+        @user.reload
+        assert_empty service.errors
+        assert_equal '+447394111583', @user.unconfirmed_phone
+        assert_equal @random_number.to_s, @user.phone_confirmation_token
+      end
+    end
+  end
 end

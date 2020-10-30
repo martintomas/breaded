@@ -72,7 +72,7 @@ export default class extends Controller {
         });
     }
 
-    handlePaymentThatRequiresCustomerAction(subscription, paymentMethodId, onSuccess) {
+    handlePaymentThatRequiresCustomerAction(subscription, paymentMethodId) {
         let paymentIntent = subscription.latest_invoice.payment_intent;
 
         if (paymentIntent.status === 'requires_action') {

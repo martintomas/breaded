@@ -27,9 +27,10 @@ class Orders::UpdateFromBasket
 
   def add_surprise_me_items!
     basket_items.each do |item|
-      next if tags[item[:id]].blank?
+      tag = tags[item[:id].to_i]
+      next if tag.blank?
 
-      order.order_surprises.create! tag: tags[item[:id]], amount: item[:amount]
+      order.order_surprises.create! tag: tag, amount: item[:amount]
     end
   end
 

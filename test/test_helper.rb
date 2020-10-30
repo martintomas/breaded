@@ -3,15 +3,12 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'webmock/minitest'
+require 'webmock_helper'
 require 'rails/test_help'
 require 'minitest/reporters'
 require 'minitest/mock'
 
 Minitest::Reporters.use!
-
-allowed_sites = [Regexp.new('chromedriver.storage.googleapis.com')]
-allowed_sites += [Regexp.new(ENV['SELENIUM_URL'])] if ENV['SELENIUM_URL'].present?
-WebMock.disable_net_connect!(allow_localhost: true, allow: allowed_sites)
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers

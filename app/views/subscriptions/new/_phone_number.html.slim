@@ -15,7 +15,7 @@ span.phoneNum
           .textFeild
             .phone-number-errors data-target="components--phone-number.confirmVerificationErrors"
             span
-              = password_field_tag 'OTP Code', '', data: { target: "components--phone-number.phoneTokenInput" }
-              = label_tag 'OTP Code'
+              = password_field_tag I18n.t('app.get_breaded.phone_number.popup.otp_code'), '', data: { target: "components--phone-number.phoneTokenInput" }
+              = label_tag I18n.t('app.get_breaded.phone_number.popup.otp_code'), I18n.t('app.get_breaded.phone_number.popup.otp_code')
               = link_to I18n.t('app.get_breaded.phone_number.popup.resend'), '#', data: { turbolinks: false, action: 'components--phone-number#sendVerificationCode' }
           button data-action='components--phone-number#verifyVerificationCode' = I18n.t('app.get_breaded.phone_number.popup.confirm')
