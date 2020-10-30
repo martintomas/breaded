@@ -25,14 +25,14 @@ spec:
               name: breaded-config
           - secretRef:
               name: breaded-secrets
-        image: registry.digitalocean.com/breaded/breaded-production:42a1783
+        image: registry.digitalocean.com/breaded/breaded-production:a574fcd
         resources:
           limits:
-            memory: 250Mi
+            memory: 500Mi
             cpu: 250m
           requests:
             cpu: 250m
-            memory: 250Mi
+            memory: 500Mi
         name: web
         ports:
         - containerPort: 3000
