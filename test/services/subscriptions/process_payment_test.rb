@@ -7,14 +7,14 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
     @subscription = subscriptions :customer_subscription_1
     @subscription_period = subscription_periods :customer_1_subscription_1_period
 
+    @subscription_created_params = object_to_methods JSON.parse(file_fixture('stripe/customer_subscription_created.json').read)
+    @subscription_created_params['data']['object'].metadata['subscription_id'] = @subscription.id
     @invoice_paid_params = object_to_methods JSON.parse(file_fixture('stripe/invoice_paid.json').read)
-    @invoice_paid_params['data']['object'].metadata['subscription_id'] = @subscription.id
     @invoice_payment_failed_params = object_to_methods JSON.parse(file_fixture('stripe/invoice_payment_failed.json').read)
   end
 
-  test '#perform - invoice.paid updates stripe_subscription' do
-    @invoice_paid_params['data']['object'].billing_reason = 'subscription_create'
-    Subscriptions::ProcessPayment.new(@invoice_paid_params).perform
+  test '#perform - customer.subscription.created' do
+    Subscriptions::ProcessPayment.new(@subscription_created_params).perform
 
     @subscription.reload
     assert_equal "NEW PAID SUBSCRIPTION", @subscription.stripe_subscription
