@@ -21,7 +21,8 @@ class Stripe::CreateSubscription
     Stripe::Customer.update stripe_customer_id, invoice_settings: { default_payment_method: payment_method_id }
     Stripe::Subscription.create customer: stripe_customer_id,
                                 items: [{ price: subscription.subscription_plan.stripe_price }],
-                                expand: %w[latest_invoice.payment_intent]
+                                expand: %w[latest_invoice.payment_intent],
+                                metadata: { subscription_id: subscription.id }
   end
 
   def stripe_customer_id

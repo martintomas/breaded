@@ -9,8 +9,6 @@ class Subscriptions::ProcessPayment
 
   def perform
     case stripe_event['type']
-    when 'checkout.session.completed'
-      run_checkout_completed_actions
     when 'invoice.paid'
       run_invoice_paid_actions
     when 'invoice.payment_failed'
@@ -20,19 +18,9 @@ class Subscriptions::ProcessPayment
 
   private
 
-  def run_checkout_completed_actions
-    checkout_session = stripe_event['data']['object']
-    subscription = Subscription.find checkout_session.metadata['subscription_id']
-    subscription.update! stripe_subscription: checkout_session.subscription, active: true
-    Subscriptions::MarkAsPaid.new(subscription).perform
-  end
-
   def run_invoice_paid_actions
     invoice = stripe_event['data']['object']
-    return if invoice.billing_reason == 'subscription_create'
-
-    subscription = Subscription.find_by! stripe_subscription: invoice.subscription
-    Subscriptions::MarkAsPaid.new(subscription).perform
+    Subscriptions::MarkAsPaid.new(subscription_from(invoice)).perform
   end
 
   def inform_user_about_fail
@@ -41,5 +29,13 @@ class Subscriptions::ProcessPayment
 
     # subscription = Subscription.find_by! stripe_subscription: invoice.subscription
     # TODO: inform user and prepare place where they can change their card
+  end
+
+  def subscription_from(invoice)
+    Subscription.find_by! stripe_subscription: invoice.subscription unless invoice.billing_reason == 'subscription_create'
+
+    Subscription.find(invoice.metadata['subscription_id']).tap do |subscription|
+      subscription.update! stripe_subscription: invoice.subscription, active: true
+    end
   end
 end

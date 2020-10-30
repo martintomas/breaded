@@ -25,7 +25,8 @@ class Stripe::CreateSubscriptionTest < ActiveSupport::TestCase
                                             invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
         Stripe::Subscription.stub :create, true, [customer: 'stripe_customer_id',
                                                   items: [{ price: @subscription.subscription_plan.stripe_price }],
-                                                  expand: %w[latest_invoice.payment_intent]] do
+                                                  expand: %w[latest_invoice.payment_intent],
+                                                  metadata: { subscription_id: @subscription.id }] do
           @service.perform_for 'stripe_payment_method_id'
           assert_empty @service.errors
         end
@@ -40,7 +41,8 @@ class Stripe::CreateSubscriptionTest < ActiveSupport::TestCase
                                               invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
           Stripe::Subscription.stub :create, true, [customer: 'stripe_customer_id',
                                                     items: [{ price: @subscription.subscription_plan.stripe_price }],
-                                                    expand: %w[latest_invoice.payment_intent]] do
+                                                    expand: %w[latest_invoice.payment_intent],
+                                                    metadata: { subscription_id: @subscription.id }] do
             @service.perform_for 'stripe_payment_method_id'
             assert_empty @service.errors
           end

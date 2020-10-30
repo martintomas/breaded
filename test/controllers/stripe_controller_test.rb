@@ -57,7 +57,8 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
                                               invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
           Stripe::Subscription.stub :create, 'subscription', [customer: 'stripe_customer_id',
                                                     items: [{ price: subscription.subscription_plan.stripe_price }],
-                                                    expand: %w[latest_invoice.payment_intent]] do
+                                                    expand: %w[latest_invoice.payment_intent],
+                                                    metadata: { subscription_id: subscription.id }] do
             post create_subscription_stripe_index_path, params: { subscription_id: subscription.id }
 
             assert_response :success

@@ -97,7 +97,7 @@
             },
             "proration":false,
             "quantity":1,
-            "subscription":null,
+            "subscription":"NEW PAID SUBSCRIPTION",
             "tax_amounts":[
 
             ],
@@ -133,7 +133,7 @@
         "paid_at":1603546603,
         "voided_at":null
       },
-      "subscription":null,
+      "subscription":"NEW PAID SUBSCRIPTION",
       "subtotal":2000,
       "tax":null,
       "total":2000,
@@ -253,7 +253,7 @@
               },
               "proration":false,
               "quantity":1,
-              "subscription":null,
+              "subscription":"NEW PAID SUBSCRIPTION",
               "tax_amounts":[
 
               ],
@@ -289,7 +289,7 @@
           "paid_at":1603546603,
           "voided_at":null
         },
-        "subscription":null,
+        "subscription":"NEW PAID SUBSCRIPTION",
         "subtotal":2000,
         "tax":null,
         "total":2000,
