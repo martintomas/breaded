@@ -270,7 +270,7 @@ body.subscriptions, body.payments.new {
     color: #333333;
   }
 
-  .breadedPlan > span {
+  .breadedPlan > span, .billing-address-section > span {
     margin-bottom: 40px;
     display: block;
     font-size: 18px !important;
@@ -305,6 +305,25 @@ body.subscriptions, body.payments.new {
 
   .textFeild span {
     margin-right: 30px;
+
+    &.phone-number-section {
+      margin-right: 0;
+
+      .phone-number-field {
+        margin-right: 0;
+      }
+
+      .verified-icon {
+        display: none;
+        margin-left: 25px;
+        margin-right: 0;
+        top: 30px;
+
+        &.active {
+          display: inline-block;
+        }
+      }
+    }
   }
 
   .textFeild input {
@@ -464,6 +483,25 @@ body.subscriptions, body.payments.new {
     .textFeild > span {
       display: block;
       margin-right: 0%;
+
+      &.phone-number-section {
+        margin-right: 0;
+        margin-bottom: 50px;
+
+        .phone-number-field {
+          display: block;
+
+          input {
+            margin-bottom: 0 !important;
+          }
+        }
+
+        .verified-icon {
+          top: 0;
+          padding: 5px 10px;
+          margin-left: 0;
+        }
+      }
     }
     input[type="submit"] {
       font-size: 18px;
@@ -520,11 +558,11 @@ body.subscriptions, body.payments.new {
     opacity: 0;
     margin-bottom: 0 !important;
     z-index: 99;
-  }
 
-  .overlay:target {
-    visibility: visible;
-    opacity: 1;
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   .popup {
@@ -636,12 +674,12 @@ body.subscriptions, body.payments.new {
     border-radius: 5px;
     cursor: pointer;
     display: inline-block;
-  }
 
-  .dateSec ul li span:hover {
-    background: black;
-    color: #fff;
-    font-weight: 500;
+    &:hover, &.active {
+      background: black;
+      color: #fff;
+      font-weight: 500;
+    }
   }
 
   .popup button {
@@ -656,10 +694,17 @@ body.subscriptions, body.payments.new {
 
   .verifyPhone {
     position: absolute;
+    visibility: hidden;
+    opacity: 0;
     top: 30px;
     right: 14px;
     font-size: 10px;
     color: #333333;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   .phoneNum sup {

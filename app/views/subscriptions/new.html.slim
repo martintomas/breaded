@@ -1,7 +1,7 @@
 section.container
   .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='subscriptions--confirmation' data-subscriptions--confirmation-variant="#{@subscription_former.shopping_basket_variant}"
     h2 = t 'app.get_breaded.title'
-    section
+    section data-controller='components--calendar'
       == render 'shared/error_messages', resource: @subscription_former
       = form_for @subscription_former, url: subscriptions_path, method: :post, html: { class: 'breadedPlan' },
             data: { target: 'subscriptions--confirmation.form', action: 'submit->subscriptions--confirmation#formSubmitted' } do |f|

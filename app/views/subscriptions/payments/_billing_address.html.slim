@@ -1,9 +1,11 @@
 .textFeild
   = label_tag :same_as_delivery_address, class: 'checkbox-container' do
-    = 'Billing address is same as delivery'
+    = t 'app.get_breaded.payment.billing_option'
     = check_box_tag :same_as_delivery_address, '', true, data: { target: 'subscriptions--payment.billingAddressCheckbox', action: 'subscriptions--payment#toggleAddress' }
     span class="checkmark"
 .billing-address-section
+  span
+    = t 'app.get_breaded.payment.billing_address.title'
   .textFeild
     span
       = text_field_tag :address_line, '', data: { target: 'subscriptions--payment.addressLine', "default-value": "#{f.object.address&.address_line}" }

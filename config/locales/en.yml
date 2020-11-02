@@ -144,14 +144,18 @@ en:
       phone_number:
         title: Your Phone Number
         link: Verify Phone Number
+        verified: Verified
         popup:
           title: Verify your phone number
           otp_code: OTP Code
           resend: Resend OTP
           confirm: Confirm & Verify
       payment:
-        title: Your account details
-        submit: Confirm & Get Breaded
+        billing_address:
+          title: Billing Address
+        title: Your card details
+        billing_option: 'Billing address is same as delivery address'
+        submit: Confirm payment & Get Breaded
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
     stripe:

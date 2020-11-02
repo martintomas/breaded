@@ -3,29 +3,52 @@ import { Controller } from "stimulus"
 require('slick-carousel');
 
 export default class extends Controller {
+    static targets = [ "popup"];
+
     initialize() {
         this.arrowImage = require('../../../../images/arrow.png');
         this.dateField = $('#delivery_date_from_field');
         this.dateFieldHidden = $('#delivery_date_from_hidden_field');
+        this.selectedTimeField = $('div#calender ul.slide > li > span.active')[0];
     }
 
     connect() {
-        this.updateDateField();
+        this.updateDateFields(this.dateFieldHidden.val());
         this.initializeSlider();
     }
 
-    selectDate(event) {
-        this.dateFieldHidden.val(event.target.dataset.timestamp);
-        this.updateDateField();
-        window.location.hash = ''
+    open(event) {
+        event.preventDefault();
+        this.popupTarget.classList.add("active");
     }
 
-    updateDateField() {
-        if(this.dateFieldHidden.val() === '') { return; }
+    close(event) {
+        event.preventDefault();
+        this.popupTarget.classList.remove("active");
+    }
 
-        let date = new Date(this.dateFieldHidden.val());
+    selectDate(event) {
+        event.preventDefault();
+        if(this.selectedTimeField) { this.selectedTimeField.classList.remove("active"); }
+        this.selectedTimeField = event.target
+        this.selectedTimeField.classList.add("active");
+    }
+
+    submit(event) {
+        event.preventDefault();
+        if(this.selectedTimeField === undefined) { return this.close(event); }
+
+        this.updateDateFields(this.selectedTimeField.dataset.timestamp);
+        this.close(event);
+    }
+
+    updateDateFields(timestamp) {
+        if(timestamp === '') { return; }
+
+        let date = new Date(timestamp);
         let dateString = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
         this.dateField.val(dateString);
+        this.dateFieldHidden.val(timestamp);
     }
 
     initializeSlider() {
@@ -35,7 +58,7 @@ export default class extends Controller {
             autoplay: false,
             autoplaySpeed: 1500,
             infinite: false,
-            arrows: true,
+            arrows: false,
             prevArrow: '<div class="slick-prev"><img src="' + this.arrowImage + '" /></div>',
             nextArrow: '<div class="slick-next"><img src="' + this.arrowImage + '" /></div>',
             dots: false,
@@ -48,6 +71,7 @@ export default class extends Controller {
             }, {
                 breakpoint: 520,
                 settings: {
+                    arrows: true,
                     slidesToShow: 2
                 }
             }]

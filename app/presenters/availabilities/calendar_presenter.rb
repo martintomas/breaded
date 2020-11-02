@@ -1,18 +1,19 @@
 # frozen_string_literal: true
 
 class Availabilities::CalendarPresenter
-  attr_accessor :to_time
+  attr_accessor :from_time, :to_time
 
-  def initialize(to_time: 1.month.from_now)
+  def initialize(from_time: Time.current, to_time: 1.month.from_now)
+    @from_time = from_time
     @to_time = to_time
   end
 
   def start_date
-    calendar_data.min { |r| r.first }.first.strftime('%e.%B')
+    calendar_data.min { |r| r.first }.first.strftime('%e %b')
   end
 
   def end_date
-    calendar_data.max { |r| r.first }.first.strftime('%e.%B')
+    calendar_data.max { |r| r.first }.first.strftime('%e %b %Y')
   end
 
   def times_grouped_by_days
@@ -24,7 +25,7 @@ class Availabilities::CalendarPresenter
   private
 
   def calendar_data
-    @calendar_data ||= find_suitable_days_from Time.current
+    @calendar_data ||= find_suitable_days_from from_time
   end
 
   def find_suitable_days_from(from_time)

@@ -1,7 +1,25 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-    static targets = [ "phoneNumberInput", "phoneTokenInput", "sentVerificationErrors", "confirmVerificationErrors" ]
+    static targets = [ "phoneNumberInput", "verifiedIcon", "popup", "verifyPhoneLink", "phoneTokenInput", "sentVerificationErrors", "confirmVerificationErrors" ]
+
+    connect() {
+        if(this.phoneNumberInputTarget.value === '') {
+            this.markAsNotVerified();
+        } else {
+            this.markAsVerified();
+        }
+    }
+
+    open(event) {
+        event.preventDefault();
+        this.popupTarget.classList.add("active");
+    }
+
+    close(event) {
+        event.preventDefault();
+        this.popupTarget.classList.remove("active");
+    }
 
     sendVerificationCode(event) {
         event.preventDefault();
@@ -18,7 +36,7 @@ export default class extends Controller {
                 if(data.errors.length > 0) {
                     this.showError(data.errors[0]);
                 } else {
-                    window.location.hash = '#phoneNumberCode'
+                    this.open(event);
                 }
             }
         });
@@ -39,10 +57,21 @@ export default class extends Controller {
                 if(data.errors.length > 0) {
                     this.showError(data.errors[0]);
                 } else {
-                    window.location.hash = ''
+                    this.markAsVerified();
+                    this.close(event);
                 }
             }
         });
+    }
+
+    markAsVerified() {
+        this.verifyPhoneLinkTarget.classList.remove("active");
+        this.verifiedIconTarget.classList.add("active");
+    }
+
+    markAsNotVerified() {
+        this.verifyPhoneLinkTarget.classList.add("active");
+        this.verifiedIconTarget.classList.remove("active");
     }
 
     resetErrors() {

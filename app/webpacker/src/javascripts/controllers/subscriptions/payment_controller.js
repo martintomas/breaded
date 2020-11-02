@@ -18,7 +18,7 @@ const STYLE = {
 }
 
 export default class extends Controller {
-    static targets = [ "form", "button", "card", "billingAddressCheckbox", "firstName", "lastName", "addressLine", "street", "city", "postalCode" ]
+    static targets = [ "form", "button", "card", "billingAddressCheckbox", "cardHolderName", "addressLine", "street", "city", "postalCode" ]
 
     initialize() {
         this.errorsArea = $('#error_explanation > ul');
@@ -99,7 +99,7 @@ export default class extends Controller {
 
     markAsPaid() {
         ShopBasketStorage.getStorage().reset();
-        location.href = this.data.get('on-success-url');
+        Turbolinks.visit(this.data.get('on-success-url'));
     }
 
     collectData() {
@@ -122,7 +122,7 @@ export default class extends Controller {
                 postal_code: this.postalCodeTarget.value,
                 state: 'United Kingdom' }
         }
-        return { name: this.firstNameTarget.value + this.lastNameTarget.value, address: address }
+        return { name: this.cardHolderNameTarget.value, address: address }
     }
 
     toggleAddress() {
