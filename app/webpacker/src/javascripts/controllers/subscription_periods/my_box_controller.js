@@ -64,7 +64,7 @@ export default class extends Controller {
             console.log('PICK YOUR BREADS!');
         }
     }
-    
+
     triggerCopyAction(orderId, copyOrderId) {
         Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
         document.clearCache = 2;

@@ -31,4 +31,11 @@ module FoodsHelper
   def print_tags_from(tags, tag_type:)
     tags.select { |tag| tag.tag_type_id == tag_type.id }.map(&:localized_name).join(', ')
   end
+
+  def print_bread_preferences_for(order)
+    order.order_surprises.joins(:tag).preload(tag: { name: { text_translations: :language }})
+      .where(tags: { tag_type_id: TagType.the_category.id }).map do |order_surprise|
+      order_surprise.tag.localized_name
+    end.join(', ')
+  end
 end
