@@ -1,0 +1,9 @@
+- order.order_foods.includes(food: [tags: { name: { text_translations: :language } }, name: { text_translations: :language },
+      description: { text_translations: :language }]).each do |order_food|
+  ul.itemsection
+    li = image_tag Blobs::UrlBuilder.new(order_food.food.image_detail).url
+    li
+      div = print_attributes_of(order_food.food.tags.select { |tag| tag.tag_type_id == TagType.the_attribute.id } )
+      span = order_food.food.localized_name
+      i = "(#{order_food.amount})"
+      p = order_food.food.localized_description

@@ -156,6 +156,52 @@ en:
         title: Your card details
         billing_option: 'Billing address is same as delivery address'
         submit: Confirm payment & Get Breaded
+    users:
+      show:
+        hi: 'Hi, %{name}'
+        edit_profile: Edit Profile
+        order_till: "%{box} order due on %{date}"
+        boxes_names:
+          box_1: First box
+          box_2: Second box
+          box_3: Third box
+          box_4: Fourth box
+        categories:
+          my_boxes: My Boxes
+          my_plan: My Plan
+          payment: Payment
+          addresses: Addresses
+          faq: FAQs
+        info_popup:
+          close: Close
+          deadline: Deadline for each box
+          delivery_date: Delivery date & timeslot
+          deadline_description: Please pick your breads before the deadline allocated for each box. As this allows us to plan & ensure that each box is baked fresh before delivery. If you forget to pick your breads before  the allocated deadline for a specific box, we will assume that your bread list is same as that of the previous box delivered to you.
+          delivery_date_description: "The 'delivery date & timeslot' of each box is automatically calculated based on ‘Your Plan’ & by default is set to the same day of the week when your first box was delivered. The ‘delivery date & timeslot’ of a box can only be changed before the deadline allocated for that particular box. We appreciate your cooperation to help us deliver freshly baked breads to you!"
+        last_day_to_pick_your_breads: 'Last day to pick your breads:'
+        pick_bread: 'Pick bread for box %{number}'
+        repeat_box_html: "Repeat from box %{number}"
+        order_delivered: ' Order Delivered'
+        order_placed: ' Order Placed'
+        bread_list_button: 'Bread List'
+        pick_breads_button: Pick Your Breads
+        address:
+          label: 'Delivery Address: '
+          change: 'Change'
+        delivery_time:
+          label: ' Delivery by: '
+          slots_available: ' Slots Available'
+          change: 'Change'
+    orders:
+      show:
+        bread_list: 'Bread List for %{name}'
+        delivery_time: 'Delivery Time: %{time_range}'
+        delivered_at: 'Delivered on %{date}'
+        specific_preferences: 'Specific Preferences'
+        favourite_bread_types: 'Favorite Bread Types: %{tags}'
+        tag_name:
+          one: '%{tag} bread'
+          other: '%{tag} breads'
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
     stripe:

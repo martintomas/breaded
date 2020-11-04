@@ -1,0 +1,4 @@
+= label_tag(:label_order_placed, class: 'OrderPlaced') do
+  = image_pack_tag 'media/images/order_placed.png'
+  = t 'app.users.show.order_placed'
+= button_tag I18n.t('app.users.show.bread_list_button'), onclick: "Turbolinks.visit('#{order_path(order)}')"

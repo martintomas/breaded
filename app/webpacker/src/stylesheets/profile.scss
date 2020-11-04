@@ -1,0 +1,911 @@
+body.users.my_boxes, body.subscription_periods.show {
+  & {
+    background-color: #fff;
+    color: #333333;
+    font-size: 28px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important;
+    position: relative;
+    display: block;
+    font-weight: normal;
+    -webkit-animation: bugfix infinite 1s;
+  }
+
+  @-webkit-keyframes bugfix {
+    from {
+      padding: 0;
+    }
+    to {
+      padding: 0;
+    }
+  }
+
+  & > section > main {
+    position: absolute;
+    width: 1100px;
+    margin: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .bodyContainers {
+    width: 1170px;
+    margin: auto;
+    position: relative;
+    z-index: 9;
+    background: #fff;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+    font-weight: 600;
+    position: relative;
+    vertical-align: middle;
+    font-family: 'Montserrat';
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: 0;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+    position: relative;
+    vertical-align: middle;
+    font-family: "Montserrat";
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  .insider {
+    background-color: #fff;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    left: -95px;
+    transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -o-transform: rotateZ(45deg);
+    -ms-transform: rotateZ(45deg);
+  }
+
+  button:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: #fff;
+  }
+
+  button:hover .insider {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    left: 185px;
+  }
+
+  .blackBtn {
+    background-color: black;
+    color: #fff;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333333;
+  }
+
+  h1 {
+    font-size: 45px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 60px;
+    margin: 0 0 25px;
+  }
+
+  h3 {
+    font-family: 'Merriweather';
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-family: 'Merriweather', sans-serif;
+    font-size: 18px;
+    margin: 15px 0;
+    font-weight: 300;
+    color: #707070;
+  }
+
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+  }
+
+  .PD0PX {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .PDLR0PX {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .profilePage {
+    margin-top: 150px;
+    position: relative;
+    display: table;
+  }
+
+  .profileDetails {
+    padding: 50px;
+    background-color: #f9f1e8;
+    margin-bottom: 75px;
+  }
+
+  .profileDetails h3 {
+    margin: 0;
+  }
+
+  .profileDetails ul {
+    padding-left: 0;
+    margin: 10px 0 0;
+    line-height: 20px;
+  }
+
+  .profileDetails ul li {
+    display: inline-block;
+    font-size: 20px;
+  }
+
+  .phoneNum {
+    position: relative;
+    padding-left: 35px;
+  }
+
+  .phoneNum::before {
+    content: ".";
+    position: absolute;
+    top: -15px;
+    left: 12px;
+    font-size: 50px;
+  }
+
+  .profileDetails ul li:last-child {
+    float: right;
+  }
+
+  .profileDetails ul li a {
+    font-size: 15px;
+    color: #333333;
+  }
+
+  .boxMenu ul {
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  .boxMenu ul li {
+    list-style: none;
+    font-size: 20px;
+    margin-bottom: 50px;
+    font-family: 'Merriweather';
+    font-weight: 300;
+    color: #666666;
+  }
+
+  .boxMenu ul li.active {
+    font-weight: 500;
+    color: #333333;
+    display: inline-block;
+  }
+
+  .boxMenu ul li.active span::after {
+    content: "";
+    border-bottom: 2.2px solid #333333;
+    width: 60%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .boxDetails > h3 {
+    margin: 0;
+  }
+
+  .boxDetails > span {
+    font-size: 14px;
+    position: relative;
+    padding-left: 15px;
+    margin-top: 15px;
+    display: block;
+  }
+
+  .listStyle::before {
+    content: ".";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    left: 5px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+  }
+
+  .redListStyle::before {
+    background-color: #f53131;
+  }
+
+  .boxDetails section {
+    margin-top: 50px;
+    padding: 50px 40px;
+    border-radius: 5px;
+    border: solid 0.5px #707070;
+    position: relative;
+  }
+
+  .boxDetails section > span {
+    font-family: "Merriweather";
+    font-size: 20px;
+    position: absolute;
+    top: -30px;
+    background-color: #fff;
+    color: #333333;
+    padding: 15px;
+    left: 30px;
+  }
+
+  .boxDetails section > div {
+    display: inline-block;
+  }
+
+  .boxDetails section > div.OrderSec {
+    width: calc(100% - 205px);
+    display: inline-block;
+  }
+
+  .OrderDelivered {
+    display: none !important;
+  }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+    background: green;
+    border-radius: 50%;
+  }
+
+  .checkmark::before {
+    content: "\2713";
+    position: absolute;
+    color: #fff;
+    top: -4px;
+    left: 5px;
+    font-size: 12px;
+  }
+
+  .boxDetails section > div label {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 25px;
+
+    &.date-label {
+      font-size: 16px;
+      font-family: "Montserrat";
+      color: #333333;
+      font-weight: 500;
+      display: inline-block;
+      margin-bottom: 0;
+    }
+  }
+
+  .boxDetails section > div label img {
+    width: 16px;
+  }
+
+  .boxDetails section > div label b {
+    display: block;
+    font-weight: 500;
+  }
+
+  .boxDetails section > div i {
+    font-style: normal;
+    font-size: 14px;
+    color: #666666;
+    line-height: 28px;
+    margin-right: 5px;
+  }
+
+  .boxDetails section > div i img {
+    width: 20px;
+  }
+
+  .boxDetails section > div.devliveyTime span.date-time {
+    display: block;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 35px;
+  }
+
+  timeslot {
+    display: block;
+    border-top: 1px solid #707070;
+    margin-top: 15px;
+  }
+
+  .drop-down {
+    position: relative;
+    display: table;
+    margin-bottom: 25px;
+    z-index: 9;
+  }
+
+  .drop-down .selected a {
+    background: #fff no-repeat scroll right center;
+    display: block;
+    padding-right: 20px;
+    border: 1px solid #707070;
+    border-radius: 2px;
+    text-decoration: none;
+    color: #333333;
+    line-height: 20px;
+    padding: 0 30px 0 10px;
+  }
+
+  .drop-down .selected a span {
+    cursor: pointer;
+    display: block;
+    padding: 5px;
+  }
+
+  .drop-down .option {
+    position: relative;
+  }
+
+  .drop-down .options ul {
+    background: #fff;
+    display: none;
+    list-style: none;
+    padding: 0px 0px;
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: auto;
+    min-width: calc(100% - 1px);
+    border: 1px solid #707070;
+  }
+
+  .drop-down .selected span.value, .drop-down .options span.value {
+    display: none;
+  }
+
+  .drop-down .options ul li a {
+    display: block;
+    text-decoration: none;
+    color: #333333;;
+    line-height: 30px;
+    border-bottom: .5px solid #707070;
+    float: none;
+    clear: both;
+    padding-left: 15px;
+  }
+
+  .drop-down .options ul li a:last-child {
+    border-bottom: none;
+  }
+
+  .triangle {
+    display: inline-block;
+    margin: auto;
+    vertical-align: middle;
+    width: 10px;
+    height: 5px;
+    border-top: solid 5px #707070;
+    border-left: solid 5px transparent;
+    border-right: solid 5px transparent;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    bottom: 0;
+  }
+
+  .boxDetails section > div p {
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 0;
+    padding-top: 15px;
+  }
+
+  .boxDetails section > div a {
+    font-size: 12px;
+    float: right;
+    line-height: 52px;
+    color: #333333;
+    font-weight: 600;
+
+    &.close-calendar-link {
+      font-size: 16px;
+      font-family: "Montserrat";
+      font-weight: 400;
+      line-height: 16px;
+    }
+  }
+
+  .deadLine {
+    margin: 50px 0 75px;
+  }
+
+  .deadLine div {
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+    border-bottom: .5px solid #707070;
+    position: relative;
+  }
+
+  .deadLine div:last-child {
+    border-bottom: none;
+  }
+
+  .deadLine img {
+    width: 40px;
+    position: absolute;
+    top: 5px;
+  }
+
+  .deadLine h3 {
+    margin: 0;
+    margin: 0 0 0 50px;
+  }
+
+  .deadLine p {
+    color: #666666;
+    font-family: "Montserrat";
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  address {
+    font-style: normal;
+    position: relative;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: .5px solid #707070;
+    font-size: 15px;
+  }
+
+  address img {
+    position: absolute;
+    width: 15px;
+    left: 0;
+  }
+
+  address p {
+    padding-left: 22px;
+    margin: 0;
+    display: inline-block;
+  }
+
+  address a {
+    float: right;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: "Montserrat";
+    color: #333333;
+  }
+
+  .calenderSec {
+    position: relative;
+    width: 330px;
+    text-decoration: none;
+  }
+
+  .calenderSec img {
+    width: 18px;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+  }
+  .calenderSec input {
+    cursor: pointer;
+  }
+  .calenderSec label {
+    margin-top: -18px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+    margin-bottom: 0 !important;
+    z-index: 99;
+
+    &.active {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .popup {
+    margin: 70px auto;
+    background: #fff;
+    border-radius: 5px;
+    width: 700px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    text-align: left;
+
+    &.calendar {
+      text-align: right;
+    }
+  }
+
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 16px;
+    color: #333333;
+    font-family: "Montserrat";
+  }
+
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+
+  .popup ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .popup ul li {
+    list-style: none;
+  }
+
+  .monthSec {
+    padding: 20px;
+    margin-bottom: 0 !important;
+    text-align: left;
+
+    label {
+      font-size: 16px;
+      font-family: "Montserrat";
+      color: #333333;
+      font-weight: 500;
+    }
+  }
+
+  .dateSec {
+    width: 100%;
+    margin: 0 auto 0 !important;
+    display: table;
+    padding: 25px 0 25px 2em;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+    position: relative;
+  }
+
+  .dateSec::before {
+    content: "";
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    left: 0;
+    border-top: none;
+    border-bottom: 1px solid #ccc !important;
+  }
+
+  .dateSec ul {
+    display: inline-block;
+    vertical-align: text-top;
+    width: 155px;
+  }
+
+  .dateSec ul li {
+    display: block;
+    width: 155px;
+    margin-bottom: 25px;
+  }
+
+  .dateSec ul li:first-child {
+    padding-bottom: 25px;
+  }
+
+  .dateSec ul li:first-child span {
+    font-size: 13px;
+    padding: 0px;
+    border: 0;
+    color: #333333;
+    border-radius: 0px;
+    cursor: context-menu;
+    display: block;
+  }
+
+  .dateSec ul li:first-child span:hover {
+    background: #ffffff;
+    color: #333333;
+    font-weight: 400;
+  }
+
+  .dateSec ul li span {
+    font-size: 10px;
+    padding: 10px;
+    border: 1px solid #707070;
+    color: #333333;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+
+    &:hover, &.active {
+      background: black;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
+
+  .popup button {
+    font-size: 14px;
+    background: #000;
+    color: #fff;
+    font-weight: 500;
+    width: 100px;
+    padding: 10px 25px;
+    margin: 40px 25px 40px;
+  }
+
+  .info {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .deliveryMonth {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #707070;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .profileDetails ul li {
+      font-size: 14px;
+    }
+    .profileDetails ul li a {
+      line-height: 30px;
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .profileDetails ul {
+      line-height: 40px;
+    }
+    .profileDetails ul li:last-child {
+      float: none;
+      clear: both;
+    }
+    .boxDetails section > div.OrderSec {
+      width: 100%;
+    }
+    .devliveyTime {
+      margin-top: 30px
+    }
+    address p {
+      width: calc(100% - 75px);
+    }
+    .deadLine img {
+      width: 30px;
+    }
+    .deadLine h3 {
+      margin: 0px 0 0 35px;
+      font-size: 25px;
+    }
+    .deadLine p {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .profileDetails {
+      padding: 20px;
+    }
+    .profileDetails ul li {
+      display: block;
+    }
+    .profileDetails h3 {
+      font-size: 30px;
+    }
+    .boxDetails section {
+      padding: 30px 20px;
+    }
+  }
+
+  /* Slider */
+
+  .slick-slide {
+    margin: 0px 20px;
+  }
+
+  .slick-slide img {
+    width: 100%;
+  }
+
+  .slick-slider
+  {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .slick-list
+  {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  .slick-list:focus
+  {
+    outline: none;
+  }
+  .slick-list.dragging
+  {
+    cursor: pointer;
+    cursor: hand;
+  }
+
+  .slick-slider .slick-track,
+  .slick-slider .slick-list
+  {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .slick-track
+  {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+  .slick-track:before,
+  .slick-track:after
+  {
+    display: table;
+    content: '';
+  }
+  .slick-track:after
+  {
+    clear: both;
+  }
+  .slick-loading .slick-track
+  {
+    visibility: hidden;
+  }
+
+  .slick-slide
+  {
+    display: none;
+    float: left;
+    min-height: 1px;
+  }
+  [dir='rtl'] .slick-slide
+  {
+    float: right;
+  }
+  .slick-slide img
+  {
+    display: block;
+  }
+  .slick-slide.slick-loading img
+  {
+    display: none;
+  }
+  .slick-slide.dragging img
+  {
+    pointer-events: none;
+  }
+  .slick-initialized .slick-slide
+  {
+    display: block;
+  }
+  .slick-loading .slick-slide
+  {
+    visibility: hidden;
+  }
+  .slick-vertical .slick-slide
+  {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+  }
+  .slick-arrow img {
+    width: 7px;
+  }
+  .slick-arrow.slick-hidden {
+    display: none;
+  }
+  .slick-prev {
+    transform: rotate(180deg);
+    left: 15px;
+
+    img {
+      vertical-align: bottom;
+    }
+  }
+  .slick-next {
+    right: 15px;
+
+    img {
+      vertical-align: top;
+    }
+  }
+  .slick-arrow {
+    position: absolute;
+    top: 33px;
+    margin: auto;
+    cursor: pointer;
+  }
+  .slick-disabled {
+    opacity: .5;
+  }
+}

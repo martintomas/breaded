@@ -1,0 +1,6 @@
+section.container.breadListed
+  == render partial: 'orders/show/title', locals: { order: @order }
+  == render partial: 'orders/show/surprise_me_section', locals: { order: @order } if @order.order_surprises.present?
+  .breads-sm-12.breads-xs-12.itemsBlock
+    == render partial: 'orders/show/list_of_food', locals: { order: @order }
+== render partial: 'shared/gift'

@@ -1,0 +1,18 @@
+= label_tag(:pick_your_breads) do
+  = t 'app.users.show.last_day_to_pick_your_breads'
+  b = order.editable_till.strftime('%A, %d %b')
+.drop-down data-order-id="#{order.id}"
+  .selected
+    = link_to content_tag(:span, I18n.t('app.users.show.pick_bread', number: box_number_for(order, orders))), '',
+          data: { action: 'subscription-periods--my-box#toggleDropdown', 'order-id': order.id, 'button-action': 'pick-up' }
+    .triangle
+  .options
+    ul
+      - orders.each_with_index.map do |copied_order, i|
+        - next if !copied_order.placed? || order == copied_order
+
+        li style="display: none;" = link_to I18n.t('app.users.show.pick_bread', number: box_number_for(order, orders)), '',
+              data: { action: 'subscription-periods--my-box#selectDropdown', 'order-id': order.id, 'button-action': 'pick-up' } if i.zero?
+        li = link_to I18n.t('app.users.show.repeat_box_html', number: i + 1), '',
+              data: { action: 'subscription-periods--my-box#selectDropdown', 'order-id': order.id, 'copy-order-id': copied_order.id, 'button-action': 'copy' }
+= button_tag I18n.t('app.users.show.pick_breads_button'), data: { action: 'subscription-periods--my-box#submitAction', 'order-id': order.id }

@@ -46,7 +46,7 @@ module Subscriptions
       subscriber = Subscriptions::Subscribe.new subscription, delivery_date: delivery_date_from
       order = subscriber.perform.sort_by(&:delivery_date_from).first
       Orders::UpdateFromBasket.new(order, basket_items).perform_for shopping_basket_variant
-      order.create_address user.address.attributes.slice('address_line', 'street', 'postal_code', 'city', 'state', 'address_type_id')
+      order.order_state_relations.create! order_state_id: OrderState.the_order_placed.id
     end
 
     def valid_user?

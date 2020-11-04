@@ -1,0 +1,349 @@
+body.orders.show {
+  & {
+    background-color: #fff;
+    color: #333333;
+    font-size: 28px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden !important;
+    position: relative;
+    display: block;
+    font-weight: normal;
+    -webkit-animation: bugfix infinite 1s;
+  }
+
+  @-webkit-keyframes bugfix {
+    from {
+      padding: 0;
+    }
+    to {
+      padding: 0;
+    }
+  }
+
+  & > section > main {
+    position: absolute;
+    width: 1100px;
+    margin: auto;
+    left: 0;
+    right: 0;
+  }
+
+  .bodyContainers {
+    width: 1170px;
+    margin: auto;
+    position: relative;
+    z-index: 9;
+    background: #fff;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+    font-weight: 600;
+    position: relative;
+    vertical-align: middle;
+    font-family: 'Montserrat';
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: 0;
+  }
+
+  button {
+    background: none;
+    border: 1px solid #333333;
+    box-sizing: border-box;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: #010101;
+    font-size: 20px;
+    position: relative;
+    vertical-align: middle;
+    font-family: "Montserrat";
+    font-weight: 500;
+    cursor: pointer;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+  }
+
+  .insider {
+    background-color: #fff;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+    left: -95px;
+    transform: rotateZ(45deg);
+    -webkit-transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -o-transform: rotateZ(45deg);
+    -ms-transform: rotateZ(45deg);
+  }
+
+  button:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: #fff;
+  }
+
+  button:hover .insider {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    left: 185px;
+  }
+
+  .blackBtn {
+    background-color: black;
+    color: #fff;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333333;
+  }
+
+  h1 {
+    font-size: 45px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 60px;
+    margin: 0 0 25px;
+  }
+
+  h3 {
+    font-family: 'Merriweather';
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-family: 'Merriweather', sans-serif;
+    font-size: 18px;
+    margin: 15px 0;
+    font-weight: 300;
+    color: #707070;
+  }
+
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+  }
+
+  .PD0PX {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .PDLR0PX {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .breadListed {
+    margin-top: 150px;
+    position: relative;
+    display: table;
+    text-align: center;
+  }
+
+  .breadListed > h2 {
+    font-family: "Merriweather";
+  }
+
+  .breadListed > span {
+    font-size: 22px;
+    display: block;
+  }
+
+  .breadListed .itemsBlock {
+    width: 850px;
+    margin: 50px auto;
+    text-align: left;
+    float: none;
+  }
+
+  .breadListed .itemsection li:last-child {
+    width: calc(100% - 300px);
+    padding-left: 30px;
+  }
+
+  .breadListed .itemsection {
+    padding-left: 0;
+  }
+
+  .breadListed .itemsection li {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    margin: 0 !important;
+  }
+
+  .breadListed .itemsection li i {
+    font-style: normal;
+    float: right;
+    margin-right: 15px;
+    font-weight: 600;
+  }
+
+  .breadListed .itemsection li span {
+    font-family: "Merriweather";
+    font-weight: 500;
+    color: #333333;
+  }
+
+  .checkmark {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+    background: green;
+    border-radius: 50%;
+  }
+
+  .checkmark::before {
+    content: "\2713";
+    position: absolute;
+    color: #fff;
+    top: 4px;
+    left: 4px;
+    font-size: 10px;
+    margin-right: 10px;
+  }
+
+  .delivered {
+    display: none !important;
+  }
+
+  .specificPreferences > div {
+    border: 1px solid #707070;
+    border-radius: 5px;
+    width: 850px;
+    margin: 50px auto;
+    position: relative;
+    padding-top: 25px;
+  }
+
+  .specificPreferences > div span {
+    font-size: 25px;
+    background: #fff;
+    padding: 10px 20px;
+    position: absolute;
+    left: 15px;
+    top: -25px;
+    font-family: "Merriweather";
+  }
+
+  .specificPreferences > div p {
+    margin: 30px 40px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: "Montserrat";
+  }
+
+  .specificPreferences > div ul {
+    padding: 30px 0;
+    text-align: left;
+    margin: 0 35px;
+    border-bottom: 1px solid #707070;
+    font-size: 20px;
+    font-family: "Merriweather";
+  }
+
+  .specificPreferences > div ul li {
+    display: inline-block;
+  }
+
+  .specificPreferences > div ul li:first-child {
+    width: calc(100% - 50px);
+  }
+
+  .glutenChoise,
+  .veganChoise {
+    font-size: 12px !important;
+    color: #666666;
+    font-family: 'Montserrat' !important;
+    font-weight: 500 !important;
+    padding-left: 25px !important;
+    line-height: 12px !important;
+    margin-top: 10px;
+    display: inline-block !important;
+    width: auto !important;
+    position: relative;
+  }
+
+  .glutenChoise i,
+  .veganChoise i {
+    position: absolute;
+    left: 6px;
+    font-style: normal;
+  }
+
+  .glutenChoise i::before,
+  .veganChoise i::before {
+    content: "";
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #2A6C07;
+    position: absolute;
+    bottom: -2px;
+    left: -4px;
+  }
+
+  .glutenChoise i::before {
+    border-color: #333333;
+  }
+
+  .itemsection li div {
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 900px) {
+    .breadListed .itemsBlock {
+      width: auto;
+      display: block;
+    }
+    .specificPreferences > div {
+      width: 97%;
+    }
+  }
+  @media (max-width: 650px) {
+    .breadListed > h2 {
+      font-size: 35px;
+    }
+    .breadListed > span {
+      font-size: 14px;
+    }
+    .breadListed .itemsection li:last-child {
+      width: auto;
+      margin-top: 25px !important;
+      padding-left: 0;
+    }
+  }
+}

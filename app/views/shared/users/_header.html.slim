@@ -1,0 +1,6 @@
+section.profileDetails
+  h3 = t 'app.users.show.hi', name: current_user.first_name
+  ul
+    li = current_user.email
+    li.phoneNum = current_user.phone_number
+    li = link_to I18n.t('app.users.show.edit_profile'), '#'

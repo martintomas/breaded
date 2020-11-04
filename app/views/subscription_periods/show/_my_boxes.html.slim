@@ -1,0 +1,11 @@
+h3 = t 'app.users.show.categories.my_boxes'
+= order_due_date_for orders
+#info.overlay data-target="subscription-periods--my-box.infoPopup"
+  .popup
+    = link_to I18n.t('app.users.show.info_popup.close'), '#', class: 'close', data: { action: 'subscription-periods--my-box#close' }
+    article.deadLine style="padding: 50px;"
+      == render partial: 'subscription_periods/show/info'
+- orders.each do |order|
+  == render partial: 'subscription_periods/show/order_detail', locals: { orders: orders, order: order }
+article.deadLine
+  == render partial: 'subscription_periods/show/info'

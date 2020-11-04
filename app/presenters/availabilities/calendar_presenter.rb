@@ -22,14 +22,14 @@ class Availabilities::CalendarPresenter
     end
   end
 
-  private
-
   def calendar_data
     @calendar_data ||= find_suitable_days_from from_time
   end
 
+  private
+
   def find_suitable_days_from(from_time)
-    (1..((to_time - from_time) / 1.day).ceil).each_with_object([]) do |i, result|
+    (1..((to_time - from_time) / 1.day).to_i).each_with_object([]) do |i, result|
       day_in_week = ((from_time.wday + i - 1) % 7) + 1
       Array.wrap(availabilities[day_in_week]).each do |availability|
         time_from = (from_time + i.days).change(hour: availability.time_from.utc.hour, min:  availability.time_from.utc.min, sec: 0)

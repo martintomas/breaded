@@ -6,4 +6,8 @@ class Address < ApplicationRecord
 
   validates :street, :postal_code, :city, :state, presence: true
   validates :main, inclusion: { in: [true, false] }
+
+  def to_s
+    "#{address_line}, #{street} #{city}"
+  end
 end

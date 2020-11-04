@@ -1,0 +1,4 @@
+= label_tag(:label_order_delivered, class: 'OrderDelivered') do
+  i.checkmark
+  = t 'app.users.show.order_delivered'
+= button_tag I18n.t('app.users.show.bread_list_button'), onclick: "Turbolinks.visit('#{order_path(order)}')"

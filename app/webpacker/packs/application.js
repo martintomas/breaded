@@ -12,6 +12,7 @@ require.context('../images', true);
 require.context('../fonts', true);
 
 import '../src/javascripts/sentry'
+import '../src/javascripts/TurbolinksScrolling'
 
 import '../src/javascripts/controllers'
 

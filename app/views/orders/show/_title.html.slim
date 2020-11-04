@@ -1,0 +1,7 @@
+h2 = t 'app.orders.show.bread_list', name: boxes_names_for(order.id, order.subscription_period.orders.order(:created_at).pluck(:id)).titleize
+- if order.delivered?
+  span.delivered
+    i.checkmark
+    = t 'app.orders.show.delivered_at', date: order.delivery_date_from.strftime('%e %B')
+- else
+  span = t 'app.orders.show.delivery_time', time_range: order.delivery_date

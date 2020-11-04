@@ -11,3 +11,6 @@ new:
 
 finalised:
   code: $LABEL
+
+order_placed:
+  code: $LABEL

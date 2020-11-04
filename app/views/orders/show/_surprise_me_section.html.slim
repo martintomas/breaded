@@ -1,0 +1,8 @@
+.specificPreferences
+  div
+    span = t 'app.orders.show.specific_preferences'
+    - order.order_surprises.joins(:tag).where(tags: { tag_type_id: TagType.the_attribute.id }).each do |surprise_tag|
+      ul
+        li = t 'app.orders.show.tag_name', name: surprise_tag.tag.localized_name, count: surprise_tag.amount
+        li = "(#{surprise_tag.amount})"
+    p = t 'app.surprise_me.favourite_bread_types', tags: order.order_surprises.joins(:tag).where(tags: { tag_type_id: TagType.the_category.id }).map(&:localized_name)

@@ -17,13 +17,18 @@ Rails.application.routes.draw do
       get :surprise_me
     end
   end
-
   resources :subscriptions, only: %i[new create] do
     scope module: :subscriptions do
       resources :payments, only: %i[new]
     end
   end
-
+  resources :subscription_periods, only: %i[show]
+  resources :orders, only: %i[show] do
+    member do
+      post :update_date
+      get :copy
+    end
+  end
   resources :stripe, only: %i[] do
     collection do
       post :checkout_session
@@ -31,14 +36,16 @@ Rails.application.routes.draw do
       post :create_subscription
     end
   end
-
   resources :twilio, only: %i[] do
     collection do
       post :sent_verification_sms
       post :verify_phone_number
     end
   end
-
   resources :producer_applications, only: %i[new create]
-  resources :users, only: %i[show]
+  resources :users, only: %i[show] do
+    collection do
+      get :my_boxes
+    end
+  end
 end
