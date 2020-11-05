@@ -4,8 +4,8 @@ import { SurpriseMeViewHelper } from "../../services/foods/SurpriseMeViewHelper"
 
 export default class extends Controller {
   initialize() {
-    this.surpriseMeMutation = new SurpriseMeMutation();
-    this.surpriseMeViewHelper = new SurpriseMeViewHelper();
+    this.surpriseMeMutation = new SurpriseMeMutation(this.data.get('storage-prefix'));
+    this.surpriseMeViewHelper = new SurpriseMeViewHelper(this.surpriseMeMutation);
   }
 
   connect() {

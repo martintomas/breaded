@@ -2,9 +2,19 @@
 
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_order, only: %i[update_date copy show]
+  before_action :set_order
 
   def show; end
+
+  def edit; end
+
+  def update
+    return redirect_to subscription_period_path(@order.subscription_period) if @order.placed?
+
+    Orders::UpdateFromBasket.new(@order, JSON.parse(params[:basket_items]).map(&:deep_symbolize_keys)).perform_for params[:shopping_basket_variant]
+    @order.order_state_relations.create! order_state_id: OrderState.the_order_placed.id
+    redirect_to subscription_period_path(@order.subscription_period)
+  end
 
   def copy
     service = Orders::Copy.new @order, Order.find(params[:copy_order_id])
@@ -21,6 +31,8 @@ class OrdersController < ApplicationController
     render json: { delivery_date: @order.delivery_date_from.strftime('%A %d %b'),
                    delivery_date_range: "#{@order.delivery_date_from.strftime('%l:%M %P')} - #{@order.delivery_date_to.strftime('%l:%M %P')}" }
   end
+
+  def surprise_me; end
 
   private
 

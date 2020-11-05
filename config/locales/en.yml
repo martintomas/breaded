@@ -103,6 +103,8 @@ en:
       read_more: Read More
       shopping_basket:
         empty: No Breads picked
+        picked: Picked
+        bread_list_for: Bread list for
         breads_selected_html: "<span class='number-selected-breads'>0</span>\u00a0Breads\u00a0Selected"
         close_button: Close
         open_button: Open

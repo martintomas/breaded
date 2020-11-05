@@ -8,6 +8,6 @@ class SubscriptionPeriod < ApplicationRecord
   validates :started_at, :ended_at, presence: true
 
   def to_s
-    "#{subscription.to_s}: #{started_at.strftime('%e.%m. %Y')}-#{ended_at.strftime('%e.%m. %Y')}"
+    "#{subscription.to_s}:#{started_at.strftime('%e.%m. %Y')}-#{ended_at.strftime('%e.%m. %Y')}"
   end
 end

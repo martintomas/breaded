@@ -38,7 +38,7 @@ class OrderTest < ActiveSupport::TestCase
   end
 
   test '#delivery_date' do
-    assert_equal "#{@order.delivery_date_from.strftime('%e.%B %Y')} #{@order.delivery_date_from.strftime('%I%p')}-#{@order.delivery_date_to.strftime('%I%p')}",
+    assert_equal "#{@order.delivery_date_from.strftime('%l:%M %P')} - #{@order.delivery_date_to.strftime('%l:%M %P')}, #{@order.delivery_date_to.strftime('%e %B')}",
                  @order.delivery_date
   end
 end

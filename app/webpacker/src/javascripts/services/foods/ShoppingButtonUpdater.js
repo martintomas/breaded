@@ -15,6 +15,14 @@ export class ShoppingButtonUpdater {
     }
 
     setButtonOf(target, toValue) {
-        $(target).parent().find('input').val(toValue);
+        let $target = $(target);
+        let pickedFoodSection = $target.closest('ul.itemsection').find('.picked-food');
+
+        $target.parent().find('input').val(toValue);
+        if(toValue > 0) {
+            pickedFoodSection.addClass('active');
+        } else {
+            pickedFoodSection.removeClass('active');
+        }
     }
 }

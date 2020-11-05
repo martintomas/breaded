@@ -13,7 +13,10 @@ export default class extends Controller {
             document.selectedSection = 'breads';
             document.selectedCategory = { breads: 'breads-all' }
         }
-        this.shoppingButtonUpdater = new ShoppingButtonUpdater(new ShopBasketMutation(), new QuerySelectorBuilder('data-food-id'));
+        this.shoppingButtonUpdater = new ShoppingButtonUpdater(
+            new ShopBasketMutation(this.data.get('storage-prefix')),
+            new QuerySelectorBuilder('data-food-id')
+        );
         this.updateStatusOfFilter();
         this.intersectionObserver = new IntersectionObserver(entries => this.processIntersectionEntries(entries))
     }
@@ -58,7 +61,9 @@ export default class extends Controller {
             type: 'GET',
             url: url,
             data: { section: document.selectedSection,
-                    category: document.selectedCategory[document.selectedSection].split('-').pop() },
+                    category: document.selectedCategory[document.selectedSection].split('-').pop(),
+                    root_url: this.data.get('root-url'),
+                    basket_prefix: this.data.get('storage-prefix')},
             dataType: 'json',
             success: (data) => {
                 if(hardReset) { this.entriesTarget.innerHTML = '' }

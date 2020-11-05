@@ -3,14 +3,16 @@ import { BaseStorage} from "./BaseStorage";
 const DEFAULT_STRUCTURE = { breads: [], surpriseMe: [] };
 
 export class ShopBasketStorage extends BaseStorage {
-    constructor() {
-        super('shop-basket', DEFAULT_STRUCTURE);
+    constructor(storageName) {
+        super(storageName, DEFAULT_STRUCTURE);
     }
 
-    static getStorage() {
-        if(document.basketStorage) { return document.basketStorage; }
+    static getStorage(storagePrefix) {
+        let storageName = 'shop-basket'
+        if(storagePrefix) { storageName += '-' + storagePrefix }
 
-        document.basketStorage = new ShopBasketStorage();
-        return document.basketStorage;
+        if(document[storageName]) { return document[storageName]; }
+        document[storageName] = new ShopBasketStorage(storageName);
+        return document[storageName];
     }
 }

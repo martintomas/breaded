@@ -1,4 +1,4 @@
-body.foods.index, body.foods.surprise_me {
+body.foods.index, body.foods.surprise_me, body.orders.edit, body.orders.surprise_me {
     & {
         background-color: #fff;
         color: #333333;
@@ -660,6 +660,79 @@ body.foods.index, body.foods.surprise_me {
 
     .itemsection {
         display: block !important;
+
+        .food-detail-image:hover ~ .picked-food {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .picked-food {
+            float: right;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 14px;
+            background-color: #f9f1e8;
+            padding: 10px 15px 10px 15px;
+            height: 40px;
+            transition: visibility 1s, opacity 1s linear;
+            visibility: hidden;
+            opacity: 0;
+
+            &.active {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            &:hover {
+                visibility: hidden;
+                opacity: 0;
+            }
+
+            .checkmark {
+                width: 18px !important;
+                height: 18px !important;
+                position: relative;
+                display: inline-block;
+                background: black;
+                border-radius: 50%;
+                margin: 0 5px 0 0;
+            }
+
+            .checkmark:before {
+                content: "\2713";
+                position: absolute;
+                color: #fff;
+                top: 3px;
+                left: 3px;
+                font-size: 10px;
+                margin-right: 10px;
+            }
+        }
+
+        .numbers-row {
+            width: 100%;
+            height: 40px;
+            background-color: #f9f1e8;
+
+            input {
+                color: black;
+                width: 20px;
+                background-color: #f9f1e8;
+            }
+
+            div:nth-of-type(1) {
+                color: black;
+                float: left;
+                padding: 5px 5px 5px 20px;
+            }
+
+            div:nth-of-type(2) {
+                color: black;
+                float: right;
+                padding: 5px 20px 5px 5px;
+            }
+        }
     }
 
     .itemsection img {
@@ -670,7 +743,7 @@ body.foods.index, body.foods.surprise_me {
         cursor: pointer;
     }
 
-    .itemsection img:hover ~ .iteamcount,
+    .itemsection .food-detail-image:hover ~ .iteamcount,
     .iteamcount:hover {
         bottom: 0;
         transition: all ease-in 0.5s;
@@ -1006,6 +1079,11 @@ body.foods.index, body.foods.surprise_me {
             padding-left: 0;
             width: 80%;
         }
+
+        .picked-food {
+            display: none;
+        }
+
         .listItems li {
             font-size: 12px;
             line-height: 22px;

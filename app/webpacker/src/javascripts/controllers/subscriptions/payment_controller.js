@@ -98,7 +98,7 @@ export default class extends Controller {
     }
 
     markAsPaid() {
-        ShopBasketStorage.getStorage().reset();
+        ShopBasketStorage.getStorage(this.data.get('storage-prefix')).reset();
         Turbolinks.clearCache();
         Turbolinks.visit(this.data.get('on-success-url'));
     }

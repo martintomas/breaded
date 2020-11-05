@@ -14,7 +14,6 @@ class FoodsSystemTest < ApplicationSystemTestCase
           within 'li:nth-of-type(1)' do
             assert_selector "img[src='#{Blobs::UrlBuilder.new(food.image_detail).url}']"
             within 'div.iteamcount' do
-              assert_selector 'span', text: I18n.t('app.browse_bread.about_bread')
               within '.numbers-row' do
                 assert_equal 0.to_s, find('input[type="text"]').value
               end

@@ -1,0 +1,19 @@
+.breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12.selectedItems.sticker
+  .order-description-section
+    span.bread-list = t 'app.browse_bread.shopping_basket.bread_list_for'
+    span.box-description = boxes_names_for(order, order.subscription_period.orders.order(:delivery_date_from)).titleize
+  span
+    i.counter.size-of-basket = 0
+    = "/#{Rails.application.config.options[:default_number_of_breads]}"
+  span.selectedBreadsActive.no-breads-title.active = t 'app.browse_bread.shopping_basket.empty'
+  #shopping-basket.selectedBreads.selectedBreadsActive
+    span
+      = t 'app.browse_bread.shopping_basket.breads_selected_html'
+      i.open-basket-button data-action='click->foods--shop-basket#openBasket'
+        = t 'app.browse_bread.shopping_basket.open_button'
+      i.close-basket-button.active data-action='click->foods--shop-basket#closeBasket'
+        = t 'app.browse_bread.shopping_basket.close_button'
+    .shopping-basket-items.active
+  = form_for order, url: order_path(order), method: :patch, data: { target: 'orders--update.form', action: 'submit->orders--update#formSubmitted' }
+    = hidden_field_tag :shopping_basket_variant, Orders::UpdateFromBasket::PICK_UP_TYPE
+    button.shopping-basket-confirm = t 'app.surprise_me.confirm'

@@ -7,7 +7,7 @@ section.container
       #tab-container
         == render partial: 'foods/menu_tabs', locals: { page: 'browse_bread' }
         #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12 data-controller='foods--shop-basket' data-foods--shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
-          .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.tab-section.active.browse_bread data-controller='foods--filter' data-foods--filter-base-url="#{foods_url}"
+          .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.tab-section.active.browse_bread data-controller='foods--filter' data-foods--filter-base-url="#{foods_url}" data-foods--filter-root-url="#{foods_url}"
             .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.browse_bread
               .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12 style="z-index: 1;"
                 == render partial: 'foods/index/filter'

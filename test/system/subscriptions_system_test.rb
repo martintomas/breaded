@@ -126,6 +126,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
   def fill_new_subscription_form
     find('a.calenderSec').click
     find('span[data-timestamp="2020-11-03 10:00:00 +0000"]').click
+    click_button I18n.t('app.get_breaded.calendar.submit')
     fill_in 'subscriptions_new_subscription_former[address_line]', with: 'Address Line'
     fill_in 'subscriptions_new_subscription_former[street]', with: 'Street'
     fill_in 'subscriptions_new_subscription_former[city]', with: 'City'

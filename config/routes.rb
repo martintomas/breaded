@@ -23,10 +23,11 @@ Rails.application.routes.draw do
     end
   end
   resources :subscription_periods, only: %i[show]
-  resources :orders, only: %i[show] do
+  resources :orders, only: %i[show update edit] do
     member do
       post :update_date
       post :copy
+      get :surprise_me
     end
   end
   resources :stripe, only: %i[] do

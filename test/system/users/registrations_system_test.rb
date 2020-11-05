@@ -14,7 +14,7 @@ class Users::RegistrationsSystemTest < ApplicationSystemTestCase
       click_on I18n.t('app.registration.registration_submit')
     end
     within 'ul.menu' do
-      assert_selector 'li', text: 'test@test.test'
+      assert_selector 'li', text: 'First Name'
     end
   end
 end

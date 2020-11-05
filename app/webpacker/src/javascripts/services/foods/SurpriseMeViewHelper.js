@@ -3,8 +3,8 @@ import { QuerySelectorBuilder } from "./QuerySelectorBuilder";
 import { ShoppingButtonUpdater } from "./ShoppingButtonUpdater";
 
 export class SurpriseMeViewHelper {
-    constructor() {
-        this.surpriseMeMutation = new SurpriseMeMutation();
+    constructor(surpriseMeMutation) {
+        this.surpriseMeMutation = surpriseMeMutation;
         this.querySelectorBuilder = new QuerySelectorBuilder('data-tag-id');
         this.shoppingButtonUpdater = new ShoppingButtonUpdater(this.surpriseMeMutation, this.querySelectorBuilder);
     }

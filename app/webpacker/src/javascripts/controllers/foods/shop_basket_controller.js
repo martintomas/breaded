@@ -4,8 +4,8 @@ import { ShopBasketViewHelper } from "../../services/foods/ShopBasketViewHelper"
 
 export default class extends Controller {
     initialize() {
-        this.shopBasketMutation = new ShopBasketMutation();
-        this.shopBasketViewHelper = new ShopBasketViewHelper(this.data.get('maxItems'));
+        this.shopBasketMutation = new ShopBasketMutation(this.data.get('storage-prefix'));
+        this.shopBasketViewHelper = new ShopBasketViewHelper(this.shopBasketMutation, this.data.get('maxItems'));
     }
 
     connect() {

@@ -5,7 +5,7 @@ export default class extends Controller {
     static targets = [ "form" ]
 
     initialize() {
-        this.basketStorage = ShopBasketStorage.getStorage();
+        this.basketStorage = ShopBasketStorage.getStorage(this.data.get('storage-prefix'));
     }
 
     formSubmitted(event) {
@@ -16,7 +16,6 @@ export default class extends Controller {
 
     addBasketItems() {
         let basketItemsInput = document.querySelector('input[name="basket_items"]');
-        console.log(basketItemsInput)
         if(basketItemsInput === null) {
             basketItemsInput = document.createElement('input');
             basketItemsInput.setAttribute('type', 'hidden');

@@ -12,12 +12,18 @@ class Orders::UpdateFromBasket
   end
 
   def perform_for(shopping_basket_variant)
+    delete_current!
     return add_food_items! if shopping_basket_variant == PICK_UP_TYPE
 
     add_surprise_me_items!
   end
 
   private
+
+  def delete_current!
+    order.order_foods.destroy_all
+    order.order_surprises.destroy_all
+  end
 
   def add_food_items!
     basket_items.each do |item|

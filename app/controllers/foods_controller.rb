@@ -26,7 +26,9 @@ class FoodsController < ApplicationController
 
     pagy, foods = pagy query, items: 10
     render json: { header: render_to_string(partial: 'foods/index/food_details_header', locals: { query: query }, formats: [:html]),
-                   entries: render_to_string(partial: 'foods/index/food_details', locals: { foods: foods }, formats: [:html]),
+                   entries: render_to_string(partial: 'foods/index/food_details',
+                                             locals: { foods: foods, basket_prefix: params[:basket_prefix], root_url: params[:root_url] },
+                                             formats: [:html]),
                    pagination: view_context.pagy_nav(pagy) }
   end
 
@@ -35,7 +37,9 @@ class FoodsController < ApplicationController
     query = query.where(id: category) if category.present? && category != 'all'
 
     pagy, producers = pagy query, items: 5
-    render json: { entries: render_to_string(partial: 'foods/index/producer_details', locals: { producers: producers }, formats: [:html]),
+    render json: { entries: render_to_string(partial: 'foods/index/producer_details',
+                                             locals: { producers: producers, basket_prefix: params[:basket_prefix], root_url: params[:root_url] },
+                                             formats: [:html]),
                    pagination: view_context.pagy_nav(pagy) }
   end
 end

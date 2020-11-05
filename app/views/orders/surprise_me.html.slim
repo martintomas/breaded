@@ -1,0 +1,16 @@
+section.container
+  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.pickup
+    h1 = t 'app.browse_bread.title'
+    p = t 'app.browse_bread.subtitle'
+    #stick-here
+    #container data-controller="orders--update" data-orders--update-variant="#{Orders::UpdateFromBasket::SURPRISE_ME_TYPE}"
+      #tab-container
+        == render partial: 'orders/menu_tabs', locals: { page: 'surprise_me', order: @order }
+        #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12 data-controller='foods--surprise-me' data-foods--surprise-me-storage-prefix="order-id-#{@order.id}" data-foods--surprise-me-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
+          .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.surpriseSection.active
+            .breads-lg-8.breads-md-8.breads-sm-8.breads-xs-12
+              div == render partial: 'foods/surprise_me/ingredient_preferences'
+              div == render partial: 'foods/surprise_me/favourite_bread_types'
+            == render partial: 'orders/surprise_me/list', locals: { order: @order }
+
+== render partial: 'shared/gift'

@@ -1,8 +1,8 @@
 section.container
-  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.breadDescription data-controller='foods--shop-basket' data-foods--shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
+  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.breadDescription data-controller='foods--shop-basket' data-foods--shop-basket-storage-prefix="#{params[:basket_prefix]}" data-foods--shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
     .breads-lg-8.breads-md-8.breads-sm-8.breads-xs-12
       ul.breadcrumbs
-        li onclick="Turbolinks.visit('#{foods_path}')" = t 'app.menu.browse_breads'
+        li onclick="Turbolinks.visit('#{params[:root_url].presence || foods_path}')" = t 'app.menu.browse_breads'
         li onclick="Turbolinks.visit('#{food_path(@food)}')" = @food.localized_name
     .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
       .breads-lg-7.breads-md-7.breads-sm-7.breads-xs-12

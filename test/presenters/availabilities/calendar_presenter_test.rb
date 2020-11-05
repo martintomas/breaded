@@ -5,25 +5,25 @@ require 'test_helper'
 class Availabilities::CalendarPresenterTest < ActiveSupport::TestCase
   test '#start_date' do
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
-      assert_equal '26.October', Availabilities::CalendarPresenter.new.start_date
+      assert_equal '26 Oct', Availabilities::CalendarPresenter.new.start_date
     end
   end
 
   test '#start_date - current date is ignored' do
     travel_to Time.zone.parse('26th Oct 2020 04:00:00') do
-      assert_equal '27.October', Availabilities::CalendarPresenter.new.start_date
+      assert_equal '27 Oct', Availabilities::CalendarPresenter.new.start_date
     end
   end
 
   test '#end_date' do
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
-      assert_equal '24.November', Availabilities::CalendarPresenter.new.end_date
+      assert_equal '24 Nov 2020', Availabilities::CalendarPresenter.new.end_date
     end
   end
 
   test '#end_date - time period can be shortened' do
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
-      assert_equal '27.October', Availabilities::CalendarPresenter.new(to_time: 1.week.from_now).end_date
+      assert_equal '27 Oct 2020', Availabilities::CalendarPresenter.new(to_time: 1.week.from_now).end_date
     end
   end
 

@@ -13,17 +13,17 @@ class Users::SessionsSystemTest < ApplicationSystemTestCase
   test 'can login as customer' do
     login_as_customer
     within 'ul.menu' do
-      assert_selector 'li', text: users(:customer).email
+      assert_selector 'li', text: users(:customer).first_name
     end
   end
 
   test 'can logout after login' do
     login_as_customer
     within 'ul.menu' do
-      assert_selector 'li', text: users(:customer).email
+      assert_selector 'li', text: users(:customer).first_name
     end
 
-    click_link users(:customer).email
+    click_link users(:customer).first_name
     within 'ul.menu' do
       assert_selector 'li', text: I18n.t('app.menu.login')
     end

@@ -1,7 +1,23 @@
-body.foods.index, body.foods.surprise_me {
+body.foods.index, body.foods.surprise_me, body.orders.edit, body.orders.surprise_me {
     .selectedItems {
         font-size: 14px;
         margin-top: 38px;
+
+        .order-description-section {
+            .bread-list {
+                font-size: 12px;
+                display: block;
+            }
+            .box-description {
+                font-size: 18px;
+                font-weight: 500;
+                margin: 0 0 20px 15px;
+                padding: 0 0 10px 0;
+                border-bottom: 0.5px solid rgba(112, 112, 112, .5);
+                display: block;
+            }
+
+        }
     }
 
     .selectedItems.stick {
@@ -159,5 +175,27 @@ body.foods.index, body.foods.surprise_me {
     .counter {
         display: inline-block;
         font-size: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .selectedItems {
+            .order-description-section {
+                border-bottom: 0.5px solid rgba(112, 112, 112, .5);
+                margin: 0 0 10px 15px;
+
+                .bread-list {
+                    display: inline-block;
+                    padding: 0;
+                }
+                .box-description {
+                    display: inline-block;
+                    font-size: 15px;
+                    font-weight: 400;
+                    margin: 0 0 5px 5px;
+                    padding: 0;
+                    border: 0;
+                }
+            }
+        }
     }
 }

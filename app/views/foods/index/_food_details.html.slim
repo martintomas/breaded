@@ -1,9 +1,12 @@
 - foods.sort_by(&:localized_name).each do |food|
   ul.itemsection
     li
-      = image_tag Blobs::UrlBuilder.new(food.image_detail).url
+      = link_to image_tag(Blobs::UrlBuilder.new(food.image_detail).url),
+            food_path(food, basket_prefix: basket_prefix, root_url: root_url), class: 'food-detail-image'
+      .picked-food
+        i.checkmark
+        = t 'app.browse_bread.shopping_basket.picked'
       .iteamcount
-        = link_to content_tag(:span, I18n.t('app.browse_bread.about_bread')), food_path(food)
         == render partial: 'amount_button', locals: { food_id: food.id, food_name: food.localized_name }
     li
       span.lastWord = last_word_split(food.localized_name)

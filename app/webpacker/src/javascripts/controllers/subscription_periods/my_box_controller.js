@@ -57,7 +57,7 @@ export default class extends Controller {
         if (selectedOption.dataset.buttonAction === 'copy') {
             this.triggerCopyAction(orderId, selectedOption.dataset.copyOrderId);
         } else {
-            console.log('PICK YOUR BREADS!');
+            Turbolinks.visit('/orders/' + orderId + '/edit')
         }
     }
 

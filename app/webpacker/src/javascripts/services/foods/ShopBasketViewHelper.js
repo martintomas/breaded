@@ -3,9 +3,9 @@ import { QuerySelectorBuilder } from "./QuerySelectorBuilder";
 import { ShoppingButtonUpdater } from "./ShoppingButtonUpdater";
 
 export class ShopBasketViewHelper {
-    constructor(maxItems) {
+    constructor(shopBasketMutation, maxItems) {
         this.maxItems = Number(maxItems);
-        this.shopBasketMutation = new ShopBasketMutation();
+        this.shopBasketMutation = shopBasketMutation;
         this.querySelectorBuilder = new QuerySelectorBuilder('data-food-id');
         this.shoppingButtonUpdater = new ShoppingButtonUpdater(this.shopBasketMutation, this.querySelectorBuilder);
     }

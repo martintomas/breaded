@@ -1,0 +1,19 @@
+section.container
+  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.pickup
+    h1 = t 'app.browse_bread.title'
+    p = t 'app.browse_bread.subtitle'
+    #stick-here
+    #container data-controller="orders--update" data-orders--update-variant="#{Orders::UpdateFromBasket::PICK_UP_TYPE}"
+      #tab-container
+        == render partial: 'orders/menu_tabs', locals: { page: 'browse_bread', order: @order }
+        #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12 data-controller='foods--shop-basket' data-foods--shop-basket-storage-prefix="order-id-#{@order.id}"  data-foods--shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"
+          .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.tab-section.active.browse_bread data-controller='foods--filter' data-foods--filter-base-url="#{foods_url}" data-foods--filter-root-url="#{edit_order_path(@order)}" data-foods--filter-storage-prefix="order-id-#{@order.id}"
+            .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.browse_bread
+              .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12 style="z-index: 1;"
+                == render partial: 'foods/index/filter'
+              .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.itemsBlock.active data-target="foods--filter.entries"
+              .pagination data-target="foods--filter.pagination"
+            == render partial: 'orders/edit/shopping_basket', locals: { order: @order }
+            == render partial: 'foods/index/shopping_basket_item'
+
+== render partial: 'shared/gift'

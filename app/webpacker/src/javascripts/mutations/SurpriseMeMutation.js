@@ -2,9 +2,9 @@ import { ShopBasketStorage } from "../storages/ShopBasketStorage";
 import { ShopBasketBaseMutations } from "./ShopBasketBaseMutations";
 
 export class SurpriseMeMutation extends ShopBasketBaseMutations {
-    constructor() {
+    constructor(storagePrefix) {
         super();
-        this.basketStorage = ShopBasketStorage.getStorage();
+        this.basketStorage = ShopBasketStorage.getStorage(storagePrefix);
         this.data = this.basketStorage.storage.surpriseMe;
     }
 

@@ -1,0 +1,9 @@
+.breads-lg-4.breads-md-4.breads-sm-4.breads-xs-12.surpriseList
+  h4 = t 'app.surprise_me.let_us_surprise_you_html'
+  .ingredients-preference
+    span = t 'app.surprise_me.ingredients_preferences'
+  .favourite_bread_types
+    span = t 'app.surprise_me.favourite_bread_types'
+  = form_for order, url: order_path(order), method: :patch, data: {target: 'orders--update.form', action: 'submit->orders--update#formSubmitted'}
+    = hidden_field_tag :shopping_basket_variant, Orders::UpdateFromBasket::SURPRISE_ME_TYPE
+    button = t 'app.surprise_me.confirm'
