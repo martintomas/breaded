@@ -1,5 +1,5 @@
 = image_pack_tag('media/images/address.png')
 p
   = t 'app.users.show.address.label'
-  = (order.address || order.user.address).to_s
+  = (order.address || current_user.address).to_s
 = link_to I18n.t('app.users.show.address.change'), '#'

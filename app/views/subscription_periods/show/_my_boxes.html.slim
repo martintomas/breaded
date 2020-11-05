@@ -6,6 +6,7 @@ h3 = t 'app.users.show.categories.my_boxes'
     article.deadLine style="padding: 50px;"
       == render partial: 'subscription_periods/show/info'
 - orders.each do |order|
-  == render partial: 'subscription_periods/show/order_detail', locals: { orders: orders, order: order }
+  section.order-detail-section data-order-id="#{order.id}"
+    == render partial: 'subscription_periods/show/order_detail', locals: { orders: orders, order: order }
 article.deadLine
   == render partial: 'subscription_periods/show/info'

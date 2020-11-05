@@ -1,13 +1,12 @@
-section
-  span = boxes_names_for(order, orders)
-  .OrderSec
-    - if order.delivered?
-      == render partial: 'subscription_periods/show/order_delivered', locals: {order: order}
-    - elsif order.placed?
-      == render partial: 'subscription_periods/show/order_placed', locals: {order: order}
-    - else
-      == render partial: 'subscription_periods/show/order_editable', locals: {orders: orders, order: order}
-  .devliveyTime data-controller='orders--calendar' data-orders--calendar-order-id="#{order.id}"
-    == render partial: 'subscription_periods/show/delivery_time', locals: { order: order }
-  address
-    == render partial: 'subscription_periods/show/order_address', locals: { order: order }
+span = boxes_names_for(order, orders)
+.OrderSec
+  - if order.delivered?
+    == render partial: 'subscription_periods/show/order_delivered', locals: {order: order}
+  - elsif order.placed?
+    == render partial: 'subscription_periods/show/order_placed', locals: {order: order}
+  - else
+    == render partial: 'subscription_periods/show/order_editable', locals: {orders: orders, order: order}
+.devliveyTime data-controller='orders--calendar' data-orders--calendar-order-id="#{order.id}"
+  == render partial: 'subscription_periods/show/delivery_time', locals: { order: order }
+address
+  == render partial: 'subscription_periods/show/order_address', locals: { order: order }

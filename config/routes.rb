@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :orders, only: %i[show] do
     member do
       post :update_date
-      get :copy
+      post :copy
     end
   end
   resources :stripe, only: %i[] do

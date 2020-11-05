@@ -4,6 +4,6 @@ section.container.profilePage
   .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12.boxMenu
     == render partial: 'shared/users/menu'
   .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.boxDetails data-controller='subscription-periods--my-box'
-    == render partial: 'subscription_periods/show/my_boxes', locals: { orders: @subscription_period.orders.order(:delivery_date_from).to_a }
+    == render partial: 'subscription_periods/show/my_boxes', locals: { orders: @subscription_period.orders.includes(:address, :order_states).order(:delivery_date_from).to_a }
 == render partial: 'shared/gift'
 

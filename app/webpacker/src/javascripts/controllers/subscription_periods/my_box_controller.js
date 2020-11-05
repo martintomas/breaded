@@ -8,10 +8,6 @@ export default class extends Controller {
     }
 
     disconnect() {
-        if(document.clearCache) {
-            document.clearCache -= 1;
-            Turbolinks.clearCache();
-        }
         $(document).unbind('click', this.hideDropdowns)
     }
 
@@ -66,8 +62,18 @@ export default class extends Controller {
     }
 
     triggerCopyAction(orderId, copyOrderId) {
-        Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-        document.clearCache = 2;
-        Turbolinks.visit('/orders/' + orderId + '/copy/?copy_order_id=' + copyOrderId);
+        $.ajax({
+            type: 'POST',
+            url: "/orders/" + orderId + "/copy",
+            data: { copy_order_id: copyOrderId },
+            dataType: 'json',
+            success: (data) => {
+                if(data.errors.length > 0) {
+                    alert(data.errors[0]);
+                } else {
+                    $('section.order-detail-section[data-order-id=' + orderId +']')[0].innerHTML = data.order_detail;
+                }
+            }
+        })
     }
 }

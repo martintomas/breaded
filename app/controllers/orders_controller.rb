@@ -8,12 +8,11 @@ class OrdersController < ApplicationController
 
   def copy
     service = Orders::Copy.new @order, Order.find(params[:copy_order_id])
-    if service.perform
-      redirect_to subscription_period_path(@order.subscription_period)
-    else
-      @subscription_period = @order.subscription_period
-      render 'subscription_periods/show', notice: service.errors.join(',')
-    end
+    service.perform
+    render json: { errors: service.errors,
+                   order_detail: render_to_string(partial: 'subscription_periods/show/order_detail',
+                                                  locals: { order: @order, orders: @order.subscription_period.orders.order(:delivery_date_from) },
+                                                  formats: [:html]) }
   end
 
   def update_date
