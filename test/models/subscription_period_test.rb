@@ -8,6 +8,7 @@ class SubscriptionPeriodTest < ActiveSupport::TestCase
                       started_at: Time.current,
                       ended_at: Time.current + 1.month,
                       paid: true }
+    @subscription_period = subscription_periods :customer_1_subscription_1_period
   end
 
   test 'the validity - empty is not valid' do
@@ -36,5 +37,10 @@ class SubscriptionPeriodTest < ActiveSupport::TestCase
     model = SubscriptionPeriod.new @full_content.except(:paid)
     assert model.valid?, model.errors.full_messages
     refute model.paid
+  end
+
+  test 'to_s' do
+    assert_equal "#{@subscription_period.subscription.to_s}:#{@subscription_period.started_at.strftime('%e.%m. %Y')}-#{@subscription_period.ended_at.strftime('%e.%m. %Y')}",
+                 @subscription_period.to_s
   end
 end

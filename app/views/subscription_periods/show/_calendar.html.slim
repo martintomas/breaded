@@ -6,18 +6,20 @@ timeslot
     count = calendar_presenter.calendar_data.count
     = t 'app.users.show.delivery_time.slots_available'
   = link_to I18n.t('app.users.show.delivery_time.change'), '#', data: { action: "orders--calendar#open" }
-#calender.overlay data-target="orders--calendar.popup" data-order-id="#{order.id}"
-  .popup.calendar
-    .monthSec
-      label.date-label = "#{calendar_presenter.start_date} - #{calendar_presenter.end_date}"
-      = link_to I18n.t('app.get_breaded.calendar.close'), '#', class: 'close', class: 'close-calendar-link', data: { action: "orders--calendar#close" }
-    .dateSec.disableArrow.dateSlider
-      - calendar_presenter.times_grouped_by_days.each do |date, times|
-        ul.slide
-          li
-            span = date.strftime('%e %a')
-            span = date.strftime('%b, %Y')
-          - times.each do |time|
+
+- if calendar_presenter.calendar_data.count.positive?
+  #calender.overlay data-target="orders--calendar.popup" data-order-id="#{order.id}"
+    .popup.calendar
+      .monthSec
+        label.date-label = "#{calendar_presenter.start_date} - #{calendar_presenter.end_date}"
+        = link_to I18n.t('app.get_breaded.calendar.close'), '#', class: 'close close-calendar-link', data: { action: "orders--calendar#close" }
+      .dateSec.disableArrow.dateSlider
+        - calendar_presenter.times_grouped_by_days.each do |date, times|
+          ul.slide
             li
-              span class="#{time[0].to_i == order.delivery_date_from.to_i ? 'active' : '' }" data-action="click->orders--calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
-    button data-action="orders--calendar#submit" = t 'app.get_breaded.calendar.submit'
+              span = date.strftime('%e %a')
+              span = date.strftime('%b, %Y')
+            - times.each do |time|
+              li
+                span class="#{time[0].to_i == order.delivery_date_from.to_i ? 'active' : '' }" data-action="click->orders--calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
+      button data-action="orders--calendar#submit" = t 'app.get_breaded.calendar.submit'

@@ -8,6 +8,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
 
     login_as_customer
     @subscription = subscriptions :customer_subscription_1
+    @subscription.update! active: false
     add_new_stripe_product!
   end
 
@@ -21,7 +22,9 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_stripe_elements card: '4000000000009987'
     click_button I18n.t('app.get_breaded.payment.submit')
 
-    assert_selector 'div#error_explanation > ul > li', text: 'Your card was declined'
+    using_wait_time(10) do
+      assert_selector 'div#error_explanation > ul > li', text: 'Your card was declined'
+    end
   end
 
   test '#new - subscription crashed with requires payment error' do
@@ -54,7 +57,9 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
 
     complete_stripe_sca_with 'Complete'
 
-    # TODO add final screen
+    using_wait_time(10) do
+      assert_text I18n.t('app.users.show.categories.my_boxes')
+    end
   end
 
   test '#new' do

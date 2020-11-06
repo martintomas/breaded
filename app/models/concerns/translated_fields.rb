@@ -7,7 +7,7 @@ module TranslatedFields
     def add_translated_fields(*attributes)
       attributes.each { |attribute| activate_translated_relation_for attribute }
       scope :with_translations, -> do
-        includes(attributes.each_with_object({}) { |attribute, res| res[attribute] = { text_translations: :language } })
+        preload(attributes.each_with_object({}) { |attribute, res| res[attribute] = { text_translations: :language } })
       end
     end
 

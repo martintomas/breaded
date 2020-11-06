@@ -27,9 +27,25 @@ class Orders::UpdateFromBasketTest < ActiveSupport::TestCase
       assert_no_difference -> { OrderFood.count } do
         Orders::UpdateFromBasket.new(@order, basket_items).perform_for Orders::UpdateFromBasket::SURPRISE_ME_TYPE
 
-        assert_equal 5, @order.order_surprises.joins(:tag).where(tags: { id: tags(:vegetarian_tag) }).first.amount
-        assert_nil @order.order_surprises.joins(:tag).where(tags: { id: tags(:rye_tag) }).first.amount
+        assert_equal 5, @order.order_surprises.joins(:tag).where(tags: { id: tags(:vegetarian_tag).id }).first.amount
+        assert_nil @order.order_surprises.joins(:tag).where(tags: { id: tags(:rye_tag).id }).first.amount
       end
+    end
+  end
+
+  test '#perform_for - old order food gets deleted' do
+    @order.order_foods.create! food_id: foods(:rye_bread).id, amount: 5
+
+    assert_difference -> { OrderFood.count }, -1 do
+      Orders::UpdateFromBasket.new(@order, []).perform_for Orders::UpdateFromBasket::PICK_UP_TYPE
+    end
+  end
+
+  test '#perform_for - old order surprises gets deleted' do
+    @order.order_surprises.create! tag: tags(:vegetarian_tag), amount: 5
+
+    assert_difference -> { OrderSurprise.count }, -1 do
+      Orders::UpdateFromBasket.new(@order, []).perform_for Orders::UpdateFromBasket::SURPRISE_ME_TYPE
     end
   end
 end

@@ -10,9 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      resource.update! role_ids: [Role.find_by!(name: :customer).id]
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -52,7 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    stored_location_for(:user) || super
+    stored_location_for(:user) || foods_path
   end
 
   # The path used after sign up for inactive accounts.

@@ -9,7 +9,7 @@ class Stripe::CreateSubscription
   end
 
   def perform_for(payment_method_id)
-    run_stripe_actions_for payment_method_id
+    run_stripe_actions_for payment_method_id unless already_paid?
   rescue Stripe::CardError => e
     errors << e.message
   end
@@ -23,6 +23,11 @@ class Stripe::CreateSubscription
                                 items: [{ price: subscription.subscription_plan.stripe_price }],
                                 expand: %w[latest_invoice.payment_intent],
                                 metadata: { subscription_id: subscription.id }
+  end
+
+  def already_paid?
+    errors << I18n.t('app.stripe.subscription_already_paid') if subscription.active?
+    errors.present?
   end
 
   def stripe_customer_id

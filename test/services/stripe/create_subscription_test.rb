@@ -4,7 +4,7 @@ require 'test_helper'
 
 class Stripe::CreateSubscriptionTest < ActiveSupport::TestCase
   setup do
-    @subscription = subscriptions :customer_subscription_1
+    @subscription = subscriptions :not_active_subscription
     @service = Stripe::CreateSubscription.new @subscription
   end
 
@@ -49,5 +49,12 @@ class Stripe::CreateSubscriptionTest < ActiveSupport::TestCase
         end
       end
     end
+  end
+
+  test '#perform_for - already paid order cannot be paid again' do
+    @subscription.update! active: true
+    @service.perform_for 'stripe_payment_method_id'
+
+    assert_equal [I18n.t('app.stripe.subscription_already_paid')], @service.errors
   end
 end

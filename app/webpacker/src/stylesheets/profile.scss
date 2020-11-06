@@ -720,6 +720,10 @@ body.users.my_boxes, body.subscription_periods.show {
       line-height: 30px;
       font-size: 13px;
     }
+    .popup {
+      width: 90%;
+      margin: 70px auto;
+    }
   }
 
   @media (max-width: 650px) {

@@ -56,4 +56,12 @@ class FoodsHelperTest < ActionView::TestCase
     tag2 = tags(:butter_tag)
     assert_equal tag1.localized_name, print_tags_from([tag1, tag2], tag_type: tag1.tag_type)
   end
+
+  test '.print_bread_preferences_for - when order has surprises' do
+    assert_equal tags(:rye_tag).localized_name, print_bread_preferences_for(orders(:customer_surprise_order))
+  end
+
+  test '.print_bread_preferences_for - order without surprises' do
+    assert_equal '', print_bread_preferences_for(orders(:customer_order_1))
+  end
 end

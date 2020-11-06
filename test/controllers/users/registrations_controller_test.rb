@@ -21,7 +21,8 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
         assert_equal 'First Name', user.first_name
         assert_equal 'Last Name', user.last_name
         assert_equal 'test@test.test', user.email
-        assert_redirected_to root_path
+        assert_equal [roles(:customer).id], user.role_ids
+        assert_redirected_to foods_path
       end
     end
   end

@@ -12,6 +12,7 @@ class AddressTest < ActiveSupport::TestCase
                       city: 'London',
                       state: 'UK',
                       main: false }
+    @address = addresses :customer_address
   end
 
   test 'the validity - empty is not valid' do
@@ -57,5 +58,9 @@ class AddressTest < ActiveSupport::TestCase
     model = Address.new @full_content.except(:main)
     assert model.valid?, model.errors.full_messages
     refute model.main
+  end
+
+  test 'to_s' do
+    assert_equal "#{@address.address_line}, #{@address.street} #{@address.city}", @address.to_s
   end
 end

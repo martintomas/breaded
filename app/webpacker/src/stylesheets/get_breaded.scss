@@ -505,13 +505,14 @@ body.subscriptions, body.payments.new {
     }
     input[type="submit"] {
       font-size: 18px;
+      white-space: normal;
     }
   }
 
   @media (max-width: 360px) {
     .breadedPlan [type="radio"]:checked + label,
     .breadedPlan [type="radio"]:not(:checked) + label,
-    .textFeild input {
+    .textFeild input, .payment-card {
       width: 280px;
     }
   }

@@ -21,6 +21,12 @@ class Subscriptions::PaymentsControllerTest < ActionDispatch::IntegrationTest
     @subscription.update! stripe_subscription: 'test', active: true
     get new_subscription_payment_path(@subscription), params: { shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE }
 
-    assert_redirected_to @subscription.user
+    assert_redirected_to my_boxes_users_path
+  end
+
+  test '#new - not allowed to pay subscription of somebody else' do
+    get new_subscription_payment_path(subscriptions(:customer_subscription_2))
+
+    assert_redirected_to root_url
   end
 end

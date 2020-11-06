@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class SubscriptionPeriodsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_subscription_period, only: %i[show]
 
-  def show; end
+  def show
+    authorize! :read, @subscription_period
+  end
 
   private
 

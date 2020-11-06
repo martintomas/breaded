@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class SubscriptionsController < ApplicationController
-  before_action :store_user_location!
-  before_action :authenticate_user!
+  prepend_before_action :authenticate_user!, :store_user_location!
 
   def new
     subscription = Subscription.find_by_id params[:subscription_id]

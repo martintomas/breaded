@@ -32,6 +32,14 @@ class FoodsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test '#show - raise forbidden when bread is disabled' do
+    food = foods :rye_bread
+    food.update! enabled: false
+
+    get food_path(food)
+    assert_redirected_to root_url
+  end
+
   test '#surprise_me' do
     get surprise_me_foods_path
     assert_response :success

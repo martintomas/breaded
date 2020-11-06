@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class TwilioController < ApplicationController
-  before_action :authenticate_user!
-
   def sent_verification_sms
     twilio_service = Twilio::VerifyPhoneNumber.new(current_user, params[:phone_number])
     twilio_service.send

@@ -50,6 +50,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
 
 
   test '#create - pick up breads subscription' do
+    @user.update! phone_number: nil
     food_id = add_items_to_basket!
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
       assert_difference -> { Subscription.count }, 1 do
@@ -86,6 +87,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
   end
 
   test '#create - surprise me subscription' do
+    @user.update! phone_number: nil
     ingredients_preference_id, bread_preference_id = add_preferences_to_basket!
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
       assert_difference -> { Subscription.count }, 1 do

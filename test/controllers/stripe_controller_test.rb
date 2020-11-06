@@ -26,7 +26,7 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     post checkout_session_stripe_index_path, params: { subscription_id: subscriptions(:customer_subscription_2).id }
 
-    assert_response :forbidden
+    assert_redirected_to root_url
   end
 
   test '#subscription_webhook' do

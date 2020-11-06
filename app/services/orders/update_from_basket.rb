@@ -12,10 +12,12 @@ class Orders::UpdateFromBasket
   end
 
   def perform_for(shopping_basket_variant)
-    delete_current!
-    return add_food_items! if shopping_basket_variant == PICK_UP_TYPE
+    ActiveRecord::Base.transaction do
+      delete_current!
+      return add_food_items! if shopping_basket_variant == PICK_UP_TYPE
 
-    add_surprise_me_items!
+      add_surprise_me_items!
+    end
   end
 
   private

@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class Orders::Copy
-  attr_accessor :order, :copied_order, :errors
+  attr_accessor :order, :copied_order
 
   def initialize(order, copied_order)
     @order = order
     @copied_order = copied_order
-    @errors = []
   end
 
   def perform
@@ -14,9 +13,7 @@ class Orders::Copy
       delete_current!
       copy_order_foods!
       copy_order_surprises!
-      order.order_state_relations.create! order_state_id: OrderState.the_order_placed.id
     end
-    errors.blank?
   end
 
   private

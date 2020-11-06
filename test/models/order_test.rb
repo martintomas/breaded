@@ -41,4 +41,30 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal "#{@order.delivery_date_from.strftime('%l:%M %P')} - #{@order.delivery_date_to.strftime('%l:%M %P')}, #{@order.delivery_date_to.strftime('%e %B')}",
                  @order.delivery_date
   end
+
+  test '#delivered?' do
+    assert @order.delivered?
+
+    @order.update! delivery_date_to: 1.day.from_now
+    refute @order.delivered?
+  end
+
+  test '#editable_till' do
+    assert_equal (@order.delivery_date_from - Rails.application.config.options[:locked_before_delivery].days).end_of_day,
+                 @order.editable_till
+  end
+
+  test '#editable?' do
+    refute @order.editable?
+
+    @order.update! delivery_date_from: 5.days.from_now
+    assert @order.editable?
+  end
+
+  test '#placed?' do
+    refute @order.placed?
+
+    @order.order_state_relations.create! order_state: order_states(:order_placed)
+    assert @order.reload.placed?
+  end
 end

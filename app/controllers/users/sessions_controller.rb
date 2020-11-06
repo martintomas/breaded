@@ -28,9 +28,11 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
   def after_sign_in_path_for(resource)
     return admin_dashboard_path if resource.has_role? :admin
+    return my_boxes_users_path if Subscription.where(active: true, user: resource).count.positive?
 
-    stored_location_for(:user) || super
+    stored_location_for(:user) || foods_path
   end
 end
