@@ -1,0 +1,10 @@
+section.container.profilePage
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :addresses }
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
+    h3.title = t 'app.addresses.index.title'
+    == render partial: 'addresses/index/new'
+    == render partial: 'addresses/index/default', locals: { address: current_user.address } if current_user.address.present?
+    - (current_user.addresses - [current_user.address]).each do |address|
+      == render partial: 'addresses/index/other', locals: { address: address }
+== render partial: 'shared/gift'

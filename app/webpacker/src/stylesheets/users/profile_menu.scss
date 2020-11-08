@@ -1,0 +1,51 @@
+.profile-menu {
+  ul {
+    padding-left: 0;
+    margin-top: 0;
+
+    li {
+      list-style: none;
+      font-size: 20px;
+      margin-bottom: 50px;
+      font-family: 'Merriweather';
+      font-weight: 300;
+      color: #666666;
+
+      a {
+        font-weight: 300;
+        color: #666666;
+        text-decoration: none;
+      }
+
+      span {
+        display: inline-block;
+        height: 5px;
+
+        &:hover:after {
+          content: "";
+          border-bottom: 2.2px solid #666666;
+          width: 60%;
+          display: block;
+          position: relative;
+        }
+      }
+
+      &.active {
+        a {
+          color: #333333;
+          font-weight: 500;
+        }
+
+        span {
+          &:after {
+            content: "";
+            border-bottom: 2.2px solid #333333;
+            width: 60%;
+            display: block;
+            position: relative;
+          }
+        }
+      }
+    }
+  }
+}

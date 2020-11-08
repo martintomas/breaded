@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_subscription_period
+
   def my_boxes
-    @subscription_period = SubscriptionPeriod.joins(:subscription).where(subscriptions: { user: current_user }).order(:created_at).last
-    return redirect_to foods_path if @subscription_period.blank?
-    render 'subscription_periods/show'
+    redirect_to subscription_period_path(@subscription_period) if @subscription_period.present?
   end
 
-  def show; end
+  def my_plan
+    redirect_to subscription_path(@subscription_period.subscription) if @subscription_period.present?
+  end
+
+  private
+
+  def set_subscription_period
+    @subscription_period = SubscriptionPeriod.joins(:subscription).where(subscriptions: { user: current_user }).order(:created_at).last
+  end
 end

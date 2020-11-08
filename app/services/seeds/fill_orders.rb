@@ -10,7 +10,8 @@ class Seeds::FillOrders
       order_obj = Order.new subscription_period: subscription_period_for(order),
                             user: order[:user],
                             delivery_date_from: order[:delivery_date],
-                            delivery_date_to: order[:delivery_date] + 4.hours
+                            delivery_date_to: order[:delivery_date] + 4.hours,
+                            position: 1
       order_obj.build_address order[:address]
       order_foods_for order_obj, order[:foods]
       order_states_for order_obj, order[:states]

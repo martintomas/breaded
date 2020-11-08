@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import * as Sentry from "@sentry/browser";
 
 export default class extends Controller {
     static targets = [ "menu" ]

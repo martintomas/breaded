@@ -16,6 +16,6 @@ class BaseType < ActiveRecord::Base
   end
 
   def to_s
-    code
+    I18n.t("app.#{self.class.name.underscore}.#{code}", default: code)
   end
 end

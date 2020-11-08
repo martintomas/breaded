@@ -1,0 +1,42 @@
+.profile-header {
+  padding: 50px;
+  background-color: #f9f1e8;
+  margin-bottom: 75px;
+
+  h3 {
+    margin: 0;
+  }
+
+  ul {
+    padding-left: 0;
+    margin: 10px 0 0;
+    line-height: 20px;
+
+    li {
+      display: inline-block;
+      font-size: 20px;
+
+      &:last-child {
+        float: right;
+      }
+
+      a {
+        font-size: 15px;
+        color: #333333;
+      }
+    }
+  }
+
+  .phoneNum {
+    position: relative;
+    padding-left: 35px;
+
+    &::before {
+      content: ".";
+      position: absolute;
+      top: -15px;
+      left: 12px;
+      font-size: 50px;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+section.container.profilePage data-controller="addresses--edit"
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :addresses }
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
+    h3.title = t 'app.addresses.new.title'
+    == render 'shared/error_messages', resource: @address
+    = form_for @address do |f|
+      = f.hidden_field :address_type_id
+      == render partial: 'addresses/edit/fields', locals: { f: f }
+      == render partial: 'addresses/edit/dropdown', locals: { f: f }
+      = submit_tag I18n.t('app.addresses.new.submit')
+== render partial: 'shared/gift'

@@ -204,6 +204,35 @@ en:
         tag_name:
           one: '%{tag} bread'
           other: '%{tag} breads'
+    addresses:
+      index:
+        title: 'Your Addresses'
+        new_address: New Address
+        add_address: Add Address
+        default_address: Default Address
+        other_address: Other Address
+        set_as_default: Set as default delivery address
+      new:
+        title: 'Add new address'
+        optional: 'Optional'
+        submit: 'Confirm & Save'
+      edit:
+        title: 'Edit your address'
+    subscriptions:
+      show:
+        title: My plan
+        description: 'Each box contains %{num_breads} breads'
+        change_plan: 'Change Plan'
+        cancel: 'Cancel/Pause Membership'
+        to_be_canceled: 'Subscription will be canceled at end of billing period'
+        resume: 'Resume Membership'
+        plans:
+          variant_1: 'One box every month: '
+          variant_2: 'Two boxes every month: '
+          variant_4: 'Four boxes every month: '
+    address_type:
+      personal: Home
+      friends_home: "Friend's House"
     errors:
       form_error: '%{errors_count} prevented the form from being saved:'
     stripe:

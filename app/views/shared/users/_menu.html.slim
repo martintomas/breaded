@@ -1,11 +1,12 @@
-ul
-  li.active
-    span = t 'app.users.show.categories.my_boxes'
-  li
-    span = t 'app.users.show.categories.my_plan'
-  li
-    span = t 'app.users.show.categories.payment'
-  li
-    span = t 'app.users.show.categories.addresses'
-  li
-    span = t 'app.users.show.categories.faq'
+.breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12.profile-menu
+  ul
+    li class="#{page == :my_boxes ? 'active' : ''}"
+      span = link_to I18n.t('app.users.show.categories.my_boxes'), my_boxes_users_path
+    li class="#{page == :my_plan ? 'active' : ''}"
+      span = link_to content_tag(:span, I18n.t('app.users.show.categories.my_plan')), my_plan_users_path
+    li class="#{page == :payment ? 'active' : ''}"
+      span = link_to content_tag(:span, I18n.t('app.users.show.categories.payment')), '#'
+    li class="#{page == :addresses ? 'active' : ''}"
+      span = link_to content_tag(:span, I18n.t('app.users.show.categories.addresses')), addresses_path
+    li class="#{page == :faq ? 'active' : ''}"
+      span = link_to content_tag(:span, I18n.t('app.users.show.categories.faq')), '#'

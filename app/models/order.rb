@@ -3,6 +3,7 @@
 class Order < ApplicationRecord
   belongs_to :subscription_period
   belongs_to :user
+  belongs_to :copied_order, class_name: 'Order', optional: true
 
   has_many :order_foods, dependent: :destroy
   has_many :order_state_relations, dependent: :destroy
@@ -12,7 +13,7 @@ class Order < ApplicationRecord
 
   accepts_nested_attributes_for :address
 
-  validates :delivery_date_from, :delivery_date_to, presence: true
+  validates :delivery_date_from, :delivery_date_to, :position, presence: true
 
   delegate :subscription, to: :subscription_period
 
@@ -34,5 +35,9 @@ class Order < ApplicationRecord
 
   def placed?
     order_states.map(&:id).include? OrderState.the_order_placed.id
+  end
+
+  def finalised?
+    order_states.map(&:id).include? OrderState.the_finalised.id
   end
 end

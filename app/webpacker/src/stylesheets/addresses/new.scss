@@ -1,0 +1,61 @@
+body.addresses.new, body.addresses.create, body.addresses.edit, body.addresses.update {
+  input[type="submit"] {
+    background: #303030;
+    color: #ffffff;
+    padding: 24px 20px;
+    display: block;
+    width: calc(100% - 20px);
+    border: none;
+    border-radius: 5px;
+    font-size: 26px;
+    margin-bottom: 40px;
+  }
+
+  .text-field {
+    position: relative;
+    margin: 20px 20px 20px 0;
+    padding: 0;
+    width: calc(50% - 20px);
+
+    input, select {
+      border-radius: 5px;
+      text-indent: 10px;
+      font-size: 14px;
+      border: 1px solid #707070;
+      color: #333;
+      font-weight: 300;
+      width: 100%;
+      padding: 20px 5px;
+    }
+
+    label {
+      background: #fff;
+      position: absolute;
+      color: #333;
+      z-index: 9;
+      font-size: 14px;
+      padding: 0 10px;
+      left: 10px;
+      top: -8px;
+      font-weight: 300;
+    }
+
+    .drop-down {
+      font-size: 14px;
+      width: 100%;
+
+      .selected a, .options a {
+        padding: 20px;
+      }
+
+      .options ul {
+        top: 48px;
+        left: 0;
+      }
+
+      .optional a {
+        color: #9f9f9f
+      }
+    }
+  }
+}

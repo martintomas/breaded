@@ -68,11 +68,7 @@ export default class extends Controller {
             data: { copy_order_id: copyOrderId },
             dataType: 'json',
             success: (data) => {
-                if(data.errors.length > 0) {
-                    alert(data.errors[0]);
-                } else {
-                    $('section.order-detail-section[data-order-id=' + orderId +']')[0].innerHTML = data.order_detail;
-                }
+                $('section.order-detail-section[data-order-id=' + orderId +']').html(data.order_detail);
             }
         })
     }

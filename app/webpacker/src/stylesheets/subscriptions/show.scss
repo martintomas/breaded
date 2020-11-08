@@ -1,0 +1,44 @@
+body.subscriptions.show {
+  .title {
+    margin: 0 0 50px 0;
+  }
+
+  .my-plan-section {
+    border-radius: 5px;
+    border: solid 1px #707070;
+    margin: 0 40px 40px 0;
+
+    .my-plan-title {
+      margin-left: 20px;
+      position: relative;
+      top: -20px;
+      padding: 0 10px 0 10px;
+      display: inline;
+      background-color: white;
+      font-size: 20px;
+      font-weight: 400;
+      font-family: Merriweather;
+    }
+
+    .my-plan-content {
+      .description {
+        margin: 10px 0 10px 30px;
+        font-size: 16px;
+      }
+
+      button {
+        margin: 20px 0 10px 30px;
+      }
+
+      .cancel-option, .resume-option {
+        margin: 10px 0 30px 30px;
+        font-size: 12px;
+        font-weight: 500;
+
+        a {
+          color: #333333;
+        }
+      }
+    }
+  }
+}

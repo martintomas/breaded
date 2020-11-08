@@ -1,0 +1,12 @@
+section.container.profilePage
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :my_plan }
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
+    h3.title = t 'app.subscriptions.show.title'
+    .my-plan-section.breads-lg-9.breads-md-9.breads-sm-12.breads-xs-12
+      span.my-plan-title
+        = t "app.subscriptions.show.plans.variant_#{@subscription.subscription_plan.number_of_deliveries}"
+        = "#{@subscription.subscription_plan.currency.symbol}#{@subscription.subscription_plan.price}"
+      .my-plan-content
+        == render partial: 'subscriptions/show/my_plan_description', locals: { subscription: @subscription }
+== render partial: 'shared/gift'

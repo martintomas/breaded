@@ -5,27 +5,32 @@ customer_order_1:
   user: customer
   delivery_date_from: <%= 4.weeks.ago %>
   delivery_date_to: <%= 4.weeks.ago + 2.hours %>
+  position: 1
 
 customer_surprise_order:
   subscription_period: customer_1_subscription_1_period
   user: customer
   delivery_date_from: <%= 2.weeks.ago %>
   delivery_date_to: <%= 2.weeks.ago + 2.hours %>
+  position: 1
 
 customer_order_2:
   subscription_period: customer_1_subscription_2_period
   user: customer
   delivery_date_from: <%= 2.weeks.from_now %>
   delivery_date_to: <%= 2.weeks.from_now + 2.hours %>
+  position: 1
 
 customer_order_3:
   subscription_period: customer_1_subscription_2_period
   user: customer
   delivery_date_from: <%= 4.weeks.from_now %>
   delivery_date_to: <%= 4.weeks.from_now + 2.hours %>
+  position: 1
 
 customer_2_order_1:
   subscription_period: customer_2_subscription_2_period
   user: customer_2
   delivery_date_from: <%= 3.days.from_now %>
   delivery_date_to: <%= 3.days.from_now + 2.hours %>
+  position: 1

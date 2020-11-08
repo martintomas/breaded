@@ -1,4 +1,5 @@
-body.users.my_boxes, body.subscription_periods.show {
+body.users.my_boxes, body.subscription_periods.show, body.addresses,
+body.subscriptions.show, body.subscriptions.edit, body.subscriptions.update {
   & {
     background-color: #fff;
     color: #333333;
@@ -53,6 +54,16 @@ body.users.my_boxes, body.subscription_periods.show {
     vertical-align: middle;
     font-family: 'Montserrat';
     cursor: pointer;
+  }
+
+  button a {
+    color: #010101;
+    text-decoration: none;
+    display: block;
+  }
+
+  button:hover a {
+    color: #fff;
   }
 
   button:focus {
@@ -169,77 +180,6 @@ body.users.my_boxes, body.subscription_periods.show {
     margin-top: 150px;
     position: relative;
     display: table;
-  }
-
-  .profileDetails {
-    padding: 50px;
-    background-color: #f9f1e8;
-    margin-bottom: 75px;
-  }
-
-  .profileDetails h3 {
-    margin: 0;
-  }
-
-  .profileDetails ul {
-    padding-left: 0;
-    margin: 10px 0 0;
-    line-height: 20px;
-  }
-
-  .profileDetails ul li {
-    display: inline-block;
-    font-size: 20px;
-  }
-
-  .phoneNum {
-    position: relative;
-    padding-left: 35px;
-  }
-
-  .phoneNum::before {
-    content: ".";
-    position: absolute;
-    top: -15px;
-    left: 12px;
-    font-size: 50px;
-  }
-
-  .profileDetails ul li:last-child {
-    float: right;
-  }
-
-  .profileDetails ul li a {
-    font-size: 15px;
-    color: #333333;
-  }
-
-  .boxMenu ul {
-    padding-left: 0;
-    margin-top: 0;
-  }
-
-  .boxMenu ul li {
-    list-style: none;
-    font-size: 20px;
-    margin-bottom: 50px;
-    font-family: 'Merriweather';
-    font-weight: 300;
-    color: #666666;
-  }
-
-  .boxMenu ul li.active {
-    font-weight: 500;
-    color: #333333;
-    display: inline-block;
-  }
-
-  .boxMenu ul li.active span::after {
-    content: "";
-    border-bottom: 2.2px solid #333333;
-    width: 60%;
-    display: inline-block;
-    position: relative;
   }
 
   .boxDetails > h3 {

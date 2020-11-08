@@ -1,0 +1,7 @@
+- if subscription.to_be_canceled?
+  .description = t 'app.subscriptions.show.to_be_canceled'
+  .resume-option = link_to I18n.t('app.subscriptions.show.resume'), resume_subscription_path(subscription)
+- else
+  .description = I18n.t("app.subscriptions.show.description", num_breads: Rails.application.config.options[:default_number_of_breads])
+  button = link_to I18n.t('app.subscriptions.show.change_plan'), '#'
+  .cancel-option = link_to I18n.t('app.subscriptions.show.cancel'), cancel_subscription_path(subscription)

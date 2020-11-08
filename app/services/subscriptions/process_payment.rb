@@ -11,6 +11,8 @@ class Subscriptions::ProcessPayment
     case stripe_event['type']
     when 'customer.subscription.created'
       register_subscription
+    when 'customer.subscription.deleted'
+      deactivate_subscription
     when 'invoice.paid'
       run_invoice_paid_actions
     when 'invoice.payment_failed'
@@ -22,7 +24,12 @@ class Subscriptions::ProcessPayment
 
   def register_subscription
     subscription = Subscription.find stripe_event['data']['object'].metadata['subscription_id']
-    subscription.update! stripe_subscription: stripe_event['data']['object'].id, active: true
+    subscription.update! stripe_subscription: stripe_event['data']['object'].id, active: true, to_be_canceled: false
+  end
+
+  def deactivate_subscription
+    subscription = Subscription.find stripe_event['data']['object'].metadata['subscription_id']
+    subscription.update! active: false, to_be_canceled: true
   end
 
   def run_invoice_paid_actions

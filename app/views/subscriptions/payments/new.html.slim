@@ -1,3 +1,6 @@
+script src='https://js.stripe.com/v3/'
+meta name="turbolinks-visit-control" content="reload"
+
 section.container
   .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='subscriptions--payment' data-subscriptions--payment-subscription-id="#{@subscription.id}" data-subscriptions--payment-subscription-url="#{create_subscription_stripe_index_path}" data-subscriptions--payment-on-success-url="#{my_boxes_users_path}" data-subscriptions--payment-default-error="#{I18n.t('app.stripe.default_error')}"
     = link_to 'Back', new_subscription_path(subscription_id: @subscription.id, shopping_basket_variant: params[:shopping_basket_variant]), class: 'back-button'

@@ -1,0 +1,8 @@
+section.breads-lg-5.breads-md-5.breads-sm-5.breads-xs-12.address-section
+  span.section-title = t 'app.addresses.index.default_address'
+  .address-content
+    .address-line = "#{address.address_line}, #{address.street}, #{address.city}"
+    .postal-code = "#{address.postal_code}"
+    .address-actions
+      span.address-edit = link_to image_pack_tag('media/images/edit.png'), edit_address_path(address)
+      span.address-delete = link_to image_pack_tag('media/images/delete.png'), address_path(address), method: :delete

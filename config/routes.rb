@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       get :surprise_me
     end
   end
-  resources :subscriptions, only: %i[new create] do
+  resources :subscriptions, only: %i[new create show] do
+    member do
+      get :cancel
+      get :resume
+    end
     scope module: :subscriptions do
       resources :payments, only: %i[new]
     end
@@ -47,6 +51,12 @@ Rails.application.routes.draw do
   resources :users, only: %i[show] do
     collection do
       get :my_boxes
+      get :my_plan
+    end
+  end
+  resources :addresses do
+    member do
+      get :set_as_main
     end
   end
 end

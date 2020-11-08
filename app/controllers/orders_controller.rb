@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     Orders::Copy.new(@order, @copied_order).perform
     @order.order_state_relations.create! order_state_id: OrderState.the_order_placed.id
     render json: { order_detail: render_to_string(partial: 'subscription_periods/show/order_detail',
-                                                  locals: { order: @order, orders: @order.subscription_period.orders.order(:delivery_date_from) },
+                                                  locals: { order: @order.reload, orders: @order.subscription_period.orders.order(:delivery_date_from) },
                                                   formats: [:html]) }
   end
 

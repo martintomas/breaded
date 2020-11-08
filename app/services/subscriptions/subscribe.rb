@@ -27,14 +27,15 @@ class Subscriptions::Subscribe
 
     number_of_deliveries.times.map do |i|
       week_modification = i * (4 / number_of_deliveries)
-      create_order_for! subscription_period, week_modification, delivery_date_from, delivery_date_to
+      create_order_for! i, subscription_period, week_modification, delivery_date_from, delivery_date_to
     end
   end
 
-  def create_order_for!(subscription_period, week_modification, delivery_date_from, delivery_date_to)
+  def create_order_for!(position, subscription_period, week_modification, delivery_date_from, delivery_date_to)
     order = subscription_period.orders.build user: subscription.user,
                                              delivery_date_from: delivery_date_from + week_modification.weeks,
-                                             delivery_date_to: delivery_date_to + week_modification.weeks
+                                             delivery_date_to: delivery_date_to + week_modification.weeks,
+                                             position: position
     order.order_state_relations.build order_state_id: OrderState.the_new.id
     order.tap { |o| o.save! }
   end

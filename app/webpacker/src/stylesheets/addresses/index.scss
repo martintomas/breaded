@@ -1,0 +1,131 @@
+body.addresses.index {
+  .title {
+    margin: 0 0 50px 0;
+  }
+
+  .address-section {
+    border-radius: 5px;
+    border: solid 1px #707070;
+    margin: 0 40px 40px 0;
+
+    .section-title {
+      position: relative;
+      top: -20px;
+      padding: 0 10px 0 10px;
+      display: inline;
+      background-color: white;
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    .new-address-content {
+      padding: 35px 0 35px 0;
+      height: 180px;
+
+      a {
+        color: #666666;
+        text-decoration: none;
+      }
+
+      .circle {
+        width: 35px;
+        height: 35px;
+        position: relative;
+        display: block;
+        background: black;
+        border-radius: 50%;
+        margin: auto;
+
+        &:before {
+          content: "+";
+          position: absolute;
+          color: #fff;
+          top: -6px;
+          left: 6px;
+          font-size: 40px;
+          font-weight: 200;
+        }
+      }
+
+      .description {
+        font-size: 14px;
+        display: block;
+        text-align: center;
+        padding-top: 10px;
+      }
+    }
+
+    .address-content {
+      padding: 15px;
+      height: 180px;
+
+      &.with-default-address {
+        height: 240px;
+      }
+
+      .address-line {
+        font-size: 18px;
+        padding: 5px 0;
+      }
+
+      .postal-code {
+        font-size: 18px;
+        padding: 5px 0;
+      }
+
+      .address-actions {
+        margin-top: 20px;
+
+        img {
+          width: 12px;
+          height: 12px;
+        }
+
+        .address-edit {
+          padding-right: 20px;
+          border-right:solid 0.5px rgba(151,151,151,.29);
+        }
+
+        .address-delete {
+          padding-left: 20px;
+        }
+      }
+
+      .address-default {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 0 0 15px 20px;
+        border-top: solid 0.5px rgba(112,112,112, .5);
+        width: 100%;
+        color: #666666;
+        text-decoration: none;
+
+        &:hover {
+          background-color: rgba(112,112,112, .1);
+        }
+
+        .description {
+          font-size: 12px;
+          font-weight: 300;
+        }
+
+        .checkmark {
+          width: 12px;
+          height: 12px;
+          position: relative;
+          display: inline-block;
+          background: black;
+          border-radius: 50%;
+          margin-right: 10px;
+
+          &:before {
+            top: 0;
+            left: 3px;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
