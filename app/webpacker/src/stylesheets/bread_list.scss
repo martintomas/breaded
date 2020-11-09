@@ -55,6 +55,16 @@ body.orders.show {
     cursor: pointer;
   }
 
+  button a {
+    color: #010101;
+    text-decoration: none;
+    display: block;
+  }
+
+  button:hover a {
+    color: #fff;
+  }
+
   button:focus {
     outline: 0;
   }

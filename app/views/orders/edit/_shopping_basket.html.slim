@@ -1,7 +1,7 @@
 .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12.selectedItems.sticker
   .order-description-section
     span.bread-list = t 'app.browse_bread.shopping_basket.bread_list_for'
-    span.box-description = boxes_names_for(order, order.subscription_period.orders.order(:delivery_date_from)).titleize
+    span.box-description = boxes_names_for(order).titleize
   span
     i.counter.size-of-basket = 0
     = "/#{Rails.application.config.options[:default_number_of_breads]}"

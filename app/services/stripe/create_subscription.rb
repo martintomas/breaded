@@ -19,10 +19,18 @@ class Stripe::CreateSubscription
   def run_stripe_actions_for(payment_method_id)
     Stripe::PaymentMethod.attach payment_method_id, { customer: stripe_customer_id }
     Stripe::Customer.update stripe_customer_id, invoice_settings: { default_payment_method: payment_method_id }
-    Stripe::Subscription.create customer: stripe_customer_id,
-                                items: [{ price: subscription.subscription_plan.stripe_price }],
-                                expand: %w[latest_invoice.payment_intent],
-                                metadata: { subscription_id: subscription.id }
+    stripe_response = Stripe::Subscription.create customer: stripe_customer_id,
+                                                  items: [{ price: subscription.subscription_plan.stripe_price }],
+                                                  expand: %w[latest_invoice.payment_intent],
+                                                  metadata: { subscription_id: subscription.id }
+    update_subscription_with! stripe_response
+    stripe_response
+  end
+
+  def update_subscription_with!(values)
+    return unless values.status == 'active'
+
+    subscription.update! active: true, to_be_canceled: false, stripe_subscription: values.id
   end
 
   def already_paid?

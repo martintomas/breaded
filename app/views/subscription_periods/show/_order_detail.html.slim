@@ -1,12 +1,12 @@
-span = boxes_names_for(order, orders)
-.OrderSec
+span = boxes_names_for(order)
+.OrderSec data-order-id="#{order.id}"
   - if order.delivered?
-    == render partial: 'subscription_periods/show/order_delivered', locals: {order: order}
-  - elsif order.placed?
-    == render partial: 'subscription_periods/show/order_placed', locals: {order: order}
+    == render partial: 'subscription_periods/show/order_delivered', locals: { order: order }
+  - elsif order.finalised?
+    == render partial: 'subscription_periods/show/order_placed', locals: { order: order }
   - else
-    == render partial: 'subscription_periods/show/order_editable', locals: {orders: orders, order: order}
+    == render partial: 'subscription_periods/show/order_editable', locals: { order: order }
 .devliveyTime data-controller='orders--calendar' data-orders--calendar-order-id="#{order.id}"
   == render partial: 'subscription_periods/show/delivery_time', locals: { order: order }
-address
+address data-controller='orders--address' data-orders--address-order-id="#{order.id}"
   == render partial: 'subscription_periods/show/order_address', locals: { order: order }

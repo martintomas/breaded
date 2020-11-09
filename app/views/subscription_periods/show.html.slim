@@ -1,6 +1,8 @@
+- orders = @subscription_period.orders.includes(:address, :order_states, subscription_period: { orders: :order_states }).order(:delivery_date_from)
+
 section.container.profilePage
   == render partial: 'shared/users/header'
   == render partial: 'shared/users/menu', locals: { page: :my_boxes }
   .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.boxDetails data-controller='subscription-periods--my-box'
-    == render partial: 'subscription_periods/show/my_boxes', locals: { orders: @subscription_period.orders.includes(:address, :order_states).order(:delivery_date_from).to_a }
+    == render partial: 'subscription_periods/show/my_boxes', locals: { orders: orders }
 == render partial: 'shared/gift'

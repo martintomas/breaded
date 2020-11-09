@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :subscription_period
   belongs_to :user
   belongs_to :copied_order, class_name: 'Order', optional: true
+  belongs_to :unconfirmed_copied_order, class_name: 'Order', optional: true
 
   has_many :order_foods, dependent: :destroy
   has_many :order_state_relations, dependent: :destroy
@@ -25,12 +26,16 @@ class Order < ApplicationRecord
     "#{delivery_date_from.strftime('%l:%M %P')} - #{delivery_date_to.strftime('%l:%M %P')}, #{delivery_date_to.strftime('%e %B')}"
   end
 
+  def contain_items?
+    order_foods.present? || order_surprises.present?
+  end
+
   def editable_till
     (delivery_date_from - Rails.application.config.options[:locked_before_delivery].days).end_of_day
   end
 
   def editable?
-    editable_till >= Time.current
+    !finalised?
   end
 
   def placed?

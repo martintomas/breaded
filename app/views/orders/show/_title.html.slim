@@ -1,4 +1,4 @@
-h2 = t 'app.orders.show.bread_list', name: boxes_names_for(order.id, order.subscription_period.orders.order(:created_at).pluck(:id)).titleize
+h2 = t 'app.orders.show.bread_list', name: boxes_names_for(order).titleize
 - if order.delivered?
   span.delivered
     i.checkmark

@@ -15,8 +15,12 @@
 
 @import "../src/stylesheets/addresses/index";
 @import "../src/stylesheets/addresses/new";
+@import "../src/stylesheets/addresses/popup";
 
 @import "../src/stylesheets/subscriptions/show";
+@import "../src/stylesheets/subscriptions/edit";
+
+@import "../src/stylesheets/subscription_plans/index";
 
 @import "../src/stylesheets/users/profile_menu";
 @import "../src/stylesheets/users/profile_header";

@@ -31,45 +31,21 @@ export default class extends Controller {
         $(".drop-down[data-order-id=" + orderId + "] .options ul").toggle();
     }
 
-    selectDropdown(event) {
+    dropdownSelected(event) {
         event.preventDefault();
 
         let $event = $(event.currentTarget)
-        let orderId = event.currentTarget.dataset.orderId;
-
-        let hiddenOption = $(".drop-down[data-order-id=" + orderId + "] .options ul li[style*='display: none']")
-        let selectedOption = $(".drop-down[data-order-id=" + orderId + "] .selected a")
-        let selectedOptionText = $(".drop-down[data-order-id=" + orderId + "] .selected a span")
-
-        selectedOptionText.text($event.text());
-        selectedOption.attr('data-button-action', $event.data('button-action'))
-        selectedOption.attr('data-copy-order-id', $event.data('copy-order-id'))
-        $event.parent().hide();
-        hiddenOption.show();
-        $(".drop-down .options ul").hide();
-    }
-
-    submitAction(event) {
-        event.preventDefault();
-
-        let orderId = event.currentTarget.dataset.orderId;
-        let selectedOption = $(".drop-down[data-order-id=" + orderId + "] .selected a")[0]
-        if (selectedOption.dataset.buttonAction === 'copy') {
-            this.triggerCopyAction(orderId, selectedOption.dataset.copyOrderId);
-        } else {
-            Turbolinks.visit('/orders/' + orderId + '/edit')
-        }
-    }
-
-    triggerCopyAction(orderId, copyOrderId) {
         $.ajax({
             type: 'POST',
-            url: "/orders/" + orderId + "/copy",
-            data: { copy_order_id: copyOrderId },
+            url: $event.data('url'),
             dataType: 'json',
             success: (data) => {
-                $('section.order-detail-section[data-order-id=' + orderId +']').html(data.order_detail);
+                $('div.OrderSec[data-order-id=' + $event.data('order-id') +']').html(data.order_detail);
             }
         })
+    }
+
+    confirmCopyAction(event) {
+        this.dropdownSelected(event);
     }
 }

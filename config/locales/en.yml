@@ -141,7 +141,9 @@ en:
         version_1: "Once Every Month %{num_breads} Breads"
         version_2_html: "Twice Every Month </br> <i>%{num_breads} Breads x 2</i>"
         version_2: "Twice Every Month %{num_breads} Breads"
-        version_4_html: "Four Times Every Month </br> <i>%{num_breads} Breads x 3</i>"
+        version_3_html: "Third Times Every Month </br> <i>%{num_breads} Breads x 3</i>"
+        version_3: "Third Times Every Month %{num_breads} Breads"
+        version_4_html: "Four Times Every Month </br> <i>%{num_breads} Breads x 4</i>"
         version_4: "Four Times Every Month %{num_breads} Breads"
       phone_number:
         title: Your Phone Number
@@ -158,6 +160,10 @@ en:
         title: Your card details
         billing_option: 'Billing address is same as delivery address'
         submit: Confirm payment & Get Breaded
+        success:
+          title: Thank you for subscribing to Breaded!
+          go_to_my_boxes: Go to My Boxes
+          go_to_second_box: Pick breads for Second Box
     users:
       show:
         hi: 'Hi, %{name}'
@@ -181,15 +187,24 @@ en:
           deadline_description: Please pick your breads before the deadline allocated for each box. As this allows us to plan & ensure that each box is baked fresh before delivery. If you forget to pick your breads before  the allocated deadline for a specific box, we will assume that your bread list is same as that of the previous box delivered to you.
           delivery_date_description: "The 'delivery date & timeslot' of each box is automatically calculated based on ‘Your Plan’ & by default is set to the same day of the week when your first box was delivered. The ‘delivery date & timeslot’ of a box can only be changed before the deadline allocated for that particular box. We appreciate your cooperation to help us deliver freshly baked breads to you!"
         last_day_to_pick_your_breads: 'Last day to pick your breads:'
-        pick_bread: 'Pick bread for box %{number}'
-        repeat_box_html: "Repeat from box %{number}"
+        pick_bread_1: 'Pick breads for first box'
+        pick_bread_2: 'Pick breads for second box'
+        pick_bread_3: 'Pick breads for third box'
+        pick_bread_4: 'Pick breads for fourth box'
+        repeat_box_1: Repeat first box list
+        repeat_box_2: Repeat second box list
+        repeat_box_3: Repeat third box list
+        repeat_box_4: Repeat fourth box list
         order_delivered: ' Order Delivered'
         order_placed: ' Order Placed'
-        bread_list_button: 'Bread List'
+        bread_list_button: 'View Bread List'
         pick_breads_button: Pick Your Breads
+        confirm_button: Confirm
         address:
           label: 'Delivery Address: '
           change: 'Change'
+          popup:
+            title: Delivery Address
         delivery_time:
           label: ' Delivery by: '
           slots_available: ' Slots Available'
@@ -229,7 +244,16 @@ en:
         plans:
           variant_1: 'One box every month: '
           variant_2: 'Two boxes every month: '
+          variant_3: 'Three boxes every month: '
           variant_4: 'Four boxes every month: '
+      edit:
+        title: Change my box plan
+        continue_button: Continue
+        popup:
+          current_plan: 'Current Plan'
+          new_plan: 'New Plan'
+          note_higher: "You won't be charged until %{date}"
+          note_lower: 'Starting %{date}'
     address_type:
       personal: Home
       friends_home: "Friend's House"

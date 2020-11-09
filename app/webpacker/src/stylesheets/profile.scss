@@ -317,22 +317,33 @@ body.subscriptions.show, body.subscriptions.edit, body.subscriptions.update {
     z-index: 9;
   }
 
-  .drop-down .selected a {
+  .drop-down .selected .drop-down-option {
     background: #fff no-repeat scroll right center;
     display: block;
-    padding-right: 20px;
     border: 1px solid #707070;
     border-radius: 2px;
     text-decoration: none;
     color: #333333;
     line-height: 20px;
-    padding: 0 30px 0 10px;
-  }
-
-  .drop-down .selected a span {
+    padding: 15px 30px 15px 10px;;
     cursor: pointer;
-    display: block;
-    padding: 5px;
+    font-size: 15px;
+
+    .checkmark {
+      width: 12px;
+      height: 12px;
+      background: black;
+      margin-right: 10px;
+
+      &:before {
+        content: "\2713";
+        position: absolute;
+        color: #fff;
+        top: -4px;
+        left: 3px;
+        font-size: 10px;
+      }
+    }
   }
 
   .drop-down .option {
@@ -343,9 +354,9 @@ body.subscriptions.show, body.subscriptions.edit, body.subscriptions.update {
     background: #fff;
     display: none;
     list-style: none;
-    padding: 0px 0px;
+    padding: 0;
     position: absolute;
-    top: 3px;
+    top: 22px;
     left: 1px;
     width: auto;
     min-width: calc(100% - 1px);
@@ -356,7 +367,7 @@ body.subscriptions.show, body.subscriptions.edit, body.subscriptions.update {
     display: none;
   }
 
-  .drop-down .options ul li a {
+  .drop-down .options ul li {
     display: block;
     text-decoration: none;
     color: #333333;;
@@ -364,10 +375,12 @@ body.subscriptions.show, body.subscriptions.edit, body.subscriptions.update {
     border-bottom: .5px solid #707070;
     float: none;
     clear: both;
-    padding-left: 15px;
+    padding: 10px 0 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
   }
 
-  .drop-down .options ul li a:last-child {
+  .drop-down .options ul li:last-child {
     border-bottom: none;
   }
 

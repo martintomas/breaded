@@ -41,6 +41,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
       t.string :unconfirmed_phone
       t.string :phone_confirmation_token
       t.datetime :phone_confirmation_sent_at
+      t.string :secondary_phone_number
 
       t.timestamps null: false
     end

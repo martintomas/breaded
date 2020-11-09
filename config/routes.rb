@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get :surprise_me
     end
   end
-  resources :subscriptions, only: %i[new create show] do
+  resources :subscriptions, only: %i[new create edit update show] do
     member do
       get :cancel
       get :resume
@@ -30,7 +30,10 @@ Rails.application.routes.draw do
   resources :orders, only: %i[show update edit] do
     member do
       post :update_date
-      post :copy
+      post :update_address
+      post :pick_breads_option
+      post :copy_order_option
+      post :confirm_copy_option
       get :surprise_me
     end
   end

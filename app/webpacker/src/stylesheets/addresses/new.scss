@@ -44,18 +44,24 @@ body.addresses.new, body.addresses.create, body.addresses.edit, body.addresses.u
       font-size: 14px;
       width: 100%;
 
-      .selected a, .options a {
-        padding: 20px;
+      .selected, .options {
+        padding: 0;
       }
 
       .options ul {
-        top: 48px;
+        top: 38px;
         left: 0;
       }
 
-      .optional a {
+      .optional {
         color: #9f9f9f
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .text-field {
+      width: calc(100% - 20px);
     }
   }
 }

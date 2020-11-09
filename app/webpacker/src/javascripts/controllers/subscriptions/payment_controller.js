@@ -18,7 +18,7 @@ const STYLE = {
 }
 
 export default class extends Controller {
-    static targets = [ "form", "button", "card", "billingAddressCheckbox", "cardHolderName", "addressLine", "street", "city", "postalCode" ]
+    static targets = [ "form", "button", "card", "billingAddressCheckbox", "cardHolderName", "addressLine", "street", "city", "postalCode", "successPopup" ]
 
     initialize() {
         this.errorsArea = $('#error_explanation > ul');
@@ -100,7 +100,8 @@ export default class extends Controller {
     markAsPaid() {
         ShopBasketStorage.getStorage(this.data.get('storage-prefix')).reset();
         Turbolinks.clearCache();
-        Turbolinks.visit(this.data.get('on-success-url'));
+        clearInterval(this.loadingInterval);
+        this.successPopupTarget.classList.add('active')
     }
 
     collectData() {

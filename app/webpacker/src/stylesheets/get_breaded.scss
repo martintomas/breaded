@@ -564,6 +564,45 @@ body.subscriptions, body.payments.new {
       visibility: visible;
       opacity: 1;
     }
+
+    &#success-popup {
+      .popup {
+        padding: 100px 160px;
+
+        .title {
+          text-align: center;
+        }
+
+        .actions {
+          button {
+            padding: 15px 20px;
+            border: solid 2px #303030;
+            font-size: 18px;
+            display: block;
+            width: 80%;
+            text-align: center;
+            margin: 30px auto;
+            font-family: Montserrat;
+
+            &.my-boxes {
+              background: #303030;
+              a {
+                color: #ffffff;
+                text-decoration: none;
+              }
+            }
+
+            &.go-to-second-box {
+              background: #ffffff;
+              a {
+                color: #303030;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   .popup {
@@ -769,6 +808,14 @@ body.subscriptions, body.payments.new {
   }
 
   @media (max-width: 730px) {
+    .overlay {
+      &#success-popup {
+        .popup {
+          padding: 10%;
+        }
+      }
+    }
+
     .popup {
       width: 90%;
       margin: 70px auto;

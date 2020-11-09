@@ -10,7 +10,7 @@ class Address < ApplicationRecord
   before_validation :prepare_default
 
   def to_s
-    "#{address_line}, #{street} #{city}"
+    "#{address_line}, #{street} #{city} - #{postal_code}"
   end
 
   private

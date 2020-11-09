@@ -27,7 +27,7 @@ class Subscriptions::Subscribe
 
     number_of_deliveries.times.map do |i|
       week_modification = i * (4 / number_of_deliveries)
-      create_order_for! i, subscription_period, week_modification, delivery_date_from, delivery_date_to
+      create_order_for! i + 1, subscription_period, week_modification, delivery_date_from, delivery_date_to
     end
   end
 

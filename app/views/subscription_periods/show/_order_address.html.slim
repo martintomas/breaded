@@ -1,5 +1,26 @@
+- address = order.address || current_user.address
+
 = image_pack_tag('media/images/address.png')
 p
   = t 'app.users.show.address.label'
-  = (order.address || current_user.address).to_s
-= link_to I18n.t('app.users.show.address.change'), '#'
+  span data-target='orders--address.addressLine' = address.to_s
+= link_to I18n.t('app.users.show.address.change'), '', data: { action: "orders--address#open" } if order.editable?
+.overlay.address data-target="orders--address.popup" data-order-id="#{order.id}"
+  .popup
+    .close data-action='click->orders--address#close' = 'Close'
+    h3.title = t 'app.users.show.address.popup.title'
+    = form_for address, url: update_address_order_path(order), method: :post, namespace: "order_#{order.id}",
+          data: { target: 'orders--address.form', action: 'submit->orders--address#formSubmitted' } do |f|
+      .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+        = f.text_field :address_line
+        = f.label :address_line
+      .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+        = f.text_field :street, required: true
+        = f.label :street
+      .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+        = f.text_field :city, required: true
+        = f.label :city
+      .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+        = f.text_field :postal_code, required: true
+        = f.label :postal_code
+      = submit_tag I18n.t('app.addresses.new.submit'), data: { target: 'orders--address.button' }

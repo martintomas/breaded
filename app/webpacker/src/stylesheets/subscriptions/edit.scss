@@ -1,0 +1,118 @@
+body.subscriptions.edit, body.subscriptions.update {
+  .title {
+    margin: 0 0 40px 0;
+  }
+
+  input[type='submit'] {
+    width: 330px;
+    margin-bottom: 50px;
+  }
+
+  .popup {
+    padding: 50px;
+
+    .close {
+      float: right;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .current-plan {
+      padding-bottom: 25px;
+      border-bottom: solid 0.5px rgba(112,112,112,.5);
+
+      .price {
+        top: 30%;
+      }
+    }
+
+    .new-plan {
+      padding-top: 25px;
+
+      .price {
+        padding-top: 25px;
+        top: 30%;
+      }
+    }
+
+    .current-plan, .new-plan {
+      position: relative;
+
+      .title {
+        font-family: Merriweather;
+        font-size: 12px;
+        color: #666666;
+        margin: 5px 0;
+      }
+
+      .description {
+        font-family: Merriweather;
+        font-size: 20px;
+        color: #333333;
+        padding: 5px 0;
+
+        i {
+          font-size: 15px;
+          font-weight: 300;
+          color: #333333;
+        }
+      }
+
+      .price {
+        font-weight: 600;
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    .note {
+      font-family: Merriweather;
+      font-size: 14px;
+      margin: 15px 0;
+    }
+
+    .confirm-button {
+      display: inline-block;
+      margin-right: 10px;
+      width: 60%;
+
+      input[type='submit'] {
+        width: 100%;
+        border: solid 2px #303030;
+      }
+    }
+
+    .cancel-button {
+      display: inline-block;
+      width: calc(40% - 10px);
+
+      input[type='submit'] {
+        width: 100%;
+        background: #ffffff;
+        color: #303030;
+        border: solid 2px #303030;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .popup {
+      padding: 20px;
+
+      .current-plan, .new-plan {
+        .description {
+          max-width: 80%;
+        }
+      }
+
+      .confirm-button,.cancel-button {
+        width: 100%;
+        display: block;
+
+        input[type='submit'] {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+}

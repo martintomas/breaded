@@ -1,0 +1,98 @@
+body.subscriptions {
+  .list-of-plans {
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+    }
+
+    [type="radio"]:checked + label,
+    [type="radio"]:not(:checked) + label {
+      position: relative;
+      cursor: pointer;
+      line-height: 20px;
+      display: inline-block;
+      color: #666;
+      width: 330px;
+      padding: 10px 18px 10px 40px;
+      border-radius: 5px;
+      font-family: 'Merriweather';
+      font-weight: 400;
+      border: 1.5px solid;
+    }
+
+    [type="radio"]:checked + label:before,
+    [type="radio"]:not(:checked) + label:before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 10px;
+      height: 10px;
+      border: 1px solid #ddd;
+      border-radius: 100%;
+      background: #fff;
+    }
+
+    [type="radio"]:checked + label:after,
+    [type="radio"]:not(:checked) + label:after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border: 3.5px solid #000000;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 18px;
+      margin: auto;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+    }
+
+    [type="radio"]:not(:checked) + label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+
+    [type="radio"]:checked + label:after {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+
+    [type="radio"]:checked + label rate {
+      font-weight: 600;
+      color: #333333;
+    }
+
+    label {
+      margin-bottom: 20px;
+    }
+
+    span {
+      display: inline-block;
+      font-size: 13px;
+      position: relative;
+      vertical-align: text-top;
+
+      i {
+        font-size: 11px;
+        font-style: normal;
+        font-family: 'Montserrat';
+      }
+    }
+
+    rate {
+      font-size: 16px;
+      float: right;
+      line-height: 40px;
+      font-family: 'Montserrat';
+      font-weight: 400;
+    }
+  }
+}

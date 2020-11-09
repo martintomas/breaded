@@ -4,4 +4,4 @@ i
 span.date-time.day-in-month data-order-id="#{order.id}"= order.delivery_date_from.strftime('%A %d %b')
 span.date-time.time-range data-order-id="#{order.id}"= "#{order.delivery_date_from.strftime('%l:%M %P')} - #{order.delivery_date_to.strftime('%l:%M %P')}"
 
-== render partial: 'subscription_periods/show/calendar', locals: { order: order } unless order.placed?
+== render partial: 'subscription_periods/show/calendar', locals: { order: order } if order.editable?

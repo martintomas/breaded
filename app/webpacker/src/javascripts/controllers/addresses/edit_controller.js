@@ -22,11 +22,11 @@ export default class extends Controller {
         event.preventDefault();
 
         let $event = $(event.currentTarget)
-        let selectedOptionText = $(".drop-down .selected a")
+        let selectedOptionText = $(".drop-down .selected span")
 
         $('#address_address_type_id').val($event.data('address-type-id'))
         selectedOptionText.text($event.text());
-        selectedOptionText.parent().removeClass('optional');
+        selectedOptionText.removeClass('optional');
         $(".drop-down .options ul").hide();
     }
 }

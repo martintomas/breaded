@@ -2,7 +2,7 @@
 
 class SubscriptionsController < ApplicationController
   prepend_before_action :authenticate_user!, :store_user_location!, only: %i[new create]
-  before_action :set_subscription, only: %i[show :edit :update cancel resume]
+  before_action :set_subscription, only: %i[show edit update cancel resume]
 
   def new
     subscription = Subscription.find_by_id params[:subscription_id]
@@ -28,11 +28,12 @@ class SubscriptionsController < ApplicationController
 
   def edit
     authorize! :update, @subscription
+    @current_period_end = Time.at Stripe::Subscription.retrieve(@subscription.stripe_subscription).current_period_end
   end
 
   def update
     authorize! :update, @subscription
-    Stripe::UpdateSubscription.new(@subscription, SubscriptionPlan.find(params[:subscription_plan_id])).perform
+    Stripe::UpdateSubscription.new(@subscription, SubscriptionPlan.find(params[:subscription][:subscription_plan_id])).perform
     redirect_to subscription_path(@subscription)
   end
 

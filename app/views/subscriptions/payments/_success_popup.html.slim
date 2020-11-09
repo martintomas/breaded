@@ -1,0 +1,9 @@
+- second_order = subscription.orders.find_by_position 2
+
+#success-popup.overlay data-target="subscriptions--payment.successPopup"
+  .popup
+    .title = t 'app.get_breaded.payment.success.title'
+    .actions
+      button.my-boxes = link_to I18n.t('app.get_breaded.payment.success.go_to_my_boxes'), my_boxes_users_path
+      - if second_order.present?
+        button.go-to-second-box = link_to I18n.t('app.get_breaded.payment.success.go_to_second_box'), edit_order_path(second_order)

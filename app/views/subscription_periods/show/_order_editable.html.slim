@@ -3,16 +3,28 @@
   b = order.editable_till.strftime('%A, %d %b')
 .drop-down data-order-id="#{order.id}"
   .selected
-    = link_to content_tag(:span, I18n.t('app.users.show.pick_bread', number: box_number_for(order, orders))), '',
-          data: { action: 'subscription-periods--my-box#toggleDropdown', 'order-id': order.id, 'button-action': 'pick-up' }
+    .drop-down-option data-action='click->subscription-periods--my-box#toggleDropdown' data-order-id="#{order.id}"
+      - if order.unconfirmed_copied_order_id.present?
+        span = t "app.users.show.repeat_box_#{order.unconfirmed_copied_order.position}"
+      - elsif order.copied_order_id.present?
+        = content_tag(:span, '', class: 'checkmark') if order.placed?
+        span = t "app.users.show.repeat_box_#{order.copied_order.position}"
+      - else
+        = content_tag(:span, '', class: 'checkmark') if order.placed?
+        span = t "app.users.show.pick_bread_#{order.position}"
     .triangle
   .options
     ul
-      - orders.each_with_index.map do |copied_order, i|
+      li data-action='click->subscription-periods--my-box#dropdownSelected' data-order-id="#{order.id}" data-url="#{pick_breads_option_order_path(order)}"
+        = t "app.users.show.pick_bread_#{order.position}"
+      - order.subscription_period.orders.sort_by(&:delivery_date_from).map do |copied_order|
         - next if !copied_order.placed? || order == copied_order
 
-        li style="display: none;" = link_to I18n.t('app.users.show.pick_bread', number: box_number_for(order, orders)), '',
-              data: { action: 'subscription-periods--my-box#selectDropdown', 'order-id': order.id, 'button-action': 'pick-up' } if i.zero?
-        li = link_to I18n.t('app.users.show.repeat_box_html', number: i + 1), '',
-              data: { action: 'subscription-periods--my-box#selectDropdown', 'order-id': order.id, 'copy-order-id': copied_order.id, 'button-action': 'copy' }
-= button_tag I18n.t('app.users.show.pick_breads_button'), data: { action: 'subscription-periods--my-box#submitAction', 'order-id': order.id }
+        li data-action='click->subscription-periods--my-box#dropdownSelected' data-order-id="#{order.id}" data-url="#{copy_order_option_order_path(order, copy_order_id: copied_order.id)}"
+          = t "app.users.show.repeat_box_#{copied_order.position}"
+- if order.unconfirmed_copied_order_id.present?
+  = button_tag I18n.t('app.users.show.confirm_button'), data: { action: 'subscription-periods--my-box#confirmCopyAction', 'order-id': "#{order.id}", url: confirm_copy_option_order_path(order) }
+- elsif order.copied_order_id.present? || order.placed?
+  = button_tag I18n.t('app.users.show.bread_list_button'), onclick: "Turbolinks.visit('#{order_path(order)}')"
+- else
+  ==button_tag I18n.t('app.users.show.pick_breads_button'), onclick: "Turbolinks.visit('#{edit_order_path(order)}')"
