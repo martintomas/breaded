@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
 
   def update
     authorize! :update, @order
+
     Orders::UpdateFromBasket.new(@order, JSON.parse(params[:basket_items]).map(&:deep_symbolize_keys)).perform_for params[:shopping_basket_variant]
     @order.order_state_relations.create! order_state_id: OrderState.the_order_placed.id unless @order.placed?
     redirect_to subscription_period_path(@order.subscription_period)
@@ -24,7 +25,7 @@ class OrdersController < ApplicationController
     raise CanCan::AccessDenied if @order.finalised?
 
     @order.update! copied_order: nil, unconfirmed_copied_order: nil
-    # OrderStateRelation.find_by(order: @order, order_state: OrderState.the_order_placed).destroy if @order.placed?
+    OrderStateRelation.find_by(order: @order, order_state: OrderState.the_order_placed).destroy if @order.placed?
     render json: { order_detail: render_to_string(partial: 'subscription_periods/show/order_editable',
                                                   locals: { order: preloaded_order_detail_for(@order.id) }, formats: [:html]) }
   end

@@ -18,7 +18,7 @@
       li data-action='click->subscription-periods--my-box#dropdownSelected' data-order-id="#{order.id}" data-url="#{pick_breads_option_order_path(order)}"
         = t "app.users.show.pick_bread_#{order.position}"
       - order.subscription_period.orders.sort_by(&:delivery_date_from).map do |copied_order|
-        - next if !copied_order.placed? || order == copied_order
+        - next if !copied_order.placed? || order == copied_order || order.position < copied_order.position
 
         li data-action='click->subscription-periods--my-box#dropdownSelected' data-order-id="#{order.id}" data-url="#{copy_order_option_order_path(order, copy_order_id: copied_order.id)}"
           = t "app.users.show.repeat_box_#{copied_order.position}"
