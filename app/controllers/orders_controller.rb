@@ -12,12 +12,21 @@ class OrdersController < ApplicationController
     authorize! :update, @order
   end
 
+  def confirm_update
+    authorize! :update, @order
+
+    @order_former = Orders::UpdateFormer.new order: @order, shopping_basket_variant: params[:shopping_basket_variant]
+  end
+
   def update
     authorize! :update, @order
 
-    Orders::UpdateFromBasket.new(@order, JSON.parse(params[:basket_items]).map(&:deep_symbolize_keys)).perform_for params[:shopping_basket_variant]
-    @order.order_state_relations.create! order_state_id: OrderState.the_order_placed.id unless @order.placed?
-    redirect_to subscription_period_path(@order.subscription_period)
+    @order_former = Orders::UpdateFormer.new order_former_params.merge(order: @order).merge(order_params)
+    if @order_former.save
+      redirect_to subscription_period_path(@order.subscription_period)
+    else
+      render :confirm_update
+    end
   end
 
   def pick_breads_option
@@ -90,6 +99,15 @@ class OrdersController < ApplicationController
 
   def set_copied_order
     @copied_order = Order.find params[:copy_order_id]
+  end
+
+  def order_former_params
+    params.require(:orders_update_former).permit(:delivery_date_from, :address_line, :street, :city, :postal_code,
+                                                 :phone_number, :secondary_phone_number, :shopping_basket_variant)
+  end
+
+  def order_params
+    params.permit(:basket_items)
   end
 
   def address_params

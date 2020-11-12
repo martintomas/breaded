@@ -3,7 +3,7 @@ section.container
     h1 = t 'app.browse_bread.title'
     p = t 'app.browse_bread.subtitle'
     #stick-here
-    #container data-controller="orders--update" data-orders--update-storage-prefix="order-id-#{@order.id}"  data-orders--update-variant="#{Orders::UpdateFromBasket::PICK_UP_TYPE}"
+    #container
       #tab-container
         == render partial: 'orders/menu_tabs', locals: { page: 'browse_bread', order: @order }
         #tab-content.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12 data-controller='foods--shop-basket' data-foods--shop-basket-storage-prefix="order-id-#{@order.id}"  data-foods--shop-basket-max-items="#{Rails.application.config.options[:default_number_of_breads]}"

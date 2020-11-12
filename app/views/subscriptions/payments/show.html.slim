@@ -1,0 +1,11 @@
+section.container.profilePage
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :payment }
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
+    h3.title = t 'app.get_breaded.payment.title'
+    .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+      = text_field_tag :card_number, "**** **** **** #{@subscription.user.payment_method.card.last4}", disabled: true
+      = label_tag :card_number, I18n.t('app.get_breaded.payment.show.card_number')
+      span.expiration_time = t 'app.get_breaded.payment.show.expiration_time'
+    = submit_tag I18n.t('app.get_breaded.payment.show.update_button'), onclick: "Turbolinks.visit('#{edit_subscription_payment_path(@subscription, id: 0)}')"
+== render partial: 'shared/gift'

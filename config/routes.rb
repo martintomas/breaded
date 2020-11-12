@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       get :resume
     end
     scope module: :subscriptions do
-      resources :payments, only: %i[new]
+      resources :payments, only: %i[new show edit]
     end
   end
   resources :subscription_periods, only: %i[show]
@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       post :pick_breads_option
       post :copy_order_option
       post :confirm_copy_option
+      get :confirm_update
       get :surprise_me
     end
   end
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
       post :checkout_session
       post :subscription_webhook
       post :create_subscription
+      post :update_payment_method
     end
   end
   resources :twilio, only: %i[] do
@@ -55,6 +57,7 @@ Rails.application.routes.draw do
     collection do
       get :my_boxes
       get :my_plan
+      get :my_payment
     end
   end
   resources :addresses do

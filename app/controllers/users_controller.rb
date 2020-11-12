@@ -11,6 +11,10 @@ class UsersController < ApplicationController
   def my_plan
     redirect_to subscription_path(@subscription_period.subscription) if @subscription_period.present?
   end
+  
+  def my_payment
+    redirect_to subscription_payment_path(@subscription_period.subscription, id: 0) if @subscription_period.present?
+  end
 
   def edit
     authorize! :update, @user

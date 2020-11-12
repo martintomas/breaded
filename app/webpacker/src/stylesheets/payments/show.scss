@@ -1,6 +1,6 @@
-body.addresses.new, body.addresses.create, body.addresses.edit, body.addresses.update {
+body.payments.show {
   .title {
-    margin: 0 0 50px 0;
+    margin: 0 0 30px 0;
   }
 
   input[type="submit"] {
@@ -17,11 +17,12 @@ body.addresses.new, body.addresses.create, body.addresses.edit, body.addresses.u
 
   .text-field {
     position: relative;
-    margin: 20px 20px 20px 0;
+    margin: 20px 20px 50px 0;
     padding: 0;
-    width: calc(50% - 20px);
+    width: calc(70% - 20px);
+    max-width: 330px;
 
-    input, select {
+    input {
       border-radius: 5px;
       text-indent: 10px;
       font-size: 14px;
@@ -44,27 +45,18 @@ body.addresses.new, body.addresses.create, body.addresses.edit, body.addresses.u
       font-weight: 300;
     }
 
-    .drop-down {
-      font-size: 14px;
-      width: 100%;
-
-      .selected, .options {
-        padding: 0;
-      }
-
-      .options ul {
-        top: 38px;
-        left: 0;
-      }
-
-      .optional {
-        color: #9f9f9f
-      }
+    .expiration_time {
+      position: absolute;
+      font-size: 15px;
+      font-weight: 300;
+      top: calc(50% - 8px);
+      right: 15px;
     }
   }
 
   @media (max-width: 768px) {
     .text-field {
+      max-width: 100%;
       width: calc(100% - 20px);
     }
   }

@@ -1,5 +1,3 @@
-- calendar_presenter = Availabilities::CalendarPresenter.new to_time: 2.weeks.from_now
-
 span
   = t 'app.get_breaded.calendar.title'
   = required_field
@@ -8,18 +6,5 @@ span
     = text_field_tag :delivery_date, '', required: true, id: :delivery_date_from_field, autocomplete: "off"
     = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
     = image_pack_tag('media/images/calender.png')
-#calender.overlay data-target="components--calendar.popup"
-  .popup
-    .monthSec
-      label = "#{calendar_presenter.start_date} - #{calendar_presenter.end_date}"
-      = link_to I18n.t('app.get_breaded.calendar.close'), '#', class: 'close', data: { action: "components--calendar#close" }
-    .dateSec.disableArrow.dateSlider
-      - calendar_presenter.times_grouped_by_days.each do |date, times|
-        ul.slide
-          li
-            span = date.strftime('%e %a')
-            span = date.strftime('%b, %Y')
-          - times.each do |time|
-            li
-              span class="#{time[0].to_i == f.object.delivery_date_from.to_i ? 'active' : '' }" data-action="click->components--calendar#selectDate" data-timestamp="#{time[0]}" = "#{time[0].strftime('%l:%M%P')} - #{time[1].strftime('%l:%M%P')}"
-    button data-action="components--calendar#submit" = t 'app.get_breaded.calendar.submit'
+== render partial: 'shared/components/calendar', locals:  { calendar_presenter: Availabilities::CalendarPresenter.new(to_time: 2.weeks.from_now),
+                                                            delivery_date_from: f.object.delivery_date_from }

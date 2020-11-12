@@ -1,18 +1,15 @@
-script src='https://js.stripe.com/v3/'
-meta name="turbolinks-visit-control" content="reload"
-
 section.container
-  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='subscriptions--payment' data-subscriptions--payment-subscription-id="#{@subscription.id}" data-subscriptions--payment-subscription-url="#{create_subscription_stripe_index_path}" data-subscriptions--payment-on-success-url="#{my_boxes_users_path}" data-subscriptions--payment-default-error="#{I18n.t('app.stripe.default_error')}"
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads data-controller='payments--new' data-payments--new-subscription-id="#{@subscription.id}" data-payments--new-subscription-url="#{create_subscription_stripe_index_path}" data-payments--new-default-error="#{I18n.t('app.stripe.default_error')}"
     = link_to 'Back', new_subscription_path(subscription_id: @subscription.id, shopping_basket_variant: params[:shopping_basket_variant]), class: 'back-button'
     h2 = t 'app.get_breaded.payment.title'
     section
       #error_explanation
         ul
       = form_for @subscription.user, url: '#', method: :post, html: { class: 'breadedPlan' },
-              data: { target: 'subscriptions--payment.form', action: 'submit->subscriptions--payment#formSubmitted' } do |f|
-        == render partial: 'subscriptions/payments/card', locals: { f: f }
-        == render partial: 'subscriptions/payments/billing_address', locals: { f: f }
-        == render partial: 'subscriptions/payments/success_popup', locals: { subscription: @subscription }
-        = submit_tag I18n.t('app.get_breaded.payment.submit'), data: { target: 'subscriptions--payment.button' }
+              data: { target: 'payments--new.form', action: 'submit->payments--new#formSubmitted' } do |f|
+        == render partial: 'subscriptions/payments/new/card', locals: { f: f }
+        == render partial: 'subscriptions/payments/new/billing_address', locals: { f: f }
+        == render partial: 'subscriptions/payments/new/success_popup', locals: { subscription: @subscription }
+        = submit_tag I18n.t('app.get_breaded.payment.submit'), data: { target: 'payments--new.button' }
   .breads-lg-3.breads-md-3.breads-sm-3.breads-xs-12
 == render partial: 'shared/gift'

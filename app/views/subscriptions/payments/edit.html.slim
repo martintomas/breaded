@@ -1,0 +1,15 @@
+- client_secret = Stripe::SetupIntent.create(customer: @subscription.user.stripe_customer).client_secret
+
+section.container.profilePage data-controller='payments--edit' data-payments--edit-client-secret="#{client_secret}" data-payments--edit-subscription-id="#{@subscription.id}" data-payments--edit-payment-method-url="#{update_payment_method_stripe_index_path}" data-payments--edit-on-success-url="#{my_payment_users_path}"
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :payment }
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
+    h3.title = t 'app.get_breaded.payment.edit.title'
+    section
+      #error_explanation
+        ul
+      = form_for @subscription.user, url: '#', method: :post, data: { action: 'submit->payments--edit#formSubmitted' } do |f|
+        == render partial: 'subscriptions/payments/edit/card', locals: {f: f}
+        == render partial: 'subscriptions/payments/edit/billing_address', locals: {f: f}
+        = submit_tag I18n.t('app.get_breaded.payment.edit.submit'), data: { target: 'payments--edit.button' }
+== render partial: 'shared/gift'

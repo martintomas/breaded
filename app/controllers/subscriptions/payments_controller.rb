@@ -5,7 +5,15 @@ class Subscriptions::PaymentsController < ApplicationController
 
   def new
     authorize! :read, @subscription
-    redirect_to my_boxes_users_path if @subscription.stripe_subscription.present?
+    redirect_to my_boxes_users_path if @subscription.active?
+  end
+
+  def show
+    authorize! :read, @subscription
+  end
+
+  def edit
+    authorize! :update, @subscription
   end
 
   private

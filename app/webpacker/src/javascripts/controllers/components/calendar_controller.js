@@ -13,7 +13,7 @@ export default class extends Controller {
     }
 
     connect() {
-        this.updateDateFields(this.dateFieldHidden.val());
+        this.updateDateFields();
         this.initializeSlider();
     }
 
@@ -38,17 +38,13 @@ export default class extends Controller {
         event.preventDefault();
         if(this.selectedTimeField === undefined) { return this.close(event); }
 
-        this.updateDateFields(this.selectedTimeField.dataset.timestamp);
+        this.updateDateFields();
         this.close(event);
     }
 
-    updateDateFields(timestamp) {
-        if(timestamp === '') { return; }
-
-        let date = new Date(timestamp);
-        let dateString = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-        this.dateField.val(dateString);
-        this.dateFieldHidden.val(timestamp);
+    updateDateFields() {
+        this.dateField.val(this.selectedTimeField.dataset.timestampPretty);
+        this.dateFieldHidden.val(this.selectedTimeField.dataset.timestamp);
     }
 
     initializeSlider() {

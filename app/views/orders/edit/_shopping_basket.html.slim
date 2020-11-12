@@ -14,6 +14,5 @@
       i.close-basket-button.active data-action='click->foods--shop-basket#closeBasket'
         = t 'app.browse_bread.shopping_basket.close_button'
     .shopping-basket-items.active
-  = form_for order, url: order_path(order), method: :patch, data: { target: 'orders--update.form', action: 'submit->orders--update#formSubmitted' }
-    = hidden_field_tag :shopping_basket_variant, Orders::UpdateFromBasket::PICK_UP_TYPE
-    button.shopping-basket-confirm = t 'app.surprise_me.confirm'
+  button.shopping-basket-confirm onclick="Turbolinks.visit('#{confirm_update_order_path(order, shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE)}')"
+    = t 'app.surprise_me.confirm'
