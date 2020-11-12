@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :set_user, only: %i[edit]
   before_action :set_subscription_period
 
   def my_boxes
@@ -11,7 +12,15 @@ class UsersController < ApplicationController
     redirect_to subscription_path(@subscription_period.subscription) if @subscription_period.present?
   end
 
+  def edit
+    authorize! :update, @user
+  end
+
   private
+
+  def set_user
+    @user = User.find params[:id]
+  end
 
   def set_subscription_period
     @subscription_period ||= begin
