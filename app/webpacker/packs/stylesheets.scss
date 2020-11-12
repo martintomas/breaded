@@ -20,6 +20,8 @@
 @import "../src/stylesheets/subscriptions/show";
 @import "../src/stylesheets/subscriptions/edit";
 
+@import "../src/stylesheets/orders/update";
+
 @import "../src/stylesheets/subscription_plans/index";
 
 @import "../src/stylesheets/users/profile_menu";
@@ -27,3 +29,5 @@
 
 @import "../src/stylesheets/payments/show";
 @import "../src/stylesheets/payments/edit";
+
+@import "../src/stylesheets/components/stripe";

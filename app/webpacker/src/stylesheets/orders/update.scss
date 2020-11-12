@@ -1,0 +1,95 @@
+body.orders.confirm_update, body.orders.update {
+  .calendar-field {
+    max-width: 500px;
+
+    .calenderSec {
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
+
+      .slots-available {
+        position: absolute;
+        font-size: 12px;
+        top: calc(50% - 3px);
+        right: 0;
+        margin-right: 10px;
+        color: #333333;
+
+        img {
+          width: 12px;
+          margin-left: 10px;
+          position: initial;
+          margin-right: 5px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .address-section {
+    border-radius: 5px;
+    border: solid 1px #707070;
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 50px;
+
+    .section-title {
+      position: relative;
+      top: -10px;
+      padding: 0 10px 0 10px;
+      margin: 0 10px 0 10px;
+      display: inline;
+      background-color: white;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .address-content {
+      min-height: 120px;
+
+      .address-line {
+        font-size: 14px;
+        padding: 0 25px;
+      }
+
+      .postal-code {
+        font-size: 14px;
+        padding: 15px 25px;
+      }
+
+      .address-actions {
+        border-top: solid 0.5px rgba(112,112,112,.5);
+        padding: 5px 25px;
+        margin-bottom: 10px;
+
+        a {
+          font-size: 12px;
+          color: #333333;
+        }
+      }
+    }
+  }
+
+  .overlay.address {
+    .title {
+      text-align: left;
+    }
+  }
+
+  input[type="submit"].confirm-button {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  @media (max-width: 768px) {
+    .calendar-field {
+      .calenderSec {
+        .slots-available {
+          top: 100%;
+        }
+      }
+    }
+  }
+}

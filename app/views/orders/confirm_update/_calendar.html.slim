@@ -1,0 +1,13 @@
+- from_time = Time.current > (order.delivery_date_from.beginning_of_week - 1.day) ? Time.current : (order.delivery_date_from.beginning_of_week - 1.day)
+- calendar_presenter = Availabilities::CalendarPresenter.new from_time: from_time, to_time: order.delivery_date_from.end_of_week
+
+span
+  = t 'app.get_breaded.calendar.title'
+.textFeild.calendar-field
+  a.calenderSec href="#calender" data-action="components--calendar#open"
+    = text_field_tag :delivery_date, '', required: true, id: :delivery_date_from_field, autocomplete: "off"
+    = label_tag :delivery_date, I18n.t('app.get_breaded.calendar.delivery_date')
+    span.slots-available
+      = image_pack_tag('media/images/calender.png')
+      = t 'app.orders.confirm_update.slots_available', number: calendar_presenter.calendar_data.count
+== render partial: 'shared/components/calendar', locals:  { calendar_presenter: calendar_presenter, delivery_date_from: f.object.delivery_date_from }

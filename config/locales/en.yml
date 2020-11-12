@@ -173,7 +173,7 @@ en:
         edit:
           title: Your card details
           submit: Save
-          billing_option: 'Billing address is same as delivery address'
+          billing_option: 'Billing address is same as your main address'
           billing_address:
             title: Billing Address
     users:
@@ -231,6 +231,18 @@ en:
         tag_name:
           one: '%{tag} bread'
           other: '%{tag} breads'
+      confirm_update:
+        slots_available: '%{number} Slots Available'
+        address:
+          title: 'Delivery Address'
+          sub_title: 'Address'
+          change: Change
+          save: Save
+        phone_number:
+          title: Phone Number
+          primary: 'Primary Contact'
+          secondary: 'Secondary Contact (optional)'
+        confirm_button: 'Confirm & Get Breaded'
     addresses:
       index:
         title: 'Your Addresses'

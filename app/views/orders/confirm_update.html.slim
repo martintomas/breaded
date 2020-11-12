@@ -1,0 +1,18 @@
+section.container data-controller="orders--update" data-orders--update-storage-prefix="order-id-#{@order.id}" data-orders--update-variant="#{@order_former.shopping_basket_variant}"
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.getBreads
+    h2 = t 'app.get_breaded.title'
+    section data-controller='components--calendar'
+      == render 'shared/error_messages', resource: @order_former
+      = form_for @order_former, url: order_path(@order_former.order), method: :patch, html: { class: 'breadedPlan' },
+            data: { target: 'orders--update.form', action: 'submit->orders--update#formSubmitted' } do |f|
+        = f.hidden_field :shopping_basket_variant
+        = f.hidden_field :delivery_date_from, id: :delivery_date_from_hidden_field
+        = f.hidden_field :address_line
+        = f.hidden_field :street
+        = f.hidden_field :city
+        = f.hidden_field :postal_code
+        == render partial: 'orders/confirm_update/calendar', locals: { f: f, order: @order_former.order }
+        == render partial: 'orders/confirm_update/delivery_address', locals: { f: f }
+        == render partial: 'orders/confirm_update/phone_number', locals: { f: f }
+        = submit_tag I18n.t('app.orders.confirm_update.confirm_button'), class: 'confirm-button'
+== render partial: 'shared/gift'

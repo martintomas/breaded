@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       post :pick_breads_option
       post :copy_order_option
       post :confirm_copy_option
+      get :confirm_update
       get :surprise_me
     end
   end

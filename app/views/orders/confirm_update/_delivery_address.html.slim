@@ -1,0 +1,27 @@
+span
+  = t 'app.orders.confirm_update.address.title'
+.address-section
+  span.section-title = t 'app.orders.confirm_update.address.sub_title'
+  .address-content
+    .address-line data-target="orders--update.addressResultFirstPart" = "#{f.object.address_line}, #{f.object.street}, #{f.object.city}"
+    .postal-code data-target="orders--update.addressResultSecondPart"= "#{f.object.postal_code}"
+    .address-actions
+      = link_to I18n.t('app.orders.confirm_update.address.change'), '', data: { action: "orders--update#addressPopupOpen" }
+.overlay.address data-target="orders--update.addressPopup"
+  .popup
+    .close data-action='click->orders--update#addressPopupClose' = 'Close'
+    h3.title = t 'app.orders.confirm_update.address.title'
+    .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+      = f.text_field :address_line, id: :popup_address_line, data: { target: "orders--update.addressLine" }
+      = f.label :address_line
+    .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+      = f.text_field :street, id: :popup_street, required: true, data: { target: "orders--update.street" }
+      = f.label :street
+    .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+      = f.text_field :city, id: :popup_city, required: true, data: { target: "orders--update.city" }
+      = f.label :city
+    .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+      = f.text_field :postal_code, id: :popup_postal_code, required: true, data: { target: "orders--update.postalCode" }
+      = f.label :postal_code
+    = submit_tag I18n.t('app.orders.confirm_update.address.save'), data: { action: 'orders--update#addressUpdated' }
+
