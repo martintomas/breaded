@@ -5,7 +5,7 @@
     li class="#{page == :my_plan ? 'active' : ''}"
       span = link_to content_tag(:span, I18n.t('app.users.show.categories.my_plan')), my_plan_users_path
     li class="#{page == :payment ? 'active' : ''}"
-      span = link_to content_tag(:span, I18n.t('app.users.show.categories.payment')), '#'
+      span = link_to content_tag(:span, I18n.t('app.users.show.categories.payment')), my_payment_users_path
     li class="#{page == :addresses ? 'active' : ''}"
       span = link_to content_tag(:span, I18n.t('app.users.show.categories.addresses')), addresses_path
     li class="#{page == :faq ? 'active' : ''}"

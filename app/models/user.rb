@@ -32,6 +32,15 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def payment_method
+    return if stripe_customer.blank?
+
+    @payment_method ||= begin
+      Stripe::Customer.retrieve(id: stripe_customer, expand: ['invoice_settings.default_payment_method'])
+        .invoice_settings.default_payment_method
+    end
+  end
+
   def to_s
     "#{first_name} #{last_name} (#{email})"
   end

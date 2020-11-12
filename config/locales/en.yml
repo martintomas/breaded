@@ -5,6 +5,7 @@ en:
       apply_to_be_baker: Apply to be a Baker
       browse_breads: Browse Breads
       gift: Gift
+      my_boxes: My Boxes
       login: Login
     gift:
       label: Gift Breaded
@@ -164,6 +165,17 @@ en:
           title: Thank you for subscribing to Breaded!
           go_to_my_boxes: Go to My Boxes
           go_to_second_box: Pick breads for Second Box
+        show:
+          title: Payment Details
+          card_number: Card Number
+          update_button: Update
+          expiration_time: 'MM / YY'
+        edit:
+          title: Your card details
+          submit: Save
+          billing_option: 'Billing address is same as delivery address'
+          billing_address:
+            title: Billing Address
     users:
       show:
         hi: 'Hi, %{name}'

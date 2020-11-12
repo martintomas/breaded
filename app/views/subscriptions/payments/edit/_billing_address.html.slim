@@ -1,0 +1,18 @@
+= label_tag :same_as_delivery_address, class: 'checkbox-container' do
+  = t 'app.get_breaded.payment.edit.billing_option'
+  = check_box_tag :same_as_delivery_address, '', true, data: { target: 'payments--edit.billingAddressCheckbox', action: 'payments--edit#toggleAddress' }
+  span.billing-address-checkmark
+.billing-address-section
+  .title = t 'app.get_breaded.payment.edit.billing_address.title'
+  .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+    = text_field_tag :address_line, '', data: { target: 'payments--edit.addressLine', "default-value": "#{f.object.address&.address_line}" }
+    = label_tag :address_line
+  .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+    = text_field_tag :street, '', data: { target: 'payments--edit.street', "default-value": "#{f.object.address&.street}" }
+    = label_tag :street
+  .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+    = text_field_tag :city, '', data: { target: 'payments--edit.city', "default-value": "#{f.object.address&.city}" }
+    = label_tag :city
+  .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
+    = text_field_tag :postal_code, '', data: { target: 'payments--edit.postalCode', "default-value": "#{f.object.address&.postal_code}" }
+    = label_tag :postal_code
