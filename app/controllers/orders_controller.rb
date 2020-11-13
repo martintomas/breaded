@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     authorize! :read, @copied_order
     raise CanCan::AccessDenied if @order.finalised?
 
-    if @order.unconfirmed_copied_order == @copied_order
+    if @order.copied_order == @copied_order
       @order.update! unconfirmed_copied_order: nil
     else
       @order.update! unconfirmed_copied_order: @copied_order
@@ -76,11 +76,10 @@ class OrdersController < ApplicationController
   def update_address
     authorize! :update, @order
 
-    address = @order.address || Address.new(addressable: @order)
+    address = @order.address || @order.build_address
     address.assign_attributes address_params
     address.save!
-    render json: { address_line: address.address_line, street: address.street,
-                   city: address.city, postal_code: address.postal_code }
+    render json: { address_line: address.address_line, street: address.street, city: address.city, postal_code: address.postal_code }
   end
 
   def surprise_me

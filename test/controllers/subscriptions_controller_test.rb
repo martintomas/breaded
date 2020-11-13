@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class StripeControllerTest < ActionDispatch::IntegrationTest
+class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
@@ -55,5 +55,89 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
         end
       end
     end
+  end
+
+  test '#show' do
+    get subscription_path(@subscription)
+
+    assert_response :success
+  end
+
+  test '#show - cannot see subscription of somebody else' do
+    get subscription_path(subscriptions(:customer_subscription_2))
+
+    assert_redirected_to root_url
+  end
+
+  test '#edit' do
+    Stripe::Subscription.stub :retrieve, OpenStruct.new(current_period_end: 0), [''] do
+      get edit_subscription_path(@subscription)
+
+      assert_response :success
+    end
+  end
+
+  test '#edit - cannot edit subscription of somebody else' do
+    get edit_subscription_path(subscriptions(:customer_subscription_2))
+
+    assert_redirected_to root_url
+  end
+
+  test '#update' do
+    @subscription.update! stripe_subscription: 'stripe_subscription', active: true
+    subscription_plan = subscription_plans :four_times_every_month
+    subscription_plan.update! stripe_price: 'stripe_price'
+
+    Stripe::Subscription.stub :retrieve, OpenStruct.new(items: OpenStruct.new(data: [OpenStruct.new(id: 'stripe_item_id')])),
+                              ['stripe_subscription'] do
+      Stripe::Subscription.stub :update, true, ['stripe_subscription',
+                                                items: [{ id: 'stripe_item_id', price: 'stripe_price' }],
+                                                proration_behavior: 'none'] do
+        patch subscription_path(@subscription), params: { subscription: { subscription_plan_id: subscription_plan.id } }
+        assert_redirected_to subscription_path(@subscription)
+
+        @subscription.reload
+        assert_equal subscription_plan, @subscription.subscription_plan
+      end
+    end
+  end
+
+  test '#update - cannot change subscription of somebody else' do
+    patch subscription_path(subscriptions(:customer_subscription_2)),
+          params: { subscription: { subscription_plan_id: subscription_plans(:four_times_every_month).id } }
+
+    assert_redirected_to root_url
+  end
+
+  test '#cancel' do
+    @subscription.update! stripe_subscription: 'stripe_subscription', active: true, to_be_canceled: false
+    Stripe::Subscription.stub :update, true, ['stripe_subscription', cancel_at_period_end: true] do
+      get cancel_subscription_path(@subscription)
+
+      assert_redirected_to subscription_path(@subscription)
+      assert @subscription.reload.to_be_canceled?
+    end
+  end
+
+  test '#cancel - cannot cancel subscription of somebody else' do
+    get cancel_subscription_path(subscriptions(:customer_subscription_2))
+
+    assert_redirected_to root_url
+  end
+
+  test '#resume' do
+    @subscription.update! stripe_subscription: 'stripe_subscription', active: true, to_be_canceled: true
+    Stripe::Subscription.stub :update, true, ['stripe_subscription', cancel_at_period_end: false] do
+      get resume_subscription_path(@subscription)
+
+      assert_redirected_to subscription_path(@subscription)
+      refute @subscription.reload.to_be_canceled?
+    end
+  end
+
+  test '#resume - cannot resume subscription of somebody else' do
+    get resume_subscription_path(subscriptions(:customer_subscription_2))
+
+    assert_redirected_to root_url
   end
 end

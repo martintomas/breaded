@@ -9,6 +9,7 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
 
     @subscription_created_params = object_to_methods JSON.parse(file_fixture('stripe/customer_subscription_created.json').read)
     @subscription_created_params['data']['object'].metadata['subscription_id'] = @subscription.id
+    @subscription_deleted_params = object_to_methods JSON.parse(file_fixture('stripe/customer_subscription_deleted.json').read)
     @invoice_paid_params = object_to_methods JSON.parse(file_fixture('stripe/invoice_paid.json').read)
     @invoice_payment_failed_params = object_to_methods JSON.parse(file_fixture('stripe/invoice_payment_failed.json').read)
   end
@@ -19,6 +20,26 @@ class Subscriptions::ProcessPaymentTest < ActiveSupport::TestCase
     @subscription.reload
     assert_equal "NEW PAID SUBSCRIPTION", @subscription.stripe_subscription
     assert @subscription.active
+    refute @subscription.to_be_canceled?
+  end
+
+  test '#perform - customer.subscription.deleted' do
+    @subscription.update! stripe_subscription: 'NEW PAID SUBSCRIPTION'
+    Subscriptions::ProcessPayment.new(@subscription_deleted_params).perform
+
+    @subscription.reload
+    assert_equal "NEW PAID SUBSCRIPTION", @subscription.stripe_subscription
+    refute @subscription.active?
+    assert @subscription.to_be_canceled?
+  end
+
+  test '#perform - invoice.paid marks subscription as active' do
+    @subscription.update! stripe_subscription: 'NEW PAID SUBSCRIPTION'
+    Subscriptions::ProcessPayment.new(@invoice_paid_params).perform
+
+    @subscription.reload
+    assert @subscription.active?
+    refute @subscription.to_be_canceled?
   end
 
   test '#perform - invoice.paid creates payment record' do

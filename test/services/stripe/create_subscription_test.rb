@@ -23,12 +23,17 @@ class Stripe::CreateSubscriptionTest < ActiveSupport::TestCase
     Stripe::PaymentMethod.stub :attach, true, ['stripe_payment_method_id', { customer: 'stripe_customer_id' }] do
       Stripe::Customer.stub :update, true, ['stripe_customer_id',
                                             invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
-        Stripe::Subscription.stub :create, true, [customer: 'stripe_customer_id',
-                                                  items: [{ price: @subscription.subscription_plan.stripe_price }],
-                                                  expand: %w[latest_invoice.payment_intent],
-                                                  metadata: { subscription_id: @subscription.id }] do
+        Stripe::Subscription.stub :create, OpenStruct.new(id: 'stripe_subscription', status: 'active'),
+                                  [customer: 'stripe_customer_id',
+                                   items: [{ price: @subscription.subscription_plan.stripe_price }],
+                                   expand: %w[latest_invoice.payment_intent],
+                                   metadata: { subscription_id: @subscription.id }] do
           @service.perform_for 'stripe_payment_method_id'
           assert_empty @service.errors
+          @subscription.reload
+          assert_equal 'stripe_subscription', @subscription.stripe_subscription
+          assert @subscription.active?
+          refute @subscription.to_be_canceled?
         end
       end
     end
@@ -39,12 +44,38 @@ class Stripe::CreateSubscriptionTest < ActiveSupport::TestCase
       Stripe::PaymentMethod.stub :attach, true, ['stripe_payment_method_id', { customer: 'stripe_customer_id' }] do
         Stripe::Customer.stub :update, true, ['stripe_customer_id',
                                               invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
-          Stripe::Subscription.stub :create, true, [customer: 'stripe_customer_id',
-                                                    items: [{ price: @subscription.subscription_plan.stripe_price }],
-                                                    expand: %w[latest_invoice.payment_intent],
-                                                    metadata: { subscription_id: @subscription.id }] do
+          Stripe::Subscription.stub :create, OpenStruct.new(id: 'stripe_subscription', status: 'active'),
+                                    [customer: 'stripe_customer_id',
+                                     items: [{ price: @subscription.subscription_plan.stripe_price }],
+                                     expand: %w[latest_invoice.payment_intent],
+                                     metadata: { subscription_id: @subscription.id }] do
             @service.perform_for 'stripe_payment_method_id'
             assert_empty @service.errors
+            @subscription.reload
+            assert_equal 'stripe_subscription', @subscription.stripe_subscription
+            assert @subscription.active?
+            refute @subscription.to_be_canceled?
+          end
+        end
+      end
+    end
+  end
+
+  test '#perform_for - subscription is not marked as active when additional verification is required' do
+    Stripe::Customer.stub :create, OpenStruct.new(id: 'stripe_customer_id'), [email: @subscription.user.email] do
+      Stripe::PaymentMethod.stub :attach, true, ['stripe_payment_method_id', { customer: 'stripe_customer_id' }] do
+        Stripe::Customer.stub :update, true, ['stripe_customer_id',
+                                              invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
+          Stripe::Subscription.stub :create, OpenStruct.new(id: 'stripe_subscription', status: 'confirmation_required'),
+                                    [customer: 'stripe_customer_id',
+                                     items: [{ price: @subscription.subscription_plan.stripe_price }],
+                                     expand: %w[latest_invoice.payment_intent],
+                                     metadata: { subscription_id: @subscription.id }] do
+            @service.perform_for 'stripe_payment_method_id'
+            assert_empty @service.errors
+            @subscription.reload
+            assert_equal 'stripe_subscription', @subscription.stripe_subscription
+            refute @subscription.active?
           end
         end
       end

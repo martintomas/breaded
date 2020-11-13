@@ -53,7 +53,8 @@ class Subscriptions::SubscribeTest < ActiveSupport::TestCase
                                                        ended_at: Time.zone.parse('20th Oct 2020 04:00:00')
       Order.create! subscription_period: subscription_period, user: users(:customer),
                     delivery_date_from: Time.zone.parse('16th Oct 2020 10:00:00'),
-                    delivery_date_to: Time.zone.parse('16th Oct 2020 14:00:00')
+                    delivery_date_to: Time.zone.parse('16th Oct 2020 14:00:00'),
+                    position: 1
 
       subscriber = Subscriptions::Subscribe.new @subscription
       assert_equal Time.zone.parse('26th Oct 2020 04:00:00').to_i, subscriber.delivery_date_subscription.to_i

@@ -12,8 +12,7 @@ class AddressesController < ApplicationController
   end
 
   def create
-    @address = current_user.addresses.new address_params
-    @address.main = true if current_user.address.blank?
+    @address = current_user.addresses.new address_params.merge(main: current_user.address.blank?)
     authorize! :create, @address
 
     if @address.save

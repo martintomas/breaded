@@ -77,7 +77,7 @@ group :test do
   gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers', require: !ENV['SELENIUM_URL']
-  gem 'minitest'
+  gem 'minitest', '5.11.3'
   gem 'minitest-reporters'
   gem 'minitest-stub_any_instance'
   gem 'webmock'

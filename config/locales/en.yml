@@ -302,6 +302,8 @@ en:
     attributes:
       subscriptions/new_subscription_former:
         delivery_date_from: 'Delivery date'
+      orders/update_former:
+        delivery_date_from: 'Delivery date'
     errors:
       models:
         subscriptions/new_subscription_former:
@@ -311,6 +313,16 @@ en:
               too_many_items: "Your shopping basket contains too many breads. Please remove some of them before you will proceed."
               missing_food_item: "Bread with name %{name} was not found. Please remove it from your shopping basket."
               already_active_subscription: "You already have active subscription. Please visit your profile page if you want to manipulate with your subscription."
+            phone_number:
+              not_valid: 'has to be filled and verified.'
+            delivery_date_from:
+              invalid_date: 'has invalid value. Please select different date from calendar.'
+        orders/update_former:
+          attributes:
+            base:
+              missing_items: "Shopping basket doesn't contain required number of items. Please pick some breads ;)"
+              too_many_items: "Your shopping basket contains too many breads. Please remove some of them before you will proceed."
+              missing_food_item: "Bread with name %{name} was not found. Please remove it from your shopping basket."
             phone_number:
               not_valid: 'has to be filled and verified.'
             delivery_date_from:

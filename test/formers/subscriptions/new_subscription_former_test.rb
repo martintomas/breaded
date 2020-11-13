@@ -35,7 +35,7 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
     assert_equal SubscriptionPlan.order(:id).first.id, model.subscription_plan_id
   end
 
-  test 'the validity - without delivery_date_from is valid' do
+  test 'the validity - without delivery_date_from is not valid' do
     invalid_with_missing Subscriptions::NewSubscriptionFormer, :delivery_date_from
   end
 
@@ -144,7 +144,7 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
   end
 
   test '#save - new address gets saved' do
-    assert_difference -> { Address.count }, 1 do
+    assert_difference -> { Address.count }, 2 do # user and order
       former = Subscriptions::NewSubscriptionFormer.new @full_content
       former.save
 
@@ -163,7 +163,7 @@ class  Subscriptions::NewSubscriptionFormerTest < ActiveSupport::TestCase
     @user.addresses.create! address_type: AddressType.the_personal, address_line: 'Old Address Line', street: 'Street 1',
                             postal_code: '54546', city: 'London', state: 'UK'
 
-    assert_no_difference -> { Address.count } do
+    assert_difference -> { Address.count }, 1 do # order
       former = Subscriptions::NewSubscriptionFormer.new @full_content
       former.save
 

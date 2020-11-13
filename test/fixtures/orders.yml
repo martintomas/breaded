@@ -19,7 +19,7 @@ customer_order_2:
   user: customer
   delivery_date_from: <%= 2.weeks.from_now %>
   delivery_date_to: <%= 2.weeks.from_now + 2.hours %>
-  position: 1
+  position: 2
 
 customer_order_3:
   subscription_period: customer_1_subscription_2_period

@@ -55,16 +55,17 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
       Stripe::PaymentMethod.stub :attach, true, ['stripe_payment_method_id', { customer: 'stripe_customer_id' }] do
         Stripe::Customer.stub :update, true, ['stripe_customer_id',
                                               invoice_settings: { default_payment_method: 'stripe_payment_method_id' }] do
-          Stripe::Subscription.stub :create, 'subscription', [customer: 'stripe_customer_id',
-                                                    items: [{ price: subscription.subscription_plan.stripe_price }],
-                                                    expand: %w[latest_invoice.payment_intent],
-                                                    metadata: { subscription_id: subscription.id }] do
+          Stripe::Subscription.stub :create, OpenStruct.new(id: 'stripe_subscription', status: 'active'),
+                                    [customer: 'stripe_customer_id',
+                                     items: [{ price: subscription.subscription_plan.stripe_price }],
+                                     expand: %w[latest_invoice.payment_intent],
+                                     metadata: { subscription_id: subscription.id }] do
             post create_subscription_stripe_index_path, params: { subscription_id: subscription.id }
 
             assert_response :success
             body = JSON.parse(response.body).deep_symbolize_keys
             assert_empty body[:errors]
-            assert_equal 'subscription', body[:response]
+            assert_equal 'stripe_subscription', body[:response][:table][:id]
           end
         end
       end
@@ -83,5 +84,54 @@ class StripeControllerTest < ActionDispatch::IntegrationTest
         assert_equal ['test'], body[:errors]
       end
     end
+  end
+
+  test '#create_subscription - forbidden when accessing subscription of somebody else' do
+    sign_in @user
+    post create_subscription_stripe_index_path, params: { subscription_id: subscriptions(:customer_subscription_2).id }
+
+    assert_redirected_to root_url
+  end
+
+  test '#update_payment_method - success' do
+    sign_in @user
+    subscription = @user.subscriptions.first
+    subscription.user.update! stripe_customer: 'stripe_customer_id'
+
+    Stripe::PaymentMethod.stub :list, OpenStruct.new(data: [OpenStruct.new(id: 'payment_method_id')]),
+                               ['stripe_customer_id', type: 'card'] do
+      Stripe::PaymentMethod.stub :attach, true, ['payment_method_id', customer: 'stripe_customer_id'] do
+        Stripe::Customer.stub :update, OpenStruct.new(invoice_settings: OpenStruct.new(default_payment_method: 'payment_method_id')),
+                              ['stripe_customer_id',
+                               invoice_settings: { default_payment_method: 'payment_method_id' }] do
+          post update_payment_method_stripe_index_path, params: { subscription_id: subscription.id }
+
+          assert_response :success
+          body = JSON.parse(response.body).deep_symbolize_keys
+          assert_empty body[:errors]
+          assert_equal 'payment_method_id', body[:response][:table][:invoice_settings][:table][:default_payment_method]
+        end
+      end
+    end
+  end
+
+  test '#update_payment_method - error' do
+    sign_in @user
+    subscription = @user.subscriptions.first
+
+    Stripe::PaymentMethod.stub :attach, -> (*) { raise Stripe::CardError.new('test', {})} do
+      post update_payment_method_stripe_index_path, params: { subscription_id: subscription.id }
+
+      assert_response :success
+      body = JSON.parse(response.body).deep_symbolize_keys
+      assert_equal ['test'], body[:errors]
+    end
+  end
+
+  test '#update_payment_method - forbidden when accessing subscription of somebody else' do
+    sign_in @user
+    post update_payment_method_stripe_index_path, params: { subscription_id: subscriptions(:customer_subscription_2).id }
+
+    assert_redirected_to root_url
   end
 end

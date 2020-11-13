@@ -28,13 +28,15 @@ class Subscriptions::ProcessPayment
   end
 
   def deactivate_subscription
-    subscription = Subscription.find stripe_event['data']['object'].metadata['subscription_id']
+    subscription = Subscription.find_by! stripe_subscription: stripe_event['data']['object'].id
     subscription.update! active: false, to_be_canceled: true
   end
 
   def run_invoice_paid_actions
     subscription = Subscription.find_by! stripe_subscription: stripe_event['data']['object'].subscription
+    subscription.update! active: true, to_be_canceled: false unless subscription.active?
     Subscriptions::MarkAsPaid.new(subscription).perform
+    # TODO: inform user that subscription was paid
   end
 
   def inform_user_about_fail

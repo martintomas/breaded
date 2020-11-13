@@ -54,8 +54,7 @@ module Orders
     end
 
     def valid_address?
-      address_params = { address_type_id: AddressType.the_personal.id, address_line: address_line, street: street,
-                         city: city, postal_code: postal_code, state: 'UK' }
+      address_params = { address_line: address_line, street: street, city: city, postal_code: postal_code }
       self.address = order.address.presence || order.build_address
       address.assign_attributes address_params
       address.valid? || promote_errors(address.errors)
@@ -77,17 +76,21 @@ module Orders
     end
 
     def preload_user
+      return if order.blank?
+
       self.user ||= order.user
       self.phone_number ||= user.phone_number
       self.secondary_phone_number ||= user.secondary_phone_number
     end
 
     def preload_order
+      return if order.blank?
+
       self.delivery_date_from ||= order.delivery_date_from
     end
 
     def preload_address
-      address = order.address.presence || user.address
+      address = order&.address.presence || user&.address
       return if address.blank?
 
       self.address_line ||=address.address_line

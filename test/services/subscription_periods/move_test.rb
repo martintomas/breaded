@@ -24,7 +24,7 @@ class SubscriptionPeriods::MoveTest < ActiveSupport::TestCase
     travel_to Time.zone.parse('10th Oct 2020 12:00:00') do
       move_subscriptions_to_past!
       move_orders_to_past!
-      SubscriptionPeriods::Move.new(@subscription_period, to: Time.zone.parse('19th Oct 2020 16:00:00')).perform
+      SubscriptionPeriods::Move.new(@subscription_period.reload, to: Time.zone.parse('19th Oct 2020 16:00:00')).perform
 
       @subscription_period.reload
       assert_equal Time.zone.parse('19th Oct 2020 12:00:00').to_i, @subscription_period.started_at.to_i
@@ -40,7 +40,7 @@ class SubscriptionPeriods::MoveTest < ActiveSupport::TestCase
     travel_to Time.zone.parse('10th Oct 2020 12:00:00') do
       move_subscriptions_to_past!
       move_orders_to_past!
-      SubscriptionPeriods::Move.new(@subscription_period, to: Time.zone.parse('19th Oct 2020 16:00:00')).perform
+      SubscriptionPeriods::Move.new(@subscription_period.reload, to: Time.zone.parse('19th Oct 2020 16:00:00')).perform
 
       assert_equal Time.zone.parse('26th Oct 2020 10:00:00').to_i, orders(:customer_order_1).delivery_date_from.to_i
       assert_equal Time.zone.parse('26th Oct 2020 14:00:00').to_i, orders(:customer_order_1).delivery_date_to.to_i

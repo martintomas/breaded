@@ -5,9 +5,12 @@ require 'test_helper'
 class OrderTest < ActiveSupport::TestCase
   setup do
     @full_content = { subscription_period: subscription_periods(:customer_1_subscription_1_period),
+                      copied_order: orders(:customer_order_1),
+                      unconfirmed_copied_order: orders(:customer_order_1),
                       user: users(:customer),
                       delivery_date_from: 2.day.from_now,
-                      delivery_date_to: 2.days.from_now + 3.hours }
+                      delivery_date_to: 2.days.from_now + 3.hours,
+                      position: 1 }
     @order = orders :customer_order_1
   end
 
@@ -29,12 +32,26 @@ class OrderTest < ActiveSupport::TestCase
     invalid_with_missing Order, :user
   end
 
+  test 'the validity - without copied_order is valid' do
+    model = Order.new @full_content.except(:copied_order)
+    assert model.valid?, model.errors.full_messages
+  end
+
+  test 'the validity - without unconfirmed_copied_order is valid' do
+    model = Order.new @full_content.except(:unconfirmed_copied_order)
+    assert model.valid?, model.errors.full_messages
+  end
+
   test 'the validity - without delivery_date_from is not valid' do
     invalid_with_missing Order, :delivery_date_from
   end
 
   test 'the validity - without delivery_date_to is not valid' do
     invalid_with_missing Order, :delivery_date_to
+  end
+
+  test 'the validity - without position is not valid' do
+    invalid_with_missing Order, :position
   end
 
   test '#delivery_date' do
@@ -54,17 +71,24 @@ class OrderTest < ActiveSupport::TestCase
                  @order.editable_till
   end
 
-  test '#editable?' do
-    refute @order.editable?
-
-    @order.update! delivery_date_from: 5.days.from_now
-    assert @order.editable?
-  end
-
   test '#placed?' do
     refute @order.placed?
 
     @order.order_state_relations.create! order_state: order_states(:order_placed)
     assert @order.reload.placed?
+  end
+
+  test '#finalised?' do
+    refute @order.finalised?
+
+    @order.order_state_relations.create! order_state: order_states(:finalised)
+    assert @order.reload.finalised?
+  end
+
+  test '#editable?' do
+    assert @order.editable?
+
+    @order.order_state_relations.create! order_state: order_states(:finalised)
+    refute @order.reload.editable?
   end
 end

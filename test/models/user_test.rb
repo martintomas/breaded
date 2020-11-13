@@ -10,7 +10,9 @@ class UserTest < ActiveSupport::TestCase
                       last_name: 'Admin',
                       email: 'new.admin@breaded.net',
                       password: 'password',
-                      phone_number: '+420734370408' }
+                      phone_number: '+420734370408',
+                      unconfirmed_phone: '+420734370408',
+                      secondary_phone_number: '+420734370408' }
     @user = users :customer
   end
 
@@ -49,6 +51,16 @@ class UserTest < ActiveSupport::TestCase
     assert model.valid?, model.errors.full_messages
   end
 
+  test 'the validity - without unconfirmed_phone is valid' do
+    model = User.new @full_content.except(:unconfirmed_phone)
+    assert model.valid?, model.errors.full_messages
+  end
+
+  test 'the validity - without secondary_phone_number is valid' do
+    model = User.new @full_content.except(:secondary_phone_number)
+    assert model.valid?, model.errors.full_messages
+  end
+
   test 'the validity - phone number has to be valid' do
     @full_content[:phone_number] = '123456789'
     model = User.new @full_content
@@ -66,6 +78,12 @@ class UserTest < ActiveSupport::TestCase
     @full_content[:unconfirmed_phone] = '420 734 370 408'
     model = User.new @full_content
     assert_equal '+420734370408', model.normalized_unconfirmed_phone
+  end
+
+  test '#phony_normalize of secondary phone number' do
+    @full_content[:secondary_phone_number] = '420 734 370 408'
+    model = User.new @full_content
+    assert_equal '+420734370408', model.normalized_secondary_phone_number
   end
 
   test '#current_ability' do
@@ -108,6 +126,21 @@ class UserTest < ActiveSupport::TestCase
 
   test '#full_name' do
     assert_equal "#{@user.first_name} #{@user.last_name}", @user.full_name
+  end
+
+  test '#payment_method - is empty when user has not stripe account' do
+    @user.update! stripe_customer: nil
+
+    assert_nil @user.payment_method
+  end
+
+  test '#payment_method - returns payment method' do
+    @user.update! stripe_customer: 'stripe_customer_id'
+
+    Stripe::Customer.stub :retrieve, OpenStruct.new(invoice_settings: OpenStruct.new(default_payment_method: 'payment_method')),
+                          [id: 'stripe_customer_id', expand: ['invoice_settings.default_payment_method']] do
+      assert_equal 'payment_method', @user.payment_method
+    end
   end
 
   test '#to_s' do

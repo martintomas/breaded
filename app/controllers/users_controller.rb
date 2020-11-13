@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   def set_subscription_period
     @subscription_period ||= begin
-      SubscriptionPeriod.joins(:subscription).where(subscriptions: { active: true, user: current_user }).order(:created_at).last
+      SubscriptionPeriod.joins(:subscription).where(subscriptions: { active: true, user: current_user }).order(:started_at).last
     end
   end
 end

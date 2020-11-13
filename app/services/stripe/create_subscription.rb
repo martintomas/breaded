@@ -28,9 +28,9 @@ class Stripe::CreateSubscription
   end
 
   def update_subscription_with!(values)
-    return unless values.status == 'active'
-
-    subscription.update! active: true, to_be_canceled: false, stripe_subscription: values.id
+    subscription.stripe_subscription = values.id
+    subscription.assign_attributes active: true, to_be_canceled: false if values.status == 'active'
+    subscription.save!
   end
 
   def already_paid?

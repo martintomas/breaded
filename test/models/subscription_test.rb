@@ -37,7 +37,7 @@ class SubscriptionTest < ActiveSupport::TestCase
   test 'the validity - without active is valid' do
     model = Subscription.new @full_content.except(:active)
     assert model.valid?, model.errors.full_messages
-    assert model.active
+    refute model.active
   end
 
   test '#to_s' do

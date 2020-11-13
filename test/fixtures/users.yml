@@ -16,6 +16,7 @@ customer:
   encrypted_password: <%= Devise::Encryptor.digest(User, 'customer') %>
   confirmed_at: <%= Time.current %>
   phone_number: +420734370408
+  secondary_phone_number: +420123456789
 
 customer_2:
   first_name: Martin
