@@ -1,4 +1,4 @@
-- second_order = subscription.orders.find_by_position 2
+- second_order = subscription.subscription_periods.order(:started_at).last&.orders&.find_by_position 2
 
 #success-popup.overlay data-target="payments--new.successPopup"
   .popup

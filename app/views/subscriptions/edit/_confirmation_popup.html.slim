@@ -1,6 +1,6 @@
 .overlay.subscription-plan-confirm data-target="subscriptions--edit.confirmationPopup" data-current-price="#{subscription.subscription_plan.price}"
   .popup
-    .close data-action='click->subscriptions--edit#close' = 'Close'
+    .close data-action='click->subscriptions--edit#close' = I18n.t('app.subscriptions.edit.popup.close')
     h3.title = t 'app.subscriptions.edit.title'
     .current-plan
       .title = t 'app.subscriptions.edit.popup.current_plan'
@@ -14,5 +14,5 @@
     .note
       span.higher = t 'app.subscriptions.edit.popup.note_higher', date: current_period_end.strftime('%e %B')
       span.lower = t 'app.subscriptions.edit.popup.note_lower', date: current_period_end.strftime('%e %B')
-    .confirm-button = submit_tag 'Confirm Change', data: { action: 'subscriptions--edit#submitForm', disable_with: false }
-    .cancel-button = submit_tag 'Cancel', data: { action: 'subscriptions--edit#close', disable_with: false }
+    .confirm-button = submit_tag I18n.t('app.subscriptions.edit.popup.confirm_button'), data: { action: 'subscriptions--edit#submitForm', disable_with: false }
+    .cancel-button = submit_tag I18n.t('app.subscriptions.edit.popup.cancel_button'), data: { action: 'subscriptions--edit#close', disable_with: false }

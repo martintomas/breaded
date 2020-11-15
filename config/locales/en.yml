@@ -278,6 +278,9 @@ en:
           new_plan: 'New Plan'
           note_higher: "You won't be charged until %{date}"
           note_lower: 'Starting %{date}'
+          confirm_button: 'Confirm Change'
+          cancel_button: 'Cancel'
+          close: Close
     address_type:
       personal: Home
       friends_home: "Friend's House"

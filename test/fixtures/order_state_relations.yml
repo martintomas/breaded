@@ -8,6 +8,10 @@ customer_order_2_delievered:
   order_state: delivered
   order: customer_order_2
 
+customer_order_3_placed:
+  order_state: order_placed
+  order: customer_order_3
+
 customer_order_3_on_way:
   order_state: on_way
   order: customer_order_3

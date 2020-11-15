@@ -27,4 +27,4 @@
 - elsif order.copied_order_id.present? || order.placed?
   = button_tag I18n.t('app.users.show.bread_list_button'), onclick: "Turbolinks.visit('#{order_path(order)}')"
 - else
-  ==button_tag I18n.t('app.users.show.pick_breads_button'), onclick: "Turbolinks.visit('#{edit_order_path(order)}')"
+  == button_tag I18n.t('app.users.show.pick_breads_button'), onclick: "Turbolinks.visit('#{edit_order_path(order)}')"

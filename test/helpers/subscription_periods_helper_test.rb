@@ -26,6 +26,7 @@ class SubscriptionPeriodsHelperTest < ActionView::TestCase
     order_2 = orders :customer_order_2
     order_2.order_state_relations.create! order_state: order_states(:order_placed)
     order_3 = orders :customer_order_3
+    order_3.order_state_relations.destroy_all
 
     inner_text = I18n.t('app.users.show.order_till', box: boxes_names_for(order_3), date: order_3.editable_till.strftime('%A, %d %b')) + ' ' +
         link_to('ⓘ', '#info', class: 'info', data: { action: 'subscription-periods--my-box#open' })

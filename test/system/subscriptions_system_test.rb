@@ -5,14 +5,16 @@ require 'mocks/twilio'
 
 class SubscriptionsSystemTest < ApplicationSystemTestCase
   include Mocks::Twilio
+  include ActionView::Helpers::NumberHelper
 
   setup do
     login_as_customer
     @user = users :customer
-    @user.subscriptions.update_all active: false
+    @subscription = subscriptions :customer_subscription_1
   end
 
   test '#create - user with already active subscription cannot create other one' do
+    deactivate_subscriptions!
     @user.subscriptions.first.update! active: true
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
       visit new_subscription_path(shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE)
@@ -25,6 +27,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
   end
   
   test '#create - failed basket validation' do
+    deactivate_subscriptions!
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
       visit new_subscription_path(shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE)
 
@@ -36,6 +39,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
   end
 
   test '#create - failed phone verification' do
+    deactivate_subscriptions!
     @user.update! phone_number: nil
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
       visit new_subscription_path(shopping_basket_variant: Orders::UpdateFromBasket::PICK_UP_TYPE)
@@ -50,6 +54,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
 
 
   test '#create - pick up breads subscription' do
+    deactivate_subscriptions!
     @user.update! phone_number: nil
     food_id = add_items_to_basket!
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
@@ -87,6 +92,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
   end
 
   test '#create - surprise me subscription' do
+    deactivate_subscriptions!
     @user.update! phone_number: nil
     ingredients_preference_id, bread_preference_id = add_preferences_to_basket!
     travel_to Time.zone.parse('25th Oct 2020 04:00:00') do
@@ -123,7 +129,71 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
     end
   end
 
+  test '#update' do
+    subscription_plan = subscription_plans :four_times_every_month
+    current_period_end = 10.days.from_now.to_i
+    activate_subscription!
+
+    Stripe::Subscription.stub :retrieve, OpenStruct.new(current_period_end: current_period_end,
+                                                        items: OpenStruct.new(data: [OpenStruct.new(id: 'stripe_item_id')])), [''] do
+      Stripe::Subscription.stub :update, true, ['', items: [{ id: 'stripe_item_id', price: '' }], proration_behavior: 'none'] do
+        visit edit_subscription_path(@subscription)
+        find("label[for='subscription_subscription_plan_id_#{subscription_plan.id}']").click
+        click_button I18n.t('app.subscriptions.edit.continue_button')
+
+        within '.current-plan' do
+          assert_selector 'span.description', text: I18n.t("app.get_breaded.plans.version_#{@subscription.subscription_plan.number_of_deliveries}",
+                                                           num_breads: Rails.application.config.options[:default_number_of_breads])
+          assert_selector 'rate.price', text: number_to_currency(@subscription.subscription_plan.price, unit: @subscription.subscription_plan.currency.symbol)
+        end
+        within '.new-plan' do
+          assert_selector 'span.description', text: I18n.t("app.get_breaded.plans.version_#{subscription_plan.number_of_deliveries}",
+                                                           num_breads: Rails.application.config.options[:default_number_of_breads])
+          assert_selector 'rate.price', text: number_to_currency(subscription_plan.price, unit: subscription_plan.currency.symbol)
+        end
+        assert_text I18n.t('app.subscriptions.edit.popup.note_higher', date: Time.at(current_period_end).strftime('%e %B'))
+
+        click_button I18n.t('app.subscriptions.edit.popup.confirm_button')
+
+        assert_selector 'h3.title', text: I18n.t('app.subscriptions.show.title')
+        assert_text I18n.t("app.subscriptions.show.plans.variant_#{subscription_plan.number_of_deliveries}")
+      end
+    end
+  end
+
+  test '#cancel' do
+    activate_subscription!
+
+    Stripe::Subscription.stub :update, true, ['', cancel_at_period_end: true] do
+      visit cancel_subscription_path(@subscription)
+
+      assert_selector 'div.description', text: I18n.t('app.subscriptions.show.to_be_canceled')
+      assert_selector 'div.resume-option', text: I18n.t('app.subscriptions.show.resume')
+    end
+  end
+
+  test '#resume' do
+    deactivate_subscriptions!
+
+    Stripe::Subscription.stub :update, true, ['', cancel_at_period_end: false] do
+      visit cancel_subscription_path(@subscription)
+
+      assert_selector 'div.description', text: I18n.t("app.subscriptions.show.description",
+                                                      num_breads: Rails.application.config.options[:default_number_of_breads])
+      assert_selector 'button', text: I18n.t('app.subscriptions.show.change_plan')
+      assert_selector 'div.cancel-option', text: I18n.t('app.subscriptions.show.cancel')
+    end
+  end
+
   private
+
+  def activate_subscription!
+    @subscription.update! active: true
+  end
+
+  def deactivate_subscriptions!
+    @user.subscriptions.update_all active: false
+  end
 
   def fill_new_subscription_form
     find('a.calenderSec').click

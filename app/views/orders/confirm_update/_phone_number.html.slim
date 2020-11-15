@@ -4,7 +4,7 @@ span
   .phone-number-errors data-target="components--phone-number.sentVerificationErrors"
   span.phone-number-section
     span.phone-number-field
-      = f.phone_field :phone_number, required: true, placeholder: '+44 7887554637', data: { target: "components--phone-number.phoneNumberInput", action: "components--phone-number#markAsNotVerified" }
+      = f.phone_field :phone_number, required: true, placeholder: '+44 7887554637', data: { target: "components--phone-number.phoneNumberInput", action: "input->components--phone-number#markAsNotVerified" }
       = f.label :phone_number, I18n.t('app.orders.confirm_update.phone_number.primary')
       = link_to I18n.t('app.get_breaded.phone_number.link'), '#phoneNumberCode', data: { target: "components--phone-number.verifyPhoneLink", action: 'components--phone-number#sendVerificationCode' }, class: 'verifyPhone'
     span.verified-icon data-target="components--phone-number.verifiedIcon"

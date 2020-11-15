@@ -22,9 +22,9 @@ customer_address:
 customer_address_1:
   addressable: customer (User)
   address_type: friends_home
-  address_line: Address Line
-  street: Street 1
-  postal_code: 54546
+  address_line: Address Line 2
+  street: Street 2
+  postal_code: 123456
   city: London
   state: UK
 
