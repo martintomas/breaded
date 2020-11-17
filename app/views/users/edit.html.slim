@@ -1,3 +1,11 @@
 section.container.profilePage
-  / TODO: add edit profile section
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :my_boxes }
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12
+    h3.title = t 'app.users.edit.title'
+    == render 'shared/error_messages', resource: @user
+    = form_for @user do |f|
+      == render partial: 'users/edit/base_fields', locals: { f: f }
+      == render partial: 'users/edit/phone_number', locals: { f: f }
+      = submit_tag I18n.t('app.users.edit.submit')
 == render partial: 'shared/gift'

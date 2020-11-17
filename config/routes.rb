@@ -53,7 +53,7 @@ Rails.application.routes.draw do
     end
   end
   resources :producer_applications, only: %i[new create]
-  resources :users, only: %i[edit] do
+  resources :users, only: %i[edit update] do
     collection do
       get :my_boxes
       get :my_plan

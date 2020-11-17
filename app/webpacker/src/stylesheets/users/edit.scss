@@ -1,3 +1,65 @@
 body.users.edit, body.users.update {
-  // TODO: add styles
+  .title {
+    margin: 0 0 50px 0;
+  }
+
+  input[type="submit"] {
+    margin-bottom: 40px;
+    width: calc(100% - 20px);
+  }
+
+  .textFeild {
+    width: calc(50% - 20px);
+    display: inline-block;
+    margin-right: 20px;
+
+    &.full-field {
+      width: calc(100% - 20px);
+    }
+
+    .phone-number-section {
+      .verified-icon {
+        font-size: 12px;
+      }
+
+      .phone-number-field {
+        position: relative;
+
+        input {
+          width: calc(50% - 20px);
+        }
+
+        label {
+          top: initial;
+        }
+
+        .verifyPhone {
+          top: 15px;
+        }
+      }
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .textFeild {
+      width: calc(100% - 20px);
+
+      .phone-number-section {
+        .phone-number-field {
+          input {
+            width: calc(100% - 20px);
+          }
+
+          .verifyPhone {
+            top: 30px;
+            right: 25px;
+          }
+        }
+      }
+    }
+  }
 }

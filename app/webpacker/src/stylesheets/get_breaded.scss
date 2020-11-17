@@ -1,4 +1,5 @@
-body.subscriptions, body.payments.new, body.orders.confirm_update, body.orders.update {
+body.subscriptions, body.payments.new, body.orders.confirm_update, body.orders.update,
+body.users.edit, body.users.update {
   & {
     background-color: #fff;
     color: #333333;

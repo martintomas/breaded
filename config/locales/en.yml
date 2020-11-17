@@ -229,6 +229,9 @@ en:
           label: ' Delivery by: '
           slots_available: ' Slots Available'
           change: 'Change'
+      edit:
+        title: Edit Profile
+        submit: Save
     orders:
       show:
         bread_list: 'Bread List for %{name}'

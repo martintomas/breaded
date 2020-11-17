@@ -9,7 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 require.context('../images', true);
-require.context('../fonts', true);
+//require.context('../fonts', true);
 
 import '../src/javascripts/sentry'
 import '../src/javascripts/TurbolinksScrolling'
