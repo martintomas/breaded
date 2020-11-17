@@ -203,10 +203,18 @@ en:
         pick_bread_2: 'Pick breads for second box'
         pick_bread_3: 'Pick breads for third box'
         pick_bread_4: 'Pick breads for fourth box'
+        picked_bread_1: 'Picked breads for first box'
+        picked_bread_2: 'Picked breads for second box'
+        picked_bread_3: 'Picked breads for third box'
+        picked_bread_4: 'Picked breads for fourth box'
         repeat_box_1: Repeat first box list
         repeat_box_2: Repeat second box list
         repeat_box_3: Repeat third box list
         repeat_box_4: Repeat fourth box list
+        repeated_box_1: Repeated first box list
+        repeated_box_2: Repeated second box list
+        repeated_box_3: Repeated third box list
+        repeated_box_4: Repeated fourth box list
         order_delivered: ' Order Delivered'
         order_placed: ' Order Placed'
         bread_list_button: 'View Bread List'
@@ -298,8 +306,8 @@ en:
         invalid_number: "Your phone number doesn't seem valid. Please double check filled phone number!"
         already_verified: "Your phone number is already verified!"
         too_many_requests:
-          one: "New verification SMS can be sent at %{minutes} minute."
-          other: "New verification SMS can be sent at %{minutes} minutes."
+          one: "New verification SMS can be sent in %{minutes} minute."
+          other: "New verification SMS can be sent in %{minutes} minutes."
         invalid_phone_token: "Verification code doesn't match!"
   activemodel:
     attributes:
