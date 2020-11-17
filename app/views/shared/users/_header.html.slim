@@ -4,4 +4,4 @@
     ul
       li = current_user.email
       li.phoneNum = current_user.phone_number
-      li = link_to I18n.t('app.users.show.edit_profile'), '#'
+      li = link_to I18n.t('app.users.show.edit_profile'), edit_user_path(current_user)
