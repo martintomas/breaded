@@ -1,0 +1,8 @@
+section.container.profilePage
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :my_plan }
+  .breads-lg-5.breads-md-5.breads-sm-5.breads-xs-12
+    h3.title = t 'app.users.show.categories.my_plan'
+    .description = t 'app.users.my_plan.description'
+    button = link_to I18n.t('app.homepage.breaded_button_simple'), foods_path
+== render partial: 'shared/gift'

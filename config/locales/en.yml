@@ -232,6 +232,13 @@ en:
       edit:
         title: Edit Profile
         submit: Save
+      my_boxes:
+        description: All our breads are freshly prepared and baked before they’re boxed & delivered to your door. Go on, pick your breads!
+      payment:
+        title: Payment Details
+        description: You have not subscribed to any of our plans yet. Pick your breads to get started.
+      my_plan:
+        description: You have not subscribed to any of our plans yet. Pick your breads to get started.
     orders:
       show:
         bread_list: 'Bread List for %{name}'
