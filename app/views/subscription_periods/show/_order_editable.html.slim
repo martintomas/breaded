@@ -7,11 +7,17 @@
       - if order.unconfirmed_copied_order_id.present?
         span = t "app.users.show.repeat_box_#{order.unconfirmed_copied_order.position}"
       - elsif order.copied_order_id.present?
-        = content_tag(:span, '', class: 'checkmark') if order.placed?
-        span = t "app.users.show.repeated_box_#{order.copied_order.position}"
+        - if order.placed?
+          = content_tag(:span, '', class: 'checkmark')
+          span = t "app.users.show.repeated_box_#{order.copied_order.position}"
+        - else
+          span = t "app.users.show.repeat_box_#{order.copied_order.position}"
       - else
-        = content_tag(:span, '', class: 'checkmark') if order.placed?
-        span = t "app.users.show.picked_bread_#{order.position}"
+        - if order.placed?
+          = content_tag(:span, '', class: 'checkmark')
+          span = t "app.users.show.picked_bread_#{order.position}"
+        - else
+          span = t "app.users.show.pick_bread_#{order.position}"
     .triangle
   .options
     ul

@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
-      resource.update! role_ids: [Role.find_by!(name: :customer).id]
+      resource.update role_ids: [Role.find_by!(name: :customer).id]
     end
   end
 
