@@ -36,7 +36,7 @@ jobs:
       STRIPE_SECRET_KEY: "sk_test_51HeFW8I4g05dLynGWnnUZjNGP6uDnqvCDUGGmqcHhlJyQpP7NS3ZEYIVbQ3DtHFoWffWbFSc8Zd4EVZt3i4gwLtG00Sva77iue"
       STRIPE_PUBLISHABLE_KEY: "pk_test_51HeFW8I4g05dLynGZJRfdRRsDN27EsdFzXdp2mKrQ58QqhgVBIPENjzPUFvbQs1PAph7ZkVKSnSKyIAhpmnQFMI6007G0NWpTK"
       STRIPE_WEBHOOK_SECRET: "whsec_3Bi3nIoiFoj95LZ5HzQl8jzbiULxSAVP"
-      SELENIUM_URL: 'http://selenium__standalone-chrome:4444/wd/hub'
+      SELENIUM_URL: 'http://127.0.0.1:4444/wd/hub'
 
     steps:
       - checkout
@@ -83,8 +83,10 @@ jobs:
           command: bundle exec rake test:system
 
   build_release:
-    machine: true
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
+      - checkout
       - run:
           name: Docker login
           command: docker login -u $DO_DOCKER_USER -p $DO_DOCKER_PASSWORD registry.digitalocean.com
@@ -101,14 +103,24 @@ jobs:
   deploy:
     machine: true
     steps:
-      - checkout
       - kubernetes/install-kubectl
       - run:
+          name: Store KUBECTL cert
+          command: echo "$KUBERNETES_CLUSTER_CERTIFICATE" | base64 --decode > cert.crt
+      - run:
           name: Update web deployment
-          command: kubectl set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+          command: kubectl --kubeconfig=/dev/null \
+            --server=$KUBERNETES_SERVER \
+            --certificate-authority=cert.crt \
+            --token=$KUBERNETES_TOKEN \
+            set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
       - run:
           name: Update background job deployment
-          command: kubectl set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+          command: kubectl --kubeconfig=/dev/null \
+            --server=$KUBERNETES_SERVER \
+            --certificate-authority=cert.crt \
+            --token=$KUBERNETES_TOKEN \
+            set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
 
 workflows:
   version: 2
