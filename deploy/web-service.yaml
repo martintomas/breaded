@@ -4,10 +4,21 @@ metadata:
   name: web-service
   labels:
     app: web
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "7a0a4aea-83f6-45b9-9de7-ab46f03a2585"
+    service.beta.kubernetes.io/do-loadbalancer-tls-passthrough: "false"
+    service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: web
+  - name: https
+    protocol: TCP
+    port: 443
     targetPort: web
   selector:
     app: web
