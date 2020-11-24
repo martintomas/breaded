@@ -9,12 +9,20 @@ jobs:
   test:
     parallelism: 1
     docker:
-      - image: cimg/ruby:2.7.2-node
-      - image: circleci/postgres:9.5-alpine
+      - image: cimg/ruby:2.7.2-browsers
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: breaded
+          RAILS_ENV: test
+      - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: breaded
           POSTGRES_DB: breaded_test
           POSTGRES_PASSWORD: password
+      - image: circleci/redis:alpine
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
@@ -22,13 +30,15 @@ jobs:
       DB_USERNAME: breaded
       DB_PASSWORD: password
       RAILS_ENV: test
-      HOST_URL: "http://localhost"
+      HOST_URL: "http://127.0.0.1"
+      REDIS_URL: "redis://127.0.0.1:6379"
       STRIPE_SECRET_KEY: "sk_test_51HeFW8I4g05dLynGWnnUZjNGP6uDnqvCDUGGmqcHhlJyQpP7NS3ZEYIVbQ3DtHFoWffWbFSc8Zd4EVZt3i4gwLtG00Sva77iue"
       STRIPE_PUBLISHABLE_KEY: "pk_test_51HeFW8I4g05dLynGZJRfdRRsDN27EsdFzXdp2mKrQ58QqhgVBIPENjzPUFvbQs1PAph7ZkVKSnSKyIAhpmnQFMI6007G0NWpTK"
       STRIPE_WEBHOOK_SECRET: "whsec_3Bi3nIoiFoj95LZ5HzQl8jzbiULxSAVP"
 
     steps:
       - checkout
+
       - run:
           name: Which bundler?
           command: bundle -v
@@ -43,9 +53,21 @@ jobs:
           key: rails-breaded-bundle-{{ checksum "Gemfile" }}
           paths:
             - vendor/bundle
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
+
+      - restore_cache:
+          keys:
+            - rails-breaded-yarn-{{ checksum "package.json" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Compile FE
+          command: rake assets:precompile
+
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
@@ -54,7 +76,10 @@ jobs:
           command: bundle exec rails db:rebuild
       - run:
           name: Run tests
-          command: rake test
+          command: bundle exec rake test
+      - run:
+          name: Run system tests
+          command: bundle exec rake test:system
 
   build_release:
     docker:
