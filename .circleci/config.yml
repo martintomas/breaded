@@ -13,6 +13,7 @@ jobs:
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: breaded
           RAILS_ENV: test
@@ -47,11 +48,11 @@ jobs:
           key: rails-breaded-bundle-{{ checksum "Gemfile" }}
       - run:
           name: Bundle Install
-          command: bundle install
+          command: bundle check || bundle install
       - save_cache:
           key: rails-breaded-bundle-{{ checksum "Gemfile" }}
           paths:
-            - ~/.bundle
+            - vendor/bundle
 
       - restore_cache:
           key: rails-breaded-yarn-{{ checksum "package.json" }}
