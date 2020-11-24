@@ -44,6 +44,9 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+      - run:
+          name: Set bundle path
+          command: bundle config set path 'vendor/bundle'
       - restore_cache:
           keys:
             - rails-breaded-bundle-{{ checksum "Gemfile" }}
@@ -87,6 +90,7 @@ jobs:
       - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Docker login
           command: docker login -u $DO_DOCKER_USER -p $DO_DOCKER_PASSWORD registry.digitalocean.com
