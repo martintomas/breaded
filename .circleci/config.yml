@@ -11,6 +11,12 @@ jobs:
       - image: cimg/ruby:2.7.2-node
     steps:
       - checkout
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
@@ -40,6 +46,12 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run:
+          name: Configure Bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
