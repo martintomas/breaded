@@ -194,11 +194,13 @@ class OrdersSystemTest < ApplicationSystemTestCase
     within '.address-section' do
       click_link I18n.t('app.orders.confirm_update.address.change')
     end
-    find('#popup_address_line').set 'Updated Address Line'
-    find('#popup_street').set 'Updated Street'
-    find('#popup_city').set 'Updated City'
-    find('#popup_postal_code').set 'Updated Postal Code'
-    click_button I18n.t('app.orders.confirm_update.address.save')
+    using_wait_time(5) do
+      find('#popup_address_line').set 'Updated Address Line'
+      find('#popup_street').set 'Updated Street'
+      find('#popup_city').set 'Updated City'
+      find('#popup_postal_code').set 'Updated Postal Code'
+      click_button I18n.t('app.orders.confirm_update.address.save')
+    end
     within '.address-section' do
       assert_selector '.address-line', text: 'Updated Address Line, Updated Street, Updated City'
       assert_selector '.postal-code', text: 'Updated Postal Code'
