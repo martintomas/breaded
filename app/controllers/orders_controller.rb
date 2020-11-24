@@ -74,10 +74,8 @@ class OrdersController < ApplicationController
   end
 
   def update_address
-    puts address_params.inspect
     authorize! :update, @order
 
-    puts address_params.inspect
     address = @order.address || @order.build_address
     address.assign_attributes address_params
     address.save!
