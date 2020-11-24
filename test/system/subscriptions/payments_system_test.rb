@@ -46,7 +46,9 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
 
     complete_stripe_sca_with 'Fail'
 
-    assert_selector 'div#error_explanation > ul > li', text: 'We are unable to authenticate your payment method. Please choose a different payment method and try again.'
+    using_wait_time(10) do
+      assert_selector 'div#error_explanation > ul > li', text: 'We are unable to authenticate your payment method. Please choose a different payment method and try again.'
+    end
   end
 
   test '#new - requires 3D secure check that passes' do
@@ -149,7 +151,9 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     click_button I18n.t('app.get_breaded.payment.edit.submit')
     complete_stripe_sca_with 'Fail'
 
-    assert_selector 'div#error_explanation > ul > li', text: 'We are unable to authenticate your payment method. Please choose a different payment method and try again.'
+    using_wait_time(10) do
+      assert_selector 'div#error_explanation > ul > li', text: 'We are unable to authenticate your payment method. Please choose a different payment method and try again.'
+    end
   end
 
   private

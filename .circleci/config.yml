@@ -49,7 +49,7 @@ jobs:
             - rails-breaded-bundle-{{ checksum "Gemfile" }}
       - run:
           name: Bundle Install
-          command: bundle install
+          command: bundle install --path vendor/bundle
       - save_cache:
           key: rails-breaded-bundle-{{ checksum "Gemfile" }}
           paths:

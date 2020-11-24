@@ -88,15 +88,17 @@ class OrdersSystemTest < ApplicationSystemTestCase
       assert_current_path subscription_period_path(@order.subscription_period)
 
       # updates user
-      assert_equal '+420734370407', @user.reload.phone_number
+      @user.reload
+      assert_equal '+420734370407', @user.phone_number
       assert_equal '+420333333333', @user.secondary_phone_number
       # updates order address
-      @order.reload
-      assert_equal 'Updated Address Line', @order.address.address_line
-      assert_equal 'Updated Street', @order.address.street
-      assert_equal 'Updated City', @order.address.city
-      assert_equal 'Updated Postal Code', @order.address.postal_code
+      address = @order.address.reload
+      assert_equal 'Updated Address Line', address.address_line
+      assert_equal 'Updated Street', address.street
+      assert_equal 'Updated City', address.city
+      assert_equal 'Updated Postal Code', address.postal_code
       # updates order
+      @order.reload
       assert_equal Time.zone.parse('"2020-10-20 10:00:00 +0100"').to_i, @order.delivery_date_from.to_i
       assert_equal Rails.application.config.options[:default_number_of_breads], @order.order_foods.first.amount
       assert_equal food_id, @order.order_foods.first.food_id
