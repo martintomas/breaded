@@ -6,22 +6,6 @@ orbs:
   kubernetes: circleci/kubernetes@0.11.2
 
 jobs:
-  build:
-    docker:
-      - image: cimg/ruby:2.7.2-node
-    steps:
-      - checkout
-      - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
-      - ruby/install-deps
-      - node/install-packages:
-          pkg-manager: yarn
-          cache-key: "yarn.lock"
-
   test:
     parallelism: 3
     docker:
@@ -45,13 +29,20 @@ jobs:
 
     steps:
       - checkout
-      - ruby/install-deps
       - run:
-          name: Configure Bundler
-          command: |
-            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
-            source $BASH_ENV
-            gem install bundler
+          name: Which bundler?
+          command: bundle -v
+      - restore_cache:
+          keys:
+            - rails-breaded-bundle-{{ checksum "Gemfile" }}
+            - rails-breaded-bundle-
+      - run:
+          name: Bundle Install
+          command: bundle install
+      - save_cache:
+          key: rails-breaded-bundle-{{ checksum "Gemfile" }}
+          paths:
+            - vendor/bundle
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
@@ -94,9 +85,8 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  test_and_deploy:
     jobs:
-      - build
       - test:
           requires:
             - build
