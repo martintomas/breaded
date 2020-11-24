@@ -83,6 +83,7 @@ jobs:
           command: bundle exec rake test:system
 
   build_release:
+    machine: true
     steps:
       - run:
           name: Docker login
@@ -98,6 +99,7 @@ jobs:
           command: docker push registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
 
   deploy:
+    machine: true
     steps:
       - checkout
       - kubernetes/install-kubectl
