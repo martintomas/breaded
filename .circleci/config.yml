@@ -8,7 +8,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.6.3-node
+      - image: cimg/ruby:2.7.2-node
     steps:
       - checkout
       - ruby/install-deps
@@ -19,7 +19,7 @@ jobs:
   test:
     parallelism: 3
     docker:
-      - image: cimg/ruby:2.6.3-node
+      - image: cimg/ruby:2.7.2-node
       - image: circleci/postgres:9.5-alpine
         environment:
           POSTGRES_USER: breaded
@@ -55,7 +55,7 @@ jobs:
 
   build_release:
     docker:
-      - image: cimg/ruby:2.6.3-node
+      - image: cimg/ruby:2.7.2-node
     steps:
       - run:
           name: Build docker image
@@ -69,7 +69,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/ruby:2.6.3-node
+      - image: cimg/ruby:2.7.2-node
     steps:
       - checkout
       - kubernetes/install-kubectl
