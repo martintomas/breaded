@@ -44,28 +44,23 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - run:
-          name: Set bundle path
-          command: bundle config set path 'vendor/bundle'
       - restore_cache:
-          keys:
-            - rails-breaded-bundle-{{ checksum "Gemfile" }}
+          key: rails-breaded-bundle-{{ checksum "Gemfile" }}
       - run:
           name: Bundle Install
-          command: bundle install --path vendor/bundle
+          command: bundle check || bundle install
       - save_cache:
           key: rails-breaded-bundle-{{ checksum "Gemfile" }}
           paths:
             - vendor/bundle
 
       - restore_cache:
-          keys:
-            - rails-breaded-yarn-{{ checksum "package.json" }}
+          key: rails-breaded-yarn-{{ checksum "package.json" }}
       - run:
           name: Install Dependencies
           command: yarn install --immutable
       - save_cache:
-          key: yarn-packages-{{ checksum "package.json" }}
+          key: rails-breaded-yarn-{{ checksum "package.json" }}
           paths:
             - ~/.cache/yarn
       - run:
@@ -84,6 +79,8 @@ jobs:
       - run:
           name: Run system tests
           command: bundle exec rake test:system
+      - store_test_results:
+          path: test_results
 
   build_release:
     docker:
