@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
+  kubernetes: circleci/kubernetes@0.11.2
 
 jobs:
   build:
@@ -50,6 +51,25 @@ jobs:
           command: bundle exec rails db:rebuild
       - rake test
 
+  build_release:
+    docker:
+      - image: cimg/ruby:2.6.3-node
+    steps:
+      - docker build -f Dockerfile.production . -t breaded-production:$CIRCLE_SHA1 --build-arg COMMIT_HASH=$CIRCLE_SHA1
+      - docker tag breaded-production:$CIRCLE_SHA1 registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+      - docker push registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+
+  deploy:
+    docker:
+      - image: cimg/ruby:2.6.3-node
+    steps:
+      - checkout
+      - kubernetes/install-kubectl
+      - kubectl apply -f deploy/web-env-configmap.yaml
+      - kubectl apply -f deploy/breaded-secrets.yaml
+      - kubectl set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+      - kubectl set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+
 workflows:
   version: 2
   build_and_test:
@@ -58,3 +78,15 @@ workflows:
       - test:
           requires:
             - build
+      - build_release:
+          requires:
+            - test
+          filter:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build_release
+          filter:
+            branches:
+              only: master
