@@ -194,10 +194,10 @@ class OrdersSystemTest < ApplicationSystemTestCase
     within '.address-section' do
       click_link I18n.t('app.orders.confirm_update.address.change')
     end
-    fill_in 'orders_update_former[address_line]', with: 'Updated Address Line'
-    fill_in 'orders_update_former[street]', with: 'Updated Street'
-    fill_in 'orders_update_former[city]', with: 'Updated City'
-    fill_in 'orders_update_former[postal_code]', with: 'Updated Postal Code'
+    fill_in 'popup_address_line', with: 'Updated Address Line'
+    fill_in 'popup_street', with: 'Updated Street'
+    fill_in 'popup_city', with: 'Updated City'
+    fill_in 'popup_postal_code', with: 'Updated Postal Code'
     click_button I18n.t('app.orders.confirm_update.address.save')
     within '.address-section' do
       assert_selector '.address-line', text: 'Updated Address Line, Updated Street, Updated City'

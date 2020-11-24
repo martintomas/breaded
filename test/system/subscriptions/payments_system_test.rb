@@ -22,7 +22,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_stripe_elements card: '4000000000009987'
     click_button I18n.t('app.get_breaded.payment.submit')
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_selector 'div#error_explanation > ul > li', text: 'Your card was declined'
     end
   end
@@ -33,7 +33,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_stripe_elements card: '4000000000000341'
     click_button I18n.t('app.get_breaded.payment.submit')
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_selector 'div#error_explanation > ul > li', text: I18n.t('app.stripe.default_error')
     end
   end
@@ -46,7 +46,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
 
     complete_stripe_sca_with 'Fail'
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_selector 'div#error_explanation > ul > li', text: 'We are unable to authenticate your payment method. Please choose a different payment method and try again.'
     end
   end
@@ -59,7 +59,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
 
     complete_stripe_sca_with 'Complete'
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_text I18n.t('app.get_breaded.payment.success.go_to_my_boxes')
     end
   end
@@ -70,7 +70,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_stripe_elements card: '4242424242424242'
     click_button I18n.t('app.get_breaded.payment.submit')
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       click_link I18n.t('app.get_breaded.payment.success.go_to_my_boxes')
       assert_current_path subscription_period_path(subscription_periods(:customer_1_subscription_2_period))
     end
@@ -82,7 +82,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_stripe_elements card: '4242424242424242'
     click_button I18n.t('app.get_breaded.payment.submit')
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       click_link I18n.t('app.get_breaded.payment.success.go_to_second_box')
       assert_current_path edit_order_path(orders(:customer_order_2))
     end
@@ -105,7 +105,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_stripe_elements card: '4242424242424242'
     click_button I18n.t('app.get_breaded.payment.edit.submit')
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_equal find('#card_number').value, '**** **** **** 4242'
     end
   end
@@ -123,7 +123,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     fill_in 'postal_code', with: 'New Postal Code'
     click_button I18n.t('app.get_breaded.payment.edit.submit')
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_equal find('#card_number').value, '**** **** **** 4242'
     end
   end
@@ -137,7 +137,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     click_button I18n.t('app.get_breaded.payment.edit.submit')
     complete_stripe_sca_with 'Complete'
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_equal find('#card_number').value, '**** **** **** 3220'
     end
   end
@@ -151,7 +151,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
     click_button I18n.t('app.get_breaded.payment.edit.submit')
     complete_stripe_sca_with 'Fail'
 
-    using_wait_time(10) do
+    using_wait_time(15) do
       assert_selector 'div#error_explanation > ul > li', text: 'We are unable to authenticate your payment method. Please choose a different payment method and try again.'
     end
   end
@@ -159,7 +159,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
   private
 
   def fill_stripe_elements(card: , expiry: '1234', cvc: '123')
-    using_wait_time(10) do
+    using_wait_time(15) do
       frame = find('div.payment-card > div > iframe')
       within_frame(frame) do
         card.to_s.chars.each do |piece|
@@ -173,7 +173,7 @@ class Subscriptions::PaymentsSystemTest < ApplicationSystemTestCase
   end
 
   def complete_stripe_sca_with(action)
-    using_wait_time(10) do
+    using_wait_time(15) do
       within_frame(find('body > div > iframe')) do
         within_frame(find('#challengeFrame')) do
           click_button action

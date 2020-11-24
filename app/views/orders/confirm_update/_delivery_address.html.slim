@@ -12,16 +12,16 @@ span
     .close data-action='click->orders--update#addressPopupClose' = 'Close'
     h3.title = t 'app.orders.confirm_update.address.title'
     .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
-      = f.text_field :address_line, id: :popup_address_line, data: { target: "orders--update.addressLine" }
-      = f.label :address_line
+      = text_field_tag :popup_address_line, f.object.address_line, data: { target: "orders--update.addressLine" }
+      = label_tag :popup_address_line
     .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
-      = f.text_field :street, id: :popup_street, required: true, data: { target: "orders--update.street" }
-      = f.label :street
+      = text_field_tag :popup_street, f.object.street, required: true, data: { target: "orders--update.street" }
+      = label_tag :popup_street
     .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
-      = f.text_field :city, id: :popup_city, required: true, data: { target: "orders--update.city" }
-      = f.label :city
+      = text_field_tag :popup_city, f.object.city, required: true, data: { target: "orders--update.city" }
+      = label_tag :popup_city
     .text-field.breads-lg-5.breads-md-5.breads-sm-12.breads-xs-12
-      = f.text_field :postal_code, id: :popup_postal_code, required: true, data: { target: "orders--update.postalCode" }
-      = f.label :postal_code
+      = text_field_tag :popup_postal_code, f.object.postal_code, required: true, data: { target: "orders--update.postalCode" }
+      = label_tag :popup_postal_code
     = submit_tag I18n.t('app.orders.confirm_update.address.save'), data: { action: 'orders--update#addressUpdated' }
 
