@@ -1,4 +1,4 @@
-FROM ruby:2.6.3-alpine AS build-env
+FROM ruby:2.7.2-alpine AS build-env
 
 ARG RAILS_ROOT=/usr/src/app
 ARG BUILD_PACKAGES="build-base curl-dev git"
@@ -24,7 +24,7 @@ COPY package.json ./
 RUN yarn install --check-files
 
 ############### Finalize build ###############
-FROM ruby:2.6.3-alpine
+FROM ruby:2.7.2-alpine
 LABEL maintainer="Martin Tomas <martintomas.it@gmail.com>"
 
 ARG RAILS_ROOT=/usr/src/app
