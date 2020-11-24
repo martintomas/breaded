@@ -42,12 +42,12 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: rails-breaded-bundle-{{ checksum "Gemfile" }}
+          key: rails-breaded-bundle-v1-{{ checksum "Gemfile" }}
       - run:
           name: Bundle Install
           command: bundle check --path vendor/bundle || bundle install --path vendor/bundle
       - save_cache:
-          key: rails-breaded-bundle-{{ checksum "Gemfile" }}
+          key: rails-breaded-bundle-v1-{{ checksum "Gemfile" }}
           paths:
             - vendor/bundle
 
@@ -76,6 +76,8 @@ jobs:
       - run:
           name: Run system tests
           command: bundle exec rake test:system
+      - store_artifacts:
+          path: tmp/screenshots
 
   build_release:
     docker:

@@ -74,6 +74,7 @@ class OrdersController < ApplicationController
   end
 
   def update_address
+    puts address_params.inspect
     authorize! :update, @order
 
     puts address_params.inspect
