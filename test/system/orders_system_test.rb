@@ -93,7 +93,7 @@ class OrdersSystemTest < ApplicationSystemTestCase
       assert_equal '+420333333333', @user.secondary_phone_number
       # updates order address
       address = @order.address.reload
-      assert_equal 'Updated Address Line', address.address_line
+      assert_includes address.address_line, 'Updated Address Line'
       assert_equal 'Updated Street', address.street
       assert_equal 'Updated City', address.city
       assert_equal 'Updated Postal Code', address.postal_code
@@ -124,7 +124,7 @@ class OrdersSystemTest < ApplicationSystemTestCase
       assert_equal '+420333333333', @user.secondary_phone_number
       # updates order address
       address = @order.address.reload
-      assert_equal 'Updated Address Line', address.address_line
+      assert_includes address.address_line, 'Updated Address Line'
       assert_equal 'Updated Street', address.street
       assert_equal 'Updated City', address.city
       assert_equal 'Updated Postal Code', address.postal_code
@@ -194,13 +194,11 @@ class OrdersSystemTest < ApplicationSystemTestCase
     within '.address-section' do
       click_link I18n.t('app.orders.confirm_update.address.change')
     end
-    using_wait_time(5) do
-      find('#popup_address_line').set 'Updated Address Line'
-      find('#popup_street').set 'Updated Street'
-      find('#popup_city').set 'Updated City'
-      find('#popup_postal_code').set 'Updated Postal Code'
-      click_button I18n.t('app.orders.confirm_update.address.save')
-    end
+    fill_in 'orders_update_former[address_line]', with: 'Updated Address Line'
+    fill_in 'orders_update_former[street]', with: 'Updated Street'
+    fill_in 'orders_update_former[city]', with: 'Updated City'
+    fill_in 'orders_update_former[postal_code]', with: 'Updated Postal Code'
+    click_button I18n.t('app.orders.confirm_update.address.save')
     within '.address-section' do
       assert_selector '.address-line', text: 'Updated Address Line, Updated Street, Updated City'
       assert_selector '.postal-code', text: 'Updated Postal Code'
