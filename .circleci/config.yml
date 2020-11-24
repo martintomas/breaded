@@ -86,6 +86,9 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Prepare master key
+          command: echo "$MASTER_KEY" > config/master.key
+      - run:
           name: Docker login
           command: docker login -u $DO_DOCKER_USER -p $DO_DOCKER_PASSWORD registry.digitalocean.com
       - run:
