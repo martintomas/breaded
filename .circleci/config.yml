@@ -1,15 +1,60 @@
 version: 2.1
+
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
 
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+      - image: cimg/ruby:2.6.3-node
     steps:
       - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
+
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:2.6.3-node
+      - image: circleci/postgres:9.5-alpine
+        environment:
+          POSTGRES_USER: breaded
+          POSTGRES_DB: breaded_test
+          POSTGRES_PASSWORD: password
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      DB_HOST: 127.0.0.1
+      DB_USERNAME: breaded
+      DB_PASSWORD: password
+      RAILS_ENV: test
+      HOST_URL: "http://localhost"
+      STRIPE_SECRET_KEY: "sk_test_51HeFW8I4g05dLynGWnnUZjNGP6uDnqvCDUGGmqcHhlJyQpP7NS3ZEYIVbQ3DtHFoWffWbFSc8Zd4EVZt3i4gwLtG00Sva77iue"
+      STRIPE_PUBLISHABLE_KEY: "pk_test_51HeFW8I4g05dLynGZJRfdRRsDN27EsdFzXdp2mKrQ58QqhgVBIPENjzPUFvbQs1PAph7ZkVKSnSKyIAhpmnQFMI6007G0NWpTK"
+      STRIPE_WEBHOOK_SECRET: "whsec_3Bi3nIoiFoj95LZ5HzQl8jzbiULxSAVP"
+
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+          cache-key: "yarn.lock"
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bundle exec rails db:rebuild
+      - rake test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build

@@ -34,6 +34,7 @@ class Subscriptions::MarkAsPaidTest < ActiveSupport::TestCase
     travel_to Time.zone.parse('24th Oct 2020 04:00:00') do
       @subscription_period.update! paid: false, started_at: Time.zone.parse('20th Oct 2020 05:00:00'),
                                    ended_at: Time.zone.parse('20th Nov 2020 05:00:00')
+      @subscription_period.orders.first.update! delivery_date_from: Time.zone.parse('20th Oct 2020 05:00:00')
       Subscription.stub_any_instance :subscription_periods, SubscriptionPeriod.where(id: @subscription_period.id) do
         SubscriptionPeriods::Move.stub_any_instance :subscription_periods, [@subscription_period] do
           Subscriptions::MarkAsPaid.new(@subscription).perform

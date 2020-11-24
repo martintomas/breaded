@@ -151,7 +151,7 @@ class SubscriptionsSystemTest < ApplicationSystemTestCase
                                                            num_breads: Rails.application.config.options[:default_number_of_breads])
           assert_selector 'rate.price', text: number_to_currency(subscription_plan.price, unit: subscription_plan.currency.symbol)
         end
-        assert_text I18n.t('app.subscriptions.edit.popup.note_higher', date: Time.at(current_period_end).strftime('%e %B'))
+        assert_text I18n.t('app.subscriptions.edit.popup.note_higher', date: Time.at(current_period_end).strftime('%e %B')).gsub!('  ', ' ')
 
         click_button I18n.t('app.subscriptions.edit.popup.confirm_button')
 
