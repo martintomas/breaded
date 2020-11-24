@@ -9,7 +9,7 @@ jobs:
   test:
     parallelism: 1
     docker:
-      - image: cimg/ruby:2.7.2-browsers
+      - image: cimg/ruby:2.7.2-node
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -22,7 +22,8 @@ jobs:
           POSTGRES_USER: breaded
           POSTGRES_DB: breaded_test
           POSTGRES_PASSWORD: password
-      - image: circleci/redis:alpine
+      - image: redis:alpine
+      - image: selenium/standalone-chrome:3.141.59
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
@@ -31,10 +32,11 @@ jobs:
       DB_PASSWORD: password
       RAILS_ENV: test
       HOST_URL: "http://127.0.0.1"
-      REDIS_URL: "redis://127.0.0.1:6379"
+      REDIS_URL: "redis://redis:6379"
       STRIPE_SECRET_KEY: "sk_test_51HeFW8I4g05dLynGWnnUZjNGP6uDnqvCDUGGmqcHhlJyQpP7NS3ZEYIVbQ3DtHFoWffWbFSc8Zd4EVZt3i4gwLtG00Sva77iue"
       STRIPE_PUBLISHABLE_KEY: "pk_test_51HeFW8I4g05dLynGZJRfdRRsDN27EsdFzXdp2mKrQ58QqhgVBIPENjzPUFvbQs1PAph7ZkVKSnSKyIAhpmnQFMI6007G0NWpTK"
       STRIPE_WEBHOOK_SECRET: "whsec_3Bi3nIoiFoj95LZ5HzQl8jzbiULxSAVP"
+      SELENIUM_URL: 'http://selenium__standalone-chrome:4444/wd/hub'
 
     steps:
       - checkout
@@ -45,7 +47,6 @@ jobs:
       - restore_cache:
           keys:
             - rails-breaded-bundle-{{ checksum "Gemfile" }}
-            - rails-breaded-bundle-
       - run:
           name: Bundle Install
           command: bundle install
@@ -61,7 +62,7 @@ jobs:
           name: Install Dependencies
           command: yarn install --immutable
       - save_cache:
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-packages-{{ checksum "package.json" }}
           paths:
             - ~/.cache/yarn
       - run:
