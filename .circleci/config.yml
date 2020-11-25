@@ -62,7 +62,7 @@ jobs:
             - ~/.cache/yarn
       - run:
           name: Compile FE
-          command: rake assets:precompile
+          command: bundle exec rake assets:precompile
 
       - run:
           name: Wait for DB
@@ -88,6 +88,9 @@ jobs:
       - run:
           name: Prepare master key
           command: echo "$MASTER_KEY" > config/master.key
+      - run:
+          name: Prepare production key
+          command: echo "$PRODUCTION_KEY" > config/credentials/production.key
       - run:
           name: Docker login
           command: docker login -u $DO_DOCKER_USER -p $DO_DOCKER_PASSWORD registry.digitalocean.com
