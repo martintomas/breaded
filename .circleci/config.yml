@@ -3,7 +3,6 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@1.0
   node: circleci/node@2
-  kubernetes: circleci/kubernetes@0.11.2
 
 jobs:
   test:
@@ -107,20 +106,24 @@ jobs:
   deploy:
     machine: true
     steps:
-      - kubernetes/install-kubectl
+      - run:
+          name: Install kubectl
+          command: |
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod u+x ./kubectl
       - run:
           name: Store KUBECTL cert
           command: echo "$KUBERNETES_CLUSTER_CERTIFICATE" | base64 --decode > cert.crt
       - run:
           name: Update web deployment
-          command: kubectl --kubeconfig=/dev/null \
+          command: ./kubectl --kubeconfig=/dev/null \
             --server=$KUBERNETES_SERVER \
             --certificate-authority=cert.crt \
             --token=$KUBERNETES_TOKEN \
             set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
       - run:
           name: Update background job deployment
-          command: kubectl --kubeconfig=/dev/null \
+          command: ./kubectl --kubeconfig=/dev/null \
             --server=$KUBERNETES_SERVER \
             --certificate-authority=cert.crt \
             --token=$KUBERNETES_TOKEN \
