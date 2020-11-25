@@ -110,13 +110,13 @@ jobs:
       - kubernetes/install-kubectl
       - run:
           name: Store KUBECTL cert
-          command: echo "$KUBERNETES_CLUSTER_CERTIFICATE" | base64 --decode > cert.crt
+          command: echo "$DO_KUBECTL_CERTIFICATE" | base64 --decode > cert.crt
       - run:
           name: Update web deployment
-          command: kubectl --kubeconfig=/dev/null --server=$KUBERNETES_SERVER --certificate-authority=cert.crt --token=$KUBERNETES_TOKEN set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+          command: kubectl --kubeconfig=/dev/null --server=$DO_KUBECTL_SERVER --certificate-authority=cert.crt --token=$DO_KUBECTL_PASSWORD set image deployment/web web=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
       - run:
           name: Update background job deployment
-          command: kubectl --kubeconfig=/dev/null --server=$KUBERNETES_SERVER --certificate-authority=cert.crt --token=$KUBERNETES_TOKEN set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
+          command: kubectl --kubeconfig=/dev/null --server=$DO_KUBECTL_SERVER --certificate-authority=cert.crt --token=$DO_KUBECTL_PASSWORD set image deployment/background-job background-job=registry.digitalocean.com/breaded/breaded-production:$CIRCLE_SHA1
 
 workflows:
   version: 2
