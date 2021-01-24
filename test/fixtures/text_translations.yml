@@ -84,3 +84,13 @@ sourdough_translation:
   text: Sourdough
   language: en
   localised_text: sourdough_localized_text
+
+how_many_breads_question_translation:
+  text: How many breads
+  language: en
+  localised_text: how_many_breads_question
+
+how_many_breads_answer_translation:
+  text: Only 10
+  language: en
+  localised_text: how_many_breads_answer

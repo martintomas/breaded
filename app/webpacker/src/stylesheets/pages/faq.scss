@@ -1,0 +1,122 @@
+body.pages.faq {
+  .faq-section {
+    position: relative;
+    display: block;
+  }
+  .faq-section h3 {
+    border-bottom:  0.5px solid rgba(112, 112, 112, .2);
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    margin-top: 0;
+    color: #333333;
+    font-size: 30px;
+  }
+  .faq div {
+    border-bottom:  0.5px solid rgba(112, 112, 112, .2);
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+  }
+  .faq-qustion{
+    position: relative;
+    display: block;
+    font-size: 20px;
+    color: #333333;
+    font-family: "Montserrat";
+    cursor: pointer;
+  }
+  .faq-qustion-bold {
+    font-weight: 500;
+  }
+  .faq-answer {
+    width: 80%;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: #333333;
+    font-family: "Montserrat";
+    height: 0;
+    display: none;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+  }
+  .faq-answer-show {
+    height: auto;
+    display: block;
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+  }
+  .faq-triangle {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 12px solid #333333;
+    position: absolute;
+    right: 25px;
+    top: 6px;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    -ms-transition: all 0.7s ease;
+  }
+  .faq-triangle-down {
+    transform: rotate(180deg);
+  }
+  /* FAQ ends */
+  /* profile dropdown*/
+  .menu li {
+    position: relative;
+  }
+  .profile-arrow {
+    width: 0;
+    height: 0;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-bottom: 5px solid #333333;
+    position: absolute;
+    right: 19px;
+    top: 28px;
+  }
+  .profile-dropdown {
+    padding: 0 25px !important;
+    position: fixed;
+    top: 112px;
+    color: #666666;
+    width: 200px;
+    font-size: 15px;
+    display: none !important;
+  }
+  .profile-dropdown li {
+    padding: 15px 0;
+    width: 100%;
+  }
+  .menu-background {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    display: none !important;
+  }
+  .showprofile {
+    display: block !important;
+  }
+  @media (max-width: 768px) {
+    .profile-dropdown {
+      top: 265px;
+      width: 100%;
+      padding-left: 40px !important;
+    }
+    .profile-arrow {
+      right: 25px;
+      top: 8px;
+    }
+  }
+}

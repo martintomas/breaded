@@ -9,4 +9,4 @@
     li class="#{page == :addresses ? 'active' : ''}"
       span = link_to content_tag(:span, I18n.t('app.users.show.categories.addresses')), addresses_path
     li class="#{page == :faq ? 'active' : ''}"
-      span = link_to content_tag(:span, I18n.t('app.users.show.categories.faq')), '#'
+      span = link_to content_tag(:span, I18n.t('app.users.show.categories.faq')), faq_pages_path

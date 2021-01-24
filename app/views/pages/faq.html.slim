@@ -1,0 +1,15 @@
+section.container.profilePage data-controller='pages--faq'
+  == render partial: 'shared/users/header'
+  == render partial: 'shared/users/menu', locals: { page: :faq }
+
+  .breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.faq-section
+    h3 = t 'app.faq.title'
+    section.faq
+      - Faq.with_translations.each do |faq|
+        div
+          span.faq-qustion data-action='click->pages--faq#showAnswer'
+            = faq.localized_question
+            i.faq-triangle
+          p.faq-answer = faq.localized_answer
+
+== render partial: 'shared/gift'

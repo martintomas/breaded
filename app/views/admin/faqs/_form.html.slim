@@ -1,0 +1,8 @@
+= semantic_form_for [:admin, resource], builder: ActiveAdmin::FormBuilder do |f|
+  = f.semantic_errors
+  = f.inputs do
+    == render partial: 'admin/shared/localized_field', locals: { f: f, field_name: :question }
+    == render partial: 'admin/shared/localized_field', locals: { f: f, field_name: :answer }
+  = f.actions do
+    = f.action(:submit)
+    = f.cancel_link

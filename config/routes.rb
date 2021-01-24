@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     collection do
       get :home
       get :about
+      get :faq
     end
   end
   resources :contacts, only: %i[new create] do

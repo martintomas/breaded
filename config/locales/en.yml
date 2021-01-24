@@ -127,6 +127,8 @@ en:
           box: "Box %{i}"
         button: Help Me Now
         notification: Thanks for your message! We will contact you as soon as possible...
+    faq:
+      title: Any questions?
     login:
       label: Hi, Bread Lover!
       login_button: Log in
@@ -433,6 +435,8 @@ en:
       ingredients: Ingredients
       attributes: Attributes
       others: Others
+    faqs:
+      label: Faqs
     orders:
       label: Orders
     order_states:

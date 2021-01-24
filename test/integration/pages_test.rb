@@ -4,6 +4,11 @@ require 'test_helper'
 
 class PagesTest < ActionDispatch::IntegrationTest
   include ActionView::Helpers::SanitizeHelper
+  include Devise::Test::IntegrationHelpers
+
+  setup do
+    @user = users :customer
+  end
 
   test 'it contains menu' do
     get root_url
@@ -223,6 +228,21 @@ class PagesTest < ActionDispatch::IntegrationTest
       assert_select 'p', I18n.t('app.about.near_future.paragraph_1')
       assert_select 'p', I18n.t('app.about.near_future.paragraph_2')
       assert_select 'p', I18n.t('app.about.near_future.paragraph_3')
+    end
+  end
+
+  test '#faq' do
+    sign_in @user
+    get faq_pages_url
+
+    assert_select 'div.faq-section' do
+      assert_select 'h3', I18n.t('app.faq.title')
+      assert_select 'section.faq' do
+        Faq.with_translations.each do |faq|
+          assert_select 'span.faq-qustion', faq.localized_question
+          assert_select 'p.faq-answer', faq.localized_answer
+        end
+      end
     end
   end
 end

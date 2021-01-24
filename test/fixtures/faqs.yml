@@ -1,0 +1,5 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+faq_1:
+  question: how_many_breads_question
+  answer: how_many_breads_answer
