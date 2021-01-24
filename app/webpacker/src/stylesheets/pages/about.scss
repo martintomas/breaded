@@ -1,0 +1,117 @@
+body.pages.about {
+  .about-us {
+    margin-top: 120px;
+    margin-bottom: 75px;
+  }
+
+  .about-us h1 {
+    margin: 2.5em 0;
+    text-align: center;
+    font-family: "Merriweather";
+    font-weight: 700;
+    font-size: 50px;
+  }
+
+  .about-us h3 {
+    margin: 15px 0 0;
+  }
+
+  .about-us .img-responsive {
+    width: 75%;
+    margin: auto;
+  }
+
+  .about-us p {
+    font-size: 18px;
+    line-height: 1.84;
+    color: #666666;
+  }
+
+  .about-us span {
+    color: #666666;
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: 300;
+    line-height: 1.96;
+  }
+
+  .align-left {
+    float: left;
+  }
+
+  .align-right {
+    float: right;
+  }
+
+  .our-passion {
+    background-color: #f9f1e8;
+    margin: 5em 0;
+    padding: 4em;
+    text-align: center;
+  }
+
+  .our-passion > span {
+    font-size: 50px;
+    font-weight: 500;
+    font-family: "Merriweather";
+  }
+
+  .our-passion > p {
+    margin: 0;
+  }
+
+  .our-passion section {
+    position: relative;
+    display: table;
+    max-width: 685px;
+    margin: auto;
+    text-align: left;
+  }
+
+  .our-passion section div {
+    position: relative;
+    display: table-row;
+  }
+
+  .our-passion section div > span {
+    font-size: 150px;
+    color: #333333;
+    font-family: "Merriweather";
+    padding: 0 40px 0 20px;
+    display: table-cell;
+  }
+
+  .our-passion section div > p {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .division {
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-us h1 {
+      margin-bottom: 1em;
+      font-size: 35px;
+    }
+    .about-us .img-responsive {
+      width: 100%;
+      margin-top: 35px;
+    }
+    .our-passion {
+      padding: 2em 1em;
+    }
+    .our-passion > span {
+      font-size: 35px;
+    }
+    .our-passion section div > span {
+      display: block;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .our-passion section div > p {
+      display: block;
+    }
+  }
+}

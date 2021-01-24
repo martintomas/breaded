@@ -5,11 +5,9 @@ require 'test_helper'
 class PagesTest < ActionDispatch::IntegrationTest
   include ActionView::Helpers::SanitizeHelper
 
-  setup do
+  test 'it contains menu' do
     get root_url
-  end
 
-  test '#home - it contains menu' do
     assert_select 'header.header' do
       assert_select 'a.logo'
       assert_select 'ul.menu' do
@@ -21,7 +19,9 @@ class PagesTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test '#home - it contains gift section' do
+  test 'it contains gift section' do
+    get root_url
+
     assert_select 'div.giftBreaded' do
       assert_select 'h1', I18n.t('app.gift.label')
       assert_select 'p', I18n.t('app.gift.description')
@@ -29,7 +29,9 @@ class PagesTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test '#home - it contains footer' do
+  test 'it contains footer' do
+    get root_url
+
     assert_select 'footer' do
       assert_select 'div' do
         assert_select 'ul' do
@@ -51,6 +53,8 @@ class PagesTest < ActionDispatch::IntegrationTest
   end
 
   test '#home - it contains initial part' do
+    get root_url
+
     assert_select 'div' do
       assert_select 'span.content_Text' do
         assert_select 'section' do
@@ -69,6 +73,8 @@ class PagesTest < ActionDispatch::IntegrationTest
   end
 
   test '#home - it contains steps part' do
+    get root_url
+
     assert_select 'div.pickupDeliveryStep' do
       assert_select 'section' do
         assert_select 'i', '1'
@@ -92,6 +98,8 @@ class PagesTest < ActionDispatch::IntegrationTest
   end
 
   test '#home - it contains reason to choose part' do
+    get root_url
+
     assert_select 'span.imageText-1' do
       assert_select 'h4', I18n.t('app.homepage.featured.first.title')
       assert_select 'p', I18n.t('app.homepage.featured.first.description')
@@ -118,6 +126,8 @@ class PagesTest < ActionDispatch::IntegrationTest
   end
 
   test '#home - it contains breaded geniuses part' do
+    get root_url
+
     assert_select 'span.imageText-2' do
       assert_select 'h4', I18n.t('app.homepage.featured.second.title')
       assert_select 'p', I18n.t('app.homepage.featured.second.description')
@@ -142,6 +152,8 @@ class PagesTest < ActionDispatch::IntegrationTest
   end
 
   test '#home - it contains plans part' do
+    get root_url
+
     assert_select 'div.breadedPlan' do
       assert_select 'span.breadedPlanTitle', I18n.t('app.homepage.plans.title')
       assert_select 'section' do
@@ -162,6 +174,55 @@ class PagesTest < ActionDispatch::IntegrationTest
         end
       end
       assert_select 'a', I18n.t('app.homepage.breaded_button_simple')
+    end
+  end
+
+  test '#about - it contains introduction part' do
+    get about_pages_path
+
+    assert_select 'h1', I18n.t('app.about.title')
+    assert_select 'section' do
+      assert_select 'h3', I18n.t('app.about.our_mission')
+      assert_select 'p', I18n.t('app.about.description_1')
+      assert_select 'p', I18n.t('app.about.description_2')
+      assert_select 'span', I18n.t('app.about.description_ps')
+    end
+  end
+
+  test '#about - it contains passion part' do
+    get about_pages_path
+
+    assert_select 'div.our-passion' do
+      assert_select 'span', I18n.t('app.about.passion.title')
+      assert_select 'p', I18n.t('app.about.passion.subtitle')
+      assert_select 'section' do
+        assert_select 'div:nth-of-type(1)' do
+          assert_select 'p', html: I18n.t('app.about.passion.beautiful.long_html')
+        end
+        assert_select 'div:nth-of-type(2)' do
+          assert_select 'p', html: I18n.t('app.about.passion.rustic.long_html')
+        end
+        assert_select 'div:nth-of-type(3)' do
+          assert_select 'p', html: I18n.t('app.about.passion.earnest.long_html')
+        end
+        assert_select 'div:nth-of-type(4)' do
+          assert_select 'p', CGI.unescapeHTML(strip_tags(I18n.t('app.about.passion.ageless.long_html')))
+        end
+        assert_select 'div:nth-of-type(5)' do
+          assert_select 'p', html: I18n.t('app.about.passion.diverse.long_html')
+        end
+      end
+    end
+  end
+
+  test '#about - it contains near future part' do
+    get about_pages_path
+
+    assert_select 'h3', I18n.t('app.about.near_future.title')
+    assert_select 'section' do
+      assert_select 'p', I18n.t('app.about.near_future.paragraph_1')
+      assert_select 'p', I18n.t('app.about.near_future.paragraph_2')
+      assert_select 'p', I18n.t('app.about.near_future.paragraph_3')
     end
   end
 end

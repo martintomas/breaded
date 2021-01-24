@@ -80,6 +80,35 @@ en:
         second:
           title: 'Featured: Multigrain Seeded Bread'
           description: A light and fluffy multigrain sandwich bread, filled and topped with lots of grains. A crispy toasted seed crust with a fluffy texture combined with whole grain goodness.
+    about:
+      title: About Breaded
+      our_mission: Our Mission
+      description_1: Breaded is a platform with one intention. To deliver bread for every occasion & need. We bring together professional & artisanal bakers & bakeries who specialize in different styles of breadmaking, combining traditional knowledge with the latest technology. Thus, giving way to impeccable quality breads made with the highest quality ingredients, free of chemicals & preservatives.
+      description_2: We maintain the highest standards of food & safety and ensure each box of breads is baked & packed fresh before delivery.
+      description_ps: "PS: We donate one box (ten breads) to the homeless & hungry for every ten boxes sold on our platform"
+      passion:
+        title: Our Passion
+        subtitle: "We love bread because it is:"
+        beautiful:
+          short: B
+          long_html: <b>Beautiful.</b> The inner terrains bursting with simple flavors, the varied shapes that range from uneven abstract to pure symmetry. Bread is edible art.
+        rustic:
+          short: R
+          long_html: <b>Rustic.</b> Breads were invented in the countryside and that’s where it gets its ‘raw earthen’ feel that brings up images of the rural landscape with each bite.
+        earnest:
+          short: E
+          long_html: <b>Earnest.</b> Bread is humble unlike it’s evolved counterparts such as cakes. Bread has no fluff, no flashiness. Just one purpose, to nourish a human.
+        ageless:
+          short: A
+          long_html: <b>Ageless.</b> Although the first breads originated in and around 8000 BC, it’s still a staple food for most of us. It has evolved & settled with us in every corner of the globe.
+        diverse:
+          short: D
+          long_html: <b>Diverse.</b> Every culture has their own versions of bread. It’s also versatile. You can accompany bread with anything, eat it anyhow, any way, at any time of day.
+      near_future:
+        title: The Near Future
+        paragraph_1: We are soon going to be introducing accompaniments such as cheese, cold cuts, spreads & jams for each type of bread. Because good breads deserve good company.
+        paragraph_2: We’re also going to be introducing semi-baked doughs. All you need to do is pop them in the oven for about fifteen minutes, it’s that simple. It also makes you look like a professional baker when you have your friends over!
+        paragraph_3: Alright, enough about us. Time for you to experience Breaded.
     login:
       label: Hi, Bread Lover!
       login_button: Log in

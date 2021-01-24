@@ -12,6 +12,12 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations', passwords: 'users/passwords' }
 
+  resources :pages, only: %i[] do
+    collection do
+      get :home
+      get :about
+    end
+  end
   resources :foods, only: %i[index show]  do
     collection do
       get :surprise_me

@@ -4,7 +4,7 @@
       section
         span = t 'app.homepage.introduction_html'
         p = t 'app.homepage.description_html', number_breads: Rails.application.config.options[:default_number_of_breads]
-        == render partial: 'get_breaded_link'
+        == render partial: 'pages/home/get_breaded_link'
   .breads-md-5.breads-lg-5.breads-sm-5.breads-xs-12.mainBannerImg
     span.imgSection data-controller='components--animated-image'
       = image_pack_tag('media/images/mainBannerImg.jpg', class: 'img-responsive')

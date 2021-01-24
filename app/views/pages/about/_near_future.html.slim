@@ -1,0 +1,11 @@
+.breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.division
+  .breads-lg-6.breads-md-6.breads-sm-6.breads-xs-12
+    = image_pack_tag('media/images/home-img-02.png', class: 'img-responsive align-left')
+  .breads-lg-6.breads-md-6.breads-sm-6.breads-xs-12
+    section
+      h3 = t 'app.about.near_future.title'
+      .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.PD0PX
+        p = t 'app.about.near_future.paragraph_1'
+        p = t 'app.about.near_future.paragraph_2'
+        p = t 'app.about.near_future.paragraph_3'
+        button = link_to t('app.homepage.breaded_button_html'), foods_path

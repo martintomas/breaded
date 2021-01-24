@@ -8,9 +8,9 @@ header.header data-controller='components--header' data-target='components--head
       li = link_to I18n.t('app.menu.browse_breads'), foods_path
       - if current_user.present?
         li = link_to I18n.t('app.menu.my_boxes'), my_boxes_users_path
-        li = link_to I18n.t('app.menu.about'), '#'
+        li = link_to I18n.t('app.menu.about'), about_pages_path
         li = link_to current_user.first_name, destroy_user_session_path, method: :delete
       - else
         li = link_to I18n.t('app.menu.gift'), '#'
-        li = link_to I18n.t('app.menu.about'), '#'
+        li = link_to I18n.t('app.menu.about'), about_pages_path
         li = link_to I18n.t('app.menu.login'), new_user_session_path
