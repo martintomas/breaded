@@ -1,7 +1,7 @@
 body.users.my_boxes, body.users.my_payment, body.users.my_plan, body.users.edit, body.users.update,
 body.subscription_periods.show, body.addresses,
 body.subscriptions.show, body.subscriptions.edit, body.subscriptions.update,
-body.payments.show, body.payments.edit, body.payments.update {
+body.payments.show, body.payments.edit, body.payments.update, body.contacts {
   & {
     background-color: #fff;
     color: #333333;

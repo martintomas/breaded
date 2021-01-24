@@ -18,6 +18,12 @@ Rails.application.routes.draw do
       get :about
     end
   end
+  resources :contacts, only: %i[new create] do
+    collection do
+      get :support
+      post :send_support_message
+    end
+  end
   resources :foods, only: %i[index show]  do
     collection do
       get :surprise_me

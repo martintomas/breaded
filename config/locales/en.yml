@@ -109,6 +109,15 @@ en:
         paragraph_1: We are soon going to be introducing accompaniments such as cheese, cold cuts, spreads & jams for each type of bread. Because good breads deserve good company.
         paragraph_2: We’re also going to be introducing semi-baked doughs. All you need to do is pop them in the oven for about fifteen minutes, it’s that simple. It also makes you look like a professional baker when you have your friends over!
         paragraph_3: Alright, enough about us. Time for you to experience Breaded.
+    contacts:
+      new:
+        title: Contact Us
+        description_html: Type your message below & we’ll get back to you within 24 hours. </br>Or you could also call us on %{phone_number} if it’s urgent.
+        textarea_placeholder: "Type your message here.."
+        button: Help Me Now
+        notification: Thanks for your message! We will contact you as soon as possible...
+      send_support_message:
+        notification: Thanks for your message! We will contact you as soon as possible...
     login:
       label: Hi, Bread Lover!
       login_button: Log in

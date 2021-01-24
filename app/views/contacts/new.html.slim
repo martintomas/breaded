@@ -1,0 +1,12 @@
+section.container.profilePage
+  .breads-lg-12.breads-md-12.breads-sm-12.breads-xs-12.contact-us
+    h3 = t 'app.contacts.new.title'
+    == render 'shared/flash_messages'
+    p = t 'app.contacts.new.description_html', phone_number: '+44 7668994563'
+    = form_with scope: :contacts, url: contacts_path, method: :post do |f|
+      .message-box
+        = f.label :message
+        = f.text_area :message, placeholder: I18n.t('app.contacts.new.textarea_placeholder')
+      = f.button I18n.t('app.contacts.new.button'), class: 'blackBtn'
+
+== render partial: 'shared/gift'
