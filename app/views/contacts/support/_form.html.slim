@@ -1,0 +1,14 @@
+.breads-lg-9.breads-md-9.breads-sm-9.breads-xs-12.support-section
+  h3 = t 'app.contacts.support.title'
+  == render 'shared/flash_messages'
+  p = t 'app.contacts.support.description_html', phone_number: '+44 7668994563'
+  = form_with scope: :contacts, url: send_support_message_contacts_path, method: :post do |f|
+    = f.hidden_field :subscription_period_id
+    = f.hidden_field :order_id
+    .message-box
+      = f.label :message
+      = f.text_area :message, placeholder: I18n.t('app.contacts.support.textarea_placeholder')
+    span.issue-box = t 'app.contacts.support.issue_box.title'
+    == render partial: 'contacts/support/month_dropdown'
+    == render partial: 'contacts/support/box_dropdown'
+    = f.button I18n.t('app.contacts.support.button'), class: 'blackBtn'

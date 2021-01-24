@@ -1,0 +1,10 @@
+.drop-down.box
+  .selected.selected-box
+    a.drop-down-option data-action='click->contacts--support#toggleBoxDropdown'
+      span = t 'app.contacts.support.issue_box.select_box'
+    .triangle
+  .options.box-option
+    ul
+      - 4.times do |i|
+        li data-action='click->contacts--support#selectBoxDropdown' data-record-id=''
+          = t 'app.contacts.support.issue_box.box', i: i + 1

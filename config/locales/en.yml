@@ -116,7 +116,16 @@ en:
         textarea_placeholder: "Type your message here.."
         button: Help Me Now
         notification: Thanks for your message! We will contact you as soon as possible...
-      send_support_message:
+      support:
+        title: Support
+        description_html: Type your message below & we’ll get back to you within 24 hours. </br>Or you could also call us on %{phone_number} if it’s urgent.
+        textarea_placeholder: "Type your message here.."
+        issue_box:
+          title: Which box do you have an issue with (optional)?
+          select_month: Select Month
+          select_box: Select Box
+          box: "Box %{i}"
+        button: Help Me Now
         notification: Thanks for your message! We will contact you as soon as possible...
     login:
       label: Hi, Bread Lover!

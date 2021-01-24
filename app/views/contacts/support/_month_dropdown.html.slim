@@ -1,0 +1,10 @@
+.drop-down.month
+  .selected.selected-month
+    a.drop-down-option data-action='click->contacts--support#toggleMonthDropdown'
+      span = t 'app.contacts.support.issue_box.select_month'
+    .triangle
+  .options.month-option
+    ul
+      - current_user.subscription_periods.includes(:orders).each do |subscription_period|
+        li data-action='click->contacts--support#selectMonthDropdown' data-record-id="#{subscription_period.id}" data-default-box="#{I18n.t('app.contacts.support.issue_box.select_month')}" data-boxes="#{subscription_period.orders.map(&:id)}"
+          = subscription_period.started_at.strftime('%b')

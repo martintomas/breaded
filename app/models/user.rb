@@ -10,6 +10,7 @@ class User < ApplicationRecord
   phony_normalized_method :phone_number, :unconfirmed_phone, :secondary_phone_number
 
   has_many :subscriptions, dependent: :restrict_with_exception
+  has_many :subscription_periods, through: :subscriptions
   has_many :orders, dependent: :restrict_with_exception
   has_many :addresses, as: :addressable, dependent: :destroy
 
