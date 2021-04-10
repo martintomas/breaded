@@ -123,15 +123,15 @@ workflows:
   test_and_deploy:
     jobs:
       - test
-      - build_release:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - build_release
-          filters:
-            branches:
-              only: master
+#      - build_release:
+#          requires:
+#            - test
+#          filters:
+#            branches:
+#              only: master
+#      - deploy:
+#          requires:
+#            - build_release
+#          filters:
+#            branches:
+#              only: master

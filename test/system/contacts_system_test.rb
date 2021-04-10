@@ -2,7 +2,7 @@
 
 require "application_system_test_case"
 
-class AddressesSystemTest < ApplicationSystemTestCase
+class ContactsSystemTest < ApplicationSystemTestCase
   setup do
     @user = users :customer
   end
