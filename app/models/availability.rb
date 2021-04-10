@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Availability < ApplicationRecord
+  self.skip_time_zone_conversion_for_attributes = %i[time_from time_to]
+
   validates :day_in_week, :time_from, :time_to, presence: true
 
   def available_at?(datetime)

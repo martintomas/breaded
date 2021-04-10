@@ -32,8 +32,8 @@ class Admin::FaqsSystemTest < ApplicationSystemTestCase
     visit edit_admin_faq_url(@faq)
 
     within "form#edit_faq_#{@faq.id}" do
-      fill_in 'faq[question_attributes][text_translations_attributes][0][text]', with: 'Test Question'
-      fill_in 'faq[answer_attributes][text_translations_attributes][0][text]', with: 'Test Answer'
+      fill_in 'faq[question_attributes][text_translations_attributes][0][text]', with: 'New Question'
+      fill_in 'faq[answer_attributes][text_translations_attributes][0][text]', with: 'New Answer'
       click_on 'Update Faq'
     end
     within 'div#active_admin_content' do
